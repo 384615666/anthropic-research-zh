@@ -154,6 +154,7 @@ for fn in sorted(os.listdir(PAPERS)):
 <body>
 <div class="wrap">
 <a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<a class="back" href="../index.html" style="margin-left:12px">&larr; 返回首页</a>
 <h1>{esc(zh_title or title)}</h1>
 <div class="meta">
 {esc(title)} · {esc(date)} · {esc(cat)} · <a href="{esc(url)}" target="_blank">查看原文</a>

@@ -338,6 +338,7 @@ def build_html(data):
 </head>
 <body>
 <div class="wrap">
+  <a href="../index.html" style="display:inline-block;margin-bottom:14px;color:#c15f3c;text-decoration:none;font-size:14px">&larr; 返回首页</a>
   <header class="top">
     <h1>前沿 AI 实验室论文源导航</h1>
     <p class="sub">为 Anthropic 论文库补充的扩展源清单　·　核查日期 {data['generated_at']}　·　状态码为实测值</p>

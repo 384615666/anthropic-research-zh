@@ -30,6 +30,11 @@
   .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
   .header h1 span { color: var(--accent2); }
   .header p { color: #bbb; margin-top: 10px; font-size: 15px; }
+  .header .home {
+    display: inline-block; margin-bottom: 12px; color: #e6b4a0;
+    text-decoration: none; font-size: 13px;
+  }
+  .header .home:hover { text-decoration: underline; }
   .stats {
     display: flex; justify-content: center; gap: 24px; margin-top: 20px; flex-wrap: wrap;
   }
@@ -96,6 +101,7 @@
 </head>
 <body>
 <div class="header">
+  <a class="home" href="index.html">&larr; 返回首页</a>
   <h1>Anthropic <span>Research Papers</span></h1>
   <p>Anthropic 官网研究论文本地镜像 — 219 篇 · 更新于 2026-09-18</p>
   <div class="stats">

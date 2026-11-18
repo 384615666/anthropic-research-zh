@@ -88,10 +88,10 @@ def main():
   <td><span class="cat">{html.escape(cat)}</span></td>
   <td>
     <a class="ptitle" href="papers/{html.escape(slug)}.md" target="_blank">{html.escape(title)}</a>
-    <div class="excerpt">{html.escape(excerpt)}鈥?/div>
+    <div class="excerpt">{html.escape(excerpt)}…</div>
     <div class="links">
-      <a href="papers/{html.escape(slug)}.md" target="_blank">鏈湴 Markdown</a>
-      <a href="{html.escape(p['url'])}" target="_blank">鍘熸枃閾炬帴</a>
+      <a href="papers/{html.escape(slug)}.md" target="_blank">本地 Markdown</a>
+      <a href="{html.escape(p['url'])}" target="_blank">原文链接</a>
     </div>
   </td>
 </tr>""")
@@ -107,7 +107,7 @@ def main():
 <div class="hero-card">
   <div class="hero-cat">{html.escape(p.get('category',''))}</div>
   <h3><a href="papers/{html.escape(slug)}.md">{html.escape(title)}</a></h3>
-  <p>{html.escape(excerpt)}鈥?/p>
+  <p>{html.escape(excerpt)}…</p>
   <div class="hero-date">{html.escape(p.get('date',''))}</div>
 </div>""")
 
@@ -119,7 +119,7 @@ def main():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anthropic Research Papers 鈥?鏈湴闀滃儚</title>
+<title>Anthropic Research Papers — 本地镜像</title>
 <style>
   :root {{
     --bg: #faf9f6;
@@ -146,6 +146,11 @@ def main():
   .header h1 {{ font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }}
   .header h1 span {{ color: var(--accent2); }}
   .header p {{ color: #bbb; margin-top: 10px; font-size: 15px; }}
+  .header .home {{
+    display: inline-block; margin-bottom: 12px; color: #e6b4a0;
+    text-decoration: none; font-size: 13px;
+  }}
+  .header .home:hover {{ text-decoration: underline; }}
   .stats {{
     display: flex; justify-content: center; gap: 24px; margin-top: 20px; flex-wrap: wrap;
   }}
@@ -212,12 +217,13 @@ def main():
 </head>
 <body>
 <div class="header">
+  <a class="home" href="index.html">&larr; 返回首页</a>
   <h1>Anthropic <span>Research Papers</span></h1>
-  <p>Anthropic 瀹樼綉鐮旂┒璁烘枃鏈湴闀滃儚 鈥?{total} 绡?路 鏇存柊浜?2026-09-18</p>
+  <p>Anthropic 官网研究论文本地镜像 — {total} 篇 · 更新于 2026-09-18</p>
   <div class="stats">
-    <div class="stat"><b>{total}</b>璁烘枃鎬绘暟</div>
-    <div class="stat"><b>{len(categories)}</b>鐮旂┒鍒嗙被</div>
-    <div class="stat"><b>{len(failed)}</b>澶辫触</div>
+    <div class="stat"><b>{total}</b>论文总数</div>
+    <div class="stat"><b>{len(categories)}</b>研究分类</div>
+    <div class="stat"><b>{len(failed)}</b>失败</div>
   </div>
 </div>
 <div class="container">
@@ -225,20 +231,20 @@ def main():
     {"".join(hero_cards)}
   </div>
   <div class="toolbar">
-    <input id="search" type="text" placeholder="馃攳 鎼滅储鏍囬銆佹憳瑕佲€? oninput="filterRows()">
+    <input id="search" type="text" placeholder="🔍 搜索标题、摘要…" oninput="filterRows()">
     <select id="catFilter" onchange="filterRows()">
-      <option value="">鍏ㄩ儴鍒嗙被</option>
+      <option value="">全部分类</option>
     </select>
   </div>
   <table>
-    <thead><tr><th>鏃ユ湡</th><th>鍒嗙被</th><th>鏍囬</th></tr></thead>
+    <thead><tr><th>日期</th><th>分类</th><th>标题</th></tr></thead>
     <tbody id="tbody">
       {"".join(rows)}
     </tbody>
   </table>
-  <div class="empty" id="empty">娌℃湁鍖归厤鐨勭粨鏋?/div>
+  <div class="empty" id="empty">没有匹配的结果</div>
 </div>
-<div class="footer">鏁版嵁鏉ユ簮锛歨ttps://www.anthropic.com/research 路 浠呬緵瀛︿範鐮旂┒浣跨敤</div>
+<div class="footer">数据来源：https://www.anthropic.com/research · 仅供学习研究使用</div>
 <script>
   function initCats() {{
     const seen = new Set();
