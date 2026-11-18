@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>前沿 AI 实验室论文源导航</title>
+<style>
+  :root {
+    --bg:#f7f8fa; --panel:#ffffff; --line:#e5e7eb; --line2:#eef0f3;
+    --ink:#14161a; --ink2:#4b5563; --ink3:#8a9099;
+    --ok:#0f9d58; --okbg:#e8f6ee;
+    --warn:#b7791f; --warnbg:#fdf6e3;
+    --proxy:#b45309; --proxybg:#fdf0e3;
+    --dead:#6b7280; --deadbg:#f1f2f4;
+    --accent:#c0392b; --accentbg:#fdeeeb;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+    font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1180px; margin:0 auto; padding:34px 22px 70px; }
+  header.top { margin-bottom:22px; }
+  h1 { font-size:25px; margin:0 0 8px; letter-spacing:-.3px; }
+  .sub { color:var(--ink2); font-size:13.5px; margin:0; }
+  .stats { display:flex; gap:26px; margin:18px 0 22px; flex-wrap:wrap; }
+  .stat b { font-size:21px; font-weight:600; display:block; line-height:1.2; }
+  .stat span { color:var(--ink3); font-size:12px; }
+  .toolbar {
+    position:sticky; top:0; z-index:20; background:rgba(247,248,250,.93);
+    backdrop-filter:blur(8px); padding:12px 0; border-bottom:1px solid var(--line);
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:24px;
+  }
+  #q {
+    flex:1 1 240px; min-width:200px; padding:9px 13px; border:1px solid var(--line);
+    border-radius:9px; font-size:13.5px; background:#fff; color:var(--ink); outline:none;
+  }
+  #q:focus { border-color:#c9ccd1; box-shadow:0 0 0 3px rgba(0,0,0,.04); }
+  .fbtn {
+    padding:8px 13px; border:1px solid var(--line); background:#fff; color:var(--ink2);
+    border-radius:8px; font-size:13px; cursor:pointer; transition:all .14s; font-family:inherit;
+  }
+  .fbtn:hover { border-color:#c9ccd1; color:var(--ink); }
+  .fbtn.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .group { margin-bottom:38px; }
+  .group-head h2 {
+    font-size:16.5px; margin:0 0 3px; display:flex; align-items:center; gap:9px;
+  }
+  .cnt {
+    font-size:11.5px; font-weight:400; color:var(--ink3); background:#eceef1;
+    border-radius:20px; padding:1px 9px;
+  }
+  .group-head p { margin:0 0 15px; color:var(--ink3); font-size:12.5px; }
+  .card {
+    background:var(--panel); border:1px solid var(--line); border-radius:11px;
+    padding:15px 17px; margin-bottom:10px; transition:box-shadow .16s,border-color .16s;
+  }
+  .card:hover { border-color:#d8dade; box-shadow:0 3px 14px rgba(16,20,30,.055); }
+  .card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+  .card-head h3 { margin:0; font-size:15px; font-weight:600; letter-spacing:-.1px; }
+  .badges { display:flex; gap:6px; align-items:center; flex-shrink:0; }
+  .pri { font-size:11px; padding:2px 8px; border-radius:5px; font-weight:600; letter-spacing:.2px; }
+  .pri-P0 { background:var(--accentbg); color:var(--accent); }
+  .pri-P1 { background:#eef2fb; color:#3b5bdb; }
+  .pri-P2 { background:#f2f3f5; color:#6b7280; }
+  .pri-已收录 { background:#e8f6ee; color:var(--ok); }
+  .pri-仅供参考 { background:#f2f3f5; color:#9aa0a6; }
+  .st { font-size:11.5px; padding:2px 9px; border-radius:5px; white-space:nowrap; }
+  .st.ok { background:var(--okbg); color:var(--ok); }
+  .st.warn { background:var(--warnbg); color:var(--warn); }
+  .st.proxy { background:var(--proxybg); color:var(--proxy); }
+  .st.dead { background:var(--deadbg); color:var(--dead); }
+  .code { font-size:11px; font-family:ui-monospace,Consolas,monospace; color:var(--ink3); }
+  .links { margin:10px 0 9px; display:flex; flex-wrap:wrap; gap:6px 8px; }
+  .lnk {
+    font-size:12.5px; color:#3b5bdb; text-decoration:none;
+    font-family:ui-monospace,Consolas,monospace; border-bottom:1px solid transparent;
+    word-break:break-all;
+  }
+  .lnk:hover { border-bottom-color:#3b5bdb; }
+  .lnk.main { font-weight:600; color:var(--accent); }
+  .lnk.main:hover { border-bottom-color:var(--accent); }
+  .lnk.rss { color:var(--ok); }
+  .lnk.rss:hover { border-bottom-color:var(--ok); }
+  .vbadge {
+    font-size:10.5px; color:var(--ok); background:var(--okbg); border-radius:4px;
+    padding:1px 6px; vertical-align:1px; white-space:nowrap;
+  }
+  .tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px; }
+  .tag { font-size:11px; color:var(--ink2); background:#f3f4f6; border-radius:5px; padding:2px 7px; }
+  .note { margin:0; color:var(--ink2); font-size:13px; }
+  .hidden { display:none !important; }
+  .empty { color:var(--ink3); padding:40px 0; text-align:center; }
+  footer { margin-top:44px; padding-top:20px; border-top:1px solid var(--line); color:var(--ink3); font-size:12.5px; }
+  footer a { color:var(--ink2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>前沿 AI 实验室论文源导航</h1>
+    <p class="sub">为 Anthropic 论文库补充的扩展源清单　·　核查日期 2026-09-18　·　状态码为实测值</p>
+    <div class="stats">
+      <div class="stat"><b>62</b><span>收录源</span></div>
+      <div class="stat"><b>51</b><span>可直接抓取</span></div>
+      <div class="stat"><b>16</b><span>P0 优先接入</span></div>
+      <div class="stat"><b>6</b><span>RSS 已验证可解析</span></div>
+      <div class="stat"><b>6</b><span>分类</span></div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="搜索机构名 / 主题 / 说明，例如「可解释性」「arXiv」「RSS」">
+    <button class="fbtn on" data-f="all">全部</button>
+    <button class="fbtn" data-f="frontier-lab">一线实验室</button><button class="fbtn" data-f="model-company">模型公司</button><button class="fbtn" data-f="nonprofit">独立研究机构</button><button class="fbtn" data-f="safety">安全 · 评估 · 对齐</button><button class="fbtn" data-f="aggregator">聚合与发现渠道</button><button class="fbtn" data-f="academic">学术机构</button>
+    <button class="fbtn" data-f="__ok">仅可直抓</button>
+    <button class="fbtn" data-f="__p0">仅 P0</button>
+  </div>
+
+  <section class="group" data-cat="frontier-lab">
+    <header class="group-head">
+      <h2>一线实验室<span class="cnt">11</span></h2>
+      <p>Google/Meta/微软/苹果等大厂研究院</p>
+    </header>
+      <article class="card" data-status="ok" data-pri="P0" data-search="apple 端侧模型 效率 多模态 隐私 rss 实测可解析、返回 10 条且带 pubdate（最新 2026-09-17），格式规范，是最容易接入自动化流水线的源。列表页为 js 渲染，抓取建议直连 rss。">
+        <div class="card-head">
+          <h3>Apple</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://machinelearning.apple.com/research" target="_blank" rel="noopener">machinelearning.apple.com/research</a><a class="lnk rss" href="https://machinelearning.apple.com/rss.xml" target="_blank" rel="noopener">RSS machinelearning.apple.com/rss.xml</a><span class="vbadge">解析通过</span></div>
+        <div class="tags"><span class="tag">端侧模型</span><span class="tag">效率</span><span class="tag">多模态</span><span class="tag">隐私</span></div>
+        <p class="note">RSS 实测可解析、返回 10 条且带 pubDate（最新 2026-09-17），格式规范，是最容易接入自动化流水线的源。列表页为 JS 渲染，抓取建议直连 RSS。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="google deepmind 基础模型 科学ai 可解释性 安全对齐 强化学习 实测 200，结构化的论文库，含摘要与合作机构；sitemap 实测 200。blog.xml 实测 404，与 anthropic 一样没有官方 rss，批量抓取需依赖 sitemap 或列表页分页。gemini 技术报告多走 /discover/blog/。">
+        <div class="card-head">
+          <h3>Google DeepMind</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://deepmind.google/research/publications/" target="_blank" rel="noopener">deepmind.google/research/publications</a><a class="lnk" href="https://deepmind.google/research/" target="_blank" rel="noopener">deepmind.google/research/</a><a class="lnk" href="https://deepmind.google/discover/blog/" target="_blank" rel="noopener">deepmind.google/discover/blog/</a><a class="lnk" href="https://deepmind.google/sitemap.xml" target="_blank" rel="noopener">sitemap</a></div>
+        <div class="tags"><span class="tag">基础模型</span><span class="tag">科学AI</span><span class="tag">可解释性</span><span class="tag">安全对齐</span><span class="tag">强化学习</span></div>
+        <p class="note">实测 200，结构化的论文库，含摘要与合作机构；sitemap 实测 200。blog.xml 实测 404，与 Anthropic 一样没有官方 RSS，批量抓取需依赖 sitemap 或列表页分页。Gemini 技术报告多走 /discover/blog/。</p>
+      </article>
+      <article class="card" data-status="proxy" data-pri="P0" data-search="google research 机器学习基础 nlp 感知 推荐系统 负责任ai 论文库规模约 1.14 万篇，支持按年份/团队/研究领域筛选，是最接近 anthropic research 索引的镜像源。无公开 rss，需走 sitemap。">
+        <div class="card-head">
+          <h3>Google Research</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st proxy">需境外网络</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://research.google/pubs" target="_blank" rel="noopener">research.google/pubs</a><a class="lnk" href="https://research.google/blog/" target="_blank" rel="noopener">research.google/blog/</a></div>
+        <div class="tags"><span class="tag">机器学习基础</span><span class="tag">NLP</span><span class="tag">感知</span><span class="tag">推荐系统</span><span class="tag">负责任AI</span></div>
+        <p class="note">论文库规模约 1.14 万篇，支持按年份/团队/研究领域筛选，是最接近 Anthropic research 索引的镜像源。无公开 RSS，需走 sitemap。</p>
+      </article>
+      <article class="card" data-status="proxy" data-pri="P0" data-search="meta ai (fair) 大模型 计算机视觉 多语言 负责任ai 机器人 publications 检索页按 responsible ai / nlp / cv / speech 等分类，每篇带作者与日期。旧站 research.fb.com 仍在线但内容停留在 2022 年。">
+        <div class="card-head">
+          <h3>Meta AI (FAIR)</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st proxy">需境外网络</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://ai.meta.com/results/?content_types[0]=publication" target="_blank" rel="noopener">ai.meta.com/results/?content_types[0]=publication</a><a class="lnk" href="https://ai.meta.com/research/publications/" target="_blank" rel="noopener">ai.meta.com/research/publications/</a><a class="lnk" href="https://ai.meta.com/blog/" target="_blank" rel="noopener">ai.meta.com/blog/</a><a class="lnk" href="https://research.fb.com/publications/" target="_blank" rel="noopener">research.fb.com/publications/</a></div>
+        <div class="tags"><span class="tag">大模型</span><span class="tag">计算机视觉</span><span class="tag">多语言</span><span class="tag">负责任AI</span><span class="tag">机器人</span></div>
+        <p class="note">Publications 检索页按 Responsible AI / NLP / CV / Speech 等分类，每篇带作者与日期。旧站 research.fb.com 仍在线但内容停留在 2022 年。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="microsoft research ai 基础 人机交互 系统 医疗ai 论文索引与博客分离；feed 实测可解析且返回 10 条（最新 2026-08-31），也是少见的官方可直接订阅源。">
+        <div class="card-head">
+          <h3>Microsoft Research</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.microsoft.com/en-us/research/publications/" target="_blank" rel="noopener">www.microsoft.com/en-us/research/publications</a><a class="lnk" href="https://www.microsoft.com/en-us/research/blog/" target="_blank" rel="noopener">www.microsoft.com/en-us/research/blog/</a><a class="lnk rss" href="https://www.microsoft.com/en-us/research/feed/" target="_blank" rel="noopener">RSS www.microsoft.com/en-us/research/feed/</a><span class="vbadge">解析通过</span></div>
+        <div class="tags"><span class="tag">AI 基础</span><span class="tag">人机交互</span><span class="tag">系统</span><span class="tag">医疗AI</span></div>
+        <p class="note">论文索引与博客分离；feed 实测可解析且返回 10 条（最新 2026-08-31），也是少见的官方可直接订阅源。</p>
+      </article>
+      <article class="card" data-status="blocked" data-pri="P0" data-search="openai 模型能力 安全 对齐 经济研究 研究正文实际位于 /index/&lt;slug&gt;/ 路径；/research/ 只是概览页，/research/index/ 才是完整索引。重要：网页端 403 反爬，但 news/rss.xml 实测直连 200 且含 1208 条历史条目，是可回溯全量的最佳入口，无需绕反爬。但信噪比低——实测 1208 条中安全/对齐/治理仅 74 条（6%）、经济研究 36 条（2%）、研究论文 32 条（2%），其余 87% 是模型发布与公司动态，入库前必须按关键词过滤。经济研究独立在 /signals/。">
+        <div class="card-head">
+          <h3>OpenAI</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st warn">需绕过反爬</span><span class="code">403</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://openai.com/research/index/" target="_blank" rel="noopener">openai.com/research/index</a><a class="lnk" href="https://openai.com/research/" target="_blank" rel="noopener">openai.com/research/</a><a class="lnk" href="https://openai.com/signals/" target="_blank" rel="noopener">openai.com/signals/</a><a class="lnk rss" href="https://openai.com/news/rss.xml" target="_blank" rel="noopener">RSS openai.com/news/rss.xml</a><span class="vbadge">解析通过</span></div>
+        <div class="tags"><span class="tag">模型能力</span><span class="tag">安全</span><span class="tag">对齐</span><span class="tag">经济研究</span></div>
+        <p class="note">研究正文实际位于 /index/&lt;slug&gt;/ 路径；/research/ 只是概览页，/research/index/ 才是完整索引。重要：网页端 403 反爬，但 news/rss.xml 实测直连 200 且含 1208 条历史条目，是可回溯全量的最佳入口，无需绕反爬。但信噪比低——实测 1208 条中安全/对齐/治理仅 74 条（6%）、经济研究 36 条（2%）、研究论文 32 条（2%），其余 87% 是模型发布与公司动态，入库前必须按关键词过滤。经济研究独立在 /signals/。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="amazon science nlp 搜索推荐 语音 aws ai 博客实测 200，按研究领域分区，含 amazon nova 等自研模型的技术解读。">
+        <div class="card-head">
+          <h3>Amazon Science</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.amazon.science/" target="_blank" rel="noopener">www.amazon.science</a><a class="lnk" href="https://www.amazon.science/blog" target="_blank" rel="noopener">www.amazon.science/blog</a></div>
+        <div class="tags"><span class="tag">NLP</span><span class="tag">搜索推荐</span><span class="tag">语音</span><span class="tag">AWS AI</span></div>
+        <p class="note">博客实测 200，按研究领域分区，含 Amazon Nova 等自研模型的技术解读。</p>
+      </article>
+      <article class="card" data-status="blocked" data-pri="P1" data-search="nvidia research 硬件加速 图形学 生成模型 机器人 首页实测 200，/labs/ 返回 403。实验室分站（如 toronto ai lab）论文密度更高。">
+        <div class="card-head">
+          <h3>NVIDIA Research</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st warn">需绕过反爬</span><span class="code">403</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://research.nvidia.com/" target="_blank" rel="noopener">research.nvidia.com</a><a class="lnk" href="https://research.nvidia.com/labs/" target="_blank" rel="noopener">research.nvidia.com/labs/</a></div>
+        <div class="tags"><span class="tag">硬件加速</span><span class="tag">图形学</span><span class="tag">生成模型</span><span class="tag">机器人</span></div>
+        <p class="note">首页实测 200，/labs/ 返回 403。实验室分站（如 Toronto AI Lab）论文密度更高。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="adobe research 生成式视觉 视频编辑 多模态 文生图/视频方向论文密度高，可作为视觉生成方向的补充。">
+        <div class="card-head">
+          <h3>Adobe Research</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://research.adobe.com/" target="_blank" rel="noopener">research.adobe.com</a></div>
+        <div class="tags"><span class="tag">生成式视觉</span><span class="tag">视频编辑</span><span class="tag">多模态</span></div>
+        <p class="note">文生图/视频方向论文密度高，可作为视觉生成方向的补充。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="ibm research 企业ai 量子 半导体 可信ai granite 系列模型与 aaai/neurips 论文入口。">
+        <div class="card-head">
+          <h3>IBM Research</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://research.ibm.com/" target="_blank" rel="noopener">research.ibm.com</a></div>
+        <div class="tags"><span class="tag">企业AI</span><span class="tag">量子</span><span class="tag">半导体</span><span class="tag">可信AI</span></div>
+        <p class="note">granite 系列模型与 AAAI/NeurIPS 论文入口。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="仅供参考" data-search="百度研究院 大模型 自动驾驶 生物计算 页面实测返回 200，但内容显示「网站维护中」，实际已长期停更，不建议作为活跃源。">
+        <div class="card-head">
+          <h3>百度研究院</h3>
+          <div class="badges"><span class="pri pri-仅供参考">仅供参考</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://research.baidu.com/" target="_blank" rel="noopener">research.baidu.com</a></div>
+        <div class="tags"><span class="tag">大模型</span><span class="tag">自动驾驶</span><span class="tag">生物计算</span></div>
+        <p class="note">页面实测返回 200，但内容显示「网站维护中」，实际已长期停更，不建议作为活跃源。</p>
+      </article>
+  </section>
+  <section class="group" data-cat="model-company">
+    <header class="group-head">
+      <h2>模型公司<span class="cnt">21</span></h2>
+      <p>OpenAI/Anthropic/Mistral/国产大模型等</p>
+    </header>
+      <article class="card" data-status="ok" data-pri="P0" data-search="anthropic 模型发布 政策 安全公告 与 research 页互补，模型卡与系统卡（system card）主要发在这里，是论文正文的重要补充。">
+        <div class="card-head">
+          <h3>Anthropic</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.anthropic.com/news" target="_blank" rel="noopener">www.anthropic.com/news</a></div>
+        <div class="tags"><span class="tag">模型发布</span><span class="tag">政策</span><span class="tag">安全公告</span></div>
+        <p class="note">与 research 页互补，模型卡与系统卡（system card）主要发在这里，是论文正文的重要补充。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="bytedance seed 基础模型 多模态 语音 agent 站内直接挂 arxiv 链接，实测页面含 arxiv.org 外链，论文聚合度高。">
+        <div class="card-head">
+          <h3>ByteDance Seed</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://seed.bytedance.com/en/" target="_blank" rel="noopener">seed.bytedance.com/en</a></div>
+        <div class="tags"><span class="tag">基础模型</span><span class="tag">多模态</span><span class="tag">语音</span><span class="tag">Agent</span></div>
+        <p class="note">站内直接挂 arXiv 链接，实测页面含 arxiv.org 外链，论文聚合度高。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="alibaba qwen 基础模型 多模态 代码模型 开源生态 抓取有坑：2026 年已迁移至 qwen.ai，新站是单页应用（/blog、/research、sitemap.xml 全部返回同一个 html 壳，链接数为 0，需 js 渲染或调后端 api）；旧站 qwenlm.github.io/blog 现仅剩一条「we have a new blog at qwen.ai」的跳转提示。建议改走 github 仓库 release + arxiv 作者检索。内容本身价值高（qwen3guard 安全、qwen-image 多模态等）。">
+        <div class="card-head">
+          <h3>Alibaba Qwen</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://qwenlm.github.io/blog/" target="_blank" rel="noopener">qwenlm.github.io/blog</a><a class="lnk" href="https://github.com/QwenLM" target="_blank" rel="noopener">github.com/QwenLM</a></div>
+        <div class="tags"><span class="tag">基础模型</span><span class="tag">多模态</span><span class="tag">代码模型</span><span class="tag">开源生态</span></div>
+        <p class="note">抓取有坑：2026 年已迁移至 qwen.ai，新站是单页应用（/blog、/research、sitemap.xml 全部返回同一个 HTML 壳，链接数为 0，需 JS 渲染或调后端 API）；旧站 qwenlm.github.io/blog 现仅剩一条「We have a new blog at qwen.ai」的跳转提示。建议改走 GitHub 仓库 Release + arXiv 作者检索。内容本身价值高（Qwen3Guard 安全、Qwen-Image 多模态等）。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="anthropic agent 工程 上下文工程 工具设计 工程博客，非严格论文，但对落地实践价值高（如 building-effective-agents 系列）。">
+        <div class="card-head">
+          <h3>Anthropic</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.anthropic.com/engineering" target="_blank" rel="noopener">www.anthropic.com/engineering</a></div>
+        <div class="tags"><span class="tag">Agent 工程</span><span class="tag">上下文工程</span><span class="tag">工具设计</span></div>
+        <p class="note">工程博客，非严格论文，但对落地实践价值高（如 building-effective-agents 系列）。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="cohere / cohere labs 多语言 检索增强 开源模型 评估 cohere labs（原 cohere for ai）论文多走 arxiv，官网页提供索引。">
+        <div class="card-head">
+          <h3>Cohere / Cohere Labs</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://cohere.com/research" target="_blank" rel="noopener">cohere.com/research</a><a class="lnk" href="https://cohere.com/blog" target="_blank" rel="noopener">cohere.com/blog</a></div>
+        <div class="tags"><span class="tag">多语言</span><span class="tag">检索增强</span><span class="tag">开源模型</span><span class="tag">评估</span></div>
+        <p class="note">Cohere Labs（原 Cohere For AI）论文多走 arXiv，官网页提供索引。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="deepseek moe 推理模型 mla 开源权重 没有独立论文站。技术报告通过 github 仓库 release + arxiv 双通道发布，api-docs 的 news 只记 api 变更。">
+        <div class="card-head">
+          <h3>DeepSeek</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://github.com/deepseek-ai" target="_blank" rel="noopener">github.com/deepseek-ai</a><a class="lnk" href="https://api-docs.deepseek.com/news/" target="_blank" rel="noopener">api-docs.deepseek.com/news/</a></div>
+        <div class="tags"><span class="tag">MoE</span><span class="tag">推理模型</span><span class="tag">MLA</span><span class="tag">开源权重</span></div>
+        <p class="note">没有独立论文站。技术报告通过 GitHub 仓库 Release + arXiv 双通道发布，api-docs 的 news 只记 API 变更。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="minimax 长上下文 语音合成 视频生成 agent 技术报告以新闻页形式发布，附带 arxiv 链接。">
+        <div class="card-head">
+          <h3>MiniMax</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.minimax.io/news" target="_blank" rel="noopener">www.minimax.io/news</a></div>
+        <div class="tags"><span class="tag">长上下文</span><span class="tag">语音合成</span><span class="tag">视频生成</span><span class="tag">Agent</span></div>
+        <p class="note">技术报告以新闻页形式发布，附带 arXiv 链接。</p>
+      </article>
+      <article class="card" data-status="proxy" data-pri="P1" data-search="mistral ai 开源模型 moe ocr 编程模型 物理ai rss 有效且字段完整（含发布时间）。模型发布与技术解读混排，research 类文章需按关键词过滤（physics-ai-research、magistral 等）。">
+        <div class="card-head">
+          <h3>Mistral AI</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st proxy">需境外网络</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://mistral.ai/news" target="_blank" rel="noopener">mistral.ai/news</a><a class="lnk rss" href="https://mistral.ai/news/rss" target="_blank" rel="noopener">RSS mistral.ai/news/rss</a></div>
+        <div class="tags"><span class="tag">开源模型</span><span class="tag">MoE</span><span class="tag">OCR</span><span class="tag">编程模型</span><span class="tag">物理AI</span></div>
+        <p class="note">RSS 有效且字段完整（含发布时间）。模型发布与技术解读混排，research 类文章需按关键词过滤（physics-ai-research、magistral 等）。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="moonshot ai (kimi) 长上下文 moe agent 开源模型 kimi k2 等技术报告经 github + arxiv 发布，官网 blog 更新不稳定。">
+        <div class="card-head">
+          <h3>Moonshot AI (Kimi)</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://github.com/MoonshotAI" target="_blank" rel="noopener">github.com/MoonshotAI</a></div>
+        <div class="tags"><span class="tag">长上下文</span><span class="tag">MoE</span><span class="tag">Agent</span><span class="tag">开源模型</span></div>
+        <p class="note">Kimi K2 等技术报告经 GitHub + arXiv 发布，官网 blog 更新不稳定。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="physical intelligence (π) 机器人基础模型 vla 具身智能 π0 系列机器人基础模型，博客即论文解读，质量高。">
+        <div class="card-head">
+          <h3>Physical Intelligence (π)</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.physicalintelligence.company/blog" target="_blank" rel="noopener">www.physicalintelligence.company/blog</a></div>
+        <div class="tags"><span class="tag">机器人基础模型</span><span class="tag">VLA</span><span class="tag">具身智能</span></div>
+        <p class="note">π0 系列机器人基础模型，博客即论文解读，质量高。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="sakana ai 进化算法 模型合并 ai 科学家 持续学习 日本实验室，论文+博客一体，风格接近 anthropic 的长文解读，可读性好。">
+        <div class="card-head">
+          <h3>Sakana AI</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://sakana.ai/" target="_blank" rel="noopener">sakana.ai</a></div>
+        <div class="tags"><span class="tag">进化算法</span><span class="tag">模型合并</span><span class="tag">AI 科学家</span><span class="tag">持续学习</span></div>
+        <p class="note">日本实验室，论文+博客一体，风格接近 Anthropic 的长文解读，可读性好。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="stability ai 扩散模型 图像生成 音频生成 3d 生成 有独立 research 栏目，实测 200，生成式视觉方向的稳定来源。">
+        <div class="card-head">
+          <h3>Stability AI</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://stability.ai/research" target="_blank" rel="noopener">stability.ai/research</a><a class="lnk" href="https://stability.ai/news" target="_blank" rel="noopener">stability.ai/news</a></div>
+        <div class="tags"><span class="tag">扩散模型</span><span class="tag">图像生成</span><span class="tag">音频生成</span><span class="tag">3D 生成</span></div>
+        <p class="note">有独立 research 栏目，实测 200，生成式视觉方向的稳定来源。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="智谱 ai / z.ai glm 系列 长上下文 agent 开源模型 glm 技术报告以 github 组织仓库 + arxiv 为主。">
+        <div class="card-head">
+          <h3>智谱 AI / Z.ai</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.zhipuai.cn/" target="_blank" rel="noopener">www.zhipuai.cn</a><a class="lnk" href="https://github.com/THUDM" target="_blank" rel="noopener">github.com/THUDM</a><a class="lnk" href="https://github.com/zai-org" target="_blank" rel="noopener">github.com/zai-org</a></div>
+        <div class="tags"><span class="tag">GLM 系列</span><span class="tag">长上下文</span><span class="tag">Agent</span><span class="tag">开源模型</span></div>
+        <p class="note">GLM 技术报告以 GitHub 组织仓库 + arXiv 为主。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="腾讯混元 多模态 视频生成 3d 生成 开源模型 混元系列技术报告经官网 + arxiv 发布，开源模型走 github。">
+        <div class="card-head">
+          <h3>腾讯混元</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://hunyuan.tencent.com/" target="_blank" rel="noopener">hunyuan.tencent.com</a></div>
+        <div class="tags"><span class="tag">多模态</span><span class="tag">视频生成</span><span class="tag">3D 生成</span><span class="tag">开源模型</span></div>
+        <p class="note">混元系列技术报告经官网 + arXiv 发布，开源模型走 GitHub。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="figure ai 人形机器人 端到端控制 以产品进展为主，论文少。">
+        <div class="card-head">
+          <h3>Figure AI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.figure.ai/news" target="_blank" rel="noopener">www.figure.ai/news</a></div>
+        <div class="tags"><span class="tag">人形机器人</span><span class="tag">端到端控制</span></div>
+        <p class="note">以产品进展为主，论文少。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="reka ai 多模态 视频理解 agent 更新频率中等。">
+        <div class="card-head">
+          <h3>Reka AI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.reka.ai/news" target="_blank" rel="noopener">www.reka.ai/news</a></div>
+        <div class="tags"><span class="tag">多模态</span><span class="tag">视频理解</span><span class="tag">Agent</span></div>
+        <p class="note">更新频率中等。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="together ai 推理加速 训练系统 开源模型 偏工程与系统方向。">
+        <div class="card-head">
+          <h3>Together AI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.together.ai/blog" target="_blank" rel="noopener">www.together.ai/blog</a></div>
+        <div class="tags"><span class="tag">推理加速</span><span class="tag">训练系统</span><span class="tag">开源模型</span></div>
+        <p class="note">偏工程与系统方向。</p>
+      </article>
+      <article class="card" data-status="proxy" data-pri="P2" data-search="xai grok 推理模型 集群工程 更新频率低，以产品发布为主。深度内容主要靠 arxiv 上的 grok 技术报告。">
+        <div class="card-head">
+          <h3>xAI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st proxy">需境外网络</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://x.ai/news" target="_blank" rel="noopener">x.ai/news</a></div>
+        <div class="tags"><span class="tag">Grok</span><span class="tag">推理模型</span><span class="tag">集群工程</span></div>
+        <p class="note">更新频率低，以产品发布为主。深度内容主要靠 arXiv 上的 Grok 技术报告。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="阶跃星辰 stepfun 多模态 推理模型 语音 step 系列模型技术报告主要在 arxiv，官网提供索引。">
+        <div class="card-head">
+          <h3>阶跃星辰 StepFun</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.stepfun.com/" target="_blank" rel="noopener">www.stepfun.com</a></div>
+        <div class="tags"><span class="tag">多模态</span><span class="tag">推理模型</span><span class="tag">语音</span></div>
+        <p class="note">Step 系列模型技术报告主要在 arXiv，官网提供索引。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="零一万物 01.ai 开源模型 多模态 yi 系列模型，更新频率已明显下降。">
+        <div class="card-head">
+          <h3>零一万物 01.AI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.01.ai/" target="_blank" rel="noopener">www.01.ai</a></div>
+        <div class="tags"><span class="tag">开源模型</span><span class="tag">多模态</span></div>
+        <p class="note">Yi 系列模型，更新频率已明显下降。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="已收录" data-search="anthropic 对齐与安全 可解释性 经济社会影响 能力评测 本项目已抓取 145 篇。sitemap 实测 200，是当前最稳定的批量入口；rss.xml 实测返回 404（官方无 rss），对比其他厂商属于少数没有订阅通道的站点。">
+        <div class="card-head">
+          <h3>Anthropic</h3>
+          <div class="badges"><span class="pri pri-已收录">已收录</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.anthropic.com/research" target="_blank" rel="noopener">www.anthropic.com/research</a><a class="lnk" href="https://www.anthropic.com/sitemap.xml" target="_blank" rel="noopener">sitemap</a></div>
+        <div class="tags"><span class="tag">对齐与安全</span><span class="tag">可解释性</span><span class="tag">经济社会影响</span><span class="tag">能力评测</span></div>
+        <p class="note">本项目已抓取 145 篇。sitemap 实测 200，是当前最稳定的批量入口；rss.xml 实测返回 404（官方无 RSS），对比其他厂商属于少数没有订阅通道的站点。</p>
+      </article>
+  </section>
+  <section class="group" data-cat="nonprofit">
+    <header class="group-head">
+      <h2>独立研究机构<span class="cnt">5</span></h2>
+      <p>AI2/EleutherAI/上海AI Lab 等</p>
+    </header>
+      <article class="card" data-status="ok" data-pri="P0" data-search="上海人工智能实验室 多模态 评测基准 基础模型 科学ai internvl 视觉模型、opencompass 评测体系、internlm 基础模型三条线，实测全部可访问，是国内可抓取性最好的机构之一。">
+        <div class="card-head">
+          <h3>上海人工智能实验室</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.shlab.org.cn/" target="_blank" rel="noopener">www.shlab.org.cn</a><a class="lnk" href="https://internvl.github.io/" target="_blank" rel="noopener">internvl.github.io/</a><a class="lnk" href="https://opencompass.org.cn/" target="_blank" rel="noopener">opencompass.org.cn/</a><a class="lnk" href="https://github.com/OpenGVLab" target="_blank" rel="noopener">github.com/OpenGVLab</a></div>
+        <div class="tags"><span class="tag">多模态</span><span class="tag">评测基准</span><span class="tag">基础模型</span><span class="tag">科学AI</span></div>
+        <p class="note">InternVL 视觉模型、OpenCompass 评测体系、InternLM 基础模型三条线，实测全部可访问，是国内可抓取性最好的机构之一。</p>
+      </article>
+      <article class="card" data-status="blocked" data-pri="P1" data-search="allen institute for ai (ai2) 开源模型 nlp 多模态 科学ai olmo 系列开源模型与开放数据集的主要发布方。403 为反爬，浏览器可正常访问。">
+        <div class="card-head">
+          <h3>Allen Institute for AI (AI2)</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st warn">需绕过反爬</span><span class="code">403</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://allenai.org/papers" target="_blank" rel="noopener">allenai.org/papers</a><a class="lnk" href="https://allenai.org/blog" target="_blank" rel="noopener">allenai.org/blog</a></div>
+        <div class="tags"><span class="tag">开源模型</span><span class="tag">NLP</span><span class="tag">多模态</span><span class="tag">科学AI</span></div>
+        <p class="note">OLMo 系列开源模型与开放数据集的主要发布方。403 为反爬，浏览器可正常访问。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="eleutherai 开源模型 可解释性 对齐 评测 注意路径：旧地址 blog.eleuther.ai 实测仅剩跳转提示、无文章链接，真实列表已迁至 /papers 与 /papers-blog/。可解释性方向（sparse autoencoder、可组合干预等）与 anthropic 主线高度重合，是不同方法论的外部对照。">
+        <div class="card-head">
+          <h3>EleutherAI</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.eleuther.ai/papers" target="_blank" rel="noopener">www.eleuther.ai/papers</a><a class="lnk" href="https://www.eleuther.ai/papers-blog/" target="_blank" rel="noopener">www.eleuther.ai/papers-blog/</a><a class="lnk" href="https://www.eleuther.ai/" target="_blank" rel="noopener">www.eleuther.ai/</a></div>
+        <div class="tags"><span class="tag">开源模型</span><span class="tag">可解释性</span><span class="tag">对齐</span><span class="tag">评测</span></div>
+        <p class="note">注意路径：旧地址 blog.eleuther.ai 实测仅剩跳转提示、无文章链接，真实列表已迁至 /papers 与 /papers-blog/。可解释性方向（sparse autoencoder、可组合干预等）与 Anthropic 主线高度重合，是不同方法论的外部对照。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="laion 开放数据集 多模态 可复现研究 以数据集与复现研究为主。">
+        <div class="card-head">
+          <h3>LAION</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://laion.ai/blog/" target="_blank" rel="noopener">laion.ai/blog</a></div>
+        <div class="tags"><span class="tag">开放数据集</span><span class="tag">多模态</span><span class="tag">可复现研究</span></div>
+        <p class="note">以数据集与复现研究为主。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="智源研究院 baai 基础模型 评测 开源生态 智源社区，含论文速递栏目，中文语境下的论文聚合价值高。">
+        <div class="card-head">
+          <h3>智源研究院 BAAI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://hub.baai.ac.cn/" target="_blank" rel="noopener">hub.baai.ac.cn</a></div>
+        <div class="tags"><span class="tag">基础模型</span><span class="tag">评测</span><span class="tag">开源生态</span></div>
+        <p class="note">智源社区，含论文速递栏目，中文语境下的论文聚合价值高。</p>
+      </article>
+  </section>
+  <section class="group" data-cat="safety">
+    <header class="group-head">
+      <h2>安全 · 评估 · 对齐<span class="cnt">12</span></h2>
+      <p>与 Anthropic 主线最互补</p>
+    </header>
+      <article class="card" data-status="ok" data-pri="P0" data-search="apollo research 欺骗性对齐 阴谋行为评估 监督 受控评测（in-context scheming）方法论与 anthropic 的 sleeper agents／alignment faking 一脉相承。">
+        <div class="card-head">
+          <h3>Apollo Research</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.apolloresearch.ai/" target="_blank" rel="noopener">www.apolloresearch.ai</a></div>
+        <div class="tags"><span class="tag">欺骗性对齐</span><span class="tag">阴谋行为评估</span><span class="tag">监督</span></div>
+        <p class="note">受控评测（in-context scheming）方法论与 Anthropic 的 sleeper agents／alignment faking 一脉相承。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="epoch ai 算力趋势 数据墙 基准数据库 ai 经济 定量数据驱动，与 anthropic economic index 系列形成数据互补。">
+        <div class="card-head">
+          <h3>Epoch AI</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://epoch.ai/publications" target="_blank" rel="noopener">epoch.ai/publications</a></div>
+        <div class="tags"><span class="tag">算力趋势</span><span class="tag">数据墙</span><span class="tag">基准数据库</span><span class="tag">AI 经济</span></div>
+        <p class="note">定量数据驱动，与 Anthropic Economic Index 系列形成数据互补。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="metr 能力评估 自主性 风险评估 红队 实测列表页含 29 条，是本批外部源中体量最大、主题最对口的一个。与 anthropic 的 sabotage-evaluations、measuring-agent-autonomy、forecasting-rare-behaviors 直接对话，且提供的是第三方评估视角（anthropic 的评估类论文多为自评）。">
+        <div class="card-head">
+          <h3>METR</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://metr.org/blog" target="_blank" rel="noopener">metr.org/blog</a></div>
+        <div class="tags"><span class="tag">能力评估</span><span class="tag">自主性</span><span class="tag">风险评估</span><span class="tag">红队</span></div>
+        <p class="note">实测列表页含 29 条，是本批外部源中体量最大、主题最对口的一个。与 Anthropic 的 sabotage-evaluations、measuring-agent-autonomy、forecasting-rare-behaviors 直接对话，且提供的是第三方评估视角（Anthropic 的评估类论文多为自评）。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="redwood research ai 控制 对齐 可解释性 ai control 议程的提出方，与 anthropic 的 sabotage/shade-arena 系列强相关。">
+        <div class="card-head">
+          <h3>Redwood Research</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.redwoodresearch.org/research" target="_blank" rel="noopener">www.redwoodresearch.org/research</a></div>
+        <div class="tags"><span class="tag">AI 控制</span><span class="tag">对齐</span><span class="tag">可解释性</span></div>
+        <p class="note">AI Control 议程的提出方，与 Anthropic 的 sabotage/shade-arena 系列强相关。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="alignment research center (arc) eliciting latent knowledge 威胁模型 理论对齐 输出以理论文章为主，更新频率低但单篇分量重。">
+        <div class="card-head">
+          <h3>Alignment Research Center (ARC)</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://alignment.org/" target="_blank" rel="noopener">alignment.org</a></div>
+        <div class="tags"><span class="tag">eliciting latent knowledge</span><span class="tag">威胁模型</span><span class="tag">理论对齐</span></div>
+        <p class="note">输出以理论文章为主，更新频率低但单篇分量重。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="timaeus 可解释性 物理启发方法 可解释性专门机构，视角与 anthropic 的 circuits 路线不同，可作对照阅读。">
+        <div class="card-head">
+          <h3>Timaeus</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://timaeus.co/" target="_blank" rel="noopener">timaeus.co</a></div>
+        <div class="tags"><span class="tag">可解释性</span><span class="tag">物理启发方法</span></div>
+        <p class="note">可解释性专门机构，视角与 Anthropic 的 circuits 路线不同，可作对照阅读。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="uk ai security institute 前沿模型评测 安全治理 政策 国家级评测机构，发布独立的前沿模型测评报告。">
+        <div class="card-head">
+          <h3>UK AI Security Institute</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.aisi.gov.uk/" target="_blank" rel="noopener">www.aisi.gov.uk</a></div>
+        <div class="tags"><span class="tag">前沿模型评测</span><span class="tag">安全治理</span><span class="tag">政策</span></div>
+        <p class="note">国家级评测机构，发布独立的前沿模型测评报告。</p>
+      </article>
+      <article class="card" data-status="blocked" data-pri="P2" data-search="alignment forum 对齐讨论 技术笔记 429 为限流，属正常现象，需降速抓取。内容为非正式技术笔记，质量参差但前沿讨论集中。">
+        <div class="card-head">
+          <h3>Alignment Forum</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st warn">需绕过反爬</span><span class="code">429</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.alignmentforum.org/" target="_blank" rel="noopener">www.alignmentforum.org</a></div>
+        <div class="tags"><span class="tag">对齐讨论</span><span class="tag">技术笔记</span></div>
+        <p class="note">429 为限流，属正常现象，需降速抓取。内容为非正式技术笔记，质量参差但前沿讨论集中。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="far.ai 前沿对齐研究 评测 治理 含研究议程与出版物索引。">
+        <div class="card-head">
+          <h3>FAR.AI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://far.ai/" target="_blank" rel="noopener">far.ai</a></div>
+        <div class="tags"><span class="tag">前沿对齐研究</span><span class="tag">评测</span><span class="tag">治理</span></div>
+        <p class="note">含研究议程与出版物索引。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="goodfire ai 可解释性 稀疏自编码器 sae 方向的工程化落地，与 anthropic 的 monosemanticity 研究直接相关。">
+        <div class="card-head">
+          <h3>Goodfire AI</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.goodfire.ai/" target="_blank" rel="noopener">www.goodfire.ai</a></div>
+        <div class="tags"><span class="tag">可解释性</span><span class="tag">稀疏自编码器</span></div>
+        <p class="note">SAE 方向的工程化落地，与 Anthropic 的 monosemanticity 研究直接相关。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="nist caisi (美国) 标准与评测 ai 安全指南 偏标准与框架文件，非论文。">
+        <div class="card-head">
+          <h3>NIST CAISI (美国)</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.nist.gov/aisi" target="_blank" rel="noopener">www.nist.gov/aisi</a></div>
+        <div class="tags"><span class="tag">标准与评测</span><span class="tag">AI 安全指南</span></div>
+        <p class="note">偏标准与框架文件，非论文。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="transluce 可解释性 模型审计 可解释性产品化公司，有公开研究报告。">
+        <div class="card-head">
+          <h3>Transluce</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://transluce.org/" target="_blank" rel="noopener">transluce.org</a></div>
+        <div class="tags"><span class="tag">可解释性</span><span class="tag">模型审计</span></div>
+        <p class="note">可解释性产品化公司，有公开研究报告。</p>
+      </article>
+  </section>
+  <section class="group" data-cat="aggregator">
+    <header class="group-head">
+      <h2>聚合与发现渠道<span class="cnt">9</span></h2>
+      <p>arXiv/HuggingFace/评审平台</p>
+    </header>
+      <article class="card" data-status="proxy" data-pri="P0" data-search="hugging face 全领域 社区热度排序 daily papers + trending papers。papers with code 关停后，trending papers 由 hf 与 meta 合作承接。热榜机制天然过滤噪声，适合做选题发现。">
+        <div class="card-head">
+          <h3>Hugging Face</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st proxy">需境外网络</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://huggingface.co/papers" target="_blank" rel="noopener">huggingface.co/papers</a><a class="lnk" href="https://huggingface.co/papers/trending" target="_blank" rel="noopener">huggingface.co/papers/trending</a></div>
+        <div class="tags"><span class="tag">全领域</span><span class="tag">社区热度排序</span></div>
+        <p class="note">Daily Papers + Trending Papers。Papers with Code 关停后，Trending Papers 由 HF 与 Meta 合作承接。热榜机制天然过滤噪声，适合做选题发现。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="arxiv 全领域预印本 所有厂商的技术报告最终都会落到 arxiv。rss 实测可解析，单次返回 304 条、带 pubdate，是可靠的自动增量入口。建议配合机构白名单（作者单位关键词）过滤。">
+        <div class="card-head">
+          <h3>arXiv</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://arxiv.org/list/cs.AI/recent" target="_blank" rel="noopener">arxiv.org/list/cs.AI/recent</a><a class="lnk rss" href="https://arxiv.org/rss/cs.AI" target="_blank" rel="noopener">RSS arxiv.org/rss/cs.AI</a><span class="vbadge">解析通过</span></div>
+        <div class="tags"><span class="tag">全领域预印本</span></div>
+        <p class="note">所有厂商的技术报告最终都会落到 arXiv。RSS 实测可解析，单次返回 304 条、带 pubDate，是可靠的自动增量入口。建议配合机构白名单（作者单位关键词）过滤。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P0" data-search="arxiv 计算语言学 / nlp 语言模型方向论文量最大。rss 实测可解析，单次返回 171 条、带 pubdate，日更。">
+        <div class="card-head">
+          <h3>arXiv</h3>
+          <div class="badges"><span class="pri pri-P0">P0</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://arxiv.org/list/cs.CL/recent" target="_blank" rel="noopener">arxiv.org/list/cs.CL/recent</a><a class="lnk rss" href="https://arxiv.org/rss/cs.CL" target="_blank" rel="noopener">RSS arxiv.org/rss/cs.CL</a><span class="vbadge">解析通过</span></div>
+        <div class="tags"><span class="tag">计算语言学 / NLP</span></div>
+        <p class="note">语言模型方向论文量最大。RSS 实测可解析，单次返回 171 条、带 pubDate，日更。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="semantic scholar 论文元数据 引用图谱 有公开 api，适合做引用关系与元数据补全（引文、作者、领域标签）。">
+        <div class="card-head">
+          <h3>Semantic Scholar</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.semanticscholar.org/" target="_blank" rel="noopener">www.semanticscholar.org</a></div>
+        <div class="tags"><span class="tag">论文元数据</span><span class="tag">引用图谱</span></div>
+        <p class="note">有公开 API，适合做引用关系与元数据补全（引文、作者、领域标签）。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="arxiv 机器学习 训练方法、架构创新集中地。">
+        <div class="card-head">
+          <h3>arXiv</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://arxiv.org/list/cs.LG/recent" target="_blank" rel="noopener">arxiv.org/list/cs.LG/recent</a><a class="lnk rss" href="https://arxiv.org/rss/cs.LG" target="_blank" rel="noopener">RSS arxiv.org/rss/cs.LG</a></div>
+        <div class="tags"><span class="tag">机器学习</span></div>
+        <p class="note">训练方法、架构创新集中地。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="openreview 会议投稿 评审意见 iclr/neurips 等会议的公开评审记录，能看到论文的争议点，价值高于单纯摘要。">
+        <div class="card-head">
+          <h3>OpenReview</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://openreview.net/" target="_blank" rel="noopener">openreview.net</a></div>
+        <div class="tags"><span class="tag">会议投稿</span><span class="tag">评审意见</span></div>
+        <p class="note">ICLR/NeurIPS 等会议的公开评审记录，能看到论文的争议点，价值高于单纯摘要。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="alphaxiv arxiv 论文讨论层 给 arxiv 论文附加社区注释与问答，适合筛选高价值论文。">
+        <div class="card-head">
+          <h3>alphaXiv</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.alphaxiv.org/" target="_blank" rel="noopener">www.alphaxiv.org</a></div>
+        <div class="tags"><span class="tag">arXiv 论文讨论层</span></div>
+        <p class="note">给 arXiv 论文附加社区注释与问答，适合筛选高价值论文。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="arxiv 软件工程 代码智能 配合 swe-bench 等代码 agent 评测方向。">
+        <div class="card-head">
+          <h3>arXiv</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://arxiv.org/list/cs.SE/recent" target="_blank" rel="noopener">arxiv.org/list/cs.SE/recent</a></div>
+        <div class="tags"><span class="tag">软件工程</span><span class="tag">代码智能</span></div>
+        <p class="note">配合 SWE-bench 等代码 Agent 评测方向。</p>
+      </article>
+      <article class="card" data-status="dead" data-pri="仅供参考" data-search="papers with code（已关停） 论文-代码-榜单关联 meta 于 2025-07-24 关停，域名现重定向至 hugging face trending papers。历史快照（约 57.6 万篇论文、30 万条论文-代码关联）以 json 形式存档在 github，只可作历史检索，不再更新。">
+        <div class="card-head">
+          <h3>Papers with Code（已关停）</h3>
+          <div class="badges"><span class="pri pri-仅供参考">仅供参考</span><span class="st dead">已停止服务</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://github.com/paperswithcode/paperswithcode-data" target="_blank" rel="noopener">github.com/paperswithcode/paperswithcode-data</a></div>
+        <div class="tags"><span class="tag">论文-代码-榜单关联</span></div>
+        <p class="note">Meta 于 2025-07-24 关停，域名现重定向至 Hugging Face Trending Papers。历史快照（约 57.6 万篇论文、30 万条论文-代码关联）以 JSON 形式存档在 GitHub，只可作历史检索，不再更新。</p>
+      </article>
+  </section>
+  <section class="group" data-cat="academic">
+    <header class="group-head">
+      <h2>学术机构<span class="cnt">4</span></h2>
+      <p>Berkeley/MIT/Stanford 等</p>
+    </header>
+      <article class="card" data-status="ok" data-pri="P1" data-search="berkeley bair 机器人 强化学习 视觉 实测 200，且 blog/feed.xml 可解析出 10 条（最新 2026-07-29）。博客由论文作者亲自撰写，是理解研究动机的最佳渠道，可读性接近 anthropic 的长文。">
+        <div class="card-head">
+          <h3>Berkeley BAIR</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://bair.berkeley.edu/blog/" target="_blank" rel="noopener">bair.berkeley.edu/blog</a><a class="lnk rss" href="https://bair.berkeley.edu/blog/feed.xml" target="_blank" rel="noopener">RSS bair.berkeley.edu/blog/feed.xml</a><span class="vbadge">解析通过</span></div>
+        <div class="tags"><span class="tag">机器人</span><span class="tag">强化学习</span><span class="tag">视觉</span></div>
+        <p class="note">实测 200，且 blog/feed.xml 可解析出 10 条（最新 2026-07-29）。博客由论文作者亲自撰写，是理解研究动机的最佳渠道，可读性接近 Anthropic 的长文。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P1" data-search="stanford hai ai 政策 经济影响 社会影响 年度 ai index 报告发布方，与 anthropic economic index 属同一议题域。">
+        <div class="card-head">
+          <h3>Stanford HAI</h3>
+          <div class="badges"><span class="pri pri-P1">P1</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://hai.stanford.edu/research" target="_blank" rel="noopener">hai.stanford.edu/research</a></div>
+        <div class="tags"><span class="tag">AI 政策</span><span class="tag">经济影响</span><span class="tag">社会影响</span></div>
+        <p class="note">年度 AI Index 报告发布方，与 Anthropic Economic Index 属同一议题域。</p>
+      </article>
+      <article class="card" data-status="ok" data-pri="P2" data-search="mit csail ai 理论 系统 机器人 计算生物学 偏学术，论文密度高。">
+        <div class="card-head">
+          <h3>MIT CSAIL</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st ok">可直抓</span><span class="code">200</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://www.csail.mit.edu/research" target="_blank" rel="noopener">www.csail.mit.edu/research</a></div>
+        <div class="tags"><span class="tag">AI 理论</span><span class="tag">系统</span><span class="tag">机器人</span><span class="tag">计算生物学</span></div>
+        <p class="note">偏学术，论文密度高。</p>
+      </article>
+      <article class="card" data-status="blocked" data-pri="P2" data-search="mit-ibm watson ai lab ai 基础 可信ai 计算生物学 产学合作实验室，有独立的出版物索引。">
+        <div class="card-head">
+          <h3>MIT-IBM Watson AI Lab</h3>
+          <div class="badges"><span class="pri pri-P2">P2</span><span class="st warn">需绕过反爬</span><span class="code">403</span></div>
+        </div>
+        <div class="links"><a class="lnk main" href="https://mitibmwatsonailab.mit.edu/research/publications/" target="_blank" rel="noopener">mitibmwatsonailab.mit.edu/research/publications</a></div>
+        <div class="tags"><span class="tag">AI 基础</span><span class="tag">可信AI</span><span class="tag">计算生物学</span></div>
+        <p class="note">产学合作实验室，有独立的出版物索引。</p>
+      </article>
+  </section>
+  <div class="empty hidden" id="empty">没有匹配的源</div>
+
+  <footer>
+    <p>状态说明：<b>可直抓</b> = 实测 200；<b>需绕过反爬</b> = 403/429，浏览器可访问；<b>需境外网络</b> = 本机代理隧道 502，地址有效但不具备直连条件；<b>已停止服务</b> = 站点下线。</p>
+    <p>数据文件：<code>sources.json</code>　·　生成脚本：<code>build_sources_page.py</code>　·　探测脚本：<code>probe_sources.py</code> / <code>probe_sources2.py</code></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
+  var empty = document.getElementById('empty');
+  var filter = 'all';
+
+  function apply() {
+    var kw = q.value.trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function (c) {
+      var okKw = !kw || c.dataset.search.indexOf(kw) > -1;
+      var okF = true;
+      if (filter === '__ok') okF = c.dataset.status === 'ok';
+      else if (filter === '__p0') okF = c.dataset.pri === 'P0';
+      else if (filter !== 'all') okF = c.closest('.group').dataset.cat === filter;
+      var vis = okKw && okF;
+      c.classList.toggle('hidden', !vis);
+      if (vis) shown++;
+    });
+    groups.forEach(function (g) {
+      var any = g.querySelector('.card:not(.hidden)');
+      g.classList.toggle('hidden', !any);
+    });
+    empty.classList.toggle('hidden', shown > 0);
+  }
+
+  q.addEventListener('input', apply);
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      filter = b.dataset.f;
+      apply();
+    });
+  });
+})();
+</script>
+</body>
+</html>

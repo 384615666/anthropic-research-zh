@@ -1,0 +1,472 @@
+[
+  {
+    "key": "openai-index",
+    "url": "https://openai.com/research/index/",
+    "ok": false,
+    "status": 403,
+    "error": "HTTP 403"
+  },
+  {
+    "key": "openai-rss",
+    "url": "https://openai.com/news/rss.xml",
+    "ok": true,
+    "status": 200,
+    "final": "https://openai.com/news/rss.xml",
+    "title": "<![CDATA[OpenAI News]]>",
+    "is_rss": true
+  },
+  {
+    "key": "deepmind-research",
+    "url": "https://deepmind.google/research/",
+    "ok": false,
+    "status": 0,
+    "error": "TimeoutError: The read operation timed out"
+  },
+  {
+    "key": "google-pubs2",
+    "url": "https://research.google/pubs",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "meta-pub-search",
+    "url": "https://ai.meta.com/results/?content_types[0]=publication",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "meta-research",
+    "url": "https://ai.meta.com/research/",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "msr-feed",
+    "url": "https://www.microsoft.com/en-us/research/feed/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.microsoft.com/en-us/research/feed/",
+    "title": "Microsoft Research",
+    "is_rss": true
+  },
+  {
+    "key": "apple-rss",
+    "url": "https://machinelearning.apple.com/rss.xml",
+    "ok": true,
+    "status": 200,
+    "final": "https://machinelearning.apple.com/rss.xml",
+    "title": "Apple Machine Learning Research",
+    "is_rss": true
+  },
+  {
+    "key": "nvidia-labs",
+    "url": "https://research.nvidia.com/labs/",
+    "ok": false,
+    "status": 403,
+    "error": "HTTP 403"
+  },
+  {
+    "key": "amazon-science",
+    "url": "https://www.amazon.science/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.amazon.science/",
+    "title": "Amazon Science homepage",
+    "is_rss": false
+  },
+  {
+    "key": "mit-ibm-watson",
+    "url": "https://mitibmwatsonailab.mit.edu/research/publications/",
+    "ok": false,
+    "status": 403,
+    "error": "HTTP 403"
+  },
+  {
+    "key": "anthropic-eng",
+    "url": "https://www.anthropic.com/engineering",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.anthropic.com/engineering",
+    "title": "Engineering \\ Anthropic",
+    "is_rss": false
+  },
+  {
+    "key": "anthropic-news",
+    "url": "https://www.anthropic.com/news",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.anthropic.com/news",
+    "title": "Newsroom \\ Anthropic",
+    "is_rss": false
+  },
+  {
+    "key": "mistral-rss",
+    "url": "https://mistral.ai/news/rss",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "hf-trending",
+    "url": "https://huggingface.co/papers/trending",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "hf-papers",
+    "url": "https://huggingface.co/papers",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "cohere-blog",
+    "url": "https://cohere.com/blog",
+    "ok": true,
+    "status": 200,
+    "final": "https://cohere.com/blog",
+    "title": "The Cohere Blog",
+    "is_rss": false
+  },
+  {
+    "key": "stability-research",
+    "url": "https://stability.ai/research",
+    "ok": true,
+    "status": 200,
+    "final": "https://stability.ai/research",
+    "title": "Research Blog &mdash; Stability AI",
+    "is_rss": false
+  },
+  {
+    "key": "xai",
+    "url": "https://x.ai/",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "salesforce-ai",
+    "url": "https://www.salesforce.com/artificial-intelligence/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.salesforce.com/artificial-intelligence/?bc=OTH",
+    "title": "AIForce: Salesforce AI, Wherever You Already Work | Salesforce",
+    "is_rss": false
+  },
+  {
+    "key": "databricks-blog",
+    "url": "https://www.databricks.com/blog",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.databricks.com/blog",
+    "title": "",
+    "is_rss": false
+  },
+  {
+    "key": "figure-news",
+    "url": "https://www.figure.ai/news",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.figure.ai/news",
+    "title": "News | Figure",
+    "is_rss": false
+  },
+  {
+    "key": "allenai-home",
+    "url": "https://allenai.org/",
+    "ok": false,
+    "status": 403,
+    "error": "HTTP 403"
+  },
+  {
+    "key": "eleuther-home",
+    "url": "https://www.eleuther.ai/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.eleuther.ai/",
+    "title": "EleutherAI",
+    "is_rss": false
+  },
+  {
+    "key": "eleuther-blog",
+    "url": "https://blog.eleuther.ai/",
+    "ok": true,
+    "status": 200,
+    "final": "https://blog.eleuther.ai/",
+    "title": "EleutherAI Blog",
+    "is_rss": false
+  },
+  {
+    "key": "laion",
+    "url": "https://laion.ai/blog/",
+    "ok": true,
+    "status": 200,
+    "final": "https://laion.ai/blog/",
+    "title": "Blog | LAION",
+    "is_rss": false
+  },
+  {
+    "key": "mlcommons",
+    "url": "https://mlcommons.org/",
+    "ok": false,
+    "status": 403,
+    "error": "HTTP 403"
+  },
+  {
+    "key": "aisi-uk",
+    "url": "https://www.aisi.gov.uk/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.aisi.gov.uk/",
+    "title": "The AI Security Institute (AISI)",
+    "is_rss": false
+  },
+  {
+    "key": "nist-aisi",
+    "url": "https://www.nist.gov/aisi",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.nist.gov/caisi",
+    "title": "Center for AI Standards and Innovation (CAISI) | NIST",
+    "is_rss": false
+  },
+  {
+    "key": "alignment-forum",
+    "url": "https://www.alignmentforum.org/",
+    "ok": false,
+    "status": 429,
+    "error": "HTTP 429"
+  },
+  {
+    "key": "lesswrong",
+    "url": "https://www.lesswrong.com/",
+    "ok": false,
+    "status": 429,
+    "error": "HTTP 429"
+  },
+  {
+    "key": "arc",
+    "url": "https://alignment.org/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.alignment.org/",
+    "title": "Alignment Research Center",
+    "is_rss": false
+  },
+  {
+    "key": "timaeus",
+    "url": "https://timaeus.co/",
+    "ok": true,
+    "status": 200,
+    "final": "https://timaeus.co/",
+    "title": "Timaeus | Breakthrough Scientific Progress on AI Safety",
+    "is_rss": false
+  },
+  {
+    "key": "control-ai",
+    "url": "https://controlai.org/",
+    "ok": true,
+    "status": 200,
+    "final": "https://controlai.org/",
+    "title": "Superintelligent AI: An Extinction Risk to Humanity | ControlAI",
+    "is_rss": false
+  },
+  {
+    "key": "far-ai",
+    "url": "https://far.ai/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.far.ai/",
+    "title": "FAR.AI: Frontier Alignment Research",
+    "is_rss": false
+  },
+  {
+    "key": "openreview",
+    "url": "https://openreview.net/",
+    "ok": true,
+    "status": 200,
+    "final": "https://openreview.net/",
+    "title": "Venues | OpenReview",
+    "is_rss": false
+  },
+  {
+    "key": "neurips",
+    "url": "https://neurips.cc/",
+    "ok": true,
+    "status": 200,
+    "final": "https://neurips.cc/",
+    "title": "2026 Conference",
+    "is_rss": false
+  },
+  {
+    "key": "icml",
+    "url": "https://icml.cc/",
+    "ok": true,
+    "status": 200,
+    "final": "https://icml.cc/",
+    "title": "2026 Conference",
+    "is_rss": false
+  },
+  {
+    "key": "iclr",
+    "url": "https://iclr.cc/",
+    "ok": true,
+    "status": 200,
+    "final": "https://iclr.cc/",
+    "title": "2027 Conference",
+    "is_rss": false
+  },
+  {
+    "key": "arxiv-cs-se",
+    "url": "https://arxiv.org/list/cs.SE/recent",
+    "ok": true,
+    "status": 200,
+    "final": "https://arxiv.org/list/cs.SE/recent",
+    "title": "Software Engineering",
+    "is_rss": false
+  },
+  {
+    "key": "shlab",
+    "url": "https://www.shlab.org.cn/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.shlab.org.cn/",
+    "title": "首页 - 上海人工智能实验室",
+    "is_rss": false
+  },
+  {
+    "key": "internvl",
+    "url": "https://internvl.github.io/",
+    "ok": true,
+    "status": 200,
+    "final": "https://internvl.github.io/",
+    "title": "InternVL",
+    "is_rss": false
+  },
+  {
+    "key": "opencompass",
+    "url": "https://opencompass.org.cn/",
+    "ok": true,
+    "status": 200,
+    "final": "https://opencompass.org.cn/",
+    "title": "OpenCompass司南",
+    "is_rss": false
+  },
+  {
+    "key": "modelscope",
+    "url": "https://www.modelscope.cn/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.modelscope.cn/home",
+    "title": "ModelScope",
+    "is_rss": false
+  },
+  {
+    "key": "stepfun",
+    "url": "https://www.stepfun.com/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.stepfun.com/",
+    "title": "阶跃星辰",
+    "is_rss": false
+  },
+  {
+    "key": "damo",
+    "url": "https://www.damo-academy.com/",
+    "ok": true,
+    "status": 200,
+    "final": "https://developer.damo-academy.com/",
+    "title": "",
+    "is_rss": false
+  },
+  {
+    "key": "kuaishou-kling",
+    "url": "https://app.klingai.com/",
+    "ok": true,
+    "status": 200,
+    "final": "https://klingai.com/app/",
+    "title": "Kling AI: Next-Generation AI Creative Studio",
+    "is_rss": false
+  },
+  {
+    "key": "sensetime",
+    "url": "https://www.sensetime.com/cn/business-detail?categoryId=59592",
+    "ok": false,
+    "status": 404,
+    "error": "HTTP 404"
+  },
+  {
+    "key": "baai-hub",
+    "url": "https://hub.baai.ac.cn/",
+    "ok": true,
+    "status": 200,
+    "final": "https://hub.baai.ac.cn/",
+    "title": "智源社区_没有围墙的人工智能实验室",
+    "is_rss": false
+  },
+  {
+    "key": "minimaxi",
+    "url": "https://www.minimaxi.com/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.minimax.cn/",
+    "title": "MiniMax",
+    "is_rss": false
+  },
+  {
+    "key": "thudm",
+    "url": "https://github.com/THUDM",
+    "ok": true,
+    "status": 200,
+    "final": "https://github.com/THUDM",
+    "title": "THUKEG · GitHub",
+    "is_rss": false
+  },
+  {
+    "key": "moonshot-github",
+    "url": "https://github.com/MoonshotAI",
+    "ok": true,
+    "status": 200,
+    "final": "https://github.com/MoonshotAI",
+    "title": "Moonshot AI · GitHub",
+    "is_rss": false
+  },
+  {
+    "key": "deepseek-github",
+    "url": "https://github.com/deepseek-ai",
+    "ok": true,
+    "status": 200,
+    "final": "https://github.com/deepseek-ai",
+    "title": "DeepSeek · GitHub",
+    "is_rss": false
+  },
+  {
+    "key": "qwen-github",
+    "url": "https://github.com/QwenLM",
+    "ok": true,
+    "status": 200,
+    "final": "https://github.com/QwenLM",
+    "title": "Qwen · GitHub",
+    "is_rss": false
+  },
+  {
+    "key": "idm",
+    "url": "https://www.idm-vc.com/",
+    "ok": false,
+    "status": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  },
+  {
+    "key": "ieit",
+    "url": "https://www.ieisystem.com/",
+    "ok": true,
+    "status": 200,
+    "final": "https://www.ieisystem.com/",
+    "title": "浪潮信息-IT基础设施产品、方案和服务提供商",
+    "is_rss": false
+  }
+]

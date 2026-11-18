@@ -1,0 +1,50 @@
+{
+  "https://arxiv.org/": {
+    "rss/cs.AI": 200,
+    "rss/cs.CL": 200
+  },
+  "https://openai.com/": {
+    "news/rss.xml": 200,
+    "index/rss.xml": 404,
+    "sitemap.xml": 200
+  },
+  "https://deepmind.google/": {
+    "blog.xml": 404,
+    "sitemap.xml": 200
+  },
+  "https://machinelearning.apple.com/": {
+    "research.rss": 404,
+    "rss.xml": 200
+  },
+  "https://www.anthropic.com/": {
+    "rss.xml": 404,
+    "sitemap.xml": 200
+  },
+  "https://bair.berkeley.edu/": {
+    "blog/index.xml": 404
+  },
+  "https://allenai.org/": {
+    "rss.xml": 403,
+    "blog/rss.xml": 403
+  },
+  "https://www.microsoft.com/en-us/research/": {
+    "feed/": 200,
+    "sitemap.xml": 200
+  },
+  "https://mistral.ai/": {
+    "rss.xml": 0,
+    "sitemap.xml": 0
+  },
+  "https://research.google/": {
+    "blog/rss/": 0,
+    "sitemap.xml": 0
+  },
+  "https://ai.meta.com/": {
+    "rss/": 0,
+    "sitemap.xml": 0
+  },
+  "https://huggingface.co/": {
+    "papers/rss": 0,
+    "papers/rss.xml": 0
+  }
+}

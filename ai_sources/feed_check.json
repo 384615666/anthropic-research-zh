@@ -1,0 +1,80 @@
+[
+  {
+    "name": "OpenAI News",
+    "url": "https://openai.com/news/rss.xml",
+    "http": 200,
+    "ctype": "text/xml; charset=utf-8",
+    "format": "rss",
+    "count": 1208,
+    "latest": "How Cooley is accelerating IPO work with ChatGPT",
+    "date": "Thu, 17 Sep 2026 12"
+  },
+  {
+    "name": "Microsoft Research",
+    "url": "https://www.microsoft.com/en-us/research/feed/",
+    "http": 200,
+    "ctype": "application/rss+xml; charset=UTF-8",
+    "format": "rss",
+    "count": 10,
+    "latest": "GigaPath-Flash and GigaTIME-Flash: Toward population-scale discovery w",
+    "date": "Mon, 31 Aug 2026 16"
+  },
+  {
+    "name": "Apple ML Research",
+    "url": "https://machinelearning.apple.com/rss.xml",
+    "http": 200,
+    "ctype": "text/xml",
+    "format": "rss",
+    "count": 10,
+    "latest": "REVERSAL-BENCH: A Reversibility Axis and Reset Oracle for Measuring th",
+    "date": "Thu, 17 Sep 2026 00"
+  },
+  {
+    "name": "arXiv cs.CL",
+    "url": "https://arxiv.org/rss/cs.CL",
+    "http": 200,
+    "ctype": "application/rss+xml",
+    "format": "rss",
+    "count": 171,
+    "latest": "Enhancing Extubation Failure Prediction with LLM-Derived Features from",
+    "date": "Thu, 17 Sep 2026 00"
+  },
+  {
+    "name": "arXiv cs.AI",
+    "url": "https://arxiv.org/rss/cs.AI",
+    "http": 200,
+    "ctype": "application/rss+xml",
+    "format": "rss",
+    "count": 304,
+    "latest": "Making AI-Assisted Claims Independently Challengeable: Publication Aut",
+    "date": "Thu, 17 Sep 2026 00"
+  },
+  {
+    "name": "Anthropic (对照)",
+    "url": "https://www.anthropic.com/rss.xml",
+    "http": 0,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+  },
+  {
+    "name": "DeepMind (对照)",
+    "url": "https://deepmind.google/blog.xml",
+    "http": 0,
+    "error": "HTTPError: HTTP Error 404: Not Found"
+  },
+  {
+    "name": "BAIR Blog",
+    "url": "https://bair.berkeley.edu/blog/feed.xml",
+    "http": 200,
+    "ctype": "application/xml",
+    "format": "rss",
+    "count": 10,
+    "latest": "From CUDA to MLX: How K-Search Brings Decades of Kernel Expertise to A",
+    "date": "Wed, 29 Jul 2026 02"
+  },
+  {
+    "name": "HF Papers (对照)",
+    "url": "https://huggingface.co/papers/rss",
+    "http": 0,
+    "error": "URLError: <urlopen error Tunnel connection failed: 502 Bad Gateway>"
+  }
+]

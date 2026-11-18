@@ -1,0 +1,168 @@
+{
+  "anthropic_dist": {
+    "Interpretability": 31,
+    "Frontier Red Team": 22,
+    "Economic Research": 15,
+    "Alignment": 43,
+    "Policy": 9,
+    "Societal Impacts": 19,
+    "Engineering": 2,
+    "Product": 1,
+    "Evaluations": 1,
+    "Announcements": 3,
+    "Science": 10,
+    "Economics": 1
+  },
+  "sources": [
+    {
+      "name": "METR",
+      "url": "https://metr.org/blog",
+      "note": "评估方法论",
+      "links": 29,
+      "bytes": 94864,
+      "ok": true,
+      "samples": []
+    },
+    {
+      "name": "Apollo Research",
+      "url": "https://www.apolloresearch.ai/",
+      "note": "欺骗性对齐",
+      "links": 3,
+      "bytes": 295789,
+      "ok": true,
+      "samples": [
+        "Runtime monitoring and control for coding agents",
+        "Securing frontier AI systems across development, deployment, and governance.",
+        "Updates from Apollo"
+      ]
+    },
+    {
+      "name": "Redwood Research",
+      "url": "https://www.redwoodresearch.org/research",
+      "note": "AI 控制",
+      "links": 3,
+      "bytes": 57878,
+      "ok": true,
+      "samples": [
+        "Highlighted Research",
+        "OpenAI / Hugging Face Incident Investigation",
+        "Alignment Faking",
+        "Other Research",
+        "BashArena: A Control Setting for Highly Privileged AI Agents"
+      ]
+    },
+    {
+      "name": "Epoch AI",
+      "url": "https://epoch.ai/publications",
+      "note": "算力与趋势",
+      "links": 5,
+      "bytes": 337637,
+      "ok": true,
+      "samples": [
+        "Investigating the trajectory of AI for the benefit of society"
+      ]
+    },
+    {
+      "name": "EleutherAI Blog",
+      "url": "https://blog.eleuther.ai/",
+      "note": "可解释性",
+      "links": 0,
+      "bytes": 34204,
+      "ok": true,
+      "samples": []
+    },
+    {
+      "name": "Qwen Blog",
+      "url": "https://qwenlm.github.io/blog/",
+      "note": "开源模型",
+      "links": 0,
+      "bytes": 13796,
+      "ok": true,
+      "samples": [
+        "We have a new blog at qwen.ai !",
+        "Qwen3Guard: Real-time Safety for Your Token Stream",
+        "Qwen-Image-Edit: Image Editing with Higher Quality and Efficiency",
+        "Qwen-Image: Crafting with Native Text Rendering",
+        "GSPO: Towards Scalable Reinforcement Learning for Language Models"
+      ]
+    },
+    {
+      "name": "UK AISI",
+      "url": "https://www.aisi.gov.uk/",
+      "note": "国家级评测",
+      "links": 6,
+      "bytes": 29927,
+      "ok": true,
+      "samples": [
+        "Rigorous AI research to enable advanced AI governance",
+        "Governments have a critical role to play in ensuring advanced AI is safe, secure and beneficial.",
+        "Featured work",
+        "How Far Behind the Frontier are Leading Open Weight Models on Cyber?",
+        "How do AI models persuade? Exploring the levers of AI-enabled persuasion through large-scale experiments"
+      ]
+    },
+    {
+      "name": "Timaeus",
+      "url": "https://timaeus.co/",
+      "note": "可解释性",
+      "links": 9,
+      "bytes": 95594,
+      "ok": true,
+      "samples": [
+        "Latest Research",
+        "Elicitation without Backpropagation: Steering Model Behavior by Optimizing the Latent Posterior",
+        "Linear Response Estimators for Singular Statistical Models",
+        "Interpreting Reinforcement Learning Agents with Susceptibilities",
+        "Learn About SLT"
+      ]
+    },
+    {
+      "name": "Transluce",
+      "url": "https://transluce.org/",
+      "note": "模型审计",
+      "links": 1,
+      "bytes": 27614,
+      "ok": true,
+      "samples": [
+        "Infrastructure for understanding AI Infrastructure for understanding AI",
+        "Some Focus Areas for Embedded Evaluations and How to Approach Them",
+        "Announcing Transluce&#x27;s Mental Health Evaluation",
+        "Some Focus Areas for Embedded Evaluations and How to Approach Them",
+        "Announcing Transluce&#x27;s Mental Health Evaluation"
+      ]
+    },
+    {
+      "name": "Goodfire",
+      "url": "https://www.goodfire.ai/",
+      "note": "SAE 工程化",
+      "links": 12,
+      "bytes": 99526,
+      "ok": true,
+      "samples": [
+        "Silico is your interpretability agent",
+        "Silico works across all types of AI models",
+        "Predictive Data Debugging: Reveal and Shape What Your Model Learns, Before You Train",
+        "The World Inside Neural Networks",
+        "Interpreting Language Model Parameters"
+      ]
+    },
+    {
+      "name": "Sakana AI",
+      "url": "https://sakana.ai/",
+      "note": "日本实验室",
+      "links": 1,
+      "bytes": 17210,
+      "ok": true,
+      "samples": []
+    },
+    {
+      "name": "Physical Intelligence",
+      "url": "https://www.physicalintelligence.company/blog",
+      "note": "机器人基础模型",
+      "links": 7,
+      "bytes": 45243,
+      "ok": true,
+      "samples": []
+    }
+  ]
+}
