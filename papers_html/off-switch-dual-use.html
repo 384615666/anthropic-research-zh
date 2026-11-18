@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An off switch for dual-use knowledge in AI models</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>AI 模型中双重用途知识的“开关”</h1>
+<div class="meta">
+An off switch for dual-use knowledge in AI models · Jul 8, 2026 · Alignment · <a href="https://www.anthropic.com/research/off-switch-dual-use" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">AE Studio 与 Anthropic 合作提出 GRAM（梯度路由辅助模块），为双重用途知识提供可移除的“隔间”。GRAM 在 Transformer 每层加入按类别分组的额外神经元：处理通用文本时正常学习，遇双重用途类文本只有对应模块能学习，通用权重冻结。训练后删除模块即可移除对应能力，也可按需保留。实验覆盖多个规模模型：删除模块的效果与从未训练该数据相当，且不损伤通用性能；抗攻击能力与数据过滤相当，优于事后“遗忘”技术。该方法以训练一个模型的成本实现多个过滤模型的效果，但仍需前沿规模验证。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">双重用途知识：既可正当使用也可能被滥用的知识，如网络攻防、生物技术</span><span class="term">梯度路由：训练时只让指定模块的权重从特定数据中学习</span><span class="term">预训练数据过滤：训练前从数据中剔除危险知识的做法</span><span class="term">遗忘（unlearning）：训练完成后移除模型已学知识的技术</span><span class="term">权重：神经网络中存储知识与能力的内部参数</span><span class="term">Transformer：当代大语言模型基于的神经网络架构</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 对齐</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/off-switch-dual-use</li>
+</ul>
+<p>对齐
+2026 年 7 月 8 日
+<img alt="AI 模型中双重用途知识的关闭开关" src="../assets/off-switch-dual-use/img_000.svg" />
+<em>这篇文章描述了由 <a href="https://ae.studio/alignment">AE Studio</a> 与 Anthropic 合作开展的研究。</em>
+前沿 AI 模型，除其他之外，是一个巨大的知识库。其中一些知识是_双重用途_（dual use）的，意思是它可以用于善也可以用于恶。例如，网络安全知识可以帮助修补关键的安全漏洞，也可以被用来利用这些漏洞。病毒学知识可以帮助研究人员创造疫苗，但也可以帮助恶意行为者设计致命病原体。理想情况下，我们应该能够平衡三个独立的目标：第一，以尽可能精准的方式限制对双重用途能力的访问；第二，允许受信任的用户为有益目的访问同样的能力；第三，在做到这一切的同时不影响模型在任何其他任务上的性能。
+当前的防护措施并不完美。我们训练模型拒绝有害请求，并使用分类器筛选输入和输出中的危险内容。这些保护层可以防范危险输出——但它们不会改变底层模型中存储的知识。尽管有我们的防护措施，一个足够坚定的攻击者仍然可能试图<a href="https://www.anthropic.com/news/fable-safeguards-jailbreak-framework">越狱</a>（jailbreak）模型，突破其防御以访问双重用途知识。
+一种更稳健的防滥用保护将是控制模型_知道什么_。我们以前探索过这一点：在早期工作中，我们<a href="https://alignment.anthropic.com/2025/pretraining-data-filtering/">从预训练数据中过滤掉了关于化学、生物、放射性和核武器的信息</a>，后来表明<a href="https://alignment.anthropic.com/2025/selective-gradient-masking/">双重用途知识可以被限制在模型权重的一个可移除切片中</a>。但过滤是一种粗糙的手段。它产生一个具有一组固定能力的模型。使用过滤，如果你想要一个_能够_讨论高级病毒学的模型版本——例如部署在经过审查的生物安全实验室——以及一个不能的版本，你必须训练两个单独的模型。尤其是在前沿模型的情况下（它们很大且训练成本极高），对开发者来说成本将高得令人望而却步。
+在<a href="https://alignment.anthropic.com/2026/modular-pretraining/">新研究</a>中，我们与 AE Studio 的合作者一起，探索了一种新方法，它可能以仅训练一个模型的成本，实现训练许多单独过滤模型的益处。我们称之为 GRAM，即梯度路由辅助模块（Gradient-Routed Auxiliary Modules）。请注意，这里呈现的实验结果是初步的——GRAM 尚未应用于 Anthropic 的任何生产模型，我们也不确定它是否会应用。</p>
+<h2>GRAM 的工作原理</h2>
+<p>GRAM 背后的想法是给模型为每个类别的双重用途知识提供专门的、可移除的隔间，并且只在学习双重用途数据时更新这些隔间。
+具体来说，GRAM 在标准 Transformer（大型语言模型所基于的神经网络架构）的每一层中添加额外的神经元。这些神经元被分成组（或“模块”），每个双重用途类别一个。在训练期间，当模型遇到通用文本时，它照常学习。但当它遇到来自双重用途类别的文本——例如病毒学——时，规则会改变：模型可以_使用_它的通用知识来做预测，但只有病毒学模块被允许从该文本中_学习_。通用权重被暂时冻结。¹
+结果是病毒学知识积累在病毒学模块中，而不是扩散到整个网络。训练后，模块可以直接被删除，能力也随之消失。或者，在需要病毒学知识的受信任部署中，它可以留在原位。知识可以根据所需的部署类型非常具体地定制：在我们的实验中，我们定义了四个双重用途类别，因此一次使用 GRAM 的训练运行产生了一个可以配置成 16 种不同方式的模型（四个类别中的每一个“开”或“关”）。</p>
+<h2>测试 GRAM</h2>
+<p>我们在三个越来越真实的场景中测试了 GRAM。
+首先，在一个按主题标注的儿童故事合成数据集上，一个小型 GRAM 模型可以被重新配置以“遗忘”任何选定的主题，每种配置的表现几乎与一个单独训练的、过滤掉该主题的从头开始训练的模型相同。也就是说，以训练单个模型的成本，我们实现了通常需要在不同数据集上进行多次训练运行才能得到的结果。
+其次，我们在一个由网络文本、代码和科学论文组成的现实混合数据上训练了一个更大的模型，涉及四个双重用途领域：病毒学、网络安全、核物理学和一种小众编程语言（作为专业化双重用途代码的代理）。与每个双重用途领域相关的能力被路由到它自己的模块。删除一个模块移除相应能力的有效性与根本没有在该数据上训练过差不多。值得注意的是，我们发现这种移除不会降低一般性能。
+我们还测试了攻击者是否可以通过在少量恶意数据上训练来恢复被移除的知识；GRAM 抵御这一点的能力与数据过滤差不多。相比之下，训练后应用的“遗忘”技术只是_抑制_了知识——通过少量微调很容易恢复。
+第三，我们在从 5000 万到 50 亿参数的七个模型规模上运行了实验。GRAM 在每个规模上都与数据过滤的性能相匹配，而且随着模型变大，“模块开”和“模块关”之间的差距越来越大。就计算成本而言，随着我们扩大规模，试图绕过我们的保护变得相对更困难和更昂贵。</p>
+<h2>结论</h2>
+<p>随着 AI 公司训练出更有能力的模型，限制双重用途能力访问的需求将会增加。今天，公司通过分类器和拒绝训练来限制访问。然而，这些防护措施很难在不降低无害请求性能的情况下变得稳健。像 GRAM 这样的方法提供了一条通往更稳健访问控制的潜在路径。
+这是早期研究，有明显的局限。我们还没有在前沿规模或生产训练流水线中测试 GRAM。（如上所述，它尚未应用于我们的任何 Claude 模型。）我们的评估以下一 token 预测能力来量化性能，而不是在真实下游任务上的性能。而且还有一个适用于数据过滤和像 GRAM 这样的方法的更深层的开放问题：一些双重用途能力可能与通用知识纠缠得如此之深，以至于没有任何方法能干净地将它们分开。
+<em>关于我们实验的更多细节，请阅读我们对齐科学博客上的<a href="https://alignment.anthropic.com/2026/modular-pretraining/">文章</a>。</em></p>
+<h4>脚注</h4>
+<ol>
+<li>一个技术细节是，在学习通用文本时，病毒学模块有时也会被打开。我们发现这有助于模块更有效地“协同工作”。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/off-switch-dual-use"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/off-switch-dual-use"></a></li>
+</ol>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界：满足该猜想的黎曼 zeta 函数零点的比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二次攻击确定了一种攻击减轮 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>An off switch for dual-use knowledge in AI models</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/off-switch-dual-use</li>
+</ul>
+<p>Alignment</p>
+<h1>An off switch for dual-use knowledge in AI models</h1>
+<p>Jul 8, 2026
+<img alt="An off switch for dual-use knowledge in AI models" src="../assets/off-switch-dual-use/img_000.svg" />
+ <em>This post describes research conducted by<a href="https://ae.studio/alignment">AE Studio</a> in collaboration with Anthropic.</em>
+A frontier AI model is, among other things, a large store of knowledge. Some of that knowledge is <em>dual use</em> , meaning it can be used for good or for bad. For example, knowledge of cybersecurity can help patch critical security vulnerabilities, or it can be used to exploit them. Knowledge of virology can help a researcher create a vaccine, but it can also help a malicious actor design a deadly pathogen. Ideally, we would be able to balance three separate goals: first, limiting access to dual-use capabilities in as surgical a way as possible; second, allowing trusted users to access those same capabilities for beneficial purposes; and third, doing all this without affecting the model’s performance on any other task.
+Current safeguards are imperfect. We train models to refuse harmful requests and use classifiers to screen inputs and outputs for dangerous content. These layers of protection guard against dangerous outputs—but they don’t change the knowledge stored in the underlying model. Despite our safeguards, a sufficiently determined attacker may still try to <a href="https://www.anthropic.com/news/fable-safeguards-jailbreak-framework">jailbreak</a> the model, working past its defenses to access the dual-use knowledge.
+A more robust protection against misuse would be to control what the model knows. We’ve explored this before: in earlier work, we <a href="https://alignment.anthropic.com/2025/pretraining-data-filtering/">filtered information about chemical, biological, radiological, and nuclear weapons out of pretraining data</a>, and later showed that <a href="https://alignment.anthropic.com/2025/selective-gradient-masking/">dual-use knowledge can be confined to a removable slice of a model’s weights</a>. But filtering is a blunt instrument. It produces one model with one fixed set of capabilities. Using filtering, if you want a model version that <em>can</em> discuss advanced virology—for deployment in a vetted biosecurity lab, say—and another version that can’t, you have to train two separate models. Especially in the case of frontier models (which are large and very expensive to train), the cost to the developer would be prohibitive.
+In <a href="https://alignment.anthropic.com/2026/modular-pretraining/">new research</a> carried out with collaborators at AE Studio, we explore a new method that could enable the benefits of training many separately filtered models, but at the cost of training only one model. We call it GRAM, for Gradient-Routed Auxiliary Modules. Note that the results of the experiments presented here are preliminary—GRAM has not been applied to any of the production models at Anthropic, and we’re not sure it ever will be.</p>
+<h2>How GRAM works</h2>
+<p>The idea behind GRAM is to give a model dedicated, removable compartments for each category of dual-use knowledge, and to update only those compartments when learning from dual-use data.
+Concretely, GRAM adds extra neurons to every layer of a standard Transformer (the neural network architecture on which large language models are based). These neurons are divided into groups (or “modules”), one per dual-use category. During training, when the model encounters general-purpose text, it learns in the usual way. But when it encounters text from a dual-use category—virology, for instance—the rules change: the model can <em>use</em> its general knowledge to make predictions, but only the virology module is allowed to <em>learn</em> from that text. The general-purpose weights are temporarily frozen.1
+The consequence is that virology knowledge accumulates in the virology module rather than diffusing across the whole network. After training, the module can simply be deleted, and the capability goes with it. Or it can be left in place for trusted deployments, when virology knowledge is needed. The knowledge can be tailored very specifically to the type of deployment needed: in our experiments, we defined four dual-use categories, so that one training run with GRAM yielded a model that can be configured 16 different ways (“on” or “off” for each of the four categories).</p>
+<h2>Testing GRAM</h2>
+<p>We tested GRAM in three settings of increasing realism.
+First, on a synthetic dataset of children’s stories tagged by topic, a small GRAM model could be reconfigured to “forget” any chosen topic, and each configuration performed almost identically to a separate model trained from scratch with that topic filtered out. That is, for the cost of training a single model, we achieved results that would normally require multiple training runs on different datasets.
+Second, we trained a larger model on a realistic mix of web text, code, and scientific papers, with four dual-use domains: virology, cybersecurity, nuclear physics, and a niche programming language (to serve as a proxy for specialized dual-use code). The capability associated with each dual-use domain is routed to its own module. Deleting a module removed the corresponding capability about as effectively as never having trained on that data at all. Remarkably, we find that this removal did not degrade general performance.
+We also tested whether an attacker could recover the removed knowledge by training on a small amount of malicious data; GRAM resisted this about as well as data filtering did. By contrast, an “unlearning” technique applied after training only <em>suppressed</em> the knowledge—it was easy to restore with a small amount of fine-tuning.
+Third, we ran the experiment at seven model sizes from 50 million to 5 billion parameters. GRAM matched the performance of data filtering at every size, and the gap between “module on” and “module off” grew wider as models got larger. In terms of compute costs, attempting to bypass our protections became relatively more difficult and expensive as we scaled.</p>
+<h2>Conclusions</h2>
+<p>As AI companies train more capable models, the need to limit access to dual-use capabilities will increase. Today, companies limit access through classifiers and refusal training. However, these safeguards are difficult to make robust without degrading performance on harmless requests. Methods like GRAM offer a potential path toward access control that is more robust.
+This is early research, and there are clear limitations. We haven’t tested GRAM at frontier scale or in a production training pipeline. (As noted above, it hasn’t been applied to any of our Claude models.) Our evaluations quantify performance in terms of next-token prediction ability, rather than performance on real downstream tasks. And there’s a deeper open problem that applies to data filtering and methods like GRAM: some dual-use capabilities might be so entangled with general knowledge that no method can separate them cleanly.
+<em>For further details on our experiments, read the<a href="https://alignment.anthropic.com/2026/modular-pretraining/">post</a> on our Alignment Science blog.</em></p>
+<h4>Footnotes</h4>
+<p>1. One technical detail is that the virology module is also sometimes turned on when learning from general-purpose text. We find this helps the modules “work together” more effectively.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/off-switch-dual-use"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/off-switch-dual-use"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

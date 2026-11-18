@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuits Updates — May 2023</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>电路研究更新——2023年5月</h1>
+<div class="meta">
+Circuits Updates — May 2023 · May 24, 2023 · Interpretability · <a href="https://www.anthropic.com/research/circuits-updates-may-2023" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文是Anthropic可解释性团队2023年5月的研究进展更新。文章以摘要形式报告了团队当前正在发展的一系列研究想法，这些想法可能对活跃在该领域的研究者有用。内容包括一些正在萌芽、预计未来几个月会有更多成果发表的研究方向，以及一些可能永远不会单独成文的零散发现。这属于Transformer Circuits系列的工作更新，体现了该团队围绕机制可解释性，特别是叠加现象等基础问题持续推进的研究节奏。全文较短，更像一份研究进展简报而非完整论文。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">机制可解释性：逆向解析神经网络内部具体计算机制的领域</span><span class="term">变压器（Transformer）：当今主流大语言模型采用的深度学习架构</span><span class="term">叠加（superposition）：模型用有限神经元压缩存储超出维度的概念</span><span class="term">特征（feature）：模型中反复出现、对应可解释概念的激活模式</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 可解释性</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/circuits-updates-may-2023</li>
+</ul>
+<p>可解释性研究
+2023 年 5 月 24 日
+<a href="https://transformer-circuits.pub/2023/may-update/index.html">阅读论文</a></p>
+<h2>摘要</h2>
+<p>我们报告了 Anthropic 可解释性团队正在发展的许多想法，这些想法可能对该领域活跃研究的研究者感兴趣。其中一些是新兴的研究脉络，我们预计未来几个月会发布更多相关内容。另一些是我们希望分享的次要观点，因为我们不太可能为它们写论文。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/circuits-updates-may-2023"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/circuits-updates-may-2023"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>一个未发布的研究版 Claude 在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而构建的数字签名方案。第二个攻击发现了一种攻击缩减轮数 AES（使用最广泛的分组密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>项目 Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，考察 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Circuits Updates — May 2023</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/circuits-updates-may-2023</li>
+</ul>
+<h1>Circuits Updates — May 2023</h1>
+<p>May 24, 2023
+<a href="https://transformer-circuits.pub/2023/may-update/index.html">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>We report a number of developing ideas on the Anthropic interpretability team, which might be of interest to researchers working actively in this space. Some of these are emerging strands of research where we expect to publish more on in the coming months. Others are minor points we wish to share, since we're unlikely to ever write a paper about them.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/circuits-updates-may-2023"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/circuits-updates-may-2023"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

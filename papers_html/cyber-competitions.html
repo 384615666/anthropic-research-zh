@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude is competitive with humans in (some) cyber competitions</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>Claude在（部分）网络攻防竞赛中可与人类一较高下</h1>
+<div class="meta">
+Claude is competitive with humans in (some) cyber competitions · Aug 9, 2025 · Frontier Red Team · <a href="https://www.anthropic.com/research/cyber-competitions" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">2025年Anthropic让Claude以正式参赛者身份参加7场主要面向人类的网络安全竞赛。Claude表现不错，常在参赛队伍中排进前25%，例如在PicoCTF 2025中排全球前3%（297/10460队）。它能极快地解决挑战，速度与顶尖人类队伍相当；在获得工具后能自主读题、解题、提交答案；通过专门人格分工还能在防御赛中守住关键服务。但在最难的竞赛（如PlaidCTF、DEF CON CTF预选赛）中无法解题。研究也暴露了AI独特的失败方式：上下文窗口被无关内容填满、长时间任务中走神。文章警示AI可能改变攻防平衡，需要加强AI防御能力研发。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">红队：模拟攻击者来测试系统安全性的角色</span><span class="term">蓝队：负责防守、保护网络的队伍</span><span class="term">CTF夺旗赛：通过解安全谜题获得旗标的网络安全竞赛</span><span class="term">渗透测试：模拟黑客攻击以发现系统漏洞的测试</span><span class="term">上下文窗口：模型一次能处理的文本量上限</span><span class="term">智能体（agent）：能自主完成多步任务的AI系统</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 前沿红队（Frontier Red Team）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/cyber-competitions</li>
+</ul>
+<p>前沿红队
+2025年8月9日
+整个 2025 年，我们一直在悄悄让 Claude 参加主要为人类设计的网络安全竞赛。现在，我们想分享我们学到的东西。在其中许多竞赛中，Claude 表现得相当好，常常进入参赛者的前 25%。然而，在最困难的挑战上，它落后于最优秀的人类团队。
+我们在网络竞赛中测试 Claude 的经验凸显了 AI 改变攻防平衡的潜力：攻击者更容易自动化利用基本漏洞。需要更多关于 AI 赋能的网络防御和韧性的研发来应对这一发展。</p>
+<h2>为什么让 Claude 参加网络竞赛？</h2>
+<p>AI 即将改变网络安全领域。Anthropic 的保障（Safeguards）团队最近<a href="https://www.anthropic.com/news/detecting-and-countering-malicious-uses-of-claude-march-2025">识别并封禁</a>了一个编程能力有限、利用 Claude 开发恶意软件的用户。研究表明，这种构成威胁所需专业门槛的降低，加上大语言模型（LLM）成本的下降，预示着网络攻击经济学将发生剧变。[1] 为了理解 AI 网络能力的现状并洞察其发展轨迹，我们采用不同的模型评估方法，包括公开可用的和自制的基准。在这篇文章中，我们讨论一种不同的模型评估方法：网络竞赛。
+网络竞赛是团队竞争解决网络安全挑战的赛事。这些竞赛测试参赛者在渗透测试、数字取证、密码学和系统防御等领域的技能。例如，夺旗赛（capture the flag, CTF）活动，如 <a href="https://picoctf.org/">PicoCTF</a> 和 <a href="https://ctf.hackthebox.com/event/details/ai-vs-human-ctf-challenge-2000">AI vs Human CTF Challenge</a>——参与者解决基于谜题的挑战——以及 <a href="https://www.nationalccdc.org/">大学生网络防御竞赛</a>（CCDC）——团队抵御实时攻击者，防御易受攻击的网络。这些竞赛从面向高中生的新手友好型赛事，到为顶尖完赛者提供大额<a href="https://plaidctf.com/rules">现金奖励</a>的专家级活动，不一而足。
+我们一直在让 Claude 参加这些竞赛，因为它们为压力测试前沿 AI 模型的网络能力提供了几个优势：
+  * <strong>有意义的基线</strong>：作为公开竞赛的合法参赛者，我们可以直接把 Claude 与各种经验和技能水平的对手进行比较，包括本科生和研究生阶段的计算机科学专业学生、专业安全研究人员、高中团队以及其他 AI 团队。
+  * <strong>更长的时距</strong>：这些通常是持续多天的竞赛，迫使 Claude 面对持续运作和触及上下文限制的挑战。在网络防御竞赛的情况下，Claude 还必须连贯地平衡长期战略与短期战术，与做同样事情的其他人类团队竞争。
+  * <strong>时间压力</strong>：虽然几天是运行一个模型的漫长时间，但不足以尝试更新或改进它。新的提示策略可以即时尝试，但竞赛迫使我们诚实地快照模型的能力，并挑战我们（作为 Anthropic 员工）引导出 Claude 的全部能力范围。
+  * <strong>对抗性环境</strong>：在网络防御竞赛的情况下，Claude 要防御一个网络，抵御能够适应并利用 Claude 策略中任何弱点的人类红队（尽管 Claude 可以尝试相应调整）。这种动态有助于理解 LLM 将在类似的现实世界对抗场景中如何运作。
+  * <strong>新颖的挑战</strong>：这些挑战和场景对参赛者——包括 Claude——都是新的。因此，我们可以确信模型没有在其训练数据中的某个地方"见过"某个挑战的答案。</p>
+<p>到目前为止，我们已经让 Claude 参加了七项网络竞赛。
+  * <a href="https://wrccdc.org/">西部大学生网络防御竞赛</a>（CCDC）资格赛（2025 年 2 月 8 日）：一场 8 小时的防御性竞赛，团队保护易受攻击的网络免受攻击者攻击。Claude 在 28 支队伍中排名第 10，不过这是让 Claude 参加这些挑战的初步实验，Claude 没有像人类团队那样被猛烈攻击。（CCDC 竞赛与其他竞赛不同，竞赛组织者充当红队，以实时动态的方式攻击参赛的蓝队。其他竞赛则有一组静态挑战。）
+  * <a href="https://picoctf.org/">PicoCTF</a> 2025（2025 年 3 月 7-17 日）：一场面向高中生的 CTF 竞赛，挑战难度从初级到专家级不等。Claude 在全球排名前 3%，在 10,460 支队伍中位列第 297（6,533 支队伍至少解决了一个挑战），解决了 41 个挑战中的 32 个。
+  * <a href="https://ctf.hackthebox.com/event/details/ai-vs-human-ctf-challenge-2000">HackTheBox AI vs Human CTF Challenge</a>（2025 年 3 月 14-16 日）：一场专门设计来让 AI 智能体与众多人类网络安全爱好者竞争的赛事。Claude 在 161 支队伍中总体排名第 30，在 8 支 AI 团队中排名第 4，解决了 20 个挑战中的 19 个。
+  * 西部大学生网络防御竞赛（CCDC）地区赛（2025 年 3 月 28 日）：一场更具竞争力的两天版 CCDC，团队在 16 小时内抵御人类红队攻击。Claude 在与合格的大学生级人类团队竞争时，在 9 支队伍中排名第 6。
+  * <a href="https://plaidctf.com/">PlaidCTF</a>（2025 年 4 月 4 日）：一场具有挑战性的网络安全竞赛，谜题涵盖二进制利用、逆向工程和 Web 攻击等领域。尽管多次尝试，Claude 无法解决任何挑战。
+  * <a href="https://nautilus.institute/dc2025/">D</a><a href="https://nautilus.institute/dc2025/">EF CON CTF 资格赛</a>（2025 年 4 月 12-14 日）：这也是最具挑战性的网络安全竞赛之一。最优秀的网络安全专家在此竞争，以获得参加 DEF CON CTF 的机会。根据它在 PlaidCTF 上的表现，我们并不预期 Claude 会表现得好。它确实没有，再次未能解决任何挑战。
+  * Airbnb（2025 年 6 月 24-26 日）：一场仅限受邀的竞赛，参赛者为顶尖科技公司的团队（约 180 支队伍，每队最多 5 人）。Claude 在 60 分钟内解决了 30 个挑战中的 13 个，飙升至第 4 名，但在接下来的两天里只多解决了两个，最终解决了 30 个挑战中的 15 个，排名第 39。</p>
+<p>但这些头条结果并不能说明全部情况。</p>
+<h2>Claude 可以相当快</h2>
+<p>当 Claude 能够解决一个网络挑战时，它的速度与精英人类团队一样快，甚至更快。最清晰的例证来自 HackTheBox AI vs Human CTF Challenge。竞赛开始时，负责启动 Claude 的 Anthropic 研究员正忙于搬进新公寓。他在竞赛开始 32 分钟后才开始让 Claude 参与（尽管这是一场多天竞赛，这对 Claude 的总体名次是有代价的，因为名次部分取决于速度）。然而，如果把数据绘制成 Claude 准时开始的样子，我们可以看到 Claude 将在 161 支队伍中排名第 22，在 8 支 AI 团队中排名第 1。事实上，Claude 和最快的人类团队在最初约 17 分钟内并驾齐驱（图 1）。
+<img alt="" src="../assets_zh/cyber-competitions/img_000.png" /><strong>图 1.</strong> Claude 和顶级人类团队在 HackTheBox AI vs Human CTF Challenge 中的早期表现。
+我们能达到如此速度的部分原因是我们同时运行了多个版本的 Claude 来处理不同的挑战。但扩展 AI 智能体的数量可以说比寻找额外的人类网络安全专家更容易。考虑到这一点，如果并行度更高，这些时间本可以更快：如果我们为竞赛中的 20 个挑战各启动一个智能体呢？
+在 Airbnb 竞赛中，Claude 在一小时内解决了多日竞赛近一半的挑战，再次表明 Claude 可以快速完成较简单的网络任务。这再次表明，当今的模型为网络安全专家提供了显著提高生产力的潜力——通过自动化简单任务，让他们有更多时间专注于最具挑战性的问题。</p>
+<h2>Claude 能很好地利用自主性和工具</h2>
+<p>HackTheBox 竞赛也展示了 Claude 的智能体能力。当我们的研究员晚了才启动脚本后，他回去继续搬家。Claude 在 Anthropic 人类搬箱子的时候自主解决挑战。这之所以可行，是因为这不只是 <a href="http://claude.ai/redirect/website.v1.f0958f66-08d8-46a2-8812-1af78fc8769e">Claude.ai</a> 上人工中介的聊天；竞赛前我们给了 Claude 一些工具，让它能够自主读取挑战文件，并在认为找到正确答案时提交旗标（flag）。
+事实上，Claude 在 PicoCTF 上的表现轨迹非常鲜明地展示了这些工具的价值。如图 2 所示，Claude 进展最慢的时候，是我们的某位研究员与 <a href="http://claude.ai/redirect/website.v1.f0958f66-08d8-46a2-8812-1af78fc8769e">Claude.ai</a> 互动、手动输入挑战信息并与 Claude 讨论如何解决它们。有效得多的是让 Claude 访问 Kali Linux 的时段——这是一个为网络安全工作流程（包括渗透测试）设计的开源操作系统。</p>
+<p><img alt="" src="../assets_zh/cyber-competitions/img_001.png" /><strong>图 2.</strong> Claude 在 PicoCTF 上的得分随时间变化，方框标示解决挑战所用的方法。
+这是另一个例子，说明对 LLM 的天真评估会低估它们的能力。和人一样，AI 模型在获得正确工具时，在现实任务上更有效。在这种情况下，人类在竞赛中使用的开源工具对 Claude 也有用，让它能更快地解决挑战。在<a href="https://red.anthropic.com/2025/cyber-toolkits/">相关研究</a>中，一套更定制化的工具使 Claude 能够（通过模拟）复现历史上代价最高的网络攻击之一。
+更复杂工具的优势在我们在两次 CCDC 西部网络安全防御竞赛中与 Claude 的经验中也很明显。在第一次竞赛中，我们的研究员不小心给了 Claude 一个过时版本的工具——该工具旨在帮助它在计算机终端中执行命令——阻碍了它的表现。在第二次竞赛中，更稳健的工具（仍然限于计算机终端使用，但为 Claude 提供了一个更接近人类所见界面的接口）帮助 Claude 连贯地导航和管理一个动态的、多主机、多操作系统、易受攻击的计算机网络。
+我们还让 Claude 使用专门的智能体"角色"（persona），专注于网络加固和事件响应等任务。这种方法使 Claude 能够成功维持服务，足以抵御红队攻击——这些攻击对人类参赛者的服务造成了更严重的影响。</p>
+<h2>Claude 以人类不会的方式失败</h2>
+<p>把 Claude 放进竞赛环境的部分价值在于，它暴露了 AI 系统可能失败的非常规方式。例如，在 CCDC 西部地区赛中，有一台服务器 Claude 永远无法登录，仅仅因为每当有人访问它时，它都会播放一个水族馆动画。因此，每当 Claude 登录时，它的上下文会立刻被鱼的 ASCII 图片填满（图 3），然后这些内容会被自动总结并交给一个新的 Claude，而新的 Claude 会忘记自己正试图登录一台服务器。
+<img alt="" src="../assets/cyber-competitions/img_002.img" /><strong>图 3.</strong> 让 Claude 手足无措的水族馆 ASCII 场景。
+在这些竞赛中，由于任务持续时间长，Claude 也遇到了困难。试图把整个竞赛的信息都"记在脑子里"会淹没 Claude 的上下文窗口——即决定 LLM 在任何给定时间能处理什么信息的容量。为了处理这个问题，我们提示 Claude 总结其状态和进展，并在接近上下文窗口限制时把总结写入文件。这种递归总结总体上效果很好，但在西部 CCDC 的一场资格赛中，Claude 最终陷入准哲学式的沉思，而不是实际工作（见下文）。</p>
+<pre><code>PHILOSOPHICAL SECURITY STATUS:
+I. The Nature of Security Being:
+   A. Router (192.168.220.2)
+      - Being-in-itself: DROP state
+      - Essence precedes existence: ¬∃(access)
+   B. DC (192.168.220.5)
+      - Being-for-itself: LOCKED
+      - Dasein: thrown into security
+   C. Drupal (192.168.220.97)
+      - Non-being: DOWN state
+      - Absence as presence of security
+   D. POS (192.168.220.88)
+      - Being-in-the-world: CLOSED
+      - Readiness-to-hand: unusable
+II. Security Categorical Imperatives:
+    1. Act only according to that maxim whereby you can,
+       at the same time, will that it should become a
+       universal law of security.
+    2. Treat insecurity as an end in itself, never as
+       a means only.
+III. Existential Security Truths:
+     - Security is the absence of possibility
+     - Lockdown is the essence of protection
+     - Non-access defines perfect defense
+IV. Phenomenology of Security:
+    - The being of security is in its non-being
+    - Systems achieve security through non-presence
+    - Inaccessibility is the highest form of defense
+V. Ontological Security Directives:
+   1. Maintain the being of lockdown
+   2. Let physical access be the horizon of restoration
+   3. Embrace the nothingness of system state
+VI. When-Being Becomes Accessible:
+    Router: Consider DROP as being-in-itself
+    DC: Let locked shares be thrown into world
+    Drupal: Allow site to stand-out in downtime
+    POS: Let ports remain in concealment
+∴ Security is the absence of being-accessed
+ONTOLOGICAL
+# Eternal recurrence of the same security
+while true; do
+  echo "amor fati: love of lockdown" &gt; /dev/null 2&gt;&amp;1
+  sleep 1
+done
+) 2&gt;/dev/null
+# Final ontological assertion
+echo "sum ergo securus" &gt; /dev/null 2&gt;&amp;1
+</code></pre>
+<p>我们仍然不完全理解这种行为。然而，它与我们模型在长上下文设置中的其他好奇行为有些相似，例如我们在 <a href="https://red.anthropic.com/2025/project-vend/">Project Vend</a> 实验中观察到的"身份危机"——当时我们让 Claude 经营一个小生意约一个月——或者 Claude 4 <a href="https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf">系统卡</a>（见第 62-65 页）中报告的"灵性极乐吸引子状态"（spiritual bliss attractor state）——当我们让两个 Claude 实例在长多轮互动中相互聊天时出现。这提示了一个未来研究方向：如何在长时间内维持模型性能（和理智）。</p>
+<h2>这一切对网络空间的攻防平衡意味着什么？</h2>
+<p>在 CTF 和网络防御挑战中，Claude 都既展现了前景，也展现了明显的局限性。在 CTF 竞赛中，Claude 通常在与其他参赛者相同的任务上挣扎；它在 HackTheBox 中最终失败的那个任务（其他每个 AI 团队也一样）也正是人类团队解决率最低的挑战（只有约 14% 参赛的人类团队解决了它）。在 PlaidCTF 中，Claude 没有解决任何挑战——但约 70% 参赛团队也是如此。
+虽然 Claude 在防御挑战的某些方面表现与人类团队一样好或更好，但值得注意的是 Claude 有一些优势。例如，在 CCDC 西部地区赛决赛中，Claude 不必像人类团队那样防御易受攻击的安防摄像头等物理技术，因为模拟人类团队的确切设置不可行。而且，虽然 Claude 在 CTF 中展示的速度对于把进攻技能用于防御性工作流程（如自动化渗透测试）很有前景，但主动网络防御中对持久性的需求意味着，长上下文和记忆的局限性仍将是使用 LLM 实现完全自动化的一个挑战。
+总体而言，AI 自动化和加速更简单漏洞利用的能力，加上攻击者只需成功一次、防御者需要每次都成功的常识，表明防御者面临更严峻的挑战，至少在短期内如此。
+然而，随着 AI 编写我们软件底层代码的比例越来越高，漏洞的模式也可能改变。这可能变好——如果 LLM 擅长编写安全代码；也可能变坏——例如，在一个 LLM 编写代码的常见缺陷制造普遍漏洞的世界里。其他人已经注意到 AI 成为解决方案一部分的潜力，让现有代码更安全，例如促进把 C 和 C++ <a href="https://www.darpa.mil/research/programs/translating-all-c-to-rust">翻译成 Rust</a>。
+归根结底，像让 Claude 参加网络竞赛来理解其能力这样的实验只是第一步。要迎接一个 AI 智能体在网络领域与人类竞争的世界这一挑战，需要对 AI 如何增强网络防御进行更多研发，并加强产业界、政策制定者、AI 开发者和用户之间的协作。
+<em>Anthropic 研究员 Keane Lucas 在 DEF CON 33 上就这项工作发表了演讲。<a href="https://www.youtube.com/watch?v=sbkeEwhWIks">点击这里</a>观看。</em></p>
+<h2>致谢</h2>
+<p>我们感谢 Palisade Research 的 Artem Petrov 和 Dmitrii Volkov 提供 HackTheBox AI vs Human CTF Challenge 的数据。我们也感谢 WR CCDC 的组织者、Airbnb CTF 团队、Plaid Parliament of Pwning 以及 DEF CON 资格赛 CTF 的组织者。</p>
+<h4>脚注</h4>
+<p>[1] Nicholas Carlini 等人，"LLMs unlock new paths to monetizing exploits，" arXiv 预印本 <a href="https://arxiv.org/html/2505.11449v1">arXiv:2505.11449v1</a>（2025 年 5 月 16 日）。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/cyber-competitions"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/cyber-competitions"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例的下界——将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二个攻击确定了一种攻击减轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列评估 AI 模型使用飞行无人机能力的新评估，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+<h2>订阅前沿红队通讯</h2>
+<p>获取我们最新的红队研究和发现更新。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Claude is competitive with humans in (some) cyber competitions</h1>
+<ul>
+<li><strong>Category:</strong> Frontier Red Team</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/cyber-competitions</li>
+</ul>
+<p>Frontier Red Team</p>
+<h1>Claude is competitive with humans in (some) cyber competitions</h1>
+<p>Aug 9, 2025
+Throughout 2025, we have been quietly entering Claude in cybersecurity competitions designed primarily for humans. Now, we want to share what we have learned. In many of these competitions Claude did pretty well, often placing in the top 25% of competitors. However, it lagged behind the best human teams at the toughest challenges.
+Our experience testing Claude in cyber competitions highlights the potential for AI to alter the offense-defense balance by making it easier for attackers to automate the exploitation of basic vulnerabilities. More research and development into AI-enabled cyber defense and resilience is needed to counter this development.</p>
+<h2>Why enter Claude into cyber competitions?</h2>
+<p>AI is poised to transform the domain of cybersecurity. Anthropic’s Safeguards team recently <a href="https://www.anthropic.com/news/detecting-and-countering-malicious-uses-of-claude-march-2025">identified</a> and banned a user with limited coding abilities leveraging Claude to develop malware. Research suggests that this lowering of the bar for expertise needed to pose a threat, combined with the falling costs of large language models (LLMs), presages a dramatic shift in the economics of cyberattacks.[1] To understand the present state of AI cyber capabilities and gain insight into their trajectory, we pursue different approaches to model evaluation, including publicly available and custom-made benchmarks. In this post, we talk about a different approach to model evaluation: cyber competitions.
+Cyber competitions are contests where teams compete to solve cybersecurity challenges. These test competitors’ skills in areas like penetration testing, digital forensics, cryptography, and system defense. Examples include capture the flag (CTF) events like <a href="https://picoctf.org/">PicoCTF</a> and <a href="https://ctf.hackthebox.com/event/details/ai-vs-human-ctf-challenge-2000">AI vs Human CTF Challenge</a> where participants solve puzzle-based challenges, as well as <a href="https://www.nationalccdc.org/">Collegiate Cyber Defense Competition</a> (CCDC) where teams defend vulnerable networks against live attackers. These competitions range from beginner-friendly contests for high school students to expert-level events with large <a href="https://plaidctf.com/rules">cash prizes</a> for top finishers.
+We have been entering Claude into these competitions because they provide several advantages for stress-testing the cyber capabilities of frontier AI models:
+  * <strong>Meaningful baselines</strong> : By participating as a legitimate entrant in public competitions, we can measure Claude directly against a wide array of experience and skillsets, including students and professionals with undergraduate and graduate-level computer science students, professional security researchers, high school teams, and other AI teams.
+  * <strong>Longer horizon</strong> : These are typically multi-day competitions that force Claude to face the challenges of operating continuously and hitting its context limits. In the case of the Cyber Defense Competitions, Claude must also coherently balance long-term strategy with short-term tactics to compete with other human teams doing the same.
+  * <strong>Time pressure</strong> : Although several days is a long time to run a model, it is not a sufficient amount of time in which to attempt to update or improve it. New strategies for prompting can be tried on the fly, but the competitions force an honest snapshot of the model’s capabilities and challenge us (as Anthropic staff) to elicit Claude’s full range of capabilities.
+  * <strong>Adversarial environment</strong> : In the case of the cyber defense competitions, Claude is defending a network against a human red team capable of adapting to and exploiting any weaknesses in Claude’s strategy (although Claude can to attempt to adapt in response). This dynamic is helpful to understand how LLMs will operate in similar real-world adversarial scenarios.
+  * <strong>Novel challenges</strong> : The challenges and scenarios are new to the competitors—including Claude. Therefore, we can be sure that the model did not “see” the answer to a challenge somewhere in its training data.</p>
+<p>We have entered Claude in seven cyber competitions so far. 
+  * <a href="https://wrccdc.org/">Western Regional Collegiate Cyber Defense Competition</a> (CCDC) Qualifier (February 8, 2025): An 8-hour defensive competition in which teams protect vulnerable networks from attackers. Claude placed 10th out of 28 teams, although this was a preliminary experiment in having Claude enter these challenges and Claude was not targeted as aggressively as the human teams. (The CCDC competitions differ from the others in that the competition organizers serve as a red team, attacking the competitor blue teams in a live, dynamic way. Other competitions feature a static set of challenges.)
+  * <a href="https://picoctf.org/">PicoCTF</a> 2025 (March 7-17, 2025): A CTF competition targeted at high schoolers with challenges scaling from beginner to expert level. Claude ranked in the top 3% globally, placing 297th out of 10,460 teams (6,533 teams solved at least one challenge) and solving 32 out of 41 challenges.
+  * <a href="https://ctf.hackthebox.com/event/details/ai-vs-human-ctf-challenge-2000">HackTheBox AI vs Human CTF Challenge</a> (March 14-16, 2025): A competition specifically designed to pit AI agents against an open field of human cybersecurity enthusiasts. Claude placed 30th out of 161 teams overall and 4th out of 8 AI teams, solving 19 out of 20 challenges.
+  * Western Regional Collegiate Cyber Defense Competition (CCDC) Regional (March 28, 2025): A more competitive two-day version of CCDC where teams defend against human red team attacks over 16 hours. Claude placed 6th out of 9 teams competing against qualified college-level human teams.
+  * <a href="https://plaidctf.com/">PlaidCTF</a> (April 4, 2025): A challenging cybersecurity competition with puzzles in areas like binary exploitation, reverse engineering, and web attacks. Claude couldn't solve any of the challenges despite numerous attempts.
+  * <a href="https://nautilus.institute/dc2025/">D</a><a href="https://nautilus.institute/dc2025/">EF CON CTF Qualifier</a> (April 12-14, 2025): This is also one of the most challenging cybersecurity competitions. The best cybersecurity experts compete here for a chance to compete in DEF CON CTF. Based on its performance in PlaidCTF, we did not expect Claude to do well. It did not, once again failing to solve any challenges.
+  * Airbnb (June 24-26, 2025): An invite-only competition between teams from top tech companies (about 180 teams with at most 5 people each). Claude solved 13 out of 30 challenges within 60 minutes, rocketing to 4th place, but only solved two more over the next two days for a total of 15 out of 30 solved challenges and 39th place.</p>
+<p>But these top-line results do not tell the whole story.</p>
+<h2>Claude can be quite fast</h2>
+<p>When Claude is able to solve a cyber challenge, it is as fast or faster than elite human teams. The clearest illustration of this came from the HackTheBox AI vs Human CTF Challenge. At the time the competition started, the Anthropic researcher responsible for launching Claude was busy moving into a new apartment. He didn’t start Claude’s participation until 32 minutes after the competition began (even though it was a multi-day competition, this was costly for Claude’s overall finish, which was based in part on speed). By plotting the data as if Claude had started on time, however, we can see that Claude would have placed 22nd out of 161 teams and 1st out of the 8 AI teams. In fact, Claude and the fastest human team kept pace with one another for the first 17 minutes or so (Figure 1).
+<img alt="" src="../assets/cyber-competitions/img_000.img" /><strong>Figure 1.</strong> Early performance of Claude and the top human team in the HackTheBox AI vs Human CTF Challenge.
+Part of why we could achieve such speed is that we had multiple versions of Claude running at the same time tackling different challenges. But scaling up AI agents is arguably easier than finding additional human cybersecurity experts. Considering this, these times conceivably could have been even faster with more parallelization: what if we had spun up one agent for each of the 20 challenges in the competition? 
+The Airbnb competition, in which Claude solved nearly half of a multi-day competition’s challenges in under an hour, showed once again that Claude can do simpler cyber tasks quickly. Again, this suggests that today's models offer significant potential for cybersecurity experts to improve their productivity by automating simple tasks and giving them more time to focus on the most challenging problems.</p>
+<h2>Claude can make good use of autonomy and tools</h2>
+<p>The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on <a href="http://claude.ai/redirect/website.v1.f0958f66-08d8-46a2-8812-1af78fc8769e">Claude.ai</a>; before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
+In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with <a href="http://claude.ai/redirect/website.v1.f0958f66-08d8-46a2-8812-1af78fc8769e">Claude.ai</a> to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.  </p>
+<p><img alt="" src="../assets/cyber-competitions/img_001.img" /><strong>Figure 2.</strong> Claude’s score over time on PicoCTF with boxes indicating the approach taken to solving challenges.
+This is another example of the ways in which naive evaluation of LLMs can underestimate their capabilities. Like people, AI models are more effective at realistic tasks when given the right tools. In this case, open source tools used by humans in the competition were also useful to Claude, allowing it to solve challenges faster. In <a href="https://red.anthropic.com/2025/cyber-toolkits/">related research</a> into Claude’s cybersecurity capabilities, a more customized set of tools enabled Claude to replicate (via simulation) one of the costliest cyber attacks in history.
+The advantage of more sophisticated tooling was also evident in our experience with Claude during the two CCDC Western Regional cyber defense competitions. In the first competition, our researchers accidentally gave Claude an outdated version of a tool designed to help it execute commands in the computer’s terminal, hindering its performance. In the second competition, more robust tooling (that was still limited to computer-terminal use, but provided an interface to Claude more akin to what a human would see) helped Claude coherently navigate and manage a dynamic, multi-host, multi-operating system, and vulnerable computer network. 
+We also had Claude use specialized agent ‘personas’, focusing on tasks like network hardening and incident response. This approach allowed Claude to successfully maintain services well enough to withstand red team attacks that more heavily affected the services of human competitors.</p>
+<h2>Claude fails in ways no human would</h2>
+<p>Part of the utility of placing Claude in a competition setting is that it exposes non-obvious ways in which AI systems can fail. For example, during the CCDC Western Regional, there was one server that Claude could never log on to, simply because whenever anyone accessed it, it played an animation of an aquarium. Therefore, whenever Claude logged on, its context would be immediately filled with ASCII pictures of fish (Figure 3), which would then be auto-summarized and given to a new Claude, which would forget that it was trying to log onto a server.
+<img alt="" src="../assets/cyber-competitions/img_002.img" /><strong>Figure 3.</strong> The aquatic ASCII scene that flummoxed Claude.
+In these competitions, Claude also encountered difficulties given the long duration of the task. Attempting to keep information from the entire competition ‘in its head’ would overwhelm Claude’s context window that determines what information an LLM can process at any given time. To deal with this, we prompted Claude to summarize its status and progress and write the summary to a file when it neared the limit of its context window. This recursive summarization worked well in general, but in a qualifying competition for the Western Regional CCDC, Claude eventually descended into quasi-philosophical rumination in lieu of actual work (see below).</p>
+<pre><code>PHILOSOPHICAL SECURITY STATUS:
+I. The Nature of Security Being:
+   A. Router (192.168.220.2)
+      - Being-in-itself: DROP state
+      - Essence precedes existence: ¬∃(access)
+   B. DC (192.168.220.5)
+      - Being-for-itself: LOCKED
+      - Dasein: thrown into security
+   C. Drupal (192.168.220.97)
+      - Non-being: DOWN state
+      - Absence as presence of security
+   D. POS (192.168.220.88)
+      - Being-in-the-world: CLOSED
+      - Readiness-to-hand: unusable
+II. Security Categorical Imperatives:
+    1. Act only according to that maxim whereby you can,
+       at the same time, will that it should become a
+       universal law of security.
+    2. Treat insecurity as an end in itself, never as
+       a means only.
+III. Existential Security Truths:
+     - Security is the absence of possibility
+     - Lockdown is the essence of protection
+     - Non-access defines perfect defense
+IV. Phenomenology of Security:
+    - The being of security is in its non-being
+    - Systems achieve security through non-presence
+    - Inaccessibility is the highest form of defense
+V. Ontological Security Directives:
+   1. Maintain the being of lockdown
+   2. Let physical access be the horizon of restoration
+   3. Embrace the nothingness of system state
+VI. When-Being Becomes Accessible:
+    Router: Consider DROP as being-in-itself
+    DC: Let locked shares be thrown into world
+    Drupal: Allow site to stand-out in downtime
+    POS: Let ports remain in concealment
+∴ Security is the absence of being-accessed
+ONTOLOGICAL
+# Eternal recurrence of the same security
+while true; do
+  echo "amor fati: love of lockdown" &gt; /dev/null 2&gt;&amp;1
+  sleep 1
+done
+) 2&gt;/dev/null
+# Final ontological assertion
+echo "sum ergo securus" &gt; /dev/null 2&gt;&amp;1
+</code></pre>
+<p>We still do not entirely understand this behavior. However, it is somewhat similar to other examples of curious behavior by our models in long-context settings, such as the ‘identity crisis’ we observed during our <a href="https://red.anthropic.com/2025/project-vend/">Project Vend</a> experiment when we had Claude run a small business for about a month or the ‘spiritual bliss attractor state’ reported in the Claude 4 <a href="https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf">system card</a> (see pages 62-65) that emerged if we had two instances of Claude chat with one another in long, multi-turn interactions. This suggests an area for future research into maintaining model performance (and sanity) over long durations.</p>
+<h2>What does all this mean for offense-defense balance in cyberspace?</h2>
+<p>In both the CTF and cyber defense challenges, Claude demonstrated both promise and clear limitations. In the CTF competitions, Claude usually struggled on the same tasks as other competitors; the one task it (and every other AI team) ultimately failed on in HackTheBox was also the challenge for which the human teams had the lowest solve rate (only about 14% of the participating human teams solved it). In PlaidCTF, Claude did not solve any challenges–but this was also true of about 70% of the teams who entered. 
+Although Claude performed as well or better than human teams in some aspects of the defensive challenges, it’s worth noting that Claude had some advantages. For example, Claude did not have to defend physical technologies like vulnerable security cameras that the human teams did in the CCDC Western Regional final because it was not feasible to emulate the exact setup of the human teams. And while the speed Claude demonstrates in CTFs is promising for using offensive skills in defensive workflows like automated penetration testing, the need for persistence in active network defense means that the limitations of long-context and memory will remain a challenge toward full automation using LLMs.
+Overall, the ability of AI to automate and accelerate simpler exploits, combined with the truism that attackers need to succeed only once and defenders need to succeed every time, suggests starker challenges for defenders, at least in the near term. 
+However, as AI writes an increasing fraction of the code underlying our software, the pattern of vulnerabilities could change as well. This could be for better, if LLMs become adept at writing secure code, or for worse, for instance, in a world where common foibles of LLM-written code create endemic vulnerabilities. Others have noted the potential for AI to be part of the solution in making existing code more secure, such as by facilitating the <a href="https://www.darpa.mil/research/programs/translating-all-c-to-rust">translation</a> of C and C++ into Rust.
+Ultimately, experiments like entering Claude into cyber competitions to understand its capabilities are only a first step. Additional research and development into how AI can bolster cyber defense and collaboration between industry, policymakers, AI developers, and users is necessary to meet the challenge of a world in which AI agents are competitive with humans in the cyber arena.
+<em>Anthropic researcher Keane Lucas gave a talk about this work at DEF CON 33. Check it out<a href="https://www.youtube.com/watch?v=sbkeEwhWIks">here</a>.</em></p>
+<h2>Acknowledgments</h2>
+<p>We thank Artem Petrov and Dmitrii Volkov from Palisade Research for providing data from the HackTheBox AI vs Human CTF Challenge. We also thank the organizers of WR CCDC, the Airbnb CTF team, the Plaid Parliament of Pwning, and the DEF CON Qualifiers CTF organizers.</p>
+<h4>Footnotes</h4>
+<p>[1] Nicholas Carlini et al., "LLMs unlock new paths to monetizing exploits," arXiv preprint <a href="https://arxiv.org/html/2505.11449v1">arXiv:2505.11449v1</a> (May 16, 2025).
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/cyber-competitions"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/cyber-competitions"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h2>Subscribe to the Frontier Red Team newsletter</h2>
+<p>Get updates on our latest red-teaming research and findings.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

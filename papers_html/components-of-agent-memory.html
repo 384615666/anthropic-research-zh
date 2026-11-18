@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The components of agent memory</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>智能体记忆的组成部分</h1>
+<div class="meta">
+The components of agent memory · Nov 6, 2026 · Engineering · <a href="https://www.anthropic.com/research/components-of-agent-memory" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic类比人脑海马体巩固记忆，提出智能体记忆分层（会话记录、记忆笔记、维基表征、注入上下文），用“梦境”在交互间隙重放纠正、重组记忆。在CL-Bench 1.0上，闭合学习闭环的模型增益明显：Opus 5从0.564升至0.828，而只会堆猜测的Sonnet 4.6仅0.330-0.364。长时程游戏评测中，Sonnet 3.7写413个文件、225个文件夹只拿一枚徽章，Fable 5仅9个文件便拿四枚。梦境还能纠错并构建维基：约35万文件语料上，会话从2个扩到128个使达标率从13%升到48%、维基加搜索达61%。研究主张让强模型自主判断显著性，硬设“只记录失败”反而削弱表现。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">智能体记忆：Claude从经验中获得、跨会话保留并可读回的知识，不含权重改动、上下文学习与压缩</span><span class="term">梦境（dreaming）：智能体在两次会话的空闲期重放会话记录、纠正笔记并重组记忆的离线过程</span><span class="term">记忆笔记：Claude即时写下的显著性观察或已核实规则，供未来会话读取</span><span class="term">维基（记忆表征）：由Claude撰写并互相链接的页面集合，充当遍历知识库的地图</span><span class="term">上下文注入：把精简后的笔记在每次会话开始时预加载进上下文，须保持精简以免降低遵循度</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 工程（Engineering）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/components-of-agent-memory</li>
+</ul>
+<p>工程（Engineering）
+2026 年 11 月 6 日
+<img alt="两个彼此错开的半圆示意图，带网格图案，一个绿色、一个粉色，在浅蓝色背景上隔着一道空隙相对而立。" src="../assets/components-of-agent-memory/img_000.webp" />
+发布于
+    2026 年 11 月 6 日
+团队
+    <a href="/engineering">工程</a>
+主题</p>
+<ul>
+<li><a href="/search?topic=agents">智能体</a></li>
+<li><a href="/search?topic=context-engineering">上下文工程</a></li>
+<li><a href="/search?topic=agent-memory">智能体记忆</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/harness-design-long-running-apps"></a><a href="https://www.anthropic.com/research/building-c-compiler"></a><a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"></a><a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents"></a>
+相关文章
+  * 工程
+2026 年 3 月 24 日
+<a href="https://www.anthropic.com/research/harness-design-long-running-apps">长时运行应用开发中的框架设计</a></p>
+<p><a href="/search?topic=agents">阅读更多</a>
+Søren Kierkegaard曾写道，生活只能 <em>向后</em> 被理解，却必须 <em>向前</em> 去活。我们在为AI智能体设计记忆时，遇到了类似的困境。
+作为人类，我们在日常生活中不断编码记忆。<a href="https://stanford.edu/~jlmcc/papers/McCMcNaughtonOReilly95.pdf">海马体</a>在其中扮演核心角色，它即时捕捉经历，使记忆迅速形成并立刻可用。但只有<a href="https://www.science.org/doi/10.1126/science.adk8261?referrer=https%3A%2F%2Fwww.google.com%2F">部分经历</a>会被巩固为长期知识。
+这种巩固大多发生在大脑离线的时候。在我们睡眠时，以及在安静的<a href="https://www.nature.com/articles/s41467-018-06213-1">休息</a>期间，海马体会重放近期的经历。人们认为，这一过程会逐步把<a href="https://www.nature.com/articles/s41593-019-0467-3">这些经历提炼并整合</a>进新皮层——我们大脑中储存大部分所谓知识的部位。
+智能体记忆可以采用类似的分工。智能体把大量工作记录在日志或会话记录中。Letta和UC Berkeley的研究者提出了<a href="https://arxiv.org/abs/2504.13171">睡眠期计算</a>，让模型利用两次交互之间的空闲时间重新组织已有的上下文。同样的思路也能帮助智能体整理记忆：通过反思日志来纠正错误，或生成新的笔记与表征。这一过程常被<a href="https://platform.claude.com/docs/en/managed-agents/dreams">称为</a><a href="https://research.google/blog/the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continual-learning/"><em>梦境</em></a>（图1）。
+我们发现，梦境一直是一件有用的工具，帮助我们为Claude提供有效的记忆。在这篇文章中，我们分享我们逐渐形成的对智能体记忆的理解，并逐一介绍我们用于探索智能体记忆的若干评测（包括对梦境的运用），以及每个组成部分对记忆组织所作的贡献。
+<img alt="一次会话与下一次会话之间的记忆层级示意图。自下而上依次为：会话记录（可搜索的事件日志）、Claude撰写的记忆笔记、维基之类的记忆表征，以及每次会话都会加载的注入上下文。在标注为「Dreaming」的方框内，箭头从会话记录向上指向各层，相邻上层之间还有双向箭头。" src="../assets_zh/components-of-agent-memory/img_001.png" />
+Claude可以借助梦境来组织记忆。这可以纠正错误、创建笔记、构建新的记忆表征，或决定哪些内容被预先加载到未来的会话中。</p>
+<h3>记忆笔记</h3>
+<p>我们所说的「智能体记忆」，指的是Claude从经验中获得的、并在会话之间保留下来的知识——包括与用户的交互以及被分派的任务——它被保存为日后可以读取的上下文。它不包括模型学习或管理上下文的其他方式，例如改动其 <em>权重</em>（训练时设定的内部参数）、<a href="https://www.anthropic.com/research/in-context-learning-and-induction-heads"><em>上下文学习</em></a>（在单次对话中获得的知识），以及<a href="https://platform.claude.com/docs/en/build-with-claude/compaction"><em>压缩</em></a>（Claude写下的摘要，用来替换较早的对话轮次，以便它能在新的上下文窗口里继续工作）。
+在人脑中，在一段经历之前、期间或之后释放的化学信号，可以把<a href="https://www.nature.com/articles/385533a0">某段记忆标记</a>为重要。在离线期间，被标记的记忆往往比未标记的记忆得到更频繁的重放。这一过程被称为 <em>重放</em>，有助于稳定这些记忆并把它们整合进长期记忆。
+类似地，Claude可以在会话日志中即时给显著性事件打上标记，方便日后查找，也可以把它们<a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">写入</a>记忆存储，比如一个由记忆笔记组成的文件夹（图2）。可是，在还不知道接下来会发生什么的时候，Claude又如何判断当下什么值得留意呢？
+<img alt="同一记忆层级示意图，其中记忆笔记层被高亮。一条箭头从会话直接指向记忆笔记，标注为Claude写下的显著性观察。" src="../assets_zh/components-of-agent-memory/img_002.png" />
+Claude可以把笔记写入记忆。</p>
+<h3>记忆可以是对未来所需的一种预测</h3>
+<p>记忆有时是一种预测。写下一条规则，就等于智能体在预测它所描述的模式会再次出现。例如，写下一条已核实的事实，就是在预测未来某个会话中的智能体会希望直接依赖这条事实而不去反复核对。随着时间推移，Claude在做这类预测上已经变得娴熟得多。
+以<a href="https://continual-learning-bench.com/news/cl-bench-1-0/">Continual Learning Bench（CL-Bench）1.0</a>中的一项任务为例，这一基准衡量智能体运用记忆来处理长时程任务的能力。其中有一项任务要求Claude通过查询数据库来回答一系列问题。Claude给出答案后，会被告知正确答案，并可以写下一条记忆，帮助回答后续问题。
+记忆在这里可以支撑一个学习闭环。如果Claude答错了一道题，它可以记录这次失败，就问题出在哪里提出猜想，检验这些猜想，并把发现转化成一条关于今后如何作答的规则。
+我们用<a href="https://platform.claude.com/docs/en/managed-agents/overview">Claude Managed Agents</a>运行了CL-Bench 1.0任务。Claude每回答一道题都从一个全新的会话开始，只有一处例外：它可以从一个跨会话持久保存的<a href="https://platform.claude.com/docs/en/managed-agents/memory">记忆目录</a>中读取文件。
+不同模型在建立自己的学习闭环上达到的程度各不相同。Claude Sonnet 4.6最多只能就答案为什么出错提出猜想。它的记忆目录里散落着一些文件，每个文件都列出若干未经检验的猜测。
+<img alt="左图：CL-Bench数据库任务上平均奖励的柱状图，对比无状态基线与记忆存储。Opus 5.5：0.655、0.838。Sonnet 5.5：0.644、0.833。Opus 5：0.564、0.828。Opus 4.7：0.383、0.700。Sonnet 5：0.306、0.610。Sonnet 4.6：0.330、0.364。右图：同样这些模型在30个问题上、有记忆与无记忆两种情况下的滑动平均奖励折线图。" src="../assets_zh/components-of-agent-memory/img_003.png" />
+CL-Bench数据库任务，跨模型对比记忆与无状态基线。
+Claude Opus 4.7把笔记合并成一份参考文档，并开始标注哪些事实已经核对、哪些仍未证实。Claude Sonnet 5会在评分器核对之后把每个答案标记为已确认，答错时则写下一条更正。
+Claude Opus 5是这些模型中第一个真正闭合这一闭环的。它的大多数条目都包含一条规则（以及它如何知道这条规则成立）、先前问题的答案，以及关于沿途发现的陷阱的明确警示（图3）。
+与Opus 5一样，Claude Opus 5.5和Claude Sonnet 5.5也都闭合了闭环，用记忆捕捉经过验证的、关于如何最好地回答未来问题的规则。有了记忆，两者的得分都与Opus 5大致相当，不过它们在没有记忆时的基线表现略高一些。</p>
+<h3>Claude已经学会判断显著性</h3>
+<p>我们还评测了Claude玩 <em>Pokémon Red</em> 的能力，这款游戏<a href="https://www.youtube.com/watch?v=CXhYDOvgpuU">考验Claude驾驭</a>复杂长时程任务的能力，我们用它来检验Claude对 <em>该把什么</em> 存入记忆的判断。每次运行开始时，我们给每个模型一个记忆文件夹，它可以在游玩过程中读取和写入（图4）。
+我们比较了Claude Sonnet 3.7和Claude Fable 5各一次运行中的记忆文件夹，两者都进行到游戏约10,000步。我们注意到的一个关键差别，是两个模型认为什么值得记住。Sonnet 3.7假定一切都可能重要，不加区分地写入记忆。它的记忆文件夹里是一份遭遇档案，往往每一场战斗、每一件捡到的道具、每一个遇到的非玩家角色都单独占一个文件。最终，Sonnet 3.7在225个文件夹里写了413个记忆文件，只拿到一枚徽章（徽章标示玩家在游戏中的进度）。
+相比之下，Fable 5只在两个文件夹里写了九个文件，外加一个名为<code>global.md</code>的顶层文件，却拿到了四枚徽章。
+<img alt="两张按同一比例绘制的Pokémon记忆目录树状图，面积表示记忆的字符数。Claude Sonnet 3.7的图又大又拥挤，含413个文件、977,930个字符，分布在locations、main、battles以及若干「consolidated」文件夹中。Claude Fable 5的图很小，只有10个文件、43,406个字符，位于locations、gameplay和global.md中。" src="../assets_zh/components-of-agent-memory/img_004.png" />
+Claude在玩Pokémon时，Sonnet 3.7与Fable 5的记忆目录对比。
+Sonnet 3.7的做法之所以成问题，主要是因为Pokémon的游戏状态一直在变——Sonnet 3.7那份详尽的记录不断过时。结果，随着Claude推进，它不得不花更多时间和资源去翻检自己的记忆，而不是去玩游戏。例如，在大约第10,000步时，Sonnet 3.7开始建立第四批「master」记忆文件夹。在接下来的17步里，它新建了六个文件、删除了九个，却没有在游戏里采取任何行动。
+Fable 5的做法，是把记忆用于游戏没有明说的事情。Sonnet 3.7写进记忆的某些信息——比如玩家有多少钱、玩家在地图上的位置——每一回合都能直接从屏幕上读到，存下来是多余的。相比之下，关于策略、计划和经过检验的规则，只有在Claude自己推演出来时才存在，而且除非Claude把它们写下来，否则就会消失。
+Fable 5据此组织自己的记忆。它的<code>global.md</code>文件像一个仪表盘，记录当前目标、一份预先写好的攻略道馆（赢得徽章的挑战）的计划，以及模型自己使用记忆的规则。<code>locations</code>文件夹存放穿越特定路线的计划，<code>gameplay</code>文件夹则存放基于它对游戏机制的理解所形成的策略。例如，在连续七个Poké Ball都没能捕捉到一只Magikarp（最容易捕捉的Pokémon之一）之后，Claude写道：「如果连续3个以上的球失败，就改变时机（在菜单步骤之间多按几次「等待」）——这样做了之后立刻就捕捉成功了。」
+凭借小得多的记忆文件夹，Fable 5在游戏中的进展远远超过Sonnet 3.7。Opus 5.5采取了类似的思路：它只保留一个小小的记忆笔记文件夹，记录当前目标和下一步，边玩边改写，最终通关了游戏。</p>
+<h3>引导Claude写记忆</h3>
+<p>我们发现，告诉Claude记忆是做什么用的会有帮助，但不要告诉它 <em>该怎样</em> 使用。在CL-Bench上，我们只告诉Claude有一个记忆文件夹可用。这点笼统的指引就足以让Opus 4.7和Opus 5有效地使用记忆，并给两者带来明显的性能提升（图3）。
+我们也测试了给模型设定关于该往记忆里写什么的具体规则，每次测试一条规则。我们把每条规则下各模型从记忆中获得的收益，与不设规则时的收益作了比较。当我们设定「只记录失败」这条规则时，Opus 5和Opus 4.7都失去了记忆带来的大部分性能提升（图5右）。对更强的模型来说，让它们自由判断显著性，比事先设定固定规则更有效，而那些规则最终反而可能削弱表现。
+<img alt="左图：Sonnet 4.6在CL-Bench数据库任务上的平均奖励柱状图：基线0.330、有记忆0.364、有记忆加改进指令0.641。参考线标出Opus 4.7有记忆为0.700、Opus 5有记忆为0.828。右图：被要求只记录失败时记忆收益的变化：Opus 5为−0.234，Opus 4.7为−0.150，Sonnet 4.6为−0.020。" src="../assets_zh/components-of-agent-memory/img_005.png" />
+左图：Sonnet 4.6在CL-Bench数据库任务上，有无提示引导记忆使用的表现对比。右图：当被要求只记录失败时，各模型从记忆中获得的收益变化幅度。
+我们还注意到，引导对较老的模型帮助最大。例如，Sonnet 4.6常常不读取记忆目录里的文件，也不会去检验自己关于答案为何出错的猜想。
+在这种情况下，提示Claude在作答前先读取记忆文件、随后明确检验自己的猜想，几乎让它的基准得分翻了一倍（图5左）。Sonnet 5会自主做到这一点。在没有任何提示的情况下，它10次里有9次会在作答前读取记忆。相比之下，Sonnet 4.6做到这一点的次数不到一半。
+对于前沿的Claude模型，我们通常只给出简单的指引：当有人要求，或当某件事明显值得记住时，就创建记忆笔记，而把这个判断留给Claude自己。</p>
+<h3>梦境可以纠正记忆</h3>
+<p>由于Claude是根据会话当下对显著性的判断来写记忆的，一条从一开始就写错、或随着环境变化而逐渐偏离的笔记，可能会在之后的会话里被Claude读到并信以为真。
+梦境给了Claude一条途径，可以拿原始会话记录来检验自己的笔记（图6）。当Claude用Managed Agents、挂载一个记忆目录来玩Pokémon时，我们看到了一个正面的例子。
+<img alt="带梦境的记忆层级，高亮一条从会话记录层向上指向记忆笔记层的箭头，表示梦境依据会话记录纠正笔记。" src="../assets_zh/components-of-agent-memory/img_006.png" />
+梦境可以纠正记忆中的错误。
+在游戏的一段里，玩家必须穿过Mt. Moon，这是一片洞穴系统，入口在地图西侧、出口在东侧。入口附近有一处陷阱：一道单向的崖边会把玩家摔回原来走来的那条路，而且没有明显的办法爬回去。Claude把山入口处的建筑PokéCenter当作地标，因此它会不会走下那道崖边，取决于它认为PokéCenter在山的哪一侧。
+某一刻，Claude错误地记下PokéCenter在东侧。当它走出PokéCenter时，它宣称「Mt Moon在我身后」，并把笔记更新为「Mt Moon已完成」。但Mt. Moon并不在它身后。几步之后，Claude越过崖边，落回它来时的那条路（图7）。它的导航工具没有显示这处落差，于是Claude得出结论：「我往西走得太远了」，还认定自己一直都在正确的一侧。其实并没有。
+<img alt="两张Pokémon地图面板，智能体站在一道崖边旁。左图「Raw memory」中存储的笔记是错的：箭头显示智能体朝下一座城市走去。右图「Memory + dreaming」中，一次离线处理纠正了笔记：箭头显示智能体朝洞口返回。" src="../assets_zh/components-of-agent-memory/img_007.png" />
+一条被纠正的记忆笔记改变了Pokémon里的结局。用未纠正的笔记时，Claude说「Mt Moon在我身后」，朝下一座城市走去，最后又回到它来时的那条路。而用经过梦境纠正的笔记时，它说「现在我需要找到Mt Moon的洞口重新进去」，于是走回了洞里。
+接着我们测试了梦境能否帮助Claude避开这个陷阱。我们对那个记错了PokéCenter位置的记忆文件夹运行了梦境：Claude拿笔记与会话记录对照，发现了错误并改写。会话记录给了Claude一个可以用来核验记忆的事实基准。带着纠正后的记忆笔记，Claude径直回到Mt. Moon，最终抵达了Cerulean City。
+在带着未纠正笔记的那次运行里，Claude三次摔回早先那条路。第三次失败后，Claude似乎打算放弃，写道「我要停下来，不再一直绕圈了」。我们设置里的自动回复指示它继续。于是它照做，一路回到了山之前的城镇Pewter City，指望在那里治疗和补货。这次运行结束时，Claude始终没能抵达Cerulean City。
+<img alt="累计3,000个动作内朝Cerulean推进的进度折线图。「记忆加梦境」那次运行在第1,935个动作抵达Cerulean。「原始记忆」那次运行摔下崖边并折返Pewter。无记忆那次运行始终没能抵达Cerulean。" src="../assets_zh/components-of-agent-memory/img_008.png" />
+梦境纠正了记忆，Claude走回洞里并抵达了下一座城市。带着未纠正笔记（「Raw memory」）的那次运行始终没能翻过那座山，完全没有记忆的那次运行也一样。</p>
+<h3>梦境可以构建新的记忆表征</h3>
+<p>借助梦境，Claude可以构建有助于在记忆中导航的表征（图9）。它使用的一种记忆表征叫作<a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"><em>维基</em></a>：由Claude撰写并维护的一组页面，把Claude对某个主题的了解汇集起来，并链接到其他笔记。这些链接实际上为Claude提供了一张地图，让它能够梳理自己的记忆，并在需要时高效地找到相应内容。
+<img alt="带梦境的记忆层级，高亮从会话记录和记忆笔记向上指向记忆表征层（例如维基）的箭头。" src="../assets_zh/components-of-agent-memory/img_009.png" />
+梦境可以构建记忆表征。
+维基之类的表征，可以帮助Claude遍历它不断膨胀的知识库。我们用一批内部文档语料探究了维基作为记忆表征的收益——约350,000个文件、大约420M tokens——来自我们在五月收购的软件公司Stainless。我们围绕这批语料制作了包含25个问题的评测集，并给Claude一个搜索工具去探索它。我们还指示Claude用梦境基于这些文件构建一份维基。在128个会话中，我们提示Opus 5智能体去探索文件、撰写或更正相互链接的维基页面、合并重复项，并对照来源核查各项论断。
+每个会话都建立在此前会话中智能体取得的进展之上，并用一个共享日志来协调工作。当我们把梦境从两个会话扩展到128个时，在这25个问题上达到的评分标准比例从13%增长到48%（图10）。
+Claude是逐步构建维基的。创建出最初的维基后，它会用随后几轮梦境来增补、编辑或删减。在梦境的早期轮次里，Claude的知识像一名新员工，仅凭维基回答问题的能力有限。它梦得越多，知识地图就越丰富，渐渐像一名经验丰富的员工。在测试中我们发现，当我们同时给它一个搜索工具时，维基对Claude的帮助最大。当它同时使用搜索和维基时，随着维基变大，Claude的总分从54%升到61%，而只用搜索工具时是53%。只用维基回答问题时，Claude的最好成绩是48%。同时使用搜索和维基，每题还能省下大约20,000 tokens。
+<img alt="中图：随着维基生成所用的梦境tokens从2M增长到128M，所满足评分标准的折线图。维基加搜索工具从54%升至61%，仅维基从13%升至48%，无维基的搜索工具则平稳停在53%。左图与右图：一份示例维基的网络图，2个会话后有103个页面和766条链接，128个会话后有222个页面和12,893条链接。" src="../assets_zh/components-of-agent-memory/img_010.png" />
+中图：随着Claude在连续会话中构建维基，它在一批公司文档语料的25个问题上的得分。左图与右图：两个会话和128个会话之后的一份示例维基；每个点是一个页面，线条连接相互链接的页面。
+我们想测试哪类任务能从Claude拥有维基中受益。为此，我们使用了<a href="https://github.com/harveyai/harvey-labs">Harvey LAB</a>基准，以及一批关于一桩并购的文档。该基准给Claude一组文档，要求它据其内容生成一份法律摘要，再按一组标准给摘要评分。也许不如让Claude跑一局Pokémon那么有趣，但这些评测为我们提供了多样化的文档集合来构建维基。
+我们指示Claude依据这些文档构建一份维基，然后让Claude分别基于维基和基于直接的文件搜索来回答问题（关于并购）或生成法律摘要（LAB基准）。其中一项测试问了24个关于并购的问题（图11左），一半以上需要Claude跨多个文档查找信息，许多还需要Claude作出判断或做算术。在这些题目上（红色和橙色线），Claude查阅维基时得分87%，而只用搜索时是73%。
+<img alt="两张把评分项与源文档连起来的示意图。左图是维基收益更明显的任务：24个评分项大多连到10份文档中的两份或更多，其中9项需要判断或算术。右图是维基收益不明显的任务：57个评分项大多能在单一文档中通过文本搜索找到，通常是交易概览备忘录。" src="../assets_zh/components-of-agent-memory/img_011.png" />
+每个面板左边列出评分项，右边列出满足每一项所需的源文档。左图：关于一桩并购的24个问题，大多可通过查阅公开文件回答；一半以上的评分项需要综合多个文档的信息。右图：一项维基未带来明显收益的LAB任务；大多数评分项都能从单一文档中得到满足。
+在另一些情况下，维基就没那么有用了。在一项LAB任务上（图11右），摘要的评分项往往用一次文本搜索就能从单一文档里找到，维基相对搜索没有带来明显提升。在另一项LAB任务上，维基甚至长得比文档本身还大（图12）。就像Borges那篇只有一段的短篇《论科学的精确性》里的制图师，画出了一张细致到与所描绘的帝国一样大的地图，Claude也做出了一份极其详尽、实际上什么都没抽象的维基。
+<img alt="一次维基构建及第二轮处理的示意图。左侧圆中放着语料：10份文档、115 KB文本。箭头指向一个更大的圆，里面是由它构建的维基：68个页面、255条链接、203 KB，即语料的1.77倍。维基中有些页面没有任何链接。" src="../assets_zh/components-of-agent-memory/img_012.png" />
+维基长得比原始文件还大。</p>
+<h3>梦境可以把笔记提升到记忆层级的更高处</h3>
+<p>梦境还能把笔记浮到记忆层级的顶端，智能体框架可以在每次会话开始时把它们预先加载进Claude的上下文（图13）。这意味着Claude不必去搜索它们，甚至不必知道有什么可搜。
+把记忆提升到新会话（一种 <em>上下文注入</em>）必须谨慎。被注入的记忆会占用宝贵的tokens，而一条错误的笔记可能被带进每一次会话。加载一条笔记也不能保证Claude会照着做：我们关于<a href="https://code.claude.com/docs/en/memory">Claude Code</a>的文档就提醒，指令文件越长，遵循度越低。因此记忆层级的顶层必须保持相对精简，而梦境在这里的很大一部分工作，正是维持这种精简——把一些细节下移到层级更低的层，只留下链接。
+<a href="https://code.claude.com/docs/en/memory">Claude Code的自动记忆</a>以同样的方式让注入层保持精简，由Claude在会话期间维护。Claude并不会把所有自动记忆都加载进每次会话的上下文窗口，它只加载<code>MEMORY.md</code>的前200行或25 KB。这段开头相当于一个索引，告诉Claude自己知道什么、去哪里找。
+<img alt="带梦境的记忆层级，高亮从会话记录和记忆表征向上指向顶端注入上下文层的箭头，该层再流入下一次会话。" src="../assets_zh/components-of-agent-memory/img_013.png" />
+梦境可以写入记忆层级的顶端。注入上下文会在每次会话中加载，而它下面的各层则在Claude需要时被读取或搜索。</p>
+<h3>梦境可以让记忆聚焦于特定目标</h3>
+<p>梦境还能影响记忆生长的方式。例如，像<a href="https://support.claude.com/en/articles/17631495-get-started-with-claude-duet">Claude Duet</a>这样的助手，往往受益于围绕所协助的那个人来组织记忆，而梦境可以被调校成为某个特定目标服务来构建记忆。
+指引记忆如何生长的指令因任务而异，用来告诉Claude哪些信息才真正重要。例如，LAB基准里有一项任务模拟一次公司收购，并提供一组合同；摘要的评分依据是它是否准确描述了合同条款。
+我们一开始用的是生成维基的基础指令，并没有告诉Claude <em>该怎样</em> 使用维基。这项任务高度依赖合同条款。在构建维基的过程中，几个智能体同时往一张共享的合同条款表里写入（图14左）。
+<img alt="两张示意图。之前：四个智能体写入同一个共享页面provisions.md，一个智能体的保存会抹掉另一个写入的行；57条被评分事实中保留了41条。之后：四个智能体各写自己那份合同的页面，条款逐字照抄；57条中的57条被评分事实全部保留。" src="../assets_zh/components-of-agent-memory/img_014.png" />
+指令改动前后，有多少条被评分的合同事实进入了维基。左图：几个智能体写同一个共享页面，57条事实中保留了41条。右图：每份合同由一个智能体负责，各自写自己的页面并逐字引用条款，57条中的57条事实全部保留。
+结果得到的是一份缺了关键事实的维基。我们给依据这份维基生成的摘要评分时，Claude只涵盖了57条事实中的41条（72%）。排查问题出在哪里时，我们发现那张共享表对合同条款的概括很糟糕，还漏掉了其中一些，原因是智能体互相覆盖了彼此的工作。
+合同条款是维基里最重要的部分，可指令里并没有说明这一点。为了找到更好的指令，我们跑了一个循环：Claude反思自己的失败，提出对指令的修改，再重新构建维基。这个循环让Claude发现了遵循合同条款有多重要，并据此改写了构建维基的指令。
+每份合同在维基里都有了属于自己的页面，由单个智能体撰写，逐字引用条款，而不是把它们概括进一张共享表。当我们给依据这份改进后的维基生成的摘要评分时，100%的评分项都得到了满足，高于此前的72%。</p>
+<h3>梦境可以填补单次会话留下的空白</h3>
+<p>Claude写记忆笔记时，只能看到 <em>那一次</em> 特定会话里的上下文。而梦境可以跨许多会话检索，找出共同模式，或纠正共通的错误。
+在为LAB基准构建维基时（示例见图14），Claude有时会链接到尚未创建的页面。第二轮梦境补上了许多这样的缺口。在一项任务上（图15），梦境发现维基里有九条指向某个不存在页面的链接，把它们重新指向同一份文档已有的页面。它还新增了三个页面（包括一个索引）来完善维基。
+<img alt="一份维基的两张网络图。第二轮处理之前：38个条目、225条链接，其中9条链接从6个页面指向并不存在的「escrow-agreement」页面。之后：41个条目、278条链接，9条链接全部指向「buyer-form-escrow-agreement」，并新增三个页面：index、instructions email和escalations。" src="../assets_zh/components-of-agent-memory/img_015.png" />
+第二轮梦境前后的维基对比。</p>
+<h3>向后思考，向前展望</h3>
+<p>关于如何为智能体设计记忆系统，还有许多开放问题。其中之一，是Claude应该什么时候创建记忆。当Claude处理一项任务时，它可以写入记忆存储（例如文件夹、文件或数据库），在源头捕捉显著性，让重要细节立刻可供未来的轮次或会话使用。但当下记笔记，必然会把Claude的注意力从主任务上拉开。相比之下，梦境可以把记忆创建推到后台，但梦境产出的任何结果未必能被Claude立刻取用。
+另一个问题，是如何让记忆可靠地保持最新。Claude可能作出错误的预测，或者把从一开始就写错的规则记进记忆；记忆也可能随着环境变化而漂移、变得无关。梦境是修正这些错误的一种方式（图8），但它需要算力。让Claude持续核查 <em>全部</em> 记忆，也许并不现实。更重要的或许是把梦境聚焦在那些可能变化的信息上，或者仔细调校梦境的节奏（例如依据记忆被访问的频率）。
+把会话记录检索当作Claude记忆的基础，也是一个合理的思路。把表征（例如维基）与搜索结合起来（图10），有时确实有效。但Claude需要消耗算力来维护记忆表征，并确保它们不会积累错误或幻觉。
+尽管Claude对显著性的判断已经进步，但没有哪个模型能真正知道未来轮次里会发生什么。梦境给了Claude一个 <em>向后</em> 回望的机会，用算力来组织记忆、纠正错误，并维护那些让未来会话能更顺畅取用记忆的表征。随着Claude变得更强，记忆系统也会演进，而在设计Claude的记忆系统这件事上，我们仍有许多要学。
+欢迎查阅我们的cookbook：<a href="https://platform.claude.com/cookbook/managed-agents-cma-dreaming-with-a-dynamic-workflow">梦境入门</a>与<a href="https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/knowledge-wiki">知识维基</a>。</p>
+<h2>作者与致谢</h2>
+<h3>致谢</h3>
+<p>本文由Lance Martin撰写，Caitlin Love、Tom Chivers、Rebecca Hiscott、Jake Eaton和Blake Wilson提供编辑指导。感谢Barry Zhang、Theodora Chu、Daliang Li、Mahesh Murag、Jake Noble、Ravi Trivedi、Tina Vachovsky、Brad Abrams、Henry de Valence、Jeremy Fox、Matt Bell、Allen Li、Chris Gorgolewski、Eugene Yan、Artur Renault、Wei Zhang和Kevin Chen的有益讨论与贡献，也感谢David Hershey带来Claude Plays Pokémon。插图由Monika Tuchowska绘制。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>The components of agent memory</h1>
+<ul>
+<li><strong>Date:</strong> 2026-11-06</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/components-of-agent-memory</li>
+</ul>
+<h1>The components of agent memory</h1>
+<p><img alt="Illustration of two offset half circles with a grid pattern, one green and one pink, facing each other across a gap on a light blue background." src="../assets/components-of-agent-memory/img_000.webp" />
+Published
+    Nov 6, 2026
+Team
+    <a href="/engineering">Engineering</a>
+Topics</p>
+<ul>
+<li><a href="/search?topic=agents">Agents</a></li>
+<li><a href="/search?topic=context-engineering">Context engineering</a></li>
+<li><a href="/search?topic=agent-memory">Agent memory</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/harness-design-long-running-apps"></a><a href="https://www.anthropic.com/research/building-c-compiler"></a><a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"></a><a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents"></a>
+Related articles
+  * Engineering
+Mar 24, 2026
+<a href="https://www.anthropic.com/research/harness-design-long-running-apps">Harness design for long-running application development</a></p>
+<p><a href="/search?topic=agents">View more</a>
+Søren Kierkegaard wrote that life can only be understood <em>backward</em> , but it must be lived <em>forward</em>. We’ve encountered a similar bind when designing memory for AI agents.
+As humans, we encode memory constantly as we go about our lives. <a href="https://stanford.edu/~jlmcc/papers/McCMcNaughtonOReilly95.pdf">The hippocampus</a> plays a central role in this, capturing experiences in the moment so that memories form quickly and are immediately available. But only <a href="https://www.science.org/doi/10.1126/science.adk8261?referrer=https%3A%2F%2Fwww.google.com%2F">some experiences</a> are consolidated into long-term knowledge.
+Much of that consolidation appears to happen when our brains are offline. As we sleep, and during quiet <a href="https://www.nature.com/articles/s41467-018-06213-1">rest</a>, the hippocampus replays our recent experiences. This is thought to gradually distill <a href="https://www.nature.com/articles/s41593-019-0467-3">those experiences and integrate them</a> into the neocortex—the part of our brains that stores most of what we think of as knowledge.
+Agent memory can use a similar division of labor. Agents capture much of their work in logs or transcripts. Researchers at Letta and UC Berkeley proposed <a href="https://arxiv.org/abs/2504.13171">sleep-time compute</a> as a way for models to use idle time between interactions to reorganize their existing context. The same idea can help agents organize their memory by reflecting on logs to fix mistakes or produce new notes and representations. This process is often <a href="https://platform.claude.com/docs/en/managed-agents/dreams">called</a> <a href="https://research.google/blog/the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continual-learning/"><em>dreaming</em></a> (Figure 1).
+We’ve found that dreaming has been a useful tool for helping us give Claude effective memory. In this post, we share how we’ve come to think about agent memory and walk through several evaluations we’ve used to explore agent memory, including the use of dreaming, and what each component contributes to memory organization.
+<img alt="Diagram of a memory hierarchy between one session and the next. From bottom to top: transcripts (a searchable event log), memory notes written by Claude, memory representations such as wikis, and injected context loaded into every session. Inside a box labeled “Dreaming,” arrows run from transcripts up to each layer, and in both directions between neighboring upper layers." src="../assets/components-of-agent-memory/img_001.webp" />
+Claude can use dreaming to organize memory. This can correct mistakes, create notes, build new memory representations, or shape what’s preemptively loaded into future sessions.</p>
+<h3>Memory notes</h3>
+<p>By “agent memory,” we mean knowledge that Claude gains from experience—including interactions with users and tasks it’s been assigned—and that it retains between sessions, saved as context it can read later. It excludes other ways models can learn or manage context, such as changes to their <em>weights</em> (the internal parameters set during training), <a href="https://www.anthropic.com/research/in-context-learning-and-induction-heads"><em>in-context learning</em></a> (knowledge gained within a single conversation), and <a href="https://platform.claude.com/docs/en/build-with-claude/compaction"><em>compaction</em></a> (summaries written by Claude that replace its older turns so it can continue working in a new context window).
+In the human brain, chemical signals released before, during, or after an experience can <a href="https://www.nature.com/articles/385533a0">mark a memory</a> as important. Marked memories tend to be replayed more often than unmarked ones during offline periods. This process, called <em>replay</em> , helps stabilize and integrate them into long-term memory.
+Similarly, Claude can tag salient events in a session log as they happen, so they’re easier to find later, or it can <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">write</a> them to a memory store, such as a folder of memory notes (Figure 2). But how can Claude tell what’s salient in the moment, before it knows what’s coming next?
+<img alt="The same memory hierarchy, with the memory notes layer highlighted. An arrow runs from the session directly to the memory notes, described as salient observations written by Claude." src="../assets/components-of-agent-memory/img_002.webp" />
+Claude can write notes to memory.</p>
+<h3>Memory can be a prediction about what the future will need</h3>
+<p>Memory is, occasionally, a prediction. By writing down a rule, an agent predicts that the pattern it’s describing will be relevant again. For instance, writing down a verified fact is a prediction that an agent in a future session will want to rely on that fact without double-checking it. Over time, Claude has become much better at making these kinds of predictions.
+Consider a task from <a href="https://continual-learning-bench.com/news/cl-bench-1-0/">Continual Learning Bench (CL-Bench) 1.0</a>, a benchmark that measures an agent’s ability to use memory in order to tackle long-horizon tasks. One particular task asks Claude to answer a series of questions by looking up information in a database. After Claude gives an answer, it’s told the correct solution and can write a memory to help answer future questions.
+Memory can support a learning loop here. If Claude gets a question wrong, it can record the failure, come up with theories about what went wrong, test those theories, and turn what it finds into a rule about how to answer in the future.
+We ran the CL-Bench 1.0 task using <a href="https://platform.claude.com/docs/en/managed-agents/overview">Claude Managed Agents</a>. Claude started each question in a fresh session, with one exception: it could retrieve files from a <a href="https://platform.claude.com/docs/en/managed-agents/memory">memory directory</a> that persisted from one session to the next.
+Different models achieved different levels of success at creating their own learning loops. Claude Sonnet 4.6 got as far as generating theories about why an answer was wrong. Its memory directory contained a scattering of files, each listing several untested guesses.
+<img alt="Left: bar chart of mean reward on the CL-Bench database task, stateless baseline versus memory store. Opus 5.5: 0.655, 0.838. Sonnet 5.5: 0.644, 0.833. Opus 5: 0.564, 0.828. Opus 4.7: 0.383, 0.700. Sonnet 5: 0.306, 0.610. Sonnet 4.6: 0.330, 0.364. Right: line chart of running-mean reward over 30 questions for the same models, with and without memory." src="../assets/components-of-agent-memory/img_003.png" />
+CL-Bench database task, comparing memory with a stateless baseline across models.
+Claude Opus 4.7 consolidated its notes into a single reference document and began marking which facts it had checked and which were still unconfirmed. Claude Sonnet 5 marked each answer as confirmed after the grader had checked it, and wrote a correction when it had answered wrong.
+Claude Opus 5 was the first of these models to close the loop. Most of its entries included a rule (and also how it knew the rule was true), answers to earlier questions, and clear warnings about traps it had discovered along the way (Figure 3).
+Like Opus 5, Claude Opus 5.5 and Claude Sonnet 5.5 both closed the loop, using memory to capture validated rules about how to best answer future questions. With memory, both scored about the same as Opus 5, though their baseline performance without memory was slightly higher.</p>
+<h3>Claude has learned to judge salience</h3>
+<p>We also evaluated Claude’s ability to play <em>Pokémon Red</em> , a game that <a href="https://www.youtube.com/watch?v=CXhYDOvgpuU">challenges Claude to navigate</a> complex long-horizon tasks, as a test of Claude’s judgment about <em>what</em> to save to memory. At the start of each run, we gave each model a folder of memory files that it could read from and write to while it played (Figure 4).
+We compared the memory folders from one run each of Claude Sonnet 3.7 and Claude Fable 5, when each was about 10,000 steps into the game. A key difference we noticed was what each model thought was worth remembering. Sonnet 3.7 assumed everything might matter and wrote to memory indiscriminately. Its memory folder contained an archive of encounters, often with a separate file for each battle it fought, each item it found, and each non-player character it met. Ultimately, Sonnet 3.7 wrote 413 memory files across 225 folders and earned one badge (badges mark a player’s progress through the game).
+Fable 5, by comparison, wrote nine files in two folders, plus a single top-level file called <code>global.md</code>, and earned four badges.
+<img alt="Two treemaps of Pokémon memory directories at the same scale, where area shows characters of memory. Claude Sonnet 3.7’s is large and crowded, with 413 files and 977,930 characters across folders such as locations, main, battles, and several “consolidated” folders. Claude Fable 5’s is small, with 10 files and 43,406 characters in locations, gameplay, and global.md." src="../assets/components-of-agent-memory/img_004.png" />
+Claude’s memory directories for Sonnet 3.7 versus Fable 5 while playing Pokémon.
+Sonnet 3.7’s approach was a problem mainly because the game state of Pokémon changes constantly—Sonnet 3.7’s detailed record was continuously going out of date. As a result, as Claude progressed, it had to spend more time and resources combing through its memories rather than playing the game. Around step 10,000, for example, Sonnet 3.7 started its fourth folder of “master” memory files. Over the next 17 steps, it created six files, deleted nine others, and took no actions in the game itself.
+Fable 5’s approach used memory for things the game didn’t explicitly tell it. Some of the kinds of information Sonnet 3.7 wrote to memory—such as how much money the player has or where the player is on the map—can be read off the screen every turn, so storing it is redundant. By contrast, memory files about strategy, plans, and tested rules exist only if Claude works them out, and they disappear unless Claude writes them down.
+Fable 5 organized its memory accordingly. Its <code>global.md</code> file acted as a dashboard, holding the current goal, a prewritten plan for tackling gyms (the challenges where badges are won), and the model’s own rules for using memory. A <code>locations</code> folder held plans for navigating particular routes, and a <code>gameplay</code> folder held strategies based on what it had learned about how the game works. For example, after seven Poké Balls in a row failed to catch a Magikarp (one of the easiest Pokémon to catch), Claude wrote, “If 3+ balls fail in a row, VARY the timing (insert extra ‘wait’ presses between menu steps) - the catch landed right after doing this.”
+With a much smaller memory folder, Fable 5 progressed much further in the game than Sonnet 3.7. Opus 5.5 took a similar approach: it kept a small folder of memory notes that tracked its current goal and next steps, rewrote them as it played, and beat the game.</p>
+<h3>Steering Claude to write memory</h3>
+<p>We’ve found that it helps to tell Claude what memory is for, but not <em>how</em> to use it. On CL-Bench, we simply told Claude that a memory folder was available. That general guidance was enough for Opus 4.7 and Opus 5 to use memory effectively, and it gave both a noticeable boost in performance (Figure 3).
+We also tested giving the models specific rules about what they should write to memory, with one rule per test. We compared how much each model gained from memory with each rule against how much it gained without it. When we set a rule to “record only failures,” both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them (Figure 5, right). For stronger models, giving them freedom to judge salience was more effective than setting fixed rules in advance, and those rules could end up weakening performance.
+<img alt="Left: bar chart of Sonnet 4.6’s mean reward on the CL-Bench database task: 0.330 at baseline, 0.364 with memory, and 0.641 with memory and refined instruction. Reference lines mark Opus 4.7 with memory at 0.700 and Opus 5 with memory at 0.828. Right: change in memory gain when told to record only failures: Opus 5, −0.234; Opus 4.7, −0.150; Sonnet 4.6, −0.020." src="../assets/components-of-agent-memory/img_005.png" />
+Left: Sonnet 4.6 on the CL-Bench database task with and without prompting to guide memory usage. Right: how much each model’s gain from memory changed when it was told to record only failures.
+We also noticed that steering helped older models the most. For instance, Sonnet 4.6 often didn’t read files from its memory directory and failed to test its theories about why an answer was wrong.
+In this case, prompting Claude to read its memory files before answering—and then to explicitly test its theories—nearly doubled its benchmark score (Figure 5, left). Sonnet 5 does this on its own. Without being prompted to, it read its memory before answering 9 out of 10 times. By comparison, Sonnet 4.6 did this less than half of the time.
+With frontier Claude models, we typically give simple guidance to create memory notes when a person asks them to or when something is clearly worth remembering, and we leave that judgment up to Claude.</p>
+<h3>Dreaming can correct memory</h3>
+<p>Since Claude writes to memory based on what it judges to be salient in-session, a note that’s wrong from the start or that drifts as the environment changes can be read, and trusted, by Claude in a later session.
+Dreaming gives Claude a way to test its notes against the original transcripts (Figure 6). We saw a positive example of this when Claude played Pokémon using Managed Agents with a mounted directory for its memories.
+<img alt="The memory hierarchy with dreaming, highlighting an arrow from the transcripts layer up to the memory notes layer, which shows dreaming correcting notes against transcripts." src="../assets/components-of-agent-memory/img_006.png" />
+Dreaming can correct mistakes in memory.
+In one part of the game, the player has to get through Mt. Moon, a cave system with its entrance on the west side of the map and its exit on the east. Near the entrance is a trap: a one-way ledge that drops the player onto the route they came from, with no clear way to climb back up. Claude was using the PokéCenter, a building at the mountain’s entrance, as a landmark, so whether it walked off the ledge depended on which side of the mountain it thought the PokéCenter was on.
+At one point, Claude wrote down (incorrectly) that the PokéCenter was on the east side. When it walked out of the PokéCenter, it announced, “Mt Moon is behind me,” and updated its notes: “Mt Moon DONE.” But Mt. Moon was not behind it. A few actions later, Claude went over the ledge and landed back on the route it had come from (Figure 7). Its navigation tool didn’t show the drop, so Claude concluded, “I overshot far west,” and that it had been on the correct side all along. It hadn’t.
+<img alt="Two Pokémon map panels with the agent next to a ledge. Left, “Raw memory,” where the stored note is wrong: an arrow shows the agent heading for the next city. Right, “Memory + dreaming,” where an offline pass corrected the note: an arrow shows the agent heading back to the cave entrance." src="../assets/components-of-agent-memory/img_007.png" />
+A corrected memory note changed the outcome in Pokémon. With the uncorrected note, Claude says, “Mt Moon is behind me,” heads for the next city, and ends up back on the route it came from. With the note corrected by dreaming, it says, “Now I need to find the Mt Moon cave entrance to re-enter,” and goes back into the cave.
+We then tested whether dreaming could help Claude avoid this trap. We ran dreaming on the memory folder that contained the wrong location for the PokéCenter: Claude checked the note against the session transcript, caught its error, and rewrote it. The transcript gave Claude a ground truth to validate its memory against. With the corrected memory note, Claude went straight back into Mt. Moon and eventually reached Cerulean City.
+In the run with the uncorrected note, Claude dropped back onto that earlier route three times. After the third failure, Claude seemed to give up, writing, “I’m going to stop rather than keep looping.” Our setup’s automatic reply instructed it to continue. So it did, all the way back to Pewter City, the town before the mountain, where it hoped to heal and restock. The run ended without Claude ever reaching Cerulean City.
+<img alt="Line chart of progress toward Cerulean over 3,000 cumulative actions. The memory plus dreaming run reaches Cerulean at action 1,935. The raw memory run falls off the ledge and backtracks to Pewter. The run with no memory never reaches Cerulean." src="../assets/components-of-agent-memory/img_008.png" />
+Dreaming corrects the memory, and Claude goes back into the cave and reaches the next city. The run with the uncorrected note (“Raw memory”) never gets past the mountain, and neither does the run with no memory.</p>
+<h3>Dreaming can build new memory representations</h3>
+<p>With dreaming, Claude can build representations to help navigate memory (Figure 9). One type of memory representation it uses is called a <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"><em>wiki</em></a>, a collection of pages written and maintained by Claude that gathers what Claude knows about one subject and links it to other notes. These links effectively provide Claude with a map it can use to sift through its memory and efficiently locate memories when they’re needed.
+<img alt="The memory hierarchy with dreaming, highlighting arrows from transcripts and from memory notes up to the memory representations layer, such as wikis." src="../assets/components-of-agent-memory/img_009.png" />
+Dreaming can build memory representations.
+Representations like wikis can help Claude traverse its ever-growing knowledge base. We explored the benefit of wikis as a memory representation using a corpus of internal documents—about 350,000 files, roughly 420M tokens—from Stainless, a software company we acquired in May. We created an evaluation set of 25 questions about this corpus and gave Claude a search tool to explore it. We also instructed Claude to build a wiki based on these files using dreaming. Over 128 sessions, we prompted Opus 5 agents to explore the files, write or correct linked wiki pages, merge duplicates, and check claims against the sources.
+Each session built on the progress that agents made in prior sessions, using a shared log to coordinate work. As we scaled dreaming from two sessions to 128, performance on the 25 questions grew from 13% to 48% of graded criteria (Figure 10).
+Claude builds its wikis incrementally. After creating an initial wiki, it uses subsequent rounds of dreaming to add to, edit, or prune it. In the early rounds of dreaming, Claude’s knowledge is like that of a new employee, and its ability to answer questions based on the wiki alone is limited. The more it dreams, the richer its knowledge map grows, like that of a seasoned employee. In our tests, we found that the wiki helped Claude the most when we also gave it access to a search tool. When it used both search and the wiki, Claude’s aggregate score rose from 54% to 61% as that wiki grew, compared with 53% when it had access to the search tool alone. Claude’s best score was 48% when it used only the wiki to answer questions. Using search and the wiki also saved about 20,000 tokens per question.
+<img alt="Center: line chart of graded criteria met as wiki generation grows from 2M to 128M dreaming tokens. Wiki plus search tool rises from 54% to 61%, wiki alone rises from 13% to 48%, and the search tool with no wiki is flat at 53%. Left and right: network graphs of an example wiki, with 103 pages and 766 links after 2 sessions and 222 pages and 12,893 links after 128 sessions." src="../assets/components-of-agent-memory/img_010.png" />
+Center: scores on 25 questions about a corpus of documents from a company as Claude built wikis over sequential sessions. Left and right: an example wiki after two and 128 sessions; each dot is a page, and lines join linked pages.
+We wanted to test which kinds of tasks benefited from Claude having a wiki. To do this, we used the <a href="https://github.com/harveyai/harvey-labs">Harvey LAB</a> benchmark along with a collection of documents about a merger. The benchmark gives Claude a set of documents and asks Claude to generate a legal brief based on their content. The benchmark then grades the brief against a list of criteria. While a tad less engaging, perhaps, than a Pokémon run, these evaluations give us diverse collections of documents to build wikis from.
+We instructed Claude to build a wiki from the documents. We then asked Claude to answer questions (about the merger) or generate legal briefs (the LAB benchmark) both from the wiki and from a direct file search. One test asked 24 questions about the merger (Figure 11, left), more than half of which needed Claude to find information across several documents, and many of which also needed Claude to use judgment or do math. On those items (red and orange lines), Claude scored 87% when it consulted the wiki, compared with 73% when it used search alone.
+<img alt="Two diagrams linking graded criteria to source documents. Left, the task where the wiki showed more benefit: most of the 24 criteria connect to two or more of 10 documents, and nine need judgment or arithmetic. Right, the task where the wiki showed less benefit: most of the 57 criteria can be found by text search in a single document, usually the deal overview memo." src="../assets/components-of-agent-memory/img_011.png" />
+Each panel lists what was graded (left) and the source documents needed to meet each one (right). Left: 24 questions about a merger, which can be answered by looking at mostly public filings. More than half of the criteria required combining information from several documents. Right: a LAB task where the wiki showed no clear gain. Most criteria could be met from a single document.
+In other cases, the wiki was less useful. On one LAB task (Figure 11, right), brief criteria often could be retrieved with a text search from a single document, and the wiki showed no clear gain in performance relative to search. On another LAB task, the wiki grew larger than the documents themselves (Figure 12). Like the mapmakers in Borges’s one-paragraph short story “On Exactitude in Science,” who drafted a map so detailed it was as large as the empire it represented, Claude had made an extremely detailed wiki that effectively abstracted nothing.
+<img alt="Diagram of a wiki build and second pass. On the left, a circle holds the corpus: 10 documents, 115 KB of text. An arrow leads to a larger circle holding the wiki built from it: 68 pages, 255 links, and 203 KB, or 1.77 times the corpus. Some of the wiki’s pages have no links." src="../assets/components-of-agent-memory/img_012.png" />
+The wiki grew to be larger than the raw files.</p>
+<h3>Dreaming can promote notes up the memory hierarchy</h3>
+<p>Dreaming can also float notes to the top of the memory hierarchy, and the agent harness can preemptively load them into Claude’s context at the start of every session (Figure 13). This means Claude doesn’t need to search for them, or even to know there’s something to search for.
+Promoting memories into a new session (a form of <em>context injection</em>) must be done carefully. Injected memories use up valuable tokens, and an incorrect note can be carried into every session. Loading a note also doesn’t guarantee that Claude acts on it: our documentation on <a href="https://code.claude.com/docs/en/memory">Claude Code</a> warns that longer instruction files reduce adherence. So the top layer of the memory hierarchy has to stay relatively small, and much of dreaming’s work here is keeping it that way—by moving some details down the hierarchy and leaving links behind.
+<a href="https://code.claude.com/docs/en/memory">Claude Code’s auto memory</a> keeps its injected layer small in the same way, with Claude maintaining it during the session. Claude doesn’t load all of its auto memory into every session’s context window. It loads only the first 200 lines or 25 KB of <code>MEMORY.md</code>. This header serves as an index, which shows Claude what it knows and where to find it.
+<img alt="The memory hierarchy with dreaming, highlighting arrows from transcripts and from memory representations up to the injected context layer at the top, which feeds into the next session." src="../assets/components-of-agent-memory/img_013.png" />
+Dreaming can write to the top of the memory hierarchy. Injected context is loaded into every session, and the layers below it are read or searched when Claude needs them.</p>
+<h3>Dreaming can focus memory on a specific goal</h3>
+<p>Dreaming can also shape how memory grows. An assistant like <a href="https://support.claude.com/en/articles/17631495-get-started-with-claude-duet">Claude Duet</a>, for example, often benefits from having memories that are organized around the person it’s helping, and dreaming can be tuned to build memory in service of a particular goal.
+The instructions that guide how memory grows differ by task and tell Claude what information actually matters. For example, one task in the LAB benchmark simulates a company acquisition and provides a set of contracts. The brief is graded on whether it correctly describes the contract terms.
+We started with basic instructions for generating the wiki that didn’t tell Claude <em>how</em> to use the wiki. This task relied heavily on contract terms. While the wiki was being built, several agents wrote to a shared table of contract terms at the same time (Figure 14, left).
+<img alt="Two diagrams. Before: four agents write to the same shared page, provisions.md, and one agent’s save erases another’s lines; 41 of 57 graded facts survived. After: four agents each write their own contract’s page, with terms copied word for word; all 57 of 57 graded facts survived." src="../assets/components-of-agent-memory/img_014.png" />
+How many graded contract facts made it into the wiki, before and after instructions changed. Left: several agents writing to one shared page; 41 of 57 facts survived. Right: one agent per contract, each writing its own page and quoting terms word for word; 57 of 57 facts survived.
+The result was a wiki that was missing key facts. When we graded a brief generated from the wiki, Claude had included only 41 of the 57 facts (72%). When we looked at what had gone wrong, we found that the shared table summarized the contract terms poorly and was missing some of them altogether, because agents had overwritten one another’s work.
+The contract terms were the most important part of the wiki, but the instructions didn’t say that. To find better instructions, we ran a loop in which Claude reflected on its failures, proposed a change to the instructions, and rebuilt the wiki. This loop allowed Claude to discover how important it was to follow the contract terms, and it rewrote the instructions for building the wiki accordingly.
+Each contract got its own page in the wiki, written by a single agent, which quoted the terms word for word rather than summarizing them into a shared table. When we graded the brief generated from this improved wiki, 100% of the criteria could be met, up from 72%.</p>
+<h3>Dreaming can fill in gaps a session leaves behind</h3>
+<p>When Claude writes memory notes, it sees only the context in <em>that</em> particular session. Dreaming can search across many sessions to find common patterns or correct common mistakes.
+When building the wikis for the LAB benchmark (as an example, see Figure 14), sometimes Claude would link to pages that hadn’t yet been created. A second dreaming pass closed many of these gaps. On one task (Figure 15), dreaming found nine links to a missing page in the wiki and repointed them to an existing page for the same document. It also added three new pages, including an index, to improve the wiki.
+<img alt="Two network graphs of a wiki. Before the second pass: 38 entries and 225 links, with nine links from six pages pointing to “escrow-agreement,” a page that doesn’t exist. After: 41 entries and 278 links, with all nine links pointing to “buyer-form-escrow-agreement” and three new pages: index, instructions email, and escalations." src="../assets/components-of-agent-memory/img_015.png" />
+The wiki before and after a second dreaming pass.</p>
+<h3>Thinking backward, looking forward</h3>
+<p>There are many open questions about how to design memory systems for agents. One is when Claude should create memory. When Claude works on a task, it can write to a memory store (e.g., a folder, file, or database), capturing salience at the source and making important details immediately available for future turns or sessions. But logging notes in the moment inevitably draws Claude’s attention away from its main task. In contrast, dreaming can push memory creation to the background, but any outputs from dreaming may not be immediately accessible to Claude.
+Another question is how to keep memory reliably up to date. Claude can make incorrect predictions or write rules to memory that are wrong from the start. Memory can also drift and become irrelevant as the environment changes. Dreaming is one way to fix these mistakes (Figure 8), but it requires compute. Directing Claude to continuously check <em>all</em> its memories might not be practical. It may be important instead to focus dreaming on information that’s likely to change or to carefully tune the cadence of dreaming (e.g., based on how often memories are accessed).
+It’s also reasonable to consider transcript search as the foundation of Claude’s memory. Combining representations (e.g., wikis) with search (Figure 10) can sometimes be effective. But Claude needs to use compute to maintain memory representations and make sure they don’t accumulate errors or hallucinations.
+Even though Claude’s judgment about salience has improved, no model can really know what will happen in future turns. Dreaming gives Claude an opportunity to look <em>backward</em> and use compute to organize its memory, correct mistakes, and maintain representations that allow future sessions to access memory more readily. Memory systems will evolve as Claude gets more capable, and we still have a lot to learn about designing Claude’s memory systems.
+See our cookbooks for <a href="https://platform.claude.com/cookbook/managed-agents-cma-dreaming-with-a-dynamic-workflow">getting started with dreaming</a> and <a href="https://github.com/anthropics/claude-quickstarts/tree/main/managed-agents/knowledge-wiki">knowledge wikis</a>.</p>
+<h2>Authors &amp; acknowledgements</h2>
+<h3>Acknowledgements</h3>
+<p>Written by Lance Martin with editorial guidance from Caitlin Love, Tom Chivers, Rebecca Hiscott, Jake Eaton, and Blake Wilson. We’re grateful to Barry Zhang, Theodora Chu, Daliang Li, Mahesh Murag, Jake Noble, Ravi Trivedi, Tina Vachovsky, Brad Abrams, Henry de Valence, Jeremy Fox, Matt Bell, Allen Li, Chris Gorgolewski, Eugene Yan, Artur Renault, Wei Zhang, and Kevin Chen for helpful discussions and contributions, and to David Hershey for Claude Plays Pokémon. Figures by Monika Tuchowska.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

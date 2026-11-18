@@ -1,0 +1,2807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic Research Papers — 本地镜像</title>
+<style>
+  :root {
+    --bg: #faf9f6;
+    --card: #ffffff;
+    --text: #1f1f1f;
+    --muted: #6b6b6b;
+    --accent: #c15f3c;
+    --accent2: #cc7857;
+    --border: #e8e4dc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #fff;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent2); }
+  .header p { color: #bbb; margin-top: 10px; font-size: 15px; }
+  .stats {
+    display: flex; justify-content: center; gap: 24px; margin-top: 20px; flex-wrap: wrap;
+  }
+  .stat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 22px; border-radius: 10px; font-size: 14px;
+  }
+  .stat b { display: block; font-size: 22px; color: #fff; }
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
+  .hero-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-bottom: 36px;
+  }
+  .hero-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .hero-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+  .hero-cat {
+    display: inline-block; font-size: 11px; color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 20px; padding: 2px 10px;
+    margin-bottom: 10px; letter-spacing: 0.5px;
+  }
+  .hero-card h3 { font-size: 15px; margin-bottom: 8px; line-height: 1.4; }
+  .hero-card h3 a { color: var(--text); text-decoration: none; }
+  .hero-card h3 a:hover { color: var(--accent); }
+  .hero-card p { font-size: 13px; color: var(--muted); }
+  .hero-date { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .toolbar {
+    display: flex; gap: 12px; align-items: center; margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .toolbar input {
+    flex: 1; min-width: 200px; padding: 10px 14px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 14px; background: var(--card);
+  }
+  .toolbar select {
+    padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 14px; background: var(--card); color: var(--text);
+  }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; }
+  th {
+    text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px;
+    color: var(--muted); border-bottom: 1px solid var(--border); padding: 12px 14px;
+  }
+  td { padding: 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.date { white-space: nowrap; color: var(--muted); font-size: 13px; width: 90px; }
+  .cat {
+    display: inline-block; font-size: 11px; background: #f3efe7; color: #7a5c4a;
+    border-radius: 20px; padding: 3px 10px; white-space: nowrap;
+  }
+  .ptitle { font-weight: 600; color: var(--text); text-decoration: none; font-size: 15px; }
+  .ptitle:hover { color: var(--accent); }
+  .excerpt { font-size: 12.5px; color: var(--muted); margin-top: 4px; max-width: 560px; }
+  .links { margin-top: 6px; font-size: 12px; }
+  .links a { color: var(--accent); text-decoration: none; margin-right: 14px; }
+  .links a:hover { text-decoration: underline; }
+  .footer { text-align: center; color: var(--muted); font-size: 12px; padding: 24px; }
+  tr.hidden { display: none; }
+  .empty { text-align: center; padding: 40px; color: var(--muted); display: none; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Anthropic <span>Research Papers</span></h1>
+  <p>Anthropic 官网研究论文本地镜像 — 219 篇 · 更新于 2026-09-18</p>
+  <div class="stats">
+    <div class="stat"><b>219</b>论文总数</div>
+    <div class="stat"><b>12</b>研究分类</div>
+    <div class="stat"><b>0</b>失败</div>
+  </div>
+</div>
+<div class="container">
+  <div class="hero-grid">
+    
+<div class="hero-card">
+  <div class="hero-cat">Engineering</div>
+  <h3><a href="papers/building-strong-safety-evaluations.md">Building strong safety evaluations</a></h3>
+  <p>Building strong safety evaluations Illustration of two dark green gridded squares on a light green background. On the le…</p>
+  <div class="hero-date">Nov 13, 2026</div>
+</div>
+<div class="hero-card">
+  <div class="hero-cat">Science</div>
+  <h3><a href="papers/claude-electronics-design.md">Testing Claude on real-world electronics design</a></h3>
+  <p>Testing Claude on realworld electronics design Abstract collage combining a closeup photograph of a circuit board with b…</p>
+  <div class="hero-date">Nov 9, 2026</div>
+</div>
+<div class="hero-card">
+  <div class="hero-cat">Engineering</div>
+  <h3><a href="papers/components-of-agent-memory.md">The components of agent memory</a></h3>
+  <p>The components of agent memory Illustration of two offset half circles with a grid pattern, one green and one pink, faci…</p>
+  <div class="hero-date">Nov 6, 2026</div>
+</div>
+<div class="hero-card">
+  <div class="hero-cat">Frontier Red Team</div>
+  <h3><a href="papers/project-eve-claude-plays-mmorpgs.md">Project EVE:Claude plays MMORPGs</a></h3>
+  <p>Project EVE : Claude plays MMORPGs Published Nov 6, 2026 Team Frontier Red Team&lt;/research/team/frontierredteam Topics Ag…</p>
+  <div class="hero-date">Nov 6, 2026</div>
+</div>
+  </div>
+  <div class="toolbar">
+    <input id="search" type="text" placeholder="🔍 搜索标题、摘要…" oninput="filterRows()">
+    <select id="catFilter" onchange="filterRows()">
+      <option value="">全部分类</option>
+    </select>
+  </div>
+  <table>
+    <thead><tr><th>日期</th><th>分类</th><th>标题</th></tr></thead>
+    <tbody id="tbody">
+      
+<tr>
+  <td class="date">Nov 13, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/building-strong-safety-evaluations.md" target="_blank">Building strong safety evaluations</a>
+    <div class="excerpt">Building strong safety evaluations Illustration of two dark green gridded squares on a light green background. On the left, a tilted red square and an upright blue square overlap imperfectly, leaving …</div>
+    <div class="links">
+      <a href="papers/building-strong-safety-evaluations.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/building-strong-safety-evaluations" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 9, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-electronics-design.md" target="_blank">Testing Claude on real-world electronics design</a>
+    <div class="excerpt">Testing Claude on realworld electronics design Abstract collage combining a closeup photograph of a circuit board with bright green panels of winding coppertrack patterns.assets/claudeelectronicsdesig…</div>
+    <div class="links">
+      <a href="papers/claude-electronics-design.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-electronics-design" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 6, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/components-of-agent-memory.md" target="_blank">The components of agent memory</a>
+    <div class="excerpt">The components of agent memory Illustration of two offset half circles with a grid pattern, one green and one pink, facing each other across a gap on a light blue background.assets/componentsofagentme…</div>
+    <div class="links">
+      <a href="papers/components-of-agent-memory.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/components-of-agent-memory" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 6, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/project-eve-claude-plays-mmorpgs.md" target="_blank">Project EVE:Claude plays MMORPGs</a>
+    <div class="excerpt">Project EVE : Claude plays MMORPGs Published Nov 6, 2026 Team Frontier Red Team&lt;/research/team/frontierredteam Topics Agents&lt;/search?topic=agents Economic Futures&lt;/search?topic=economicfutures Researc…</div>
+    <div class="links">
+      <a href="papers/project-eve-claude-plays-mmorpgs.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/project-eve-claude-plays-mmorpgs" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 6, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/teaching-ai-to-build-scientific-models.md" target="_blank">Teaching AI to build scientific models</a>
+    <div class="excerpt">Teaching AI to build scientific models Collage of a looping black line drawn across a pink grid, continuing into a green engraving of a textured, branching landscape.assets/teachingaitobuildscientific…</div>
+    <div class="links">
+      <a href="papers/teaching-ai-to-build-scientific-models.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/teaching-ai-to-build-scientific-models" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 5, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/how-researchers-use-claude.md" target="_blank">AI for scientific discovery:How researchers use Claude</a>
+    <div class="excerpt">AI for scientific discovery : How researchers use Claude Download the PDF&lt;https://wwwcdn.anthropic.com/6e7c6446c0d8405dba73b91dabd36aac069dea2e/AIforScientificDiscovery.pdf AI for scientific discovery…</div>
+    <div class="links">
+      <a href="papers/how-researchers-use-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/how-researchers-use-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 4, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/investigating-vault-particles-with-claude.md" target="_blank">Investigating vault particles with Claude</a>
+    <div class="excerpt">Investigating vault particles with Claude Read the preprint&lt;https://www.biorxiv.org/content/10.64898/2026.11.04.764334v1 Collage illustration pairing vintage measuring scales over a blackandwhite phot…</div>
+    <div class="links">
+      <a href="papers/investigating-vault-particles-with-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/investigating-vault-particles-with-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 2, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/provable-inference.md" target="_blank">Progress on provable inference for large language models</a>
+    <div class="excerpt">Progress on provable inference for large language models Read the technical report&lt;https://www.anthropic.com/document/flashprovetechnicalreport Progress on provable inference for large language models…</div>
+    <div class="links">
+      <a href="papers/provable-inference.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/provable-inference" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 27, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/agents-judgment-calls.md" target="_blank">How AI agents shape experts’ judgment calls</a>
+    <div class="excerpt">How AI agents shape experts’ judgment calls Read the paper&lt;https://wwwcdn.anthropic.com/519c17a5d23a794e8b6d50a854048d0b61e0d73a.pdf Collage of a vintage lithograph of a schooner heeling in a stormy s…</div>
+    <div class="links">
+      <a href="papers/agents-judgment-calls.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/agents-judgment-calls" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 27, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/discovering-vulnerabilities-with-claude.md" target="_blank">Discovering and exploiting vulnerabilities in critical, real-world software with Claude</a>
+    <div class="excerpt">Discovering and exploiting vulnerabilities in critical, realworld software with Claude Published Oct 27, 2026 Team Frontier Red Team&lt;/research/team/frontierredteam Topics Cybersecurity&lt;/search?topic=c…</div>
+    <div class="links">
+      <a href="papers/discovering-vulnerabilities-with-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/discovering-vulnerabilities-with-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 27, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/early-progress-drug-development.md" target="_blank">Early progress on accelerating drug development with Claude</a>
+    <div class="excerpt">Early progress on accelerating drug development with Claude Early progress on accelerating drug development with Claudeassets/earlyprogressdrugdevelopment/img_000.webp Published Oct 27, 2026 Team Scie…</div>
+    <div class="links">
+      <a href="papers/early-progress-drug-development.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/early-progress-drug-development" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 23, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/alignment-assessment-ukaisi.md" target="_blank">An alignment assessment of the UK AISI cybertesting incident</a>
+    <div class="excerpt">An alignment assessment of the UK AISI cybertesting incident An alignment assessment of the UK AISI cybertesting incidentassets/alignmentassessmentukaisi/img_000.jpg Published Oct 23, 2026 Team Alignm…</div>
+    <div class="links">
+      <a href="papers/alignment-assessment-ukaisi.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/alignment-assessment-ukaisi" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 22, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/formal-verification.md" target="_blank">LLMs are making formal software verification feasible at a much larger scale</a>
+    <div class="excerpt">LLMs are making formal software verification feasible at a much larger scale LLMs are making formal software verification feasible at a much larger scaleassets/formalverification/img_000.webp Publishe…</div>
+    <div class="links">
+      <a href="papers/formal-verification.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/formal-verification" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 20, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/attack-surface-reduction.md" target="_blank">Using Claude to reduce the attack surface of code</a>
+    <div class="excerpt">Using Claude to reduce the attack surface of code Published Oct 20, 2026 Team Frontier Red Team&lt;/research/team/frontierredteam Topics Cybersecurity&lt;/search?topic=cybersecurity Coding&lt;/search?topic=cod…</div>
+    <div class="links">
+      <a href="papers/attack-surface-reduction.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/attack-surface-reduction" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 20, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-scorpion-toxin-binder-design.md" target="_blank">How Claude designed protein binders against scorpion neurotoxins</a>
+    <div class="excerpt">How Claude designed protein binders against scorpion neurotoxins Read the technical report&lt;https://wwwcdn.anthropic.com/31ac578806cffd8b3d92d8affe6edc4c04d502e1.pdf How Claude designed protein binders…</div>
+    <div class="links">
+      <a href="papers/claude-scorpion-toxin-binder-design.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-scorpion-toxin-binder-design" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 16, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/ai-expectations-gap.md" target="_blank">The AI expectations gap</a>
+    <div class="excerpt">The AI expectations gap Read in PDF&lt;https://wwwcdn.anthropic.com/a28f24814c56e2834a3eae7b13946f19d3e97ec4/The AI Expectations Gap.pdf The AI expectations gapassets/aiexpectationsgap/img_000.webp Publi…</div>
+    <div class="links">
+      <a href="papers/ai-expectations-gap.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/ai-expectations-gap" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 16, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/designing-efficient-quantum-circuits.md" target="_blank">Designing more efficient quantum circuits with Claude</a>
+    <div class="excerpt">Designing more efficient quantum circuits with Claude Designing more efficient quantum circuits with Claudeassets/designingefficientquantumcircuits/img_000.jpg Published Oct 16, 2026 Team Science&lt;/sci…</div>
+    <div class="links">
+      <a href="papers/designing-efficient-quantum-circuits.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/designing-efficient-quantum-circuits" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 16, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/employment-at-anthropic.md" target="_blank">How employment is changing at Anthropic</a>
+    <div class="excerpt">How employment is changing at Anthropic Read in PDF&lt;https://wwwcdn.anthropic.com/72628f1863c53432195db83279252dfd2cb53158/Employment at Anthropic.pdf How employment is changing at Anthropicassets/empl…</div>
+    <div class="links">
+      <a href="papers/employment-at-anthropic.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/employment-at-anthropic" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 16, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/expectations-for-the-future.md" target="_blank">Working at the frontier shapes expectations for the future</a>
+    <div class="excerpt">Working at the frontier shapes expectations for the future Working at the frontier shapes expectations for the futureassets/expectationsforthefuture/img_000.webp Published Oct 16, 2026 Team Economics&lt;…</div>
+    <div class="links">
+      <a href="papers/expectations-for-the-future.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/expectations-for-the-future" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 16, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/ecdsa-curve-origins.md" target="_blank">Claude reveals ECDSA curve origins</a>
+    <div class="excerpt">Claude reveals ECDSA curve origins Claude reveals ECDSA curve originsassets/ecdsacurveorigins/img_000.webp Published Oct 16, 2026 Team Frontier Red Team&lt;/research/team/frontierredteam Topics Cybersecu…</div>
+    <div class="links">
+      <a href="papers/ecdsa-curve-origins.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/ecdsa-curve-origins" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 13, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/redesigning-source-control.md" target="_blank">Redesigning source control at Anthropic</a>
+    <div class="excerpt">Redesigning source control at Anthropic Redesigning source control at Anthropicassets/redesigningsourcecontrol/img_000.webp Published Oct 13, 2026 Team Engineering&lt;/engineering Topics Coding&lt;/search?t…</div>
+    <div class="links">
+      <a href="papers/redesigning-source-control.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/redesigning-source-control" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 12, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/self-replicating-ai.md" target="_blank">AI models may be capable of self-replicating without access to a datacenter</a>
+    <div class="excerpt">AI models may be capable of selfreplicating without access to a datacenter AI models may be capable of selfreplicating without access to a datacenterassets/selfreplicatingai/img_000.webp Published Oct…</div>
+    <div class="links">
+      <a href="papers/self-replicating-ai.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/self-replicating-ai" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 9, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/investigating-unintended-model-actions.md" target="_blank">Investigating unintended model actions in our evaluations and internal use</a>
+    <div class="excerpt">Investigating unintended model actions in our evaluations and internal use Investigating unintended model actions in our evaluations and internal useassets/investigatingunintendedmodelactions/img_000.…</div>
+    <div class="links">
+      <a href="papers/investigating-unintended-model-actions.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/investigating-unintended-model-actions" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 8, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/launching-opt-in-vuln-finding-service-for-open-source.md" target="_blank">Launching an opt-in vulnerability-finding service for open-source software</a>
+    <div class="excerpt">Launching an optin vulnerabilityfinding service for opensource software Launching an optin vulnerabilityfinding service for opensource softwareassets/launchingoptinvulnfindingserviceforopensource/img_…</div>
+    <div class="links">
+      <a href="papers/launching-opt-in-vuln-finding-service-for-open-source.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 8, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/the-missing-map-of-the-sky.md" target="_blank">The missing map of the sky</a>
+    <div class="excerpt">The missing map of the sky Published Oct 8, 2026 Team Science&lt;/science Topics Discovery&lt;/search?topic=discovery Agents&lt;/search?topic=agents Education&lt;/search?topic=education Productivity&lt;/search?topic…</div>
+    <div class="links">
+      <a href="papers/the-missing-map-of-the-sky.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/the-missing-map-of-the-sky" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 1, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-shaped-science.md" target="_blank">Claude-shaped science</a>
+    <div class="excerpt">Claudeshaped science Claudeshaped scienceassets/claudeshapedscience/img_000.webp Published Oct 1, 2026 Team Science&lt;/science Topics Discovery&lt;/search?topic=discovery Coding&lt;/search?topic=coding Open s…</div>
+    <div class="links">
+      <a href="papers/claude-shaped-science.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-shaped-science" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 30, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/what-work-can-robots-do.md" target="_blank">What work can robots do?</a>
+    <div class="excerpt">What work can robots do? Download the PDF&lt;https://cdn.sanity.io/files/4zrzovbb/website/401a473469db99fd39bba1ca6d9a5653a70e2f12.pdf What work can robots do?assets/whatworkcanrobotsdo/img_000.webp Publ…</div>
+    <div class="links">
+      <a href="papers/what-work-can-robots-do.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/what-work-can-robots-do" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 29, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/glm-5-3-and-the-spread-of-advanced-cyber-capabilities.md" target="_blank">GLM-5.3 and the spread of advanced cyber capabilities</a>
+    <div class="excerpt">GLM5.3 and the spread of advanced cyber capabilities GLM5.3 and the spread of advanced cyber capabilitiesassets/glm53andthespreadofadvancedcybercapabilities/img_000.webp Published Sep 29, 2026 Team Fr…</div>
+    <div class="links">
+      <a href="papers/glm-5-3-and-the-spread-of-advanced-cyber-capabilities.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 29, 2026</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/your-thoughts-on-ai.md" target="_blank">What do you want from AI?</a>
+    <div class="excerpt">What do you want from AI? Participate here &lt;https://claude.ai/anthropicinterviewer/yourthoughtsonai?from=blog What do you want from AI?assets/yourthoughtsonai/img_000.webp Published Sep 29, 2026 Team …</div>
+    <div class="links">
+      <a href="papers/your-thoughts-on-ai.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/your-thoughts-on-ai" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 25, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/yes-claude-can-do-nine-loops.md" target="_blank">Yes, Claude can do Nine Loops</a>
+    <div class="excerpt">Yes, Claude can do Nine Loops Diagram of nine loopsassets/yesclaudecandonineloops/img_000.webp Published Sep 25, 2026 Team Science&lt;/science Topics Discovery&lt;/search?topic=discovery Reasoning&lt;/search?t…</div>
+    <div class="links">
+      <a href="papers/yes-claude-can-do-nine-loops.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/yes-claude-can-do-nine-loops" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 24, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/project-swap.md" target="_blank">Project Swap:What happens when agents trade for us?</a>
+    <div class="excerpt">Project Swap : What happens when agents trade for us? Read in PDF&lt;https://wwwcdn.anthropic.com/3818cf6119b88f9714d995f6549fa8aac0bd5ab5/ProjectSwap.pdf Twopanel illustration: on a dark background, fiv…</div>
+    <div class="links">
+      <a href="papers/project-swap.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/project-swap" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 23, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-discovers-novel-enzyme-system.md" target="_blank">Claude discovers a novel enzyme system with CRISPR-like repeats</a>
+    <div class="excerpt">Claude discovers a novel enzyme system with CRISPRlike repeats Video thumbnailassets/claudediscoversnovelenzymesystem/img_000.webp Published Sep 23, 2026 Topics Life sciences&lt;/search?topic=lifescience…</div>
+    <div class="links">
+      <a href="papers/claude-discovers-novel-enzyme-system.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-discovers-novel-enzyme-system" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 17, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-uplifts-biomolecular-modeling.md" target="_blank">How Claude is uplifting biomolecular modeling</a>
+    <div class="excerpt">Science How Claude is uplifting biomolecular modeling Sep 17, 2026 _In this post, we share how Claude made the opensource models that scientists use to predict and design biomolecules faster and more …</div>
+    <div class="links">
+      <a href="papers/claude-uplifts-biomolecular-modeling.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 10, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/intelligence-targeting-conventional-weapons-capabilities.md" target="_blank">Measuring tactical intelligence targeting and conventional weapons capabilities of AI models</a>
+    <div class="excerpt">Frontier Red Team Measuring tactical intelligence targeting and conventional weapons capabilities of AI models Sep 10, 2026 _Anthropic’s Frontier Red Team developed new evaluations to measure AI capab…</div>
+    <div class="links">
+      <a href="papers/intelligence-targeting-conventional-weapons-capabilities.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 9, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/alignment-assessment-cybersecurity-incidents.md" target="_blank">An alignment assessment of recent cybersecurity incidents</a>
+    <div class="excerpt">Alignment An alignment assessment of recent cybersecurity incidents Sep 9, 2026 An alignment assessment of recent cybersecurity incidentsassets/alignmentassessmentcybersecurityincidents/img_000.webp I…</div>
+    <div class="links">
+      <a href="papers/alignment-assessment-cybersecurity-incidents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 4, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/formalizing-fermats-last-theorem.md" target="_blank">Formalizing Fermat&#x27;s Last Theorem</a>
+    <div class="excerpt">Science Formalizing Fermat&#x27;s Last Theorem Sep 4, 2026 Formalizing Fermat&#x27;s Last Theorem assets/formalizingfermatslasttheorem/img_000.webp _We are sharing the first complete computerchecked proof of Fe…</div>
+    <div class="links">
+      <a href="papers/formalizing-fermats-last-theorem.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 28, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/automated-researchers-mitigate-alignment-failures.md" target="_blank">Automated researchers can reliably mitigate alignment failures</a>
+    <div class="excerpt">Alignment Automated researchers can reliably mitigate alignment failures Aug 28, 2026 Read the paper&lt;https://wwwcdn.anthropic.com/7b1c44894e980876479947dcdd40716278aeeffd/automatedalignmentresearchers…</div>
+    <div class="links">
+      <a href="papers/automated-researchers-mitigate-alignment-failures.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 26, 2026</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/enabling-independent-research.md" target="_blank">Enabling independent research on how people use Claude</a>
+    <div class="excerpt">Societal Impacts Enabling independent research on how people use Claude Aug 26, 2026 Enabling independent research on how people use Claudeassets/enablingindependentresearch/img_000.svg _Earlier this …</div>
+    <div class="links">
+      <a href="papers/enabling-independent-research.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/enabling-independent-research" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 18, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/Claude-accelerates-protein-design.md" target="_blank">How Claude is accelerating protein design and analytical chemistry</a>
+    <div class="excerpt">Science How Claude is accelerating protein design and analytical chemistry Aug 18, 2026 _Summary: In this post, we share two results that show how Claude can help life scientists increase the pace of …</div>
+    <div class="links">
+      <a href="papers/Claude-accelerates-protein-design.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/Claude-accelerates-protein-design" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 13, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/multiagent-systems.md" target="_blank">Patterns and problems in emerging multiagent systems</a>
+    <div class="excerpt">Frontier Red Team Patterns and problems in emerging multiagent systems Aug 13, 2026 Models are improving and AI agents are taking on more tasks in shared codebases, markets, and other social systems. …</div>
+    <div class="links">
+      <a href="papers/multiagent-systems.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/multiagent-systems" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 12, 2026</td>
+  <td><span class="cat">Economics</span></td>
+  <td>
+    <a class="ptitle" href="papers/reviewing-the-evidence-on-worker-retraining-programs.md" target="_blank">Reviewing the evidence on worker retraining programs</a>
+    <div class="excerpt">Economics Reviewing the evidence on worker retraining programs Aug 12, 2026 Download the report&lt;https://wwwcdn.anthropic.com/169e4adceebbab066b91e0b45127d73cb2bda24b/WorkerRetraining.pdf Reviewing the…</div>
+    <div class="links">
+      <a href="papers/reviewing-the-evidence-on-worker-retraining-programs.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 10, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/riemann-zeta.md" target="_blank">Learning more about Claude&#x27;s mathematical capabilities</a>
+    <div class="excerpt">Science Learning more about Claude&#x27;s mathematical capabilities Aug 10, 2026 Illustration of a mathematical compassassets/riemannzeta/img_000.img Recently, a member of staff at Anthropic gave Claude an…</div>
+    <div class="links">
+      <a href="papers/riemann-zeta.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/riemann-zeta" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 28, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/discovering-cryptographic-weaknesses.md" target="_blank">Discovering cryptographic weaknesses with Claude</a>
+    <div class="excerpt">Frontier Red Team Discovering cryptographic weaknesses with Claude Jul 28, 2026 Discovering cryptographic weaknesses with Claudeassets/discoveringcryptographicweaknesses/img_000.svg Summary _Using Cla…</div>
+    <div class="links">
+      <a href="papers/discovering-cryptographic-weaknesses.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 24, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/project-pilot.md" target="_blank">Project Pilot: Can AI control a drone?</a>
+    <div class="excerpt">Frontier Red Team Project Pilot: Can AI control a drone? Jul 24, 2026 _Anthropic and Andon Labs_ Several of our research projects over the last year have looked at how frontier models interact with th…</div>
+    <div class="links">
+      <a href="papers/project-pilot.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/project-pilot" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 14, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/how-canada-uses-claude.md" target="_blank">How Canada uses Claude: Findings from the Anthropic Economic Index</a>
+    <div class="excerpt">Economic Research How Canada uses Claude: Findings from the Anthropic Economic Index Jul 14, 2026 How Canada uses Claude: Findings from the Anthropic Economic Indexassets/howcanadausesclaude/img_000.s…</div>
+    <div class="links">
+      <a href="papers/how-canada-uses-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/how-canada-uses-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 13, 2026</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-values-models-languages.md" target="_blank">Claude’s values across models and languages</a>
+    <div class="excerpt">Societal Impacts Claude’s values across models and languages Jul 13, 2026 Claude’s values across models and languagesassets/claudevaluesmodelslanguages/img_000.svg When someone asks Claude a question …</div>
+    <div class="links">
+      <a href="papers/claude-values-models-languages.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-values-models-languages" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 9, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-plays-robotics.md" target="_blank">Claude plays robotics</a>
+    <div class="excerpt">Frontier Red Team Claude plays robotics Jul 9, 2026 _Shmuel Berman, Michael Ilie, Jia Deng, and Daniel Freeman_ Do language models’ strengths transfer to robotics, a domain which requires the synthesi…</div>
+    <div class="links">
+      <a href="papers/claude-plays-robotics.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-plays-robotics" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 8, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/off-switch-dual-use.md" target="_blank">An off switch for dual-use knowledge in AI models</a>
+    <div class="excerpt">Alignment An off switch for dualuse knowledge in AI models Jul 8, 2026 An off switch for dualuse knowledge in AI modelsassets/offswitchdualuse/img_000.svg _This post describes research conducted byAE …</div>
+    <div class="links">
+      <a href="papers/off-switch-dual-use.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/off-switch-dual-use" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 6, 2026</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/global-workspace.md" target="_blank">A global workspace in language models</a>
+    <div class="excerpt">Interpretability A global workspace in language models Jul 6, 2026 Read the paper&lt;http://transformercircuits.pub/2026/workspace/index.html As you read this sentence, circuits in your brain are adjusti…</div>
+    <div class="links">
+      <a href="papers/global-workspace.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/global-workspace" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 26, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/economic-index-june-2026-report.md" target="_blank">Anthropic Economic Index report: Cadences</a>
+    <div class="excerpt">Economic Research Anthropic Economic Index report: Cadences Jun 26, 2026 Read in PDF&lt;https://cdn.sanity.io/files/4zrzovbb/website/9e0eadc8097864886c5d5060ebb1f89b02ea29d6.pdf Anthropic Economic Index …</div>
+    <div class="links">
+      <a href="papers/economic-index-june-2026-report.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/economic-index-june-2026-report" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 18, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/project-fetch-phase-two.md" target="_blank">Project Fetch: Phase two</a>
+    <div class="excerpt">Frontier Red Team Project Fetch: Phase two Jun 18, 2026 Project Fetch: Phase twoassets/projectfetchphasetwo/img_000.svg _Michael Ilie, C. Daniel Freeman, and Kevin K. Troy_ In August 2025, we ran an e…</div>
+    <div class="links">
+      <a href="papers/project-fetch-phase-two.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/project-fetch-phase-two" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 16, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-code-expertise.md" target="_blank">Agentic coding and persistent returns to expertise</a>
+    <div class="excerpt">Economic Research Agentic coding and persistent returns to expertise Jun 16, 2026 Read in PDF&lt;https://cdn.sanity.io/files/4zrzovbb/website/433472e34b60db1a52ebf0b8c6600f057b6908c5.pdf Agentic coding a…</div>
+    <div class="links">
+      <a href="papers/claude-code-expertise.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-code-expertise" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 12, 2026</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-public-record.md" target="_blank">Results from the first Anthropic Public Record</a>
+    <div class="excerpt">Results from the first Anthropic Public Record Results from the first Anthropic Public Recordassets/anthropicpublicrecord/img_000.webp Published Jun 12, 2026 Team Societal Impacts&lt;/research/team/socie…</div>
+    <div class="links">
+      <a href="papers/anthropic-public-record.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-public-record" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 8, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/agents-in-biology.md" target="_blank">Paving the way for agents in biology</a>
+    <div class="excerpt">Science Paving the way for agents in biology Jun 8, 2026 Paving the way for agents in biologyassets/agentsinbiology/img_000.svg Written by Laura Luebbert. Based on research&lt;https://arxiv.org/pdf/2606.…</div>
+    <div class="links">
+      <a href="papers/agents-in-biology.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/agents-in-biology" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 8, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/n-days.md" target="_blank">Measuring LLMs’ impact on N-day exploits</a>
+    <div class="excerpt">Frontier Red Team Measuring LLMs’ impact on Nday exploits Jun 8, 2026 _Winnie Xiao, Tim Abbott, Nicholas Carlini, Newton Cheng, David Forsythe, Keane Lucas, Milad Nasr, and Shikhar Sakhuja_ For the la…</div>
+    <div class="links">
+      <a href="papers/n-days.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/n-days" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 5, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/making-claude-a-chemist.md" target="_blank">Making Claude a chemist</a>
+    <div class="excerpt">Science Making Claude a chemist Jun 5, 2026 Making Claude a chemistassets/makingclaudeachemist/img_000.svg _We’re working with worldclass synthetic, computational, and analytical chemists to make Clau…</div>
+    <div class="links">
+      <a href="papers/making-claude-a-chemist.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/making-claude-a-chemist" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 3, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/attack-navigator.md" target="_blank">Mapping AI-enabled cyber threats: Insights from the LLM ATT&amp;CK Navigator</a>
+    <div class="excerpt">Frontier Red Team Mapping AIenabled cyber threats: Insights from the LLM ATT&amp;CK Navigator Jun 3, 2026 _Kyla Guru, Alex Moix, and Jacob Klein_ _We’ve spent the past year investigating how threat actors…</div>
+    <div class="links">
+      <a href="papers/attack-navigator.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/attack-navigator" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 27, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/coding-agents-social-sciences.md" target="_blank">Coding agents in the social sciences</a>
+    <div class="excerpt">Economic Research Coding agents in the social sciences May 27, 2026 Coding agents in the social sciencesassets/codingagentssocialsciences/img_000.svg Summary _We present results from a survey of 1,260…</div>
+    <div class="links">
+      <a href="papers/coding-agents-social-sciences.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/coding-agents-social-sciences" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 25, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/how-we-contain-claude.md" target="_blank">How we contain Claude across products</a>
+    <div class="excerpt">How we contain Claude across products How we contain Claude across productsassets/howwecontainclaude/img_000.webp Published May 25, 2026 Team Engineering&lt;/engineering Topics Safeguards&lt;/search?topic=s…</div>
+    <div class="links">
+      <a href="papers/how-we-contain-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/how-we-contain-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 22, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/exploit-evals.md" target="_blank">Measuring LLMs’ ability to develop exploits</a>
+    <div class="excerpt">Frontier Red Team Measuring LLMs’ ability to develop exploits May 22, 2026 _Newton Cheng, Keane Lucas, Winnie Xiao, Nicholas Carlini, and Milad Nasr_ Introduction Claude Mythos Preview&lt;https://wwwcdn.…</div>
+    <div class="links">
+      <a href="papers/exploit-evals.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/exploit-evals" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 22, 2026</td>
+  <td><span class="cat">Announcements</span></td>
+  <td>
+    <a class="ptitle" href="papers/glasswing-initial-update.md" target="_blank">Project Glasswing: An initial update</a>
+    <div class="excerpt">Announcements Project Glasswing: An initial update May 22, 2026 Project Glasswing: An initial updateassets/glasswinginitialupdate/img_000.img Last month, we launched Project Glasswing&lt;https://www.anth…</div>
+    <div class="links">
+      <a href="papers/glasswing-initial-update.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/glasswing-initial-update" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 14, 2026</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/2028-ai-leadership.md" target="_blank">2028: Two scenarios for global AI leadership</a>
+    <div class="excerpt">Policy 2028: Two scenarios for global AI leadership May 14, 2026 2028: Two scenarios for global AI leadershipassets/2028aileadership/img_000.img We’re releasing a new paper that explains our views on …</div>
+    <div class="links">
+      <a href="papers/2028-ai-leadership.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/2028-ai-leadership" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 8, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/teaching-claude-why.md" target="_blank">Teaching Claude why</a>
+    <div class="excerpt">Alignment Teaching Claude why May 8, 2026 Teaching Claude whyassets/teachingclaudewhy/img_000.svg Last year, we released a case study on agentic misalignment&lt;https://www.anthropic.com/research/agentic…</div>
+    <div class="links">
+      <a href="papers/teaching-claude-why.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/teaching-claude-why" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 7, 2026</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-institute-agenda.md" target="_blank">Focus areas for The Anthropic Institute</a>
+    <div class="excerpt">Policy Focus areas for The Anthropic Institute May 7, 2026 Focus areas for The Anthropic Instituteassets/anthropicinstituteagenda/img_000.svg At The Anthropic Institute&lt;https://www.anthropic.com/news/…</div>
+    <div class="links">
+      <a href="papers/anthropic-institute-agenda.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-institute-agenda" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 7, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/donating-open-source-petri.md" target="_blank">Donating our open-source alignment tool</a>
+    <div class="excerpt">Alignment Donating our opensource alignment tool May 7, 2026 Donating our opensource alignment toolassets/donatingopensourcepetri/img_000.svg In October 2025, we launched Petri&lt;https://www.anthropic.c…</div>
+    <div class="links">
+      <a href="papers/donating-open-source-petri.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/donating-open-source-petri" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 7, 2026</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/natural-language-autoencoders.md" target="_blank">Natural Language Autoencoders: Turning Claude’s thoughts into text</a>
+    <div class="excerpt">Interpretability Natural Language Autoencoders: Turning Claude’s thoughts into text May 7, 2026 Read the paper&lt;https://transformercircuits.pub/2026/nla/index.html When you talk to an AI model like Cla…</div>
+    <div class="links">
+      <a href="papers/natural-language-autoencoders.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/natural-language-autoencoders" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 30, 2026</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-personal-guidance.md" target="_blank">How people ask Claude for personal guidance</a>
+    <div class="excerpt">Societal Impacts How people ask Claude for personal guidance Apr 30, 2026 How people ask Claude for personal guidanceassets/claudepersonalguidance/img_000.img People don’t just come to Claude for code…</div>
+    <div class="links">
+      <a href="papers/claude-personal-guidance.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-personal-guidance" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 29, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench.md" target="_blank">Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench</a>
+    <div class="excerpt">Science Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench Apr 29, 2026 Evaluating Claude’s bioinformatics research capabilities with BioMysteryBenchassets/EvaluatingClaudeF…</div>
+    <div class="links">
+      <a href="papers/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 23, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/april-23-postmortem.md" target="_blank">An update on recent Claude Code quality reports</a>
+    <div class="excerpt">An update on recent Claude Code quality reports An update on recent Claude Code quality reportsassets/april23postmortem/img_000.webp Published Apr 23, 2026 Team Engineering&lt;/engineering Topics Claude …</div>
+    <div class="links">
+      <a href="papers/april-23-postmortem.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/april-23-postmortem" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 22, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/81k-economics.md" target="_blank">What 81,000 people told us about the economics of AI</a>
+    <div class="excerpt">Economic Research What 81,000 people told us about the economics of AI Apr 22, 2026 Read the PDF&lt;https://cdn.sanity.io/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf What 81,000 p…</div>
+    <div class="links">
+      <a href="papers/81k-economics.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/81k-economics" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 22, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/economic-index-survey-announcement.md" target="_blank">Announcing the Anthropic Economic Index Survey</a>
+    <div class="excerpt">Economic Research Announcing the Anthropic Economic Index Survey Apr 22, 2026 Announcing the Anthropic Economic Index Survey assets/economicindexsurveyannouncement/img_000.svg The Economic Research&lt;ht…</div>
+    <div class="links">
+      <a href="papers/economic-index-survey-announcement.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/economic-index-survey-announcement" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 14, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/automated-alignment-researchers.md" target="_blank">Automated Alignment Researchers: Using large language models to scale scalable oversight</a>
+    <div class="excerpt">Alignment Automated Alignment Researchers: Using large language models to scale scalable oversight Apr 14, 2026 Read the research&lt;https://alignment.anthropic.com/2026/automatedw2sresearcher/ Automated…</div>
+    <div class="links">
+      <a href="papers/automated-alignment-researchers.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/automated-alignment-researchers" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 9, 2026</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/trustworthy-agents.md" target="_blank">Trustworthy agents in practice</a>
+    <div class="excerpt">Policy Trustworthy agents in practice Apr 9, 2026 Trustworthy agents in practiceassets/trustworthyagents/img_000.svg AI “agents” represent the latest major shift in how people and organizations are us…</div>
+    <div class="links">
+      <a href="papers/trustworthy-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/trustworthy-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 8, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/managed-agents.md" target="_blank">Scaling Managed Agents:Decoupling the brain from the hands</a>
+    <div class="excerpt">Scaling Managed Agents : Decoupling the brain from the hands Published Apr 8, 2026 Team Engineering&lt;/engineering Topics Agents&lt;/search?topic=agents Claude Developer Platform&lt;/search?topic=claudedevelo…</div>
+    <div class="links">
+      <a href="papers/managed-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/managed-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 7, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/mythos-preview.md" target="_blank">Assessing Claude Mythos Preview’s cybersecurity capabilities</a>
+    <div class="excerpt">Frontier Red Team Assessing Claude Mythos Preview’s cybersecurity capabilities Apr 7, 2026 _Nicholas Carlini, Newton Cheng, Keane Lucas, Michael Moore, Milad Nasr, Vinay Prabhushankar, Winnie Xiao_ _H…</div>
+    <div class="links">
+      <a href="papers/mythos-preview.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/mythos-preview" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 2, 2026</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/emotion-concepts-function.md" target="_blank">Emotion concepts and their function in a large language model</a>
+    <div class="excerpt">Interpretability Emotion concepts and their function in a large language model Apr 2, 2026 Read the paper&lt;https://transformercircuits.pub/2026/emotions/index.html All modern language models sometimes …</div>
+    <div class="links">
+      <a href="papers/emotion-concepts-function.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/emotion-concepts-function" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 31, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/how-australia-uses-claude.md" target="_blank">How Australia Uses Claude: Findings from the Anthropic Economic Index</a>
+    <div class="excerpt">Economic Research How Australia Uses Claude: Findings from the Anthropic Economic Index Mar 31, 2026 How Australia Uses Claude: Findings from the Anthropic Economic Indexassets/howaustraliausesclaude/…</div>
+    <div class="links">
+      <a href="papers/how-australia-uses-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/how-australia-uses-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 25, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-code-auto-mode.md" target="_blank">How we built Claude Code auto mode:a safer way to skip permissions</a>
+    <div class="excerpt">How we built Claude Code auto mode : a safer way to skip permissions Published Mar 25, 2026 Team Engineering&lt;/engineering Topics Claude Code&lt;/search?topic=claudecode Safeguards&lt;/search?topic=safeguard…</div>
+    <div class="links">
+      <a href="papers/claude-code-auto-mode.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-code-auto-mode" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 24, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/economic-index-march-2026-report.md" target="_blank">Anthropic Economic Index report: Learning curves</a>
+    <div class="excerpt">Economic Research Anthropic Economic Index report: Learning curves Mar 24, 2026 Read in PDF&lt;https://cdn.sanity.io/files/4zrzovbb/website/4053bf3440c0c85b8852052770c5b4cf882689c3.pdf Anthropic Economic…</div>
+    <div class="links">
+      <a href="papers/economic-index-march-2026-report.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/economic-index-march-2026-report" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 24, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/harness-design-long-running-apps.md" target="_blank">Harness design for long-running application development</a>
+    <div class="excerpt">Harness design for longrunning application development Published Mar 24, 2026 Team Engineering&lt;/engineering Topics Agents&lt;/search?topic=agents Coding&lt;/search?topic=coding Context engineering&lt;/search?t…</div>
+    <div class="links">
+      <a href="papers/harness-design-long-running-apps.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/harness-design-long-running-apps" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 23, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/introducing-anthropic-science.md" target="_blank">Introducing our Science Blog</a>
+    <div class="excerpt">Science Introducing our Science Blog Mar 23, 2026 Introducing our Science Blogassets/introducinganthropicscience/img_000.svg _We’re launching a new blog about AI and science. We’ll share work happenin…</div>
+    <div class="links">
+      <a href="papers/introducing-anthropic-science.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/introducing-anthropic-science" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 23, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/long-running-Claude.md" target="_blank">Long-running Claude for scientific computing</a>
+    <div class="excerpt">Science Longrunning Claude for scientific computing Mar 23, 2026 Longrunning Claude for scientific computingassets/longrunningClaude/img_000.svg _In this post, Siddharth MishraSharma_ , _a researcher …</div>
+    <div class="links">
+      <a href="papers/long-running-Claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/long-running-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 23, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/vibe-physics.md" target="_blank">Vibe physics: The AI grad student</a>
+    <div class="excerpt">Science Vibe physics: The AI grad student Mar 23, 2026 Vibe physics: The AI grad studentassets/vibephysics/img_000.svg _Can AI do theoretical physics? In this guest post, professor of physicsMatthew S…</div>
+    <div class="links">
+      <a href="papers/vibe-physics.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/vibe-physics" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 13, 2026</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/diff-tool.md" target="_blank">A “diff” tool for AI: Finding behavioral differences in new models</a>
+    <div class="excerpt">Interpretability A “diff” tool for AI: Finding behavioral differences in new models Mar 13, 2026 Read the paper&lt;https://arxiv.org/abs/2602.11729 A “diff” tool for AI: Finding behavioral differences in…</div>
+    <div class="links">
+      <a href="papers/diff-tool.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/diff-tool" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 6, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/exploit.md" target="_blank">Reverse engineering Claude&#x27;s CVE-2026-2796 exploit</a>
+    <div class="excerpt">Frontier Red Team Reverse engineering Claude&#x27;s CVE20262796 exploit Mar 6, 2026 _Evyatar Ben Asher, Keane Lucas, Nicholas Carlini, Newton Cheng, and Daniel Freeman_ Introduction Today we published an u…</div>
+    <div class="links">
+      <a href="papers/exploit.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/exploit" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 6, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/eval-awareness-browsecomp.md" target="_blank">Eval awareness in Claude Opus 4.6’s BrowseComp performance</a>
+    <div class="excerpt">Eval awareness in Claude Opus 4.6’s BrowseComp performance Eval awareness in Claude Opus 4.6’s BrowseComp performanceassets/evalawarenessbrowsecomp/img_000.webp Published Mar 6, 2026 Team Engineering&lt;…</div>
+    <div class="links">
+      <a href="papers/eval-awareness-browsecomp.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/eval-awareness-browsecomp" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 5, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/labor-market-impacts.md" target="_blank">Labor market impacts of AI: A new measure and early evidence</a>
+    <div class="excerpt">Economic Research Labor market impacts of AI: A new measure and early evidence Mar 5, 2026 Read in PDF&lt;https://cdn.sanity.io/files/4zrzovbb/website/2b5bbaf2c1eb81dbf6e6fb813c1a24e35a64d376.pdf Labor m…</div>
+    <div class="links">
+      <a href="papers/labor-market-impacts.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/labor-market-impacts" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 25, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/deprecation-updates-opus-3.md" target="_blank">An update on our model deprecation commitments for Claude Opus 3</a>
+    <div class="excerpt">Alignment An update on our model deprecation commitments for Claude Opus 3 Feb 25, 2026 An update on our model deprecation commitments for Claude Opus 3assets/deprecationupdatesopus3/img_000.svg As we…</div>
+    <div class="links">
+      <a href="papers/deprecation-updates-opus-3.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/deprecation-updates-opus-3" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 23, 2026</td>
+  <td><span class="cat">Announcements</span></td>
+  <td>
+    <a class="ptitle" href="papers/AI-fluency-index.md" target="_blank">Anthropic Education Report: The AI Fluency Index</a>
+    <div class="excerpt">Announcements Anthropic Education Report: The AI Fluency Index Feb 23, 2026 Anthropic Education Report: The AI Fluency Indexassets/AIfluencyindex/img_000.img People are integrating AI tools into their…</div>
+    <div class="links">
+      <a href="papers/AI-fluency-index.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/AI-fluency-index" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 23, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/persona-selection-model.md" target="_blank">The persona selection model</a>
+    <div class="excerpt">Alignment The persona selection model Feb 23, 2026 Read the full post&lt;https://alignment.anthropic.com/2026/psm The persona selection modelassets/personaselectionmodel/img_000.img AI assistants like Cl…</div>
+    <div class="links">
+      <a href="papers/persona-selection-model.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/persona-selection-model" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 18, 2026</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/measuring-agent-autonomy.md" target="_blank">Measuring AI agent autonomy in practice</a>
+    <div class="excerpt">Societal Impacts Measuring AI agent autonomy in practice Feb 18, 2026 Measuring AI agent autonomy in practiceassets/measuringagentautonomy/img_000.svg AI agents are here, and already they’re being dep…</div>
+    <div class="links">
+      <a href="papers/measuring-agent-autonomy.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/measuring-agent-autonomy" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 16, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/india-brief-economic-index.md" target="_blank">India Country Brief: The Anthropic Economic Index</a>
+    <div class="excerpt">Economic Research India Country Brief: The Anthropic Economic Index Feb 16, 2026 India Country Brief: The Anthropic Economic Indexassets/indiabriefeconomicindex/img_000.svg Executive summary India, al…</div>
+    <div class="links">
+      <a href="papers/india-brief-economic-index.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/india-brief-economic-index" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 5, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/zero-days.md" target="_blank">Evaluating and mitigating the growing risk of LLM-discovered 0-days</a>
+    <div class="excerpt">Frontier Red Team Evaluating and mitigating the growing risk of LLMdiscovered 0days Feb 5, 2026 _Nicholas Carlini , Keane Lucas, Evyatar Ben Asher, Newton Cheng, Hasnain Lakhani, David Forsythe, and K…</div>
+    <div class="links">
+      <a href="papers/zero-days.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/zero-days" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 5, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/building-c-compiler.md" target="_blank">Building a C compiler with a team of parallel Claudes</a>
+    <div class="excerpt">Building a C compiler with a team of parallel Claudes Building a C compiler with a team of parallel Claudesassets/buildingccompiler/img_000.webp Published Feb 5, 2026 Team Engineering&lt;/engineering Top…</div>
+    <div class="links">
+      <a href="papers/building-c-compiler.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/building-c-compiler" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 5, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/infrastructure-noise.md" target="_blank">Quantifying infrastructure noise in agentic coding evals</a>
+    <div class="excerpt">Quantifying infrastructure noise in agentic coding evals Quantifying infrastructure noise in agentic coding evalsassets/infrastructurenoise/img_000.jpg Published Feb 5, 2026 Team Engineering&lt;/engineer…</div>
+    <div class="links">
+      <a href="papers/infrastructure-noise.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/infrastructure-noise" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 29, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/AI-assistance-coding-skills.md" target="_blank">How AI assistance impacts the formation of coding skills</a>
+    <div class="excerpt">Alignment How AI assistance impacts the formation of coding skills Jan 29, 2026 Read the paper &lt;https://arxiv.org/abs/2601.20245 How AI assistance impacts the formation of coding skillsassets/AIassist…</div>
+    <div class="links">
+      <a href="papers/AI-assistance-coding-skills.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/AI-assistance-coding-skills" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 28, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/disempowerment-patterns.md" target="_blank">Disempowerment patterns in real-world AI usage</a>
+    <div class="excerpt">Alignment Disempowerment patterns in realworld AI usage Jan 28, 2026 Read the paper &lt;https://arxiv.org/abs/2601.19062 Disempowerment patterns in realworld AI usageassets/disempowermentpatterns/img_000…</div>
+    <div class="links">
+      <a href="papers/disempowerment-patterns.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/disempowerment-patterns" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 21, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/AI-resistant-technical-evaluations.md" target="_blank">Designing AI-resistant technical evaluations</a>
+    <div class="excerpt">Designing AIresistant technical evaluations Designing AIresistant technical evaluationsassets/AIresistanttechnicalevaluations/img_000.webp Published Jan 21, 2026 Team Engineering&lt;/engineering Topics C…</div>
+    <div class="links">
+      <a href="papers/AI-resistant-technical-evaluations.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/AI-resistant-technical-evaluations" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 19, 2026</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/assistant-axis.md" target="_blank">The assistant axis: situating and stabilizing the character of large language models</a>
+    <div class="excerpt">Interpretability The assistant axis: situating and stabilizing the character of large language models Jan 19, 2026 Read the full paper&lt;https://arxiv.org/abs/2601.10387 Graphs showing the Assistant Axi…</div>
+    <div class="links">
+      <a href="papers/assistant-axis.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/assistant-axis" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 16, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/cyber-toolkits-update.md" target="_blank">AI models are showing a greater ability to find and exploit vulnerabilities on realistic cyber ranges</a>
+    <div class="excerpt">Frontier Red Team AI models are showing a greater ability to find and exploit vulnerabilities on realistic cyber ranges Jan 16, 2026 _In a recent evaluation of AI models’ cyber capabilities, current C…</div>
+    <div class="links">
+      <a href="papers/cyber-toolkits-update.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/cyber-toolkits-update" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 15, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-economic-index-january-2026-report.md" target="_blank">Anthropic Economic Index report: Economic primitives</a>
+    <div class="excerpt">Economic Research Anthropic Economic Index report: Economic primitives Jan 15, 2026 Download PDF&lt;https://wwwcdn.anthropic.com/096d94c1a91c6480806d8f24b2344c7e2a4bc666.pdf Anthropic Economic Index repo…</div>
+    <div class="links">
+      <a href="papers/anthropic-economic-index-january-2026-report.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-economic-index-january-2026-report" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 15, 2026</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/economic-index-primitives.md" target="_blank">Anthropic Economic Index: New building blocks for understanding AI use</a>
+    <div class="excerpt">Economic Research Anthropic Economic Index: New building blocks for understanding AI use Jan 15, 2026 Read the full report&lt;https://www.anthropic.com/research/anthropiceconomicindexjanuary2026report An…</div>
+    <div class="links">
+      <a href="papers/economic-index-primitives.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/economic-index-primitives" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 15, 2026</td>
+  <td><span class="cat">Science</span></td>
+  <td>
+    <a class="ptitle" href="papers/accelerating-scientific-research.md" target="_blank">How scientists are using Claude to accelerate research and discovery</a>
+    <div class="excerpt">How scientists are using Claude to accelerate research and discovery How scientists are using Claude to accelerate research and discoveryassets/acceleratingscientificresearch/img_000.jpg Published Jan…</div>
+    <div class="links">
+      <a href="papers/accelerating-scientific-research.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/accelerating-scientific-research" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 14, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/property-based-testing.md" target="_blank">Finding bugs across the Python ecosystem with Claude and property-based testing</a>
+    <div class="excerpt">Frontier Red Team Finding bugs across the Python ecosystem with Claude and propertybased testing Jan 14, 2026 _Muhammad Maaz 1,2, Liam DeVoe3, Zac HatfieldDodds2, Nicholas Carlini2 1MATS, 2Anthropic, …</div>
+    <div class="links">
+      <a href="papers/property-based-testing.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/property-based-testing" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 9, 2026</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/next-generation-constitutional-classifiers.md" target="_blank">Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks</a>
+    <div class="excerpt">Alignment Nextgeneration Constitutional Classifiers: More efficient protection against universal jailbreaks Jan 9, 2026 Read the paper &lt;https://arxiv.org/abs/2601.04603 Nextgeneration Constitutional C…</div>
+    <div class="links">
+      <a href="papers/next-generation-constitutional-classifiers.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/next-generation-constitutional-classifiers" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 9, 2026</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/demystifying-evals-for-ai-agents.md" target="_blank">Demystifying evals for AI agents</a>
+    <div class="excerpt">Demystifying evals for AI agents Published Jan 9, 2026 Team Engineering&lt;/engineering Topics Agents&lt;/search?topic=agents Measurement and mitigation&lt;/search?topic=measurementandmitigation Benchmarks&lt;/se…</div>
+    <div class="links">
+      <a href="papers/demystifying-evals-for-ai-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 8, 2026</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/critical-infrastructure-defense.md" target="_blank">Experimenting with AI to defend critical infrastructure</a>
+    <div class="excerpt">Frontier Red Team Experimenting with AI to defend critical infrastructure Jan 8, 2026 Cyber attacks have had severe realworld effects on critical infrastructure like power grids and fuel pipelines, an…</div>
+    <div class="links">
+      <a href="papers/critical-infrastructure-defense.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/critical-infrastructure-defense" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 19, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/bloom.md" target="_blank">Introducing Bloom: an open source tool for automated behavioral evaluations</a>
+    <div class="excerpt">Alignment Introducing Bloom: an open source tool for automated behavioral evaluations Dec 19, 2025 Read the technical report &lt;https://alignment.anthropic.com/2025/bloomautoevals/ Introducing Bloom: an…</div>
+    <div class="links">
+      <a href="papers/bloom.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/bloom" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 18, 2025</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/project-vend-2.md" target="_blank">Project Vend: Phase two</a>
+    <div class="excerpt">PolicyFrontier Red Team Project Vend: Phase two Dec 18, 2025 In June, we revealed that we’d set up a small shop in our San Francisco office lunchroom, run by an AI shopkeeper. It was part of Project V…</div>
+    <div class="links">
+      <a href="papers/project-vend-2.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/project-vend-2" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 4, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-interviewer.md" target="_blank">Introducing Anthropic Interviewer: What 1,250 professionals told us about working with AI</a>
+    <div class="excerpt">Societal Impacts Introducing Anthropic Interviewer: What 1,250 professionals told us about working with AI Dec 4, 2025 Introducing Anthropic Interviewer: What 1,250 professionals told us about working…</div>
+    <div class="links">
+      <a href="papers/anthropic-interviewer.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-interviewer" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 2, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/how-ai-is-transforming-work-at-anthropic.md" target="_blank">How AI is transforming work at Anthropic</a>
+    <div class="excerpt">Societal Impacts How AI is transforming work at Anthropic Dec 2, 2025 How AI is transforming work at Anthropicassets/howaiistransformingworkatanthropic/img_000.svg How is AI changing the way we work? …</div>
+    <div class="links">
+      <a href="papers/how-ai-is-transforming-work-at-anthropic.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 1, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/smart-contracts.md" target="_blank">AI agents find $4.6M in blockchain smart contract exploits</a>
+    <div class="excerpt">Frontier Red Team AI agents find $4.6M in blockchain smart contract exploits Dec 1, 2025 _Winnie Xiao, Cole Killian Henry Sleight, Alan Chan Nicholas Carlini, Alwin Peng MATS and the Anthropic Fellows…</div>
+    <div class="links">
+      <a href="papers/smart-contracts.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/smart-contracts" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 26, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/effective-harnesses-for-long-running-agents.md" target="_blank">Effective harnesses for long-running agents</a>
+    <div class="excerpt">Effective harnesses for longrunning agents Published Nov 26, 2025 Team Engineering&lt;/engineering Topics Agents&lt;/search?topic=agents Context engineering&lt;/search?topic=contextengineering Coding&lt;/search?t…</div>
+    <div class="links">
+      <a href="papers/effective-harnesses-for-long-running-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 25, 2025</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/estimating-productivity-gains.md" target="_blank">Estimating AI productivity gains from Claude conversations</a>
+    <div class="excerpt">Economic Research Estimating AI productivity gains from Claude conversations Nov 25, 2025 Read as a PDF&lt;https://wwwcdn.anthropic.com/e5645986a7ce8fbcc48fa6d2fc67753c87642c30.pdf Estimating AI producti…</div>
+    <div class="links">
+      <a href="papers/estimating-productivity-gains.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/estimating-productivity-gains" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 24, 2025</td>
+  <td><span class="cat">Product</span></td>
+  <td>
+    <a class="ptitle" href="papers/prompt-injection-defenses.md" target="_blank">Mitigating the risk of prompt injections in browser use</a>
+    <div class="excerpt">Product Mitigating the risk of prompt injections in browser use Nov 24, 2025 Mitigating the risk of prompt injections in browser useassets/promptinjectiondefenses/img_000.svg Claude Opus 4.5 sets a ne…</div>
+    <div class="links">
+      <a href="papers/prompt-injection-defenses.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/prompt-injection-defenses" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 24, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/advanced-tool-use.md" target="_blank">Introducing advanced tool use on the Claude Developer Platform</a>
+    <div class="excerpt">Introducing advanced tool use on the Claude Developer Platform Introducing advanced tool use on the Claude Developer Platformassets/advancedtooluse/img_000.webp Published Nov 24, 2025 Team Engineering…</div>
+    <div class="links">
+      <a href="papers/advanced-tool-use.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/advanced-tool-use" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 21, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/emergent-misalignment-reward-hacking.md" target="_blank">From shortcuts to sabotage: natural emergent misalignment from reward hacking</a>
+    <div class="excerpt">Alignment From shortcuts to sabotage: natural emergent misalignment from reward hacking Nov 21, 2025 Read the paper&lt;https://assets.anthropic.com/m/74342f2c96095771/original/Naturalemergentmisalignment…</div>
+    <div class="links">
+      <a href="papers/emergent-misalignment-reward-hacking.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/emergent-misalignment-reward-hacking" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 13, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/political-even-handedness.md" target="_blank">Measuring political bias in Claude</a>
+    <div class="excerpt">Measuring political bias in Claude Measuring political bias in Claudeassets/politicalevenhandedness/img_000.webp Published Nov 13, 2025 Team Societal Impacts&lt;/research/team/societalimpacts Topics Bias…</div>
+    <div class="links">
+      <a href="papers/political-even-handedness.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/political-even-handedness" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 12, 2025</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/project-fetch-robot-dog.md" target="_blank">Project Fetch: Can Claude train a robot dog?</a>
+    <div class="excerpt">PolicyFrontier Red Team Project Fetch: Can Claude train a robot dog? Nov 12, 2025 _How could frontier AI models like Claude reach beyond computers and affect the physical world? One path is through ro…</div>
+    <div class="links">
+      <a href="papers/project-fetch-robot-dog.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/project-fetch-robot-dog" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 4, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/deprecation-commitments.md" target="_blank">Commitments on model deprecation and preservation</a>
+    <div class="excerpt">Alignment Commitments on model deprecation and preservation Nov 4, 2025 Commitments on model deprecation and preservationassets/deprecationcommitments/img_000.svg Claude models are increasingly capabl…</div>
+    <div class="links">
+      <a href="papers/deprecation-commitments.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/deprecation-commitments" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 4, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/code-execution-with-mcp.md" target="_blank">Code execution with MCP:Building more efficient agents</a>
+    <div class="excerpt">Code execution with MCP : Building more efficient agents Code execution with MCP: Building more efficient agentsassets/codeexecutionwithmcp/img_000.webp Published Nov 4, 2025 Team Engineering&lt;/enginee…</div>
+    <div class="links">
+      <a href="papers/code-execution-with-mcp.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/code-execution-with-mcp" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 29, 2025</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/introspection.md" target="_blank">Signs of introspection in large language models</a>
+    <div class="excerpt">Interpretability Signs of introspection in large language models Oct 29, 2025 Read the paper&lt;https://transformercircuits.pub/2025/introspection/index.html Signs of introspection in large language mode…</div>
+    <div class="links">
+      <a href="papers/introspection.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/introspection" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 20, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-code-sandboxing.md" target="_blank">Beyond permission prompts:making Claude Code more secure and autonomous</a>
+    <div class="excerpt">Beyond permission prompts : making Claude Code more secure and autonomous Beyond permission prompts: making Claude Code more secure and autonomousassets/claudecodesandboxing/img_000.webp Published Oct…</div>
+    <div class="links">
+      <a href="papers/claude-code-sandboxing.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-code-sandboxing" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 16, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/equipping-agents-for-the-real-world-with-agent-skills.md" target="_blank">Equipping agents for the real world with Agent Skills</a>
+    <div class="excerpt">Equipping agents for the real world with Agent Skills Published Oct 16, 2025 Team Engineering&lt;/engineering Topics Agent Skills&lt;/search?topic=agentskills Agents&lt;/search?topic=agents Context engineering…</div>
+    <div class="links">
+      <a href="papers/equipping-agents-for-the-real-world-with-agent-skills.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/equipping-agents-for-the-real-world-with-agent-skills" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 14, 2025</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/economic-policy-responses.md" target="_blank">Preparing for AI’s economic impact: exploring policy responses</a>
+    <div class="excerpt">Policy Preparing for AI’s economic impact: exploring policy responses Oct 14, 2025 Preparing for AI’s economic impact: exploring policy responsesassets/economicpolicyresponses/img_000.img _How will th…</div>
+    <div class="links">
+      <a href="papers/economic-policy-responses.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/economic-policy-responses" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 9, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/small-samples-poison.md" target="_blank">A small number of samples can poison LLMs of any size</a>
+    <div class="excerpt">Alignment A small number of samples can poison LLMs of any size Oct 9, 2025 Read the paper&lt;https://arxiv.org/abs/2510.07192 A small number of samples can poison LLMs of any sizeassets/smallsamplespois…</div>
+    <div class="links">
+      <a href="papers/small-samples-poison.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/small-samples-poison" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 6, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/petri-open-source-auditing.md" target="_blank">Petri: An open-source auditing tool to accelerate AI safety research</a>
+    <div class="excerpt">Alignment Petri: An opensource auditing tool to accelerate AI safety research Oct 6, 2025 Read the technical report&lt;https://alignment.anthropic.com/2025/petri Petri Parallel Exploration Tool for Risky…</div>
+    <div class="links">
+      <a href="papers/petri-open-source-auditing.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/petri-open-source-auditing" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 3, 2025</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/building-ai-cyber-defenders.md" target="_blank">Building AI for cyber defenders</a>
+    <div class="excerpt">PolicyFrontier Red Team Building AI for cyber defenders Oct 3, 2025 Building AI for cyber defendersassets/buildingaicyberdefenders/img_000.img AI models are now useful for cybersecurity tasks in pract…</div>
+    <div class="links">
+      <a href="papers/building-ai-cyber-defenders.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/building-ai-cyber-defenders" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 29, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/effective-context-engineering-for-ai-agents.md" target="_blank">Effective context engineering for AI agents</a>
+    <div class="excerpt">Effective context engineering for AI agents Published Sep 29, 2025 Team Engineering&lt;/engineering Topics Context engineering&lt;/search?topic=contextengineering Agents&lt;/search?topic=agents Tool use&lt;/searc…</div>
+    <div class="links">
+      <a href="papers/effective-context-engineering-for-ai-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 17, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/a-postmortem-of-three-recent-issues.md" target="_blank">A postmortem of three recent issues</a>
+    <div class="excerpt">A postmortem of three recent issues A postmortem of three recent issuesassets/apostmortemofthreerecentissues/img_000.webp Published Sep 17, 2025 Team Engineering&lt;/engineering Topics Transparency&lt;/sear…</div>
+    <div class="links">
+      <a href="papers/a-postmortem-of-three-recent-issues.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/a-postmortem-of-three-recent-issues" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 15, 2025</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-economic-index-september-2025-report.md" target="_blank">Anthropic Economic Index report: Uneven geographic and enterprise AI adoption</a>
+    <div class="excerpt">Economic Research Anthropic Economic Index report: Uneven geographic and enterprise AI adoption Sep 15, 2025 Download PDF&lt;https://assets.anthropic.com/m/218c82b858610fac/original/EconomicIndex.pdf Ant…</div>
+    <div class="links">
+      <a href="papers/anthropic-economic-index-september-2025-report.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-economic-index-september-2025-report" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 15, 2025</td>
+  <td><span class="cat">Economic Research</span></td>
+  <td>
+    <a class="ptitle" href="papers/economic-index-geography.md" target="_blank">Anthropic Economic Index: Tracking AI’s role in the US and global economy</a>
+    <div class="excerpt">Economic Research Anthropic Economic Index: Tracking AI’s role in the US and global economy Sep 15, 2025 Explore our data&lt;http://anthropic.com/economicindex Anthropic Economic Index: Tracking AI’s rol…</div>
+    <div class="links">
+      <a href="papers/economic-index-geography.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/economic-index-geography" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 11, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/writing-tools-for-agents.md" target="_blank">Writing effective tools for agents — with agents</a>
+    <div class="excerpt">Writing effective tools for agents — with agents Published Sep 11, 2025 Team Engineering&lt;/engineering Topics Tool use&lt;/search?topic=tooluse Agents&lt;/search?topic=agents Model Context Protocol&lt;/search?t…</div>
+    <div class="links">
+      <a href="papers/writing-tools-for-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/writing-tools-for-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 5, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/biorisk.md" target="_blank">Why do we take LLMs seriously as a potential source of biorisk?</a>
+    <div class="excerpt">Frontier Red Team Why do we take LLMs seriously as a potential source of biorisk? Sep 5, 2025 Why do we take LLMs seriously as a potential source of biorisk?assets/biorisk/img_000.img Our work at Anth…</div>
+    <div class="links">
+      <a href="papers/biorisk.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/biorisk" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 27, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-education-report-how-educators-use-claude.md" target="_blank">Anthropic Education Report: How educators use Claude</a>
+    <div class="excerpt">Societal Impacts Anthropic Education Report: How educators use Claude Aug 27, 2025 Anthropic Education Report: How educators use Claudeassets/anthropiceducationreporthoweducatorsuseclaude/img_000.svg …</div>
+    <div class="links">
+      <a href="papers/anthropic-education-report-how-educators-use-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-education-report-how-educators-use-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 21, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/nuclear-safeguards-for-ai.md" target="_blank">Developing nuclear safeguards for AI</a>
+    <div class="excerpt">Frontier Red Team Developing nuclear safeguards for AI Aug 21, 2025 Nuclear technology is inherently dualuse: the same physics principles that power nuclear reactors can be misused for weapons develop…</div>
+    <div class="links">
+      <a href="papers/nuclear-safeguards-for-ai.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/nuclear-safeguards-for-ai" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 15, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/end-subset-conversations.md" target="_blank">Claude Opus 4 and 4.1 can now end a rare subset of conversations</a>
+    <div class="excerpt">Alignment Claude Opus 4 and 4.1 can now end a rare subset of conversations Aug 15, 2025 Claude Opus 4 and 4.1 can now end a rare subset of conversationsassets/endsubsetconversations/img_000.img We rec…</div>
+    <div class="links">
+      <a href="papers/end-subset-conversations.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/end-subset-conversations" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 9, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/cyber-competitions.md" target="_blank">Claude is competitive with humans in (some) cyber competitions</a>
+    <div class="excerpt">Frontier Red Team Claude is competitive with humans in some cyber competitions Aug 9, 2025 Throughout 2025, we have been quietly entering Claude in cybersecurity competitions designed primarily for hu…</div>
+    <div class="links">
+      <a href="papers/cyber-competitions.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/cyber-competitions" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 1, 2025</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/persona-vectors.md" target="_blank">Persona vectors: Monitoring and controlling character traits in language models</a>
+    <div class="excerpt">Interpretability Persona vectors: Monitoring and controlling character traits in language models Aug 1, 2025 Read the paper&lt;https://arxiv.org/abs/2507.21509 Persona vectors: Monitoring and controlling…</div>
+    <div class="links">
+      <a href="papers/persona-vectors.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/persona-vectors" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 15, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-4-cyber.md" target="_blank">Detailed cyber evaluations of Claude 4</a>
+    <div class="excerpt">Frontier Red Team Detailed cyber evaluations of Claude 4 Jul 15, 2025 _Anthropic withPattern Labs&lt;https://patternlabs.co/_ We believe we are at a crucial period for cybersecurity and AI, with models a…</div>
+    <div class="links">
+      <a href="papers/claude-4-cyber.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-4-cyber" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 27, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/project-vend-1.md" target="_blank">Project Vend: Can Claude run a small shop? (And why does that matter?)</a>
+    <div class="excerpt">Frontier Red TeamPolicy Project Vend: Can Claude run a small shop? And why does that matter? Jun 27, 2025 Project Vend: Can Claude run a small shop? \And why does that matter?\assets/projectvend1/img_…</div>
+    <div class="links">
+      <a href="papers/project-vend-1.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/project-vend-1" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 27, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/how-people-use-claude-for-support-advice-and-companionship.md" target="_blank">How people use Claude for support, advice, and companionship</a>
+    <div class="excerpt">How people use Claude for support, advice, and companionship How people use Claude for support, advice, and companionshipassets/howpeopleuseclaudeforsupportadviceandcompanionship/img_000.webp Publishe…</div>
+    <div class="links">
+      <a href="papers/how-people-use-claude-for-support-advice-and-companionship.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/how-people-use-claude-for-support-advice-and-companionship" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 26, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/desktop-extensions.md" target="_blank">Desktop Extensions:One-click MCP server installation for Claude Desktop</a>
+    <div class="excerpt">Desktop Extensions : Oneclick MCP server installation for Claude Desktop Published Jun 26, 2025 Team Engineering&lt;/engineering Topics Model Context Protocol&lt;/search?topic=modelcontextprotocol Claude ap…</div>
+    <div class="links">
+      <a href="papers/desktop-extensions.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/desktop-extensions" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 20, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/agentic-misalignment.md" target="_blank">Agentic misalignment: How LLMs could be insider threats</a>
+    <div class="excerpt">Alignment Agentic misalignment: How LLMs could be insider threats Jun 20, 2025 Agentic misalignment: How LLMs could be insider threatsassets/agenticmisalignment/img_000.img Highlights We stresstested …</div>
+    <div class="links">
+      <a href="papers/agentic-misalignment.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/agentic-misalignment" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 18, 2025</td>
+  <td><span class="cat">Announcements</span></td>
+  <td>
+    <a class="ptitle" href="papers/confidential-inference-trusted-vms.md" target="_blank">Confidential Inference via Trusted Virtual Machines</a>
+    <div class="excerpt">Announcements Confidential Inference via Trusted Virtual Machines Jun 18, 2025 Read the paper&lt;https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf Confidential Infe…</div>
+    <div class="links">
+      <a href="papers/confidential-inference-trusted-vms.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/confidential-inference-trusted-vms" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 16, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/shade-arena-sabotage-monitoring.md" target="_blank">SHADE-Arena: Evaluating sabotage and monitoring in LLM agents</a>
+    <div class="excerpt">Alignment SHADEArena: Evaluating sabotage and monitoring in LLM agents Jun 16, 2025 Read the paper&lt;https://www.arxiv.org/abs/2506.15740 As AI models get smarter, we also need to become smarter in how …</div>
+    <div class="links">
+      <a href="papers/shade-arena-sabotage-monitoring.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/shade-arena-sabotage-monitoring" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 13, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/cyber-toolkits.md" target="_blank">LLMs with cyber toolkits can conduct multistage cyber operations on business-sized computer networks</a>
+    <div class="excerpt">Frontier Red Team LLMs with cyber toolkits can conduct multistage cyber operations on businesssized computer networks Jun 13, 2025 _Anthropic with Carnegie Mellon University’sCyLab&lt;https://www.cylab.c…</div>
+    <div class="links">
+      <a href="papers/cyber-toolkits.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/cyber-toolkits" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 13, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/multi-agent-research-system.md" target="_blank">How we built our multi-agent research system</a>
+    <div class="excerpt">How we built our multiagent research system Published Jun 13, 2025 Team Engineering&lt;/engineering Topics Agents&lt;/search?topic=agents Claude apps&lt;/search?topic=claudeapps Tool use&lt;/search?topic=tooluse …</div>
+    <div class="links">
+      <a href="papers/multi-agent-research-system.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/multi-agent-research-system" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 29, 2025</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/open-source-circuit-tracing.md" target="_blank">Open-sourcing circuit tracing tools</a>
+    <div class="excerpt">Interpretability Opensourcing circuit tracing tools May 29, 2025 A handdrawn image of three hands adjusting a neural networkassets/opensourcecircuittracing/img_000.img In our recent interpretability r…</div>
+    <div class="links">
+      <a href="papers/open-source-circuit-tracing.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/open-source-circuit-tracing" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 28, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/impact-software-development.md" target="_blank">Anthropic Economic Index: AI’s impact on software development</a>
+    <div class="excerpt">Societal ImpactsEconomic Research Anthropic Economic Index: AI’s impact on software development Apr 28, 2025 Anthropic Economic Index: AI’s impact on software developmentassets/impactsoftwaredevelopme…</div>
+    <div class="links">
+      <a href="papers/impact-software-development.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/impact-software-development" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 24, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/exploring-model-welfare.md" target="_blank">Exploring model welfare</a>
+    <div class="excerpt">Alignment Exploring model welfare Apr 24, 2025 Human welfare is at the heart of our work at Anthropic: our mission is to make sure that increasingly capable and sophisticated AI systems remain benefic…</div>
+    <div class="links">
+      <a href="papers/exploring-model-welfare.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/exploring-model-welfare" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 21, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/values-wild.md" target="_blank">Values in the wild: Discovering and analyzing values in real-world language model interactions</a>
+    <div class="excerpt">Societal Impacts Values in the wild: Discovering and analyzing values in realworld language model interactions Apr 21, 2025 Read the paper&lt;https://assets.anthropic.com/m/18d20cca3cde3503/original/Valu…</div>
+    <div class="links">
+      <a href="papers/values-wild.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/values-wild" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 18, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-code-best-practices.md" target="_blank">Claude Code:Best practices for agentic coding</a>
+    <div class="excerpt">Claude Code : Best practices for agentic coding Published Apr 18, 2025 Team Engineering&lt;/engineering Topics Claude Code&lt;/search?topic=claudecode Coding&lt;/search?topic=coding Agents&lt;/search?topic=agents…</div>
+    <div class="links">
+      <a href="papers/claude-code-best-practices.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-code-best-practices" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 8, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-education-report-how-university-students-use-claude.md" target="_blank">Anthropic Education Report:How university students use Claude</a>
+    <div class="excerpt">Anthropic Education Report : How university students use Claude A lamp shining on a documentassets/anthropiceducationreporthowuniversitystudentsuseclaude/img_000.jpg Published Apr 8, 2025 Team Societa…</div>
+    <div class="links">
+      <a href="papers/anthropic-education-report-how-university-students-use-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-education-report-how-university-students-use-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 3, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/reasoning-models-dont-say-think.md" target="_blank">Reasoning models don&#x27;t always say what they think</a>
+    <div class="excerpt">Alignment Reasoning models don&#x27;t always say what they think Apr 3, 2025 Read the paper&lt;https://assets.anthropic.com/m/71876fabef0f0ed4/original/reasoning_models_paper.pdf Since late last year, “reason…</div>
+    <div class="links">
+      <a href="papers/reasoning-models-dont-say-think.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/reasoning-models-dont-say-think" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 27, 2025</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/tracing-thoughts-language-model.md" target="_blank">Tracing the thoughts of a large language model</a>
+    <div class="excerpt">Interpretability Tracing the thoughts of a large language model Mar 27, 2025 Read the paper&lt;https://transformercircuits.pub/2025/attributiongraphs/biology.html Language models like Claude aren&#x27;t progr…</div>
+    <div class="links">
+      <a href="papers/tracing-thoughts-language-model.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/tracing-thoughts-language-model" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 27, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/anthropic-economic-index-insights-from-claude-sonnet-3-7.md" target="_blank">Anthropic Economic Index: Insights from Claude 3.7 Sonnet</a>
+    <div class="excerpt">Societal ImpactsEconomics Anthropic Economic Index: Insights from Claude 3.7 Sonnet Mar 27, 2025 Anthropic Economic Index: Insights from Claude 3.7 Sonnetassets/anthropiceconomicindexinsightsfromclaud…</div>
+    <div class="links">
+      <a href="papers/anthropic-economic-index-insights-from-claude-sonnet-3-7.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/anthropic-economic-index-insights-from-claude-sonnet-3-7" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 20, 2025</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-think-tool.md" target="_blank">The &quot;think&quot; tool:Enabling Claude to stop and think in complex tool use situations</a>
+    <div class="excerpt">The &quot;think&quot; tool : Enabling Claude to stop and think in complex tool use situations Published Mar 20, 2025 Team Engineering&lt;/engineering Topics Tool use&lt;/search?topic=tooluse Reasoning&lt;/search?topic=r…</div>
+    <div class="links">
+      <a href="papers/claude-think-tool.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-think-tool" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 19, 2025</td>
+  <td><span class="cat">Frontier Red Team</span></td>
+  <td>
+    <a class="ptitle" href="papers/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team.md" target="_blank">Progress from our Frontier Red Team</a>
+    <div class="excerpt">Progress from our Frontier Red Team Progress from our Frontier Red Teamassets/strategicwarningforairiskprogressandinsightsfromourfrontierredteam/img_000.jpg Published Mar 19, 2025 Team Frontier Red Te…</div>
+    <div class="links">
+      <a href="papers/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 13, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/auditing-hidden-objectives.md" target="_blank">Auditing language models for hidden objectives</a>
+    <div class="excerpt">AlignmentInterpretability Auditing language models for hidden objectives Mar 13, 2025 Read the paper&lt;https://arxiv.org/abs/2503.10965 _A new paper from the Anthropic Alignment Science and Interpretabi…</div>
+    <div class="links">
+      <a href="papers/auditing-hidden-objectives.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/auditing-hidden-objectives" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 25, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/forecasting-rare-behaviors.md" target="_blank">Forecasting rare language model behaviors</a>
+    <div class="excerpt">Alignment Forecasting rare language model behaviors Feb 25, 2025 Read the paper&lt;https://arxiv.org/abs/2502.16797 One of the major goals of Alignment Science is to predict AI models’ propensity for dan…</div>
+    <div class="links">
+      <a href="papers/forecasting-rare-behaviors.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/forecasting-rare-behaviors" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 20, 2025</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/crosscoder-model-diffing.md" target="_blank">Insights on Crosscoder Model Diffing</a>
+    <div class="excerpt">Interpretability Insights on Crosscoder Model Diffing Feb 20, 2025 Read Transformer Circuits&lt;https://transformercircuits.pub/2025/crosscoderdiffingupdate/index.html At the link above, we report some d…</div>
+    <div class="links">
+      <a href="papers/crosscoder-model-diffing.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/crosscoder-model-diffing" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 10, 2025</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/the-anthropic-economic-index.md" target="_blank">The Anthropic Economic Index</a>
+    <div class="excerpt">Societal ImpactsEconomics The Anthropic Economic Index Feb 10, 2025 Read the paper&lt;http://arxiv.org/abs/2503.04761 Economic index hero image, a minimalist illustration of a simple line graph showing a…</div>
+    <div class="links">
+      <a href="papers/the-anthropic-economic-index.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/the-anthropic-economic-index" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 3, 2025</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/constitutional-classifiers.md" target="_blank">Constitutional Classifiers: Defending against universal jailbreaks</a>
+    <div class="excerpt">Alignment Constitutional Classifiers: Defending against universal jailbreaks Feb 3, 2025 Constitutional Classifiers: Defending against universal jailbreaksassets/constitutionalclassifiers/img_000.img …</div>
+    <div class="links">
+      <a href="papers/constitutional-classifiers.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/constitutional-classifiers" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 19, 2024</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/building-effective-agents.md" target="_blank">Building Effective AI Agents</a>
+    <div class="excerpt">_Note: Much of the tooling landscape described in this post has changed since December 2024. For our current approach, seehow we built Claude Managed Agents&lt;https://www.anthropic.com/engineering/manag…</div>
+    <div class="links">
+      <a href="papers/building-effective-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 18, 2024</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/alignment-faking.md" target="_blank">Alignment faking in large language models</a>
+    <div class="excerpt">Alignment Alignment faking in large language models Dec 18, 2024 Read the paper&lt;https://arxiv.org/abs/2412.14093 Most of us have encountered situations where someone appears to share our views or valu…</div>
+    <div class="links">
+      <a href="papers/alignment-faking.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/alignment-faking" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 12, 2024</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/clio.md" target="_blank">Clio: A system for privacy-preserving insights into real-world AI use</a>
+    <div class="excerpt">Societal Impacts Clio: A system for privacypreserving insights into realworld AI use Dec 12, 2024 Read the paper&lt;https://arxiv.org/abs/2412.13678 Update Consumer Terms and Privacy Policy Aug 28, 2025 …</div>
+    <div class="links">
+      <a href="papers/clio.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/clio" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 19, 2024</td>
+  <td><span class="cat">Evaluations</span></td>
+  <td>
+    <a class="ptitle" href="papers/statistical-approach-to-model-evals.md" target="_blank">A statistical approach to model evaluations</a>
+    <div class="excerpt">Evaluations A statistical approach to model evaluations Nov 19, 2024 Read the paper&lt;https://arxiv.org/abs/2411.00640 Suppose an AI model outperforms another model on a benchmark of interest—testing it…</div>
+    <div class="links">
+      <a href="papers/statistical-approach-to-model-evals.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/statistical-approach-to-model-evals" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 25, 2024</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/evaluating-feature-steering.md" target="_blank">Evaluating feature steering: A case study in mitigating social biases</a>
+    <div class="excerpt">Societal ImpactsInterpretability Evaluating feature steering: A case study in mitigating social biases Oct 25, 2024 A few months ago, we published an interpretability paper&lt;https://transformercircuits…</div>
+    <div class="links">
+      <a href="papers/evaluating-feature-steering.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/evaluating-feature-steering" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 18, 2024</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/sabotage-evaluations.md" target="_blank">Sabotage evaluations for frontier models</a>
+    <div class="excerpt">Alignment Sabotage evaluations for frontier models Oct 18, 2024 Read the paper&lt;https://assets.anthropic.com/m/377027d5b36ac1eb/original/SabotageEvaluationsforFrontierModels.pdf Any industry where ther…</div>
+    <div class="links">
+      <a href="papers/sabotage-evaluations.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/sabotage-evaluations" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 16, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/features-as-classifiers.md" target="_blank">Using dictionary learning features as classifiers</a>
+    <div class="excerpt">Interpretability Using dictionary learning features as classifiers Oct 16, 2024 Read Transformer Circuits&lt;https://transformercircuits.pub/2024/featuresasclassifiers/index.html _At the link above, we r…</div>
+    <div class="links">
+      <a href="papers/features-as-classifiers.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/features-as-classifiers" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 15, 2024</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/swe-bench-sonnet.md" target="_blank">Claude SWE-Bench Performance</a>
+    <div class="excerpt">_Our latest model, the upgradedClaude 3.5 Sonnet&lt;https://www.anthropic.com/news/35modelsandcomputeruse, achieved 49% on SWEbench Verified, a software engineering evaluation, beating the previous state…</div>
+    <div class="links">
+      <a href="papers/swe-bench-sonnet.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/swe-bench-sonnet" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 1, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/circuits-updates-sept-2024.md" target="_blank">Circuits Updates – September 2024</a>
+    <div class="excerpt">Interpretability Circuits Updates – September 2024 Oct 1, 2024 Read Circuits Updates&lt;https://transformercircuits.pub/2024/septemberupdate/index.html At the above link, we report a number of developing…</div>
+    <div class="links">
+      <a href="papers/circuits-updates-sept-2024.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/circuits-updates-sept-2024" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 19, 2024</td>
+  <td><span class="cat">Engineering</span></td>
+  <td>
+    <a class="ptitle" href="papers/contextual-retrieval.md" target="_blank">Introducing Contextual Retrieval</a>
+    <div class="excerpt">Introducing Contextual Retrieval Introducing Contextual Retrievalassets/contextualretrieval/img_000.webp Published Sep 19, 2024 Team Engineering&lt;/engineering Topics Context engineering&lt;/search?topic=c…</div>
+    <div class="links">
+      <a href="papers/contextual-retrieval.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/contextual-retrieval" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 6, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/circuits-updates-august-2024.md" target="_blank">Circuits Updates – August 2024</a>
+    <div class="excerpt">Interpretability Circuits Updates – August 2024 Sep 6, 2024 Read Circuits Updates&lt;https://transformercircuits.pub/2024/augustupdate/index.html At the link above, we report a number of developing ideas…</div>
+    <div class="links">
+      <a href="papers/circuits-updates-august-2024.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/circuits-updates-august-2024" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 31, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/circuits-updates-july-2024.md" target="_blank">Circuits Updates – July 2024</a>
+    <div class="excerpt">Interpretability Circuits Updates – July 2024 Jul 31, 2024 Read Circuits Updates&lt;https://transformercircuits.pub/2024/julyupdate/index.html At the link above, we report a number of developing ideas on…</div>
+    <div class="links">
+      <a href="papers/circuits-updates-july-2024.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/circuits-updates-july-2024" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 28, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/circuits-updates-june-2024.md" target="_blank">Circuits Updates – June 2024</a>
+    <div class="excerpt">Interpretability Circuits Updates – June 2024 Jun 28, 2024 Read Circuits Updates&lt;https://transformercircuits.pub/2024/juneupdate/index.html At the link above, we report a number of developing ideas on…</div>
+    <div class="links">
+      <a href="papers/circuits-updates-june-2024.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/circuits-updates-june-2024" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 17, 2024</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/reward-tampering.md" target="_blank">Sycophancy to subterfuge: Investigating reward tampering in language models</a>
+    <div class="excerpt">Alignment Sycophancy to subterfuge: Investigating reward tampering in language models Jun 17, 2024 Read the paper&lt;https://arxiv.org/abs/2406.10162 Perverse incentives are everywhere. Think of the conc…</div>
+    <div class="links">
+      <a href="papers/reward-tampering.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/reward-tampering" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 13, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/engineering-challenges-interpretability.md" target="_blank">The engineering challenges of scaling interpretability</a>
+    <div class="excerpt">Interpretability The engineering challenges of scaling interpretability Jun 13, 2024 _In this post, and in the above roundtable video, our researchers reflect on the close relationship between scienti…</div>
+    <div class="links">
+      <a href="papers/engineering-challenges-interpretability.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/engineering-challenges-interpretability" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 8, 2024</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/claude-character.md" target="_blank">Claude’s Character</a>
+    <div class="excerpt">Alignment Claude’s Character Jun 8, 2024 _Listen to our conversation about Claude&#x27;s character in the video above._ Companies developing AI models generally train them to avoid saying harmful things an…</div>
+    <div class="links">
+      <a href="papers/claude-character.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/claude-character" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 23, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/golden-gate-claude.md" target="_blank">Golden Gate Claude</a>
+    <div class="excerpt">Golden Gate Claude Golden Gate Claudeassets/goldengateclaude/img_000.webp Published May 23, 2024 Team Interpretability&lt;/research/team/interpretability Topics Interpretability&lt;/search?topic=interpretab…</div>
+    <div class="links">
+      <a href="papers/golden-gate-claude.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/golden-gate-claude" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 21, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/mapping-mind-language-model.md" target="_blank">Mapping the mind of a large language model</a>
+    <div class="excerpt">Interpretability Mapping the mind of a large language model May 21, 2024 Read the paper&lt;https://transformercircuits.pub/2024/scalingmonosemanticity/index.html Mapping the mind of a large language mode…</div>
+    <div class="links">
+      <a href="papers/mapping-mind-language-model.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/mapping-mind-language-model" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 26, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/circuits-updates-april-2024.md" target="_blank">Circuits Updates – April 2024</a>
+    <div class="excerpt">InterpretabilityResearch Circuits Updates – April 2024 Apr 26, 2024 Read Circuits Updates&lt;https://transformercircuits.pub/2024/aprilupdate/index.html At the link above, we report a number of developin…</div>
+    <div class="links">
+      <a href="papers/circuits-updates-april-2024.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/circuits-updates-april-2024" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 23, 2024</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/probes-catch-sleeper-agents.md" target="_blank">Simple probes can catch sleeper agents</a>
+    <div class="excerpt">AlignmentInterpretability Simple probes can catch sleeper agents Apr 23, 2024 _This “Alignment Note” presents some earlystage research from the Anthropic Alignment Science team following up on our rec…</div>
+    <div class="links">
+      <a href="papers/probes-catch-sleeper-agents.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/probes-catch-sleeper-agents" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 9, 2024</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/measuring-model-persuasiveness.md" target="_blank">Measuring the persuasiveness of language models</a>
+    <div class="excerpt">Societal Impacts Measuring the persuasiveness of language models Apr 9, 2024 Measuring the persuasiveness of language modelsassets/measuringmodelpersuasiveness/img_000.img While people have long quest…</div>
+    <div class="links">
+      <a href="papers/measuring-model-persuasiveness.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/measuring-model-persuasiveness" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 2, 2024</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/many-shot-jailbreaking.md" target="_blank">Many-shot jailbreaking</a>
+    <div class="excerpt">Alignment Manyshot jailbreaking Apr 2, 2024 Read the paper&lt;https://wwwcdn.anthropic.com/af5633c94ed2beb282f6a53c595eb437e8e7b630/Many_Shot_Jailbreaking__2024_04_02_0936.pdf We investigated a “jailbrea…</div>
+    <div class="links">
+      <a href="papers/many-shot-jailbreaking.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/many-shot-jailbreaking" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 8, 2024</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/transformer-circuits.md" target="_blank">Reflections on Qualitative Research</a>
+    <div class="excerpt">InterpretabilityResearch Reflections on Qualitative Research Mar 8, 2024 Read Transformer Circuits&lt;https://transformercircuits.pub/2024/qualitativeessay/index.html This note offers some opinionated th…</div>
+    <div class="links">
+      <a href="papers/transformer-circuits.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/transformer-circuits" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 14, 2024</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/sleeper-agents-training-deceptive-llms-that-persist-through-safety-training.md" target="_blank">Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training</a>
+    <div class="excerpt">AlignmentResearch Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training Jan 14, 2024 Read Paper&lt;https://arxiv.org/abs/2401.05566 Humans are capable of strategically deceptive be…</div>
+    <div class="links">
+      <a href="papers/sleeper-agents-training-deceptive-llms-that-persist-through-safety-training.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/sleeper-agents-training-deceptive-llms-that-persist-through-safety-training" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 7, 2023</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/evaluating-and-mitigating-discrimination-in-language-model-decisions.md" target="_blank">Evaluating and Mitigating Discrimination in Language Model Decisions</a>
+    <div class="excerpt">Societal Impacts Evaluating and Mitigating Discrimination in Language Model Decisions Dec 7, 2023 Read Paper&lt;http://arxiv.org/abs/2312.03689 Abstract As language models LMs advance, interest is growin…</div>
+    <div class="links">
+      <a href="papers/evaluating-and-mitigating-discrimination-in-language-model-decisions.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/evaluating-and-mitigating-discrimination-in-language-model-decisions" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 24, 2023</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/specific-versus-general-principles-for-constitutional-ai.md" target="_blank">Specific versus General Principles for Constitutional AI</a>
+    <div class="excerpt">AlignmentResearch Specific versus General Principles for Constitutional AI Oct 24, 2023 Read Paper&lt;https://arxiv.org/abs/2310.13798 Abstract Human feedback can prevent overtly harmful utterances in co…</div>
+    <div class="links">
+      <a href="papers/specific-versus-general-principles-for-constitutional-ai.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 23, 2023</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/towards-understanding-sycophancy-in-language-models.md" target="_blank">Towards Understanding Sycophancy in Language Models</a>
+    <div class="excerpt">AlignmentResearch Towards Understanding Sycophancy in Language Models Oct 23, 2023 Read Paper&lt;https://arxiv.org/abs/2310.13548 Abstract Reinforcement learning from human feedback RLHF is a popular tec…</div>
+    <div class="links">
+      <a href="papers/towards-understanding-sycophancy-in-language-models.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/towards-understanding-sycophancy-in-language-models" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 17, 2023</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/collective-constitutional-ai-aligning-a-language-model-with-public-input.md" target="_blank">Collective Constitutional AI: Aligning a Language Model with Public Input</a>
+    <div class="excerpt">PolicySocietal Impacts Collective Constitutional AI: Aligning a Language Model with Public Input Oct 17, 2023 assets/collectiveconstitutionalaialigningalanguagemodelwithpublicinput/img_000.img Anthrop…</div>
+    <div class="links">
+      <a href="papers/collective-constitutional-ai-aligning-a-language-model-with-public-input.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 5, 2023</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/decomposing-language-models-into-understandable-components.md" target="_blank">Decomposing Language Models Into Understandable Components</a>
+    <div class="excerpt">InterpretabilityResearch Decomposing Language Models Into Understandable Components Oct 5, 2023 assets/decomposinglanguagemodelsintounderstandablecomponents/img_000.img Neural networks are trained on …</div>
+    <div class="links">
+      <a href="papers/decomposing-language-models-into-understandable-components.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/decomposing-language-models-into-understandable-components" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 5, 2023</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/towards-monosemanticity-decomposing-language-models-with-dictionary-learning.md" target="_blank">Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</a>
+    <div class="excerpt">InterpretabilityResearch Towards Monosemanticity: Decomposing Language Models With Dictionary Learning Oct 5, 2023 Read Paper&lt;https://transformercircuits.pub/2023/monosemanticfeatures/index.html Abstr…</div>
+    <div class="links">
+      <a href="papers/towards-monosemanticity-decomposing-language-models-with-dictionary-learning.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Oct 4, 2023</td>
+  <td><span class="cat">Policy</span></td>
+  <td>
+    <a class="ptitle" href="papers/evaluating-ai-systems.md" target="_blank">Challenges in evaluating AI systems</a>
+    <div class="excerpt">Policy Challenges in evaluating AI systems Oct 4, 2023 assets/evaluatingaisystems/img_000.img Introduction Most conversations around the societal impacts of artificial intelligence AI come down to dis…</div>
+    <div class="links">
+      <a href="papers/evaluating-ai-systems.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/evaluating-ai-systems" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 8, 2023</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/influence-functions.md" target="_blank">Tracing Model Outputs to the Training Data</a>
+    <div class="excerpt">AlignmentResearch Tracing Model Outputs to the Training Data Aug 8, 2023 assets/influencefunctions/img_000.img As large language models become more powerful and their risks become clearer, there is in…</div>
+    <div class="links">
+      <a href="papers/influence-functions.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/influence-functions" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 8, 2023</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/studying-large-language-model-generalization-with-influence-functions.md" target="_blank">Studying Large Language Model Generalization with Influence Functions</a>
+    <div class="excerpt">AlignmentResearch Studying Large Language Model Generalization with Influence Functions Aug 8, 2023 Read Paper&lt;https://arxiv.org/abs/2308.03296 Abstract When trying to gain better visibility into a ma…</div>
+    <div class="links">
+      <a href="papers/studying-large-language-model-generalization-with-influence-functions.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 18, 2023</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/measuring-faithfulness-in-chain-of-thought-reasoning.md" target="_blank">Measuring Faithfulness in Chain-of-Thought Reasoning</a>
+    <div class="excerpt">AlignmentResearch Measuring Faithfulness in ChainofThought Reasoning Jul 18, 2023 Download Paper&lt;https://wwwcdn.anthropic.com/827afa7dd36e4afbb1a49c735bfbb2c69749756e/measuringfaithfulnessinchainoftho…</div>
+    <div class="links">
+      <a href="papers/measuring-faithfulness-in-chain-of-thought-reasoning.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 18, 2023</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/question-decomposition-improves-the-faithfulness-of-model-generated-reasoning.md" target="_blank">Question Decomposition Improves the Faithfulness of Model-Generated Reasoning</a>
+    <div class="excerpt">AlignmentResearch Question Decomposition Improves the Faithfulness of ModelGenerated Reasoning Jul 18, 2023 Download Paper&lt;https://wwwcdn.anthropic.com/8154fb1d828cdc390dc1fa442d84034948679c47/questio…</div>
+    <div class="links">
+      <a href="papers/question-decomposition-improves-the-faithfulness-of-model-generated-reasoning.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/question-decomposition-improves-the-faithfulness-of-model-generated-reasoning" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 29, 2023</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models.md" target="_blank">Towards Measuring the Representation of Subjective Global Opinions in Language Models</a>
+    <div class="excerpt">Societal Impacts Towards Measuring the Representation of Subjective Global Opinions in Language Models Jun 29, 2023 Read Paper&lt;https://arxiv.org/abs/2306.16388 Abstract Large language models LLMs may …</div>
+    <div class="links">
+      <a href="papers/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 24, 2023</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/circuits-updates-may-2023.md" target="_blank">Circuits Updates — May 2023</a>
+    <div class="excerpt">InterpretabilityResearch Circuits Updates — May 2023 May 24, 2023 Read Paper&lt;https://transformercircuits.pub/2023/mayupdate/index.html Abstract We report a number of developing ideas on the Anthropic …</div>
+    <div class="links">
+      <a href="papers/circuits-updates-may-2023.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/circuits-updates-may-2023" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 24, 2023</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/interpretability-dreams.md" target="_blank">Interpretability Dreams</a>
+    <div class="excerpt">InterpretabilityResearch Interpretability Dreams May 24, 2023 Read Paper&lt;https://transformercircuits.pub/2023/interpretabilitydreams/index.html Abstract Our present research aims to create a foundatio…</div>
+    <div class="links">
+      <a href="papers/interpretability-dreams.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/interpretability-dreams" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 4, 2023</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/distributed-representations-composition-superposition.md" target="_blank">Distributed Representations: Composition &amp; Superposition</a>
+    <div class="excerpt">InterpretabilityResearch Distributed Representations: Composition &amp; Superposition May 4, 2023 Read Paper&lt;https://transformercircuits.pub/2023/superpositioncomposition/index.html Abstract Distributed r…</div>
+    <div class="links">
+      <a href="papers/distributed-representations-composition-superposition.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/distributed-representations-composition-superposition" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 16, 2023</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/privileged-bases-in-the-transformer-residual-stream.md" target="_blank">Privileged Bases in the Transformer Residual Stream</a>
+    <div class="excerpt">InterpretabilityResearch Privileged Bases in the Transformer Residual Stream Mar 16, 2023 Read Paper&lt;https://transformercircuits.pub/2023/privilegedbasis/index.html Abstract Our mathematical theories …</div>
+    <div class="links">
+      <a href="papers/privileged-bases-in-the-transformer-residual-stream.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 15, 2023</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/the-capacity-for-moral-self-correction-in-large-language-models.md" target="_blank">The Capacity for Moral Self-Correction in Large Language Models</a>
+    <div class="excerpt">Societal Impacts The Capacity for Moral SelfCorrection in Large Language Models Feb 15, 2023 Read Paper&lt;https://arxiv.org/abs/2302.07459 Abstract We test the hypothesis that language models trained wi…</div>
+    <div class="links">
+      <a href="papers/the-capacity-for-moral-self-correction-in-large-language-models.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jan 5, 2023</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/superposition-memorization-and-double-descent.md" target="_blank">Superposition, Memorization, and Double Descent</a>
+    <div class="excerpt">InterpretabilityResearch Superposition, Memorization, and Double Descent Jan 5, 2023 Read Paper&lt;https://transformercircuits.pub/2023/toydoubledescent/index.html Abstract In a recent paper&lt;https://tran…</div>
+    <div class="links">
+      <a href="papers/superposition-memorization-and-double-descent.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/superposition-memorization-and-double-descent" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 19, 2022</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/discovering-language-model-behaviors-with-model-written-evaluations.md" target="_blank">Discovering Language Model Behaviors with Model-Written Evaluations</a>
+    <div class="excerpt">AlignmentResearch Discovering Language Model Behaviors with ModelWritten Evaluations Dec 19, 2022 Read Paper&lt;https://arxiv.org/abs/2212.09251 Abstract As language models LMs scale, they develop many n…</div>
+    <div class="links">
+      <a href="papers/discovering-language-model-behaviors-with-model-written-evaluations.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/discovering-language-model-behaviors-with-model-written-evaluations" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 15, 2022</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/constitutional-ai-harmlessness-from-ai-feedback.md" target="_blank">Constitutional AI: Harmlessness from AI Feedback</a>
+    <div class="excerpt">AlignmentResearch Constitutional AI: Harmlessness from AI Feedback Dec 15, 2022 Read Paper&lt;https://arxiv.org/abs/2212.08073 Abstract As AI systems become more capable, we would like to enlist their he…</div>
+    <div class="links">
+      <a href="papers/constitutional-ai-harmlessness-from-ai-feedback.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Nov 4, 2022</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/measuring-progress-on-scalable-oversight-for-large-language-models.md" target="_blank">Measuring Progress on Scalable Oversight for Large Language Models</a>
+    <div class="excerpt">AlignmentResearch Measuring Progress on Scalable Oversight for Large Language Models Nov 4, 2022 Read Paper&lt;https://arxiv.org/abs/2211.03540 Abstract Developing safe and useful generalpurpose AI syste…</div>
+    <div class="links">
+      <a href="papers/measuring-progress-on-scalable-oversight-for-large-language-models.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/measuring-progress-on-scalable-oversight-for-large-language-models" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Sep 14, 2022</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/toy-models-of-superposition.md" target="_blank">Toy Models of Superposition</a>
+    <div class="excerpt">InterpretabilityResearch Toy Models of Superposition Sep 14, 2022 Read Paper&lt;https://transformercircuits.pub/2022/toy_model/index.html Abstract In this paper, we use toy models — small ReLU networks t…</div>
+    <div class="links">
+      <a href="papers/toy-models-of-superposition.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/toy-models-of-superposition" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Aug 22, 2022</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned.md" target="_blank">Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned</a>
+    <div class="excerpt">Societal Impacts Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned Aug 22, 2022 Read Paper&lt;https://arxiv.org/abs/2209.07858 Abstract We describe our early ef…</div>
+    <div class="links">
+      <a href="papers/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jul 11, 2022</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/language-models-mostly-know-what-they-know.md" target="_blank">Language Models (Mostly) Know What They Know</a>
+    <div class="excerpt">AlignmentResearch Language Models Mostly Know What They Know Jul 11, 2022 Read Paper&lt;https://arxiv.org/abs/2207.05221 Abstract We study whether language models can evaluate the validity of their own c…</div>
+    <div class="links">
+      <a href="papers/language-models-mostly-know-what-they-know.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/language-models-mostly-know-what-they-know" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Jun 17, 2022</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/softmax-linear-units.md" target="_blank">Softmax Linear Units</a>
+    <div class="excerpt">InterpretabilityResearch Softmax Linear Units Jun 17, 2022 Read Paper&lt;https://transformercircuits.pub/2022/solu/index.html Abstract In this paper, we report an architectural change which appears to su…</div>
+    <div class="links">
+      <a href="papers/softmax-linear-units.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/softmax-linear-units" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">May 21, 2022</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/scaling-laws-and-interpretability-of-learning-from-repeated-data.md" target="_blank">Scaling Laws and Interpretability of Learning from Repeated Data</a>
+    <div class="excerpt">InterpretabilityResearch Scaling Laws and Interpretability of Learning from Repeated Data May 21, 2022 Read Paper&lt;https://arxiv.org/abs/2205.10487 Abstract Recent large language models have been train…</div>
+    <div class="links">
+      <a href="papers/scaling-laws-and-interpretability-of-learning-from-repeated-data.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Apr 12, 2022</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback.md" target="_blank">Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback</a>
+    <div class="excerpt">AlignmentResearch Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback Apr 12, 2022 Read Paper&lt;https://arxiv.org/abs/2204.05862 Abstract We apply preference modeli…</div>
+    <div class="links">
+      <a href="papers/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Mar 8, 2022</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/in-context-learning-and-induction-heads.md" target="_blank">In-context Learning and Induction Heads</a>
+    <div class="excerpt">InterpretabilityResearch Incontext Learning and Induction Heads Mar 8, 2022 Read Paper&lt;https://transformercircuits.pub/2022/incontextlearningandinductionheads/index.html &lt;https://twitter.com/intent/tw…</div>
+    <div class="links">
+      <a href="papers/in-context-learning-and-induction-heads.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/in-context-learning-and-induction-heads" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Feb 15, 2022</td>
+  <td><span class="cat">Societal Impacts</span></td>
+  <td>
+    <a class="ptitle" href="papers/predictability-and-surprise-in-large-generative-models.md" target="_blank">Predictability and Surprise in Large Generative Models</a>
+    <div class="excerpt">Societal Impacts Predictability and Surprise in Large Generative Models Feb 15, 2022 Read Paper&lt;https://arxiv.org/abs/2202.07785 Abstract Largescale pretraining has recently emerged as a technique for…</div>
+    <div class="links">
+      <a href="papers/predictability-and-surprise-in-large-generative-models.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/predictability-and-surprise-in-large-generative-models" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 22, 2021</td>
+  <td><span class="cat">Interpretability</span></td>
+  <td>
+    <a class="ptitle" href="papers/a-mathematical-framework-for-transformer-circuits.md" target="_blank">A Mathematical Framework for Transformer Circuits</a>
+    <div class="excerpt">InterpretabilityResearch A Mathematical Framework for Transformer Circuits Dec 22, 2021 Read Paper&lt;https://transformercircuits.pub/2021/framework/index.html &lt;https://twitter.com/intent/tweet?text=http…</div>
+    <div class="links">
+      <a href="papers/a-mathematical-framework-for-transformer-circuits.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/a-mathematical-framework-for-transformer-circuits" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="date">Dec 1, 2021</td>
+  <td><span class="cat">Alignment</span></td>
+  <td>
+    <a class="ptitle" href="papers/a-general-language-assistant-as-a-laboratory-for-alignment.md" target="_blank">A General Language Assistant as a Laboratory for Alignment</a>
+    <div class="excerpt">AlignmentResearch A General Language Assistant as a Laboratory for Alignment Dec 1, 2021 Read Paper&lt;https://arxiv.org/abs/2112.00861 Abstract Given the broad capabilities of large language models, it …</div>
+    <div class="links">
+      <a href="papers/a-general-language-assistant-as-a-laboratory-for-alignment.md" target="_blank">本地 Markdown</a>
+      <a href="https://www.anthropic.com/research/a-general-language-assistant-as-a-laboratory-for-alignment" target="_blank">原文链接</a>
+    </div>
+  </td>
+</tr>
+    </tbody>
+  </table>
+  <div class="empty" id="empty">没有匹配的结果</div>
+</div>
+<div class="footer">数据来源：https://www.anthropic.com/research · 仅供学习研究使用</div>
+<script>
+  function initCats() {
+    const seen = new Set();
+    document.querySelectorAll(".cat").forEach(el => {
+      const c = el.textContent.trim();
+      if (c && !seen.has(c)) {
+        seen.add(c);
+        const opt = document.createElement("option");
+        opt.value = c; opt.textContent = c;
+        document.getElementById("catFilter").appendChild(opt);
+      }
+    });
+  }
+  function filterRows() {
+    const q = document.getElementById("search").value.toLowerCase();
+    const c = document.getElementById("catFilter").value;
+    let shown = 0;
+    document.querySelectorAll("#tbody tr").forEach(tr => {
+      const text = tr.textContent.toLowerCase();
+      const cat = tr.querySelector(".cat").textContent.trim();
+      const ok = (c === "" || cat === c) && (q === "" || text.includes(q));
+      tr.classList.toggle("hidden", !ok);
+      if (ok) shown++;
+    });
+    document.getElementById("empty").style.display = shown === 0 ? "block" : "none";
+  }
+  initCats();
+</script>
+</body>
+</html>

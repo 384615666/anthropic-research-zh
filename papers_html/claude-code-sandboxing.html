@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond permission prompts:making Claude Code more secure and autonomous</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>超越权限提示：让 Claude Code 更安全、更自主</h1>
+<div class="meta">
+Beyond permission prompts:making Claude Code more secure and autonomous · Oct 20, 2025 · Engineering · <a href="https://www.anthropic.com/research/claude-code-sandboxing" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Claude Code默认基于权限、默认只读，做修改或运行命令前都要请求批准，频繁点「批准」既拖慢节奏又造成审批疲劳——用户不再细看自己批准了什么。Anthropic因此推出两项基于操作系统原语的沙箱：沙箱化bash工具（借助Linux bubblewrap与macOS seatbelt，同时实施文件系统隔离与网络隔离），以及网页版Claude Code（会话跑在云端隔离沙箱中，git凭据与签名密钥不进入沙箱，git交互经代理核验后转发GitHub）。内部使用中，沙箱在保证安全的前提下把权限提示减少84%。作者强调有效沙箱必须同时具备两道隔离，否则被注入的智能体仍可外传SSH密钥或逃逸联网。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">提示词注入：把恶意指令藏进模型读取的内容，诱导其执行攻击者意图</span><span class="term">沙箱：为进程预先划定文件与网络边界的隔离执行环境</span><span class="term">文件系统隔离：只允许读写指定目录，阻止修改目录之外的系统文件</span><span class="term">网络隔离：只允许连接经批准的服务器，防止数据外泄或下载恶意软件</span><span class="term">审批疲劳：用户因频繁确认而不再认真审视每次授权的内容</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 工程（Engineering）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/claude-code-sandboxing</li>
+</ul>
+<p>工程（Engineering）
+2025 年 10 月 20 日
+<img alt="超越权限提示：让 Claude Code 更安全、更自主" src="../assets/claude-code-sandboxing/img_000.webp" />
+已发布
+    2025 年 10 月 20 日
+团队
+    <a href="/engineering">工程</a>
+主题</p>
+<ul>
+<li><a href="/search?topic=claude-code">Claude Code</a></li>
+<li><a href="/search?topic=cybersecurity">网络安全</a></li>
+<li><a href="/search?topic=agents">智能体</a></li>
+<li><a href="/search?topic=safeguards">安全保障</a></li>
+<li><a href="/search?topic=open-source">开源</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/how-we-contain-claude"></a><a href="https://www.anthropic.com/research/trustworthy-agents"></a><a href="https://www.anthropic.com/research/zero-days"></a><a href="https://www.anthropic.com/news/disrupting-AI-espionage"></a>
+相关文章
+  * 工程
+2026 年 5 月 25 日
+<a href="https://www.anthropic.com/research/how-we-contain-claude">我们如何在各产品中约束 Claude</a></p>
+<p><a href="/search?topic=claude-code">阅读更多</a>
+在 <a href="https://www.claude.com/product/claude-code">Claude Code</a> 中，Claude 与你一同编写、测试和调试代码：浏览你的代码库、编辑多个文件、运行命令来验证自己的工作。让 Claude 拥有对代码库和文件如此大的访问权限，也可能带来风险，尤其是在发生提示词注入（prompt injection）时。
+为解决这一问题，我们在 Claude Code 中引入了两项基于沙箱（sandboxing）的新功能，二者都旨在为开发者提供更安全的工作环境，同时让 Claude 能更自主地运行、减少权限提示。在我们的内部使用中，我们发现沙箱能在保证安全的前提下把权限提示减少 84%。通过划定 Claude 可自由工作的既定边界，它们同时提升了安全性与自主性。</p>
+<h2>保障 Claude Code 用户的安全</h2>
+<p>Claude Code 采用基于权限的模型：默认状态下它是只读的，也就是说，在做出修改或运行任何命令之前，它都会先请求许可。这一规则有一些例外：我们会自动放行 echo 或 cat 这类安全命令，但大多数操作仍需显式批准。
+不断点击「批准」会拖慢开发节奏，还可能导致「审批疲劳」——用户可能不再仔细留意自己批准了什么，反而让开发变得更不安全。
+为此，我们为 Claude Code 推出了沙箱机制。</p>
+<h2>沙箱：更安全、更自主的方案</h2>
+<p>沙箱会预先划定边界，让 Claude 在其中更自由地工作，而不必为每个操作逐一请求许可。启用沙箱后，权限提示会大幅减少，安全性也会提高。
+我们的沙箱方案建立在操作系统级别的功能之上，用以实现两道边界：
+  1. <strong>文件系统隔离（filesystem isolation）</strong>，它确保 Claude 只能访问或修改特定目录。这一点对于防止被提示词注入的 Claude 修改敏感系统文件尤为重要。
+  2. <strong>网络隔离（network isolation）</strong>，它确保 Claude 只能连接到经过批准的服务器。这可以防止被提示词注入的 Claude 泄露敏感信息或下载恶意软件。</p>
+<p>值得注意的是，有效的沙箱_必须同时_具备文件系统隔离与网络隔离。没有网络隔离，被攻陷的智能体可能把 SSH 密钥之类的敏感文件外传；没有文件系统隔离，被攻陷的智能体则能轻易逃出沙箱并获得网络访问。正是通过同时使用这两种技术，我们才能为 Claude Code 用户提供更安全、更快捷的智能体体验。</p>
+<h3>Claude Code 中的两项新沙箱功能</h3>
+<h4>沙箱化 bash 工具：无需权限提示即可安全执行 bash</h4>
+<p>我们正在推出<a href="https://docs.claude.com/en/docs/claude-code/sandboxing">一套新的沙箱运行时</a>，它以研究预览的形式提供 beta 版本，让你可以精确定义智能体能够访问哪些目录和网络主机，而无需承担启动和管理容器的开销。它可以用来对任意进程、智能体和 MCP 服务器进行沙箱隔离。它同样以<a href="https://github.com/anthropic-experimental/sandbox-runtime">开源研究预览</a>的形式提供。
+在 Claude Code 中，我们用这套运行时为 bash 工具加上沙箱，使 Claude 能在你设定的边界内运行命令。在安全的沙箱内部，Claude 可以更自主地运行，并在无需权限提示的情况下安全地执行命令。如果 Claude 试图访问沙箱_之外_的内容，你会立即收到通知，并可以自行决定是否允许。
+我们把这套机制构建在操作系统级别的原语之上，例如 <a href="https://github.com/containers/bubblewrap">Linux bubblewrap</a> 和 MacOS seatbelt，以便在操作系统层面强制执行这些限制。它们不仅覆盖 Claude Code 的直接交互，也覆盖由该命令派生出的任何脚本、程序或子进程。如上所述，这个沙箱同时强制执行以下两点：
+  1. <strong>文件系统隔离</strong>，通过允许读写当前工作目录、但阻止修改目录之外的任何文件来实现。
+  2. <strong>网络隔离</strong>，通过只允许借助连接到沙箱外代理服务器的 unix 域套接字访问互联网来实现。该代理服务器会强制执行对进程可连接域名的限制，并处理对新请求域名的用户确认。若你希望进一步提升安全性，我们也支持自定义该代理，对出站流量强制执行任意规则。</p>
+<p>这两个组件都可配置：你可以轻松地选择允许或禁止特定的文件路径或域名。
+<img alt="这张图说明了 Claude Code 中的沙箱机制如何工作。" src="../assets_zh/claude-code-sandboxing/img_001.webp" />
+Claude Code 的沙箱架构通过文件系统与网络控制来隔离代码执行，自动放行安全操作、拦截恶意操作，并仅在必要时请求许可。
+沙箱确保即便提示词注入成功，也会被完全隔离，无法影响用户的整体安全。这样一来，被攻陷的 Claude Code 既无法窃取你的 SSH 密钥，也无法向攻击者的服务器回连。
+要开始使用这项功能，在 Claude Code 中运行 /sandbox，并查看关于我们安全模型的<a href="https://docs.claude.com/en/docs/claude-code/sandboxing">更多技术细节</a>。
+为了让其他团队更容易构建更安全的智能体，我们已经将这项功能<a href="https://github.com/anthropic-experimental/sandbox-runtime">开源</a>。我们认为，其他团队也应当考虑把这项技术用于自己的智能体，以提升其智能体的安全态势。</p>
+<h4>网页版 Claude Code：在云端安全地运行 Claude Code</h4>
+<p>今天，我们还发布了<a href="https://docs.claude.com/en/docs/claude-code/claude-code-on-the-web">网页版 Claude Code</a>，让用户能够在云端隔离的沙箱中运行 Claude Code。网页版 Claude Code 会把每个 Claude Code 会话放在隔离沙箱中执行，使其以安全可靠的方式完整访问自己的服务器。我们在设计这个沙箱时，确保敏感凭据（例如 git 凭据或签名密钥）绝不会与 Claude Code 一同留在沙箱内部。这样一来，即便沙箱中运行的代码被攻陷，用户也不会受到进一步损害。
+网页版 Claude Code 使用一个自定义代理服务，以透明方式处理所有 git 交互。在沙箱内部，git 客户端借助一个定制的、限定作用域的凭据向该服务完成认证。代理会核验这一凭据以及 git 交互的内容（例如确保它只向配置好的分支推送），随后在把请求发往 GitHub 之前附上正确的认证令牌。
+<img alt="这张插图描绘了网页版 Claude Code 如何通过自定义代理处理所有 git 交互。" src="../assets_zh/claude-code-sandboxing/img_002.webp" />
+Claude Code 的 Git 集成会把命令路由经过一个安全代理，由它校验认证令牌、分支名称和仓库目标地址——在支持安全版本控制工作流的同时，阻止未经授权的推送。</p>
+<h2>开始使用</h2>
+<p>对于把 Claude 用于工程工作的开发者而言，我们新的沙箱化 bash 工具与网页版 Claude Code 在安全性和生产力两方面都带来了显著提升。
+要开始使用这些工具：
+  1. 在 Claude 中运行 <code>/sandbox</code>，并查看<a href="https://docs.claude.com/en/docs/claude-code/sandboxing">我们的文档</a>了解如何配置这个沙箱。
+  2. 前往 <a href="http://claude.ai/code">claude.com/code</a> 试用网页版 Claude Code。</p>
+<p>或者，如果你正在构建自己的智能体，可以看看我们<a href="https://github.com/anthropic-experimental/sandbox-runtime">开源的沙箱代码</a>，并考虑把它集成到你的工作中。我们期待看到你构建出的成果。
+要进一步了解网页版 Claude Code，请查看我们的<a href="https://www.anthropic.com/news/claude-code-on-the-web">发布博客文章</a>。</p>
+<h2>作者与致谢</h2>
+<h3>贡献者</h3>
+<p>Article written by David Dworken and Oliver Weller-Davies, with contributions from Meaghan Choi, Catherine Wu, Molly Vorwerck, Alex Isken, Kier Bradwell, and Kevin Garcia</p>
+<h3>致谢</h3>
+<p>Article written by David Dworken and Oliver Weller-Davies, with contributions from Meaghan Choi, Catherine Wu, Molly Vorwerck, Alex Isken, Kier Bradwell, and Kevin Garcia</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Beyond permission prompts:making Claude Code more secure and autonomous</h1>
+<ul>
+<li><strong>Date:</strong> 2025-10-20</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/claude-code-sandboxing</li>
+</ul>
+<h3></h3>
+<h1><strong>Beyond permission prompts : </strong>making Claude Code more secure and autonomous</h1>
+<p><img alt="Beyond permission prompts: making Claude Code more secure and autonomous" src="../assets/claude-code-sandboxing/img_000.webp" />
+Published
+    Oct 20, 2025
+Team
+    <a href="/engineering">Engineering</a>
+Topics</p>
+<ul>
+<li><a href="/search?topic=claude-code">Claude Code</a></li>
+<li><a href="/search?topic=cybersecurity">Cybersecurity</a></li>
+<li><a href="/search?topic=agents">Agents</a></li>
+<li><a href="/search?topic=safeguards">Safeguards</a></li>
+<li><a href="/search?topic=open-source">Open source</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/how-we-contain-claude"></a><a href="https://www.anthropic.com/research/trustworthy-agents"></a><a href="https://www.anthropic.com/research/zero-days"></a><a href="https://www.anthropic.com/news/disrupting-AI-espionage"></a>
+Related articles
+  * Engineering
+May 25, 2026
+<a href="https://www.anthropic.com/research/how-we-contain-claude">How we contain Claude across products</a></p>
+<p><a href="/search?topic=claude-code">View more</a>
+In <a href="https://www.claude.com/product/claude-code">Claude Code</a>, Claude writes, tests, and debugs code alongside you, navigating your codebase, editing multiple files, and running commands to verify its work. Giving Claude this much access to your codebase and files can introduce risks, especially in the case of prompt injection.
+To help address this, we’ve introduced two new features in Claude Code built on top of sandboxing, both of which are designed to provide a more secure place for developers to work, while also allowing Claude to run more autonomously and with fewer permission prompts. In our internal usage, we've found that sandboxing safely reduces permission prompts by 84%. By defining set boundaries within which Claude can work freely, they increase security and agency.</p>
+<h2>Keeping users secure on Claude Code</h2>
+<p>Claude Code runs on a permission-based model: by default, it's read-only, which means it asks for permission before making modifications or running any commands. There are some exceptions to this: we auto-allow safe commands like echo or cat, but most operations still need explicit approval.
+Constantly clicking "approve" slows down development cycles and can lead to ‘approval fatigue’, where users might not pay close attention to what they're approving, and in turn making development less safe.
+To address this, we launched sandboxing for Claude Code.</p>
+<h2>Sandboxing: a safer and more autonomous approach</h2>
+<p>Sandboxing creates pre-defined boundaries within which Claude can work more freely, instead of asking for permission for each action. With sandboxing enabled, you get drastically fewer permission prompts and increased safety.
+Our approach to sandboxing is built on top of operating system-level features to enable two boundaries:
+  1. <strong>Filesystem isolation</strong> ,<strong><em>* which ensures that Claude can only access or modify specific directories. This is particularly important in preventing a prompt-injected Claude from modifying sensitive system files.
+  2. </em>*Network isolation</strong> ,**** which ensures that Claude can only connect to approved servers. This prevents a prompt-injected Claude from leaking sensitive information or downloading malware.</p>
+<p>It is worth noting that effective sandboxing requires <em>both</em> filesystem and network isolation. Without network isolation, a compromised agent could exfiltrate sensitive files like SSH keys; without filesystem isolation, a compromised agent could easily escape the sandbox and gain network access. It’s by using both techniques that we can provide a safer and faster agentic experience for Claude Code users.</p>
+<h3>Two new sandboxing features in Claude Code</h3>
+<h4>Sandboxed bash tool: safe bash execution without permission prompts</h4>
+<p>We're introducing <a href="https://docs.claude.com/en/docs/claude-code/sandboxing">a new sandbox runtime</a>, available in beta as a research preview, that lets you define exactly which directories and network hosts your agent can access, without the overhead of spinning up and managing a container. This can be used to sandbox arbitrary processes, agents and MCP servers. It is also available as <a href="https://github.com/anthropic-experimental/sandbox-runtime">an open source research preview</a>.
+In Claude Code, we use this runtime to sandbox the bash tool, which allows Claude to run commands within the defined limits you set. Inside the safe sandbox, Claude can run more autonomously and safely execute commands without permission prompts. If Claude tries to access something <em>outside</em> of the sandbox, you'll be notified immediately, and can choose whether or not to allow it.
+We’ve built this on top of OS level primitives such as <a href="https://github.com/containers/bubblewrap">Linux bubblewrap</a> and MacOS seatbelt to enforce these restrictions at the OS level. They cover not just Claude Code's direct interactions, but also any scripts, programs, or subprocesses that are spawned by the command.As described above, this sandbox enforces both:
+  1. <strong>Filesystem isolation,</strong> by allowing read and write access to the current working directory, but blocking the modification of any files outside of it.
+  2. <strong>Network isolation,</strong> by only allowing internet access through a unix domain socket connected to a proxy server running outside the sandbox. This proxy server enforces restrictions on the domains that a process can connect to, and handles user confirmation for newly requested domains. And if you’d like further-increased security, we also support customizing this proxy to enforce arbitrary rules on outgoing traffic.</p>
+<p>Both components are configurable: you can easily choose to allow or disallow specific file paths or domains.
+<img alt="This image illustrations how sandboxing in Claude Code works." src="../assets/claude-code-sandboxing/img_001.webp" />
+Claude Code's sandboxing architecture isolates code execution with filesystem and network controls, automatically allowing safe operations, blocking malicious ones, and asking permission only when needed.
+Sandboxing ensures that even a successful prompt injection is fully isolated, and cannot impact overall user security. This way, a compromised Claude Code can't steal your SSH keys, or phone home to an attacker's server.
+To get started with this feature, run /sandbox in Claude Code and check out <a href="https://docs.claude.com/en/docs/claude-code/sandboxing">more technical details</a> about our security model.
+To make it easier for other teams to build safer agents, we have <a href="https://github.com/anthropic-experimental/sandbox-runtime">open sourced</a> this feature. We believe that others should consider adopting this technology for their own agents in order to enhance the security posture of their agents.</p>
+<h4>Claude Code on the web: running Claude Code securely in the cloud</h4>
+<p>Today, we're also releasing <a href="https://docs.claude.com/en/docs/claude-code/claude-code-on-the-web">Claude Code on the web</a> enabling users to run Claude Code in an isolated sandbox in the cloud. Claude Code on the web executes each Claude Code session in an isolated sandbox where it has full access to its server in a safe and secure way. We've designed this sandbox to ensure that sensitive credentials (such as git credentials or signing keys) are never inside the sandbox with Claude Code. This way, even if the code running in the sandbox is compromised, the user is kept safe from further harm.
+Claude Code on the web uses a custom proxy service that transparently handles all git interactions. Inside the sandbox, the git client authenticates to this service with a custom-built scoped credential. The proxy verifies this credential and the contents of the git interaction (e.g. ensuring it is only pushing to the configured branch), then attaches the right authentication token before sending the request to GitHub.
+<img alt="This illustration depicts how Claude Code on the web uses a custom proxy to handle all git interactions." src="../assets/claude-code-sandboxing/img_002.webp" />
+Claude Code's Git integration routes commands through a secure proxy that validates authentication tokens, branch names, and repository destinations—allowing safe version control workflows while preventing unauthorized pushes.</p>
+<h2>Getting started</h2>
+<p>Our new sandboxed bash tool and Claude Code on the web offer substantial improvements in both security and productivity for developers using Claude for their engineering work.
+To get started with these tools:
+  1. Run <code>/sandbox</code> in Claude and check out <a href="https://docs.claude.com/en/docs/claude-code/sandboxing">our docs</a> on how to configure this sandbox.
+  2. Go to <a href="http://claude.ai/code">claude.com/code</a> to try out Claude Code on the web.</p>
+<p>Or, if you're building your own agents, check out our <a href="https://github.com/anthropic-experimental/sandbox-runtime">open-sourced sandboxing code</a>, and consider integrating it into your work. We look forward to seeing what you build.
+To learn more about Claude Code on the web, check out our <a href="https://www.anthropic.com/news/claude-code-on-the-web">launch blog post</a>.</p>
+<h2>Authors &amp; acknowledgements</h2>
+<h3>Contributors</h3>
+<p>Article written by David Dworken and Oliver Weller-Davies, with contributions from Meaghan Choi, Catherine Wu, Molly Vorwerck, Alex Isken, Kier Bradwell, and Kevin Garcia</p>
+<h3>Acknowledgements</h3>
+<p>Article written by David Dworken and Oliver Weller-Davies, with contributions from Meaghan Choi, Catherine Wu, Molly Vorwerck, Alex Isken, Kier Bradwell, and Kevin Garcia</p>
+</div>
+</details>
+</div>
+</body>
+</html>

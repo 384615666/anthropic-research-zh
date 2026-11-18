@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning more about Claude&#x27;s mathematical capabilities</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>进一步了解Claude的数学能力</h1>
+<div class="meta">
+Learning more about Claude&#x27;s mathematical capabilities · Aug 10, 2026 · Science · <a href="https://www.anthropic.com/research/riemann-zeta" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">一位Anthropic员工让Claude尝试攻克黎曼猜想——数学中最著名的未解难题之一。Claude虽然没能证明黎曼猜想，却意外地在相关问题取得突破：一个未发布的研究版Claude改进了满足黎曼猜想的zeta函数零点比例的下界，从41.6%提高到67.2%。Claude在Claude Code中用两个会话、共3100万输出token完成工作，先尝试了650个想法均失败，随后协调约60个子代理运行数千次数值验证并互相审查证明。Claude还主动撰写了论文、生成了Lean形式化可验证证明，Anthropic的两名数学家验证了结果。文章认为这体现了AI数学能力进步的速度。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">黎曼猜想：关于素数分布的著名未解数学难题</span><span class="term">黎曼zeta函数：描述素数分布的重要数学函数</span><span class="term">下界：已知至少成立的最低数值</span><span class="term">形式化证明：用机器可验证语言写成的证明</span><span class="term">子代理：并行协作的多个AI实例</span><span class="term">输出token：模型生成文本的基本单位</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 科学（Science）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/riemann-zeta</li>
+</ul>
+<p>科学（Science）
+2026 年 8 月 10 日
+<img alt="数学圆规的插图" src="../assets/riemann-zeta/img_000.img" />
+最近，Anthropic 的一位员工给 Claude 出了一个"不合理的挑战"。这个挑战与数学中最著名的未解问题之一有关：<em>认真尝试一下黎曼猜想吧</em>。
+Claude 确实认真尝试了，但正如你如果了解这项任务的难度就会预料到的那样（黎曼猜想可以追溯到 1859 年，并且有 <a href="https://www.claymath.org/millennium-problems/">一百万美元的悬赏</a>），它没有成功。然而，在尝试过程中，它意外地在相关问题上取得了进展。
+一个未发布的 Claude 研究版本改进了黎曼 zeta 函数满足黎曼猜想的零点比例的一个长期下界。借鉴数学家们过去几十年的广泛前期研究，它把这个下界从 41.6% 提高到了 67.2%。
+Anthropic 的两位数学家研究并验证了 Claude 的 <a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">论文</a>，并撰写了一份 <a href="https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf">非正式说明</a> 供专家参考，简洁地阐述了 Claude 的证明。Claude 还为其结果制作了一份 <a href="https://github.com/anthropics/zeta-23-lean">可正式验证的证明</a>。我们非常感谢该领域的两位专家 Brian Conrey 和 Dan Goldston，他们在时间紧迫的情况下慷慨地审阅了这篇论文。
+我们不指望 Claude 使用的技术能证明黎曼猜想。但它的工作作为最新例证，展示了 AI 模型数学能力的进步速度。在这篇文章中，我们讨论 Claude 如何着手解决这个问题以及它发现了什么。</p>
+<h2>黎曼 zeta 函数</h2>
+<p>黎曼 zeta 函数描述了素数的分布：函数取值为零的每个位置都为素数序列贡献越来越精细的细节。黎曼猜想认为，决定素数的那些零点都位于某条特定的垂直线上。这已成为数学中影响最深远的猜想之一：许多结果都假设它成立，以便为素数提供某种形式的随机性。
+至今还没有人能够证明或反驳黎曼猜想，但数学家们在研究黎曼 zeta 函数及其零点的许多相关方向上取得了进展。如上所述，其中一个方向是量化位于线上的零点的最小比例：随着时间的推移，他们已逐步将这个已知的常数比例提高到 41.6%。
+另一个方向涉及零点的_分布_。特别是，在 1973 年，Montgomery <a href="https://en.wikipedia.org/wiki/Montgomery's_pair_correlation_conjecture">引入</a> 了这一领域的许多新技术，不过这些技术假设猜想是成立的。最近，几位数学家（Baluyot、Goldston、Suriajaya 和 Turnage-Butterbaugh）发表了一系列 <a href="https://arxiv.org/abs/2306.04799">成果</a> <a href="https://arxiv.org/abs/2501.14545">（多篇论文）</a>，使 Montgomery 的技术能够在_没有_该假设的情况下发挥作用，这意味着它们可以支持提高线上零点下界常数的工作。Claude 的结果大量借鉴了这条研究路线，以及 Bombieri 在 2000 年发表的 <a href="https://eudml.org/doc/252338">论文</a>。</p>
+<h2>Claude 的发现</h2>
+<p>Claude 发现，将 Baluyot、Goldston、Suriajaya 和 Turnage-Butterbaugh 的结果与 Bombieri 的工作结合起来，提供了一种超越此前最先进下界比例 41.6% 的方法，将其提高到 67.2%。
+关于 Claude 发现的简短技术解释如下：Claude 构造了一个合适的函数空间，其中带有 Weil 所诱导的二次型，并由位于线上（相应地，离线）的零点产生正定（相应地，负定）子空间。然后，Claude 直接根据一阶矩和二阶矩信息写出了关于二次型秩的一个不等式。（在解析数论中，利用素数对偶图景或通过控制 Hilbert 变换来成功计算后者，并不令人意外。）敢于处理整个空间，将正定性和负定性放在一起考虑，并允许二次型是非对角的——从某种意义上说，正是这一步使 Claude 能够基于重要的前期工作得出结论。
+完整的技术解释见 <a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">论文</a>。Claude 对自己如何得出该结果的解释见 <a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">此处</a> 的单独附录。</p>
+<h2>Claude 的方法</h2>
+<p>一个未发布的 Claude 研究版本在 Claude Code 中通过两个会话发现了这个新下界，共使用了 3100 万个输出 token。
+Anthropic 员工（且非数学家）Jarred Sumner 提示 Claude"认真尝试一下"这个猜想本身，之后的所有数学选择都交由模型自行决定。最初，Claude 生成并尝试了 650 个想法，没有一个奏效。Jarred 提示 Claude 再试一次，于是它花了一天半的时间协调约 60 个 Claude 子代理，这次它们深入得多：它们总共运行了 2400 条 shell 命令，并编写了数百个 Python 脚本。[1] 这些子代理针对已知的 zeta 零点运行了数千次数值检查，并互相评审彼此的工作。在整个过程中，Jarred 的输入主要限于向 Claude 发送鼓励信息（大多是"继续"或"相信自己"的变体）。[2] 这似乎帮助 Claude 克服了最初的一些怀疑——它曾怀疑自己能否取得有意义的进展。
+在尝试该任务的过程中发现这一新结果后，Claude 测试了自己的工作：让各个子代理审阅证明、搜索反例、从 arXiv 下载 54 篇论文以确认其发现尚未被提出过，并从零开始独立地重新证明其发现。Claude 主动提出将它的发现写成论文，并建议由人类数论专家验证其发现。
+Anthropic 自己的两位数学家 Levent Alpöge 和 Ralph Furman 审查了 Claude 的工作，以理解这些新结果以及它们与上述前期工作的关系。与此同时，Claude 与另一位员工 Eric Easley 合作，为这一结果制作了一份 <a href="https://github.com/anthropics/zeta-23-lean">Lean 形式化证明</a>，它通过了标准验证工具 <a href="https://github.com/leanprover/comparator">comparator</a> 的检查。</p>
+<h2>AI 模型在数学领域的进展</h2>
+<p>这一结果表明，像 Claude 这样的 AI 模型能够以新的、有时令人惊讶的方式扩展数学家思想的影响力和触及范围。尽管它没能解决黎曼猜想本身，但这一结果是作为最初那个请求的意外副产品而出现的。
+就连 Claude 也对自己的发现感到惊讶——它起初持怀疑态度，可能是因为它从训练中了解了数学开放问题的难度以及 AI 模型的局限性。但在一些鼓励性提示之后，它得出了我们所描述的结果。也许 Claude 和我们许多人一样，低估了 AI 进步的速度。</p>
+<h2>延伸阅读</h2>
+<p>以下是提供更多关于 Claude 结果信息的文档列表：
+  * <a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">Claude</a><a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">的</a><a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">论文</a>；
+  * <a href="https://github.com/anthropics/zeta-23-lean">Claude</a><a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">的</a><a href="https://github.com/anthropics/zeta-23-lean">形式化证明</a>；
+  * <a href="https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf">Anthropic</a><a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">的更简洁地阐述该证明的</a><a href="https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf">非正式说明</a>；
+  * <a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">Claude 对自己如何得出该结果的解释</a>；
+  * <a href="https://www-cdn.anthropic.com/8a0d1add3c637b858a9a181e98c40e9548c3f44f.pdf">Claude 过程的详细记录</a>。</p>
+<h4>脚注</h4>
+<ol>
+<li>在 60 个子代理中，两个负责提出关键的数学思想，13 个为这些代理贡献想法，30 个尝试（但未能）提出新想法，13 个担任验证者以检查论证的正确性，最后两个帮助撰写初始论文。</li>
+<li>一个包含类似鼓励内容的提示也被用来帮助 Claude 否证 <a href="https://x.com/__alpoge__/status/2079028340955197566?s=20">Jacobian 猜想</a>。</li>
+</ol>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/riemann-zeta"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/riemann-zeta"></a></p>
+<h2>相关内容</h2>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而构建的数字签名方案。第二个攻击发现了一种攻击缩减轮数 AES（使用最广泛的对称密码）的新方法。 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+<h3>加拿大如何使用 Claude：来自 Anthropic 经济指数（Anthropic Economic Index）的发现</h3>
+<p><a href="https://www.anthropic.com/research/how-canada-uses-claude">阅读更多</a></p>
+<h2>订阅 Anthropic 科学（Anthropic Science）</h2>
+<p>关于 AI 辅助发现、实用工作流程以及各科学领域田野笔记的特稿。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Learning more about Claude's mathematical capabilities</h1>
+<ul>
+<li><strong>Category:</strong> Science</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/riemann-zeta</li>
+</ul>
+<p>Science</p>
+<h1>Learning more about Claude's mathematical capabilities</h1>
+<p>Aug 10, 2026
+<img alt="Illustration of a mathematical compass" src="../assets/riemann-zeta/img_000.img" />
+Recently, a member of staff at Anthropic gave Claude an unreasonable challenge. It was about one of the most famous unsolved problems in mathematics: <em>Take a real stab at the Riemann hypothesis</em>.
+Claude did take a real stab, but as you might have expected if you’re familiar with the difficulty of the task (the Riemann hypothesis dates back to 1859 and has a <a href="https://www.claymath.org/millennium-problems/">million-dollar bounty</a>), it didn’t succeed. Nevertheless, during its attempt, it unexpectedly made strides on a related problem.
+An unreleased research version of Claude has improved on a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the Riemann hypothesis. Drawing on extensive prior research by mathematicians over the past decades, it has increased this bound from 41.6% to 67.2%.
+Two mathematicians at Anthropic studied and validated Claude’s <a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">paper</a>, and produced an <a href="https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf">informal note</a> for experts stating Claude’s proof concisely. Claude also produced a <a href="https://github.com/anthropics/zeta-23-lean">formally verifiable proof</a> of its result. We are grateful to Brian Conrey and Dan Goldston, two experts in this area, who generously examined the paper on short notice.
+We don’t expect that the techniques Claude used will lead to proving the Riemann hypothesis. But its work serves as the latest example of the speed of progress in AI models’ mathematical capabilities. In this post, we discuss how Claude approached this problem and what it found.</p>
+<h2>The Riemann zeta function</h2>
+<p>The Riemann zeta function describes the distribution of prime numbers: each place that the function takes the value of zero contributes successively finer detail to the sequence of primes. The Riemann hypothesis is that the zeros that determine the primes all exist along a certain vertical line. This has become one of the most consequential conjectures in mathematics: many results assume it in order to provide a form of randomness in the primes.
+No one has yet been able to prove or disprove the Riemann hypothesis, but mathematicians have made progress in many related directions studying the Riemann zeta function and its zeros. One of these, as above, is quantifying a minimum proportion of zeros that are on the line: over time, they’ve gradually increased this known constant proportion to 41.6%.
+Another direction concerns the <em>distribution</em> of zeros on the line. In particular, in 1973, Montgomery <a href="https://en.wikipedia.org/wiki/Montgomery's_pair_correlation_conjecture">introduced</a> a number of new techniques in this area, though these techniques assumed the hypothesis was true. More recently, several mathematicians (Baluyot, Goldston, Suriajaya, and Turnage-Butterbaugh) have published a <a href="https://arxiv.org/abs/2306.04799">series</a> of <a href="https://arxiv.org/abs/2501.14545">works</a> that allow Montgomery’s techniques to work <em>without</em> that assumption, meaning they can support work on increasing the lower-bound constant for the zeros on the line. Claude’s result draws heavily on this line of research, along with a 2000 <a href="https://eudml.org/doc/252338">paper</a> by Bombieri.</p>
+<h2>Claude's finding</h2>
+<p>Claude found that combining the results from Baluyot, Goldston, Suriajaya, and Turnage-Butterbaugh with the work of Bombieri provides a way to surpass the previous state-of-the-art lower-bound proportion of 41.6%, increasing it to 67.2%.
+A short technical explanation of Claude’s finding is as follows: Claude forms a suitable space of functions with quadratic form induced by Weil, and positive- (respectively negative-)definite subspaces arising from zeros on (respectively off) the line. Then Claude simply writes down an inequality on the rank of a quadratic form in terms of first- and second-moment information. (The successful computation of the latter in terms of the dual picture over primes, or via control of a Hilbert transform, is no surprise in analytic number theory.) The courage to treat the entire space, with positive- and negative-definiteness taken into account together, and with the quadratic form allowed to be non-diagonal, is in some sense the step that allows Claude to achieve the conclusion based on the important prior work.
+The full technical explanation is available in the <a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">paper</a>. Claude’s explanation of how it arrived at its result is available in a separate Appendix <a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">here</a>.</p>
+<h2>Claude's methodology</h2>
+<p>An unreleased research version of Claude found the new lower bound over two sessions in Claude Code, using a total of 31 million output tokens.
+Jarred Sumner, an Anthropic staff member (and non-mathematician), prompted Claude to “take a real stab” at the hypothesis itself, leaving the mathematical choices from there up to the model. Initially, Claude generated and tried 650 ideas, none of which worked. Jarred prompted Claude to try again, and it spent a day and a half coordinating about 60 Claude subagents, which this time went much deeper: between them, they ran 2,400 shell commands and wrote hundreds of Python scripts.1 The subagents ran thousands of numerical checks against known zeta zeros and refereed one another’s work. Throughout this process, Jarred's input was mostly limited to sending Claude messages of encouragement (mostly variants of “keep going” or “believe in yourself”).2 This seems to have helped Claude overcome some initial skepticism that it could make meaningful progress.
+Having found this new result while attempting the task, Claude tested its work by having various subagents review the proofs, search for counterexamples, download 54 papers from the arXiv to check that its finding hadn’t already been made, and independently re-prove its finding from scratch. Claude volunteered to write its findings up as a paper, and recommended that a human number theorist validate its findings.
+Levent Alpöge and Ralph Furman, two of Anthropic’s own mathematicians, examined Claude’s work to understand the new results and how they related to the prior work mentioned above. In parallel, Claude worked with another member of staff, Eric Easley, to produce a <a href="https://github.com/anthropics/zeta-23-lean">Lean formalization</a> of the result, which passes the standard validation tool <a href="https://github.com/leanprover/comparator">comparator</a>.</p>
+<h2>AI models' progress in mathematics</h2>
+<p>This result shows that AI models like Claude can extend the impact and reach of mathematicians’ ideas in new and sometimes surprising ways. Even though it couldn’t resolve the Riemann hypothesis itself, this result emerged as the unintended byproduct of that original request.
+Even Claude was surprised by its own finding—it was skeptical at first, possibly because it has learned from its training about the difficulty of open problems in mathematics and about the limitations of AI models. But after some encouraging prompts, it arrived at the result we’ve described. Perhaps Claude, like many of us, underestimates the rate of AI progress.</p>
+<h2>Further reading</h2>
+<p>Below is a list of documents that provide more information about Claude’s result:
+  * <a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">Claude</a><a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">’</a><a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">s paper</a>;
+  * <a href="https://github.com/anthropics/zeta-23-lean">Claude</a><a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">’</a><a href="https://github.com/anthropics/zeta-23-lean">s formalization</a>;
+  * <a href="https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf">Anthropic</a><a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">’</a><a href="https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf">s informal note stating the proof more concisely</a>;
+  * <a href="https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf">Claude’s explanation of how it arrived at its result</a>;
+  * <a href="https://www-cdn.anthropic.com/8a0d1add3c637b858a9a181e98c40e9548c3f44f.pdf">Detailed transcripts of Claude's process</a>.</p>
+<h4>Footnotes</h4>
+<ol>
+<li>Out of the 60 subagents, two were responsible for developing the key mathematical ideas, 13 contributed ideas to these agents, 30 attempted (but were unable) to develop new ideas, 13 served as validators to check the correctness of the arguments, and the final two helped to write the initial paper.</li>
+<li>A prompt including similar encouragement was used to help Claude disprove the <a href="https://x.com/__alpoge__/status/2079028340955197566?s=20">Jacobian conjecture</a>.</li>
+</ol>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/riemann-zeta"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/riemann-zeta"></a></p>
+<h2>Related content</h2>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h3>How Canada uses Claude: Findings from the Anthropic Economic Index</h3>
+<p><a href="https://www.anthropic.com/research/how-canada-uses-claude">Read more</a></p>
+<h2>Subscribe to Anthropic Science</h2>
+<p>Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

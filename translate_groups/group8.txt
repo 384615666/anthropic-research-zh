@@ -1,0 +1,16 @@
+anthropic-interviewer
+estimating-productivity-gains
+exploit
+collective-constitutional-ai-aligning-a-language-model-with-public-input
+n-days
+building-effective-agents
+AI-assistance-coding-skills
+teaching-claude-why
+long-running-Claude
+petri-open-source-auditing
+off-switch-dual-use
+critical-infrastructure-defense
+red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned
+specific-versus-general-principles-for-constitutional-ai
+interpretability-dreams
+in-context-learning-and-induction-heads

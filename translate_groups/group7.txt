@@ -1,0 +1,15 @@
+economic-index-june-2026-report
+vibe-physics
+claude-code-expertise
+agents-in-biology
+project-vend-2
+impact-software-development
+making-claude-a-chemist
+property-based-testing
+persona-vectors
+bloom
+forecasting-rare-behaviors
+deprecation-commitments
+evaluating-and-mitigating-discrimination-in-language-model-decisions
+question-decomposition-improves-the-faithfulness-of-model-generated-reasoning
+softmax-linear-units

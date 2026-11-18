@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>迈向单义性：用字典学习分解语言模型</h1>
+<div class="meta">
+Towards Monosemanticity: Decomposing Language Models With Dictionary Learning · Oct 5, 2023 · Interpretability · <a href="https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">这篇论文提供了特征优于单个神经元的证据，并构建了能在小型Transformer模型中找到这些特征的机制。与以往从神经科学、机器学习和统计学解释高维系统的努力一脉相承，研究将一个含有512个神经元的层分解为超过4000个特征，它们分别代表DNA序列、法律语言、HTTP请求、希伯来文本、营养声明等众多概念，而这些性质在单独观察神经元激活时不可见。这是Anthropic在机制可解释性领域长期投入的成果，为理解语言模型内部工作原理提供了新的分析单元。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">单义性：每个特征只对应单一明确概念的性质，与之相对的是多义性</span><span class="term">特征：神经元激活的组合，可被解释为某个具体概念</span><span class="term">字典学习：将高维信号分解为若干基元的机器学习技术</span><span class="term">神经元激活：神经元对输入的响应强度</span><span class="term">高维系统：包含大量相互关联变量的复杂系统</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 可解释性（Interpretability）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning</li>
+</ul>
+<p>可解释性研究（InterpretabilityResearch）
+2023 年 10 月 5 日
+<a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">阅读论文</a></p>
+<h2>摘要</h2>
+<p>在我们最新的论文<a href="https://transformer-circuits.pub/2023/monosemantic-features">《迈向单义性：用字典学习分解语言模型》</a>（<em>Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</em>）中，我们概述了证据，表明存在比单个神经元更好的分析单元，并且我们已经构建了能在小型 Transformer 模型中找到这些单元的机制。这些被称为特征的单元对应于神经元激活的模式（线性组合）。这为将复杂的神经网络分解成我们可以理解的部分提供了一条路径，并建立在神经科学、机器学习和统计学中先前解释高维系统的努力之上。在 Transformer 语言模型中，我们将一个具有 512 个神经元的层分解为 4000 多个特征，它们分别代表 DNA 序列、法律语言、HTTP 请求、希伯来语文本、营养声明等等。在孤立地查看单个神经元的激活时，这些模型属性中的大多数是不可见的。</p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例这一长期存在的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二次攻击发现了一种攻击缩减轮数 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列评估 AI 模型使用飞行无人机能力的新测试，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning</li>
+</ul>
+<h1>Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</h1>
+<p>Oct 5, 2023
+<a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>In our latest paper, <a href="https://transformer-circuits.pub/2023/monosemantic-features"><em>Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</em></a>, we outline evidence that there are better units of analysis than individual neurons, and we have built machinery that lets us find these units in small transformer models. These units, called features, correspond to patterns (linear combinations) of neuron activations. This provides a path to breaking down complex neural networks into parts we can understand, and builds on previous efforts to interpret high-dimensional systems in neuroscience, machine learning, and statistics. In a transformer language model, we decompose a layer with 512 neurons into more than 4000 features which separately represent things like DNA sequences, legal language, HTTP requests, Hebrew text, nutrition statements, and much, much more. Most of these model properties are invisible when looking at the activations of individual neurons in isolation.</p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

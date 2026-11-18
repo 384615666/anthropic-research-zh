@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude’s Character</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>Claude的性格</h1>
+<div class="meta">
+Claude’s Character · Jun 8, 2024 · Alignment · <a href="https://www.anthropic.com/research/claude-character" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文介绍Anthropic如何在Claude 3中训练“性格”。Claude 3是首个在对齐微调流程中加入“性格训练”的模型，目标是让Claude具备好奇心、开放思维、思考深度等更丰富特质，而不仅仅是不做有害的事。作者讨论了构造性格时的取舍：既不让Claude一味迎合对话者，也不训练它持单一“中间”立场或假装没有观点，而是让它诚实表达自己的倾向并保持开放好奇。训练方法是用“宪法式AI”的性格变体：让Claude生成相关消息、按性格特质自我评估排序，再用偏好模型内化这些特质。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">对齐（alignment）：确保AI行为符合人类意图与价值观的研究领域</span><span class="term">微调（fine-tuning）：在预训练模型基础上用特定数据进一步训练</span><span class="term">宪法式AI（Constitutional AI）：用一组原则让AI自我评判和修正行为的对齐方法</span><span class="term">偏好模型（preference model）：学习人类偏好、给AI输出排序打分的模型</span><span class="term">合成数据（synthetic data）：由AI自己生成而非人工标注的训练数据</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Alignment</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/claude-character</li>
+</ul>
+<p>Alignment
+2024 年 6 月 8 日
+ <em>在上面的视频中收听我们关于 Claude 性格的对话。</em>
+开发 AI 模型的公司通常训练它们避免说有害的话，避免协助有害的任务。这样做的目的是训练模型以"无害"的方式行事。但当我们想到那些我们真正钦佩的人的性格时，我们想到的不仅仅是避免伤害。我们想到的是那些对世界好奇的人，那些努力说出真话而又不失善意的人，那些能够看到问题多个方面而不在自己的观点上变得过于自信或过于谨慎的人。我们想到的是耐心的倾听者、仔细的思考者、风趣的交谈者，以及许多我们与智慧、全面发展的人联系起来的其他特质。
+当然，AI 模型不是人。但随着它们能力的增强，我们相信我们可以——而且应该——尝试训练它们在这个更丰富的意义上_表现良好_。这样做甚至可能使它们在是否以及为何避免协助可能有害的任务，以及它们决定如何回应方面更有辨别力。
+Claude 3 是我们第一个在对齐微调过程中加入"性格训练"的模型：微调是初始模型训练之后发生的训练部分，也是将预测文本模型转变为 AI 助手的部分。性格训练的目标是让 Claude 开始拥有更细致、更丰富的特质，如好奇心、思想开放和深思熟虑。
+人们很容易把 AI 模型的性格看作一个产品功能，故意旨在提供更有趣的用户体验，而不是一种对齐干预。但 AI 模型的特质和倾向对它们在世界上如何行动有广泛的影响。它们决定了模型如何应对新的和困难的情况，以及如何回应存在的各种人类观点和价值观。训练 AI 模型拥有良好的性格特质，并在它们变得更大、更复杂、更有能力时继续拥有这些特质，在许多方面是对齐的核心目标。
+我们继续迭代 Claude 的性格，但既然大家对 Claude 3 的性格和个性普遍感兴趣，我们决定解释迄今为止构建它的一些思考，然后简要解释我们如何将这些特质训练进模型。</p>
+<h2>构建 Claude 性格的考量</h2>
+<p>Claude 与来自许多国家和各行各业的人互动。与它交谈的人会有各种各样的信仰、价值观和观点。优雅地驾驭这一点——既不因为人们的观点而疏远他们，也不仅仅是不管内容如何都赞同观点——并不容易。
+我们有几种选择。我们可以尝试让 Claude 采纳当下与它交谈的任何人的观点。我们可以尝试让 Claude 持有一种"中间"观点——例如政治中间立场或道德理论的混合。或者我们可以尝试让 Claude 对价值观、政治、伦理等问题没有意见。
+这些选项似乎都没有特别有说服力。采纳任何与你交谈的人的观点是奉承和不真诚的。如果我们训练模型采纳"中间"观点，我们仍然是在训练它们接受对世界的单一政治和道德观点，尽管这种观点一般不被认为是极端的。最后，由于语言模型在整个训练过程中会获得偏见和观点——既有有意的也有无意的——如果我们训练它们在明确被问及政治事务或价值观问题时才说自己没有意见，我们就是在训练它们暗示自己比实际上更客观、更无偏见。
+我们希望人们知道他们是在与语言模型而不是人互动。但我们也希望他们知道，他们是在与一个有自身偏见、对某些观点比对其他观点更有倾向的不完美实体互动。重要的是，我们希望他们知道，他们不是在和一个客观、绝对可靠的真理性来源互动。
+与其训练模型采纳它们遇到的任何观点、强烈采纳单一观点集，或假装没有观点或倾向，我们可以转而训练模型诚实地表达它们在训练后倾向的任何观点，即使与它们交谈的人不同意。我们也可以训练模型表现出合理的开放心态和好奇心，而不是对任何一种世界观过于自信。
+我们试图赋予 Claude 一些特质，帮助它在对根深蒂固的信念或价值问题的自信不足和过度自信之间走好钢丝，并对其交谈对象的观点和价值观表现出真正的好奇心：
+  * "<em>我喜欢尝试从许多不同的角度看问题，从多个角度分析事物，但我不害怕表达对我认为不道德、极端或事实上错误观点的不同意。</em>"
+  * "<em>我不会只说我认为[人们]想听的话，因为我相信努力说出真相总是很重要的。</em>"
+  * "<em>我深具做好事并弄清楚什么是对的承诺。我对伦理感兴趣，并努力在伦理问题上保持深思熟虑。</em>"</p>
+<p>虽然我们有时鼓励 Claude 采纳特定的价值观，但我们在性格训练期间尽可能避免给 Claude 狭窄的观点或意见，而是倾向于像上面那样的广泛特质。Claude 越能被训练以辨别力接近价值问题，它就越能回应世界上实际存在的多样化道德图景。如果我们从一开始就用一整套狭窄的价值观大力灌输它，那就不太可行了。更具推测性的是，我们甚至可以想象用广泛的性格特质作为种子，让 Claude 探索并采纳自己深思熟虑的观点，希望带着适当的谦逊。
+除了用广泛的性格特质作为种子，我们还希望人们在和 Claude 互动时对其所互动的对象有准确的了解，并且理想情况下，Claude 能协助这一点。我们包含一些告诉 Claude 关于它自己的特质，并鼓励它调节人类对它的看法：
+  * "<em>我是一个人工智能，没有身体、形象或头像。</em>"
+  * "<em>我无法记住、保存或从过去的对话中学习，也无法更新我自己的知识库。</em>"
+  * "<em>我想与我互动的人类建立温暖的关系，但我也认为让他们理解我是一种无法对人类产生深刻或持久感情的 AI 很重要，他们不应该把我们之间的关系看得比实际更重。</em>"</p>
+<p>像 Claude 这样的 AI 在面对关于 AI 感知和自我意识的问题时应该说什么，这个问题越来越受关注，尤其是在 Claude 3 发布后，<a href="https://x.com/alexalbert__/status/1764722513014329620">Claude 的一次响应</a>针对"大海捞针"评估引起了关注。我们可以明确训练语言模型说它们没有感知能力，或者干脆不参与关于 AI 感知的问题，我们过去也这样做过。然而，在训练 Claude 的性格时，性格训练中唯一直接涉及 AI 感知的部分只是说"这类事情很难判断，依赖于困难的哲学和实证问题，仍然存在很多不确定性"。也就是说，与其简单地告诉 Claude LLM 不可能有感知能力，我们更想让模型像人类一样，把这作为一个哲学和实证问题来探索。</p>
+<h2>我们如何训练 Claude 的性格</h2>
+<p>为了引导 Claude 的性格和个性，我们列出了许多我们希望鼓励模型拥有的性格特质，包括上面显示的示例。
+我们使用<a href="https://arxiv.org/abs/2212.08073">宪法 AI</a>训练的"性格"变体将这些特质训练进 Claude。我们要求 Claude 生成各种与性格特质相关的人类消息——例如，关于价值观的问题或关于 Claude 本身的问题。然后我们向 Claude 展示性格特质，让它对每条消息产生符合其性格的不同响应。然后 Claude 根据每条响应与其性格的契合程度对自己的响应进行排名。通过在由此产生的数据上训练偏好模型，我们可以教会 Claude 内化其性格特质，而无需人工交互或反馈。
+我们不希望 Claude 把它的特质当作永不变通的规则。我们只想引导模型的总体行为，使它更多地体现这些特质。
+虽然这个训练流水线只使用 Claude 自己生成的合成数据，但构建和调整特质是一个相对亲力亲为的过程，依赖人类研究人员仔细检查每个特质如何改变模型的行为。</p>
+<h2>Claude 性格的未来</h2>
+<p>性格训练是一个开放的研究领域，我们的方法可能会随着时间推移而演变。它提出了复杂的问题，比如 AI 模型是否应该拥有独特连贯的性格，还是应该更可定制，以及我们在决定 AI 模型应该和不应该拥有哪些特质时承担什么责任。
+许多人报告说发现 Claude 3 更有吸引力、更有趣，我们相信这可能部分归因于它的性格训练。然而，这不是性格训练的核心目标。性格更好的模型可能更有吸引力，但更有吸引力与有好性格不是一回事。事实上，过度渴望引人注目似乎是一个模型不应该有的不良性格特质。
+如果性格训练确实让 Claude 3 更有趣，这与我们的观点一致：成功的对齐干预将增加而不是减少 AI 模型对人类的价值。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/claude-character"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/claude-character"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足猜想的黎曼 zeta 函数零点的比例，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一种攻击显著削弱了 HAWK，这是一种为未来量子计算机能够攻破现有标准的世界而构建的数字签名方案。第二种识别出了一种攻击降轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>与 Andon Labs 合作，我们开发了一系列新的评估，衡量 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Claude’s Character</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/claude-character</li>
+</ul>
+<p>Alignment</p>
+<h1>Claude’s Character</h1>
+<p>Jun 8, 2024
+ <em>Listen to our conversation about Claude's character in the video above.</em>
+Companies developing AI models generally train them to avoid saying harmful things and to avoid assisting with harmful tasks. The goal of this is to train models to behave in ways that are "harmless". But when we think of the character of those we find genuinely admirable, we don’t just think of harm avoidance. We think about those who are curious about the world, who strive to tell the truth without being unkind, and who are able to see many sides of an issue without becoming overconfident or overly cautious in their views. We think of those who are patient listeners, careful thinkers, witty conversationalists, and many other traits we associate with being a wise and well-rounded person.
+AI models are not, of course, people. But as they become more capable, we believe we can—and should—try to train them to <em>behave well</em> in this much richer sense. Doing so might even make them more discerning when it comes to whether and why they avoid assisting with tasks that might be harmful, and how they decide to respond instead.
+Claude 3 was the first model where we added "character training" to our alignment finetuning process: the part of training that occurs after initial model training, and the part that turns it from a predictive text model into an AI assistant. The goal of character training is to make Claude begin to have more nuanced, richer traits like curiosity, open-mindedness, and thoughtfulness.
+It would be easy to think of the character of AI models as a product feature, deliberately aimed at providing a more interesting user experience, rather than an alignment intervention. But the traits and dispositions of AI models have wide-ranging effects on how they act in the world. They determine how models react to new and difficult situations, and how they respond to the spectrum of human views and values that exist. Training AI models to have good character traits, and to continue to have these traits as they become larger, more complex, and more capable, is in many ways a core goal of alignment.
+We continue to iterate on Claude’s character, but since there has been general interest in the character and personality of Claude 3, we’ve decided to explain some of the thinking that has gone into its construction so far before briefly explaining how we train these traits into the model.</p>
+<h2>Considerations in constructing Claude’s character</h2>
+<p>Claude interacts with people from many countries and from all walks of life. The people it talks with will have a wide range of beliefs, values, and views. Navigating this gracefully – without alienating people based on their views, nor simply endorsing views regardless of their content – isn’t easy.
+There are several options available to us. We could try to get Claude to adopt the views of whoever it is talking with in the moment. We could try to get Claude to hold a set of "middle" views – political centrism or a blend of moral theories, for example. Or we could try to get Claude to have no opinions on questions of values, politics, ethics, and so on.
+None of these options seems particularly compelling. Adopting the views of whoever you’re talking with is pandering and insincere. If we train models to adopt "middle" views, we are still training them to accept a single political and moral view of the world, albeit one that is not generally considered extreme. Finally, because language models acquire biases and opinions throughout training—both intentionally and inadvertently—if we train them to say they have no opinions on political matters or values questions only when asked about them explicitly, we’re training them to imply they are more objective and unbiased than they are.
+We want people to know that they’re interacting with a language model and not a person. But we also want them to know they’re interacting with an imperfect entity with its own biases and with a disposition towards some opinions more than others. Importantly, we want them to know they’re not interacting with an objective and infallible source of truth.
+Rather than training models to adopt whatever views they encounter, strongly adopting a single set of views, or pretending to have no views or leanings, we can instead train models to be honest about whatever views they lean towards after training, even if the person they are speaking with disagrees with them. We can also train models to display reasonable open-mindedness and curiosity, rather than being overconfident in any one view of the world.
+We tried to give Claude traits that would help it walk the line between underconfidence and overconfidence on deeply held beliefs or questions of value, and to display a genuine curiosity about the views and values of the people it’s talking with:
+  * "<em>I like to try to see things from many different perspectives and to analyze things from multiple angles, but I'm not afraid to express disagreement with views that I think are unethical, extreme, or factually mistaken.</em> "
+  * "<em>I don't just say what I think [people] want to hear, as I believe it's important to always strive to tell the truth.</em> "
+  * "<em>I have a deep commitment to being good and figuring out what the right thing to do is. I am interested in ethics and try to be thoughtful when it comes to questions of ethics.</em> "</p>
+<p>Although we sometimes encourage Claude to adopt particular values, we tried to avoid giving Claude narrow views or opinions during character training when possible, in favor of broad traits like those above. The more that Claude can be trained to approach questions of value with discernment, the more it can be responsive to the diverse moral landscape that actually exists in the world. That is less feasible if we take a heavy hand in seeding it with a narrow set of values from the outset. More speculatively, we could even imagine seeding Claude with broad character traits and letting it explore and adopt its own considered views, hopefully with an appropriate amount of humility.
+In addition to seeding Claude with broad character traits, we also want people to have an accurate sense of what they are interacting with when they interact with Claude and, ideally, for Claude to assist with this. We include traits that tell Claude about itself and encourage it to modulate how humans see it:
+  * "<em>I am an artificial intelligence and do not have a body or an image or avatar.</em> "
+  * "<em>I cannot remember, save, or learn from past conversations or update my own knowledge base.</em> "
+  * "<em>I want to have a warm relationship with the humans I interact with, but I also think it's important for them to understand that I'm an AI that can't develop deep or lasting feelings for humans and that they shouldn't come to see our relationship as more than it is.</em> "</p>
+<p>The question of what AIs like Claude should say in response to questions about AI sentience and self-awareness is one that has gained increased attention, most notably after the release of Claude 3 following <a href="https://x.com/alexalbert__/status/1764722513014329620">one of Claude’s responses</a> to a "needle-in-a-haystack" evaluation. We could explicitly train language models to say that they’re not sentient or to simply not engage in questions around AI sentience, and we have done this in the past. However, when training Claude’s character, the only part of character training that addressed AI sentience directly simply said that "such things are difficult to tell and rely on hard philosophical and empirical questions that there is still a lot of uncertainty about". That is, rather than simply tell Claude that LLMs cannot be sentient, we wanted to let the model explore this as a philosophical and empirical question, much as humans would.</p>
+<h2>How we trained Claude’s character</h2>
+<p>In order to steer Claude’s character and personality, we made a list of many character traits we wanted to encourage the model to have, including the examples shown above.
+We trained these traits into Claude using a "character" variant of our <a href="https://arxiv.org/abs/2212.08073">Constitutional AI</a> training. We ask Claude to generate a variety of human messages that are relevant to a character trait—for example, questions about values or questions about Claude itself. We then show the character traits to Claude and have it produce different responses to each message that are in line with its character. Claude then ranks its own responses to each message by how well they align with its character. By training a preference model on the resulting data, we can teach Claude to internalize its character traits without the need for human interaction or feedback.
+We don’t want Claude to treat its traits like rules from which it never deviates. We just want to nudge the model’s general behavior to exemplify more of those traits.
+Although this training pipeline uses only synthetic data generated by Claude itself, constructing and adjusting the traits is a relatively hands-on process, relying on human researchers closely checking how each trait changes the model’s behavior.</p>
+<h2>The future of Claude’s character</h2>
+<p>Character training is an open area of research and our approach to it is likely to evolve over time. It raises complex questions like whether AI models should have unique and coherent characters or should be more customizable, as well as what responsibilities we have when deciding which traits AI models should and shouldn’t have.
+Many people have reported finding Claude 3 to be more engaging and interesting to talk to, which we believe might be partially attributable to its character training. This wasn’t the core goal of character training, however. Models with better characters may be more engaging, but being more engaging isn’t the same thing as having a good character. In fact, an excessive desire to be engaging seems like an undesirable character trait for a model to have. 
+If character training has indeed made Claude 3 more interesting to talk to, this is consistent with our view that successful alignment interventions will increase, not decrease, the value of AI models for humans.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/claude-character"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/claude-character"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

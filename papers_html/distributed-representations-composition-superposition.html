@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distributed Representations: Composition &amp; Superposition</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>分布式表征：组合与叠加</h1>
+<div class="meta">
+Distributed Representations: Composition &amp; Superposition · May 4, 2023 · Interpretability · <a href="https://www.anthropic.com/research/distributed-representations-composition-superposition" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文是Anthropic对“分布式表征”概念的思考笔记。论文指出“分布式表征”其实包含两个不同的观念——“组合”与“叠加”。组合指多个特征分布在不同神经元上协同表达信息；叠加指神经网络用远少于特征数量的神经元，通过高维空间方式存储远超维度的概念。两者在泛化能力和可线性计算的性质上差异很大，且存在根本性的权衡与张力。作者借用Thorpe关于形状与颜色编码的经典例子，提出不应把它们看作“局部—分布式”的单一谱系，而应看作组合与叠加两个维度的变化，从而更深入理解神经网络如何表示与存储知识。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">分布式表征：信息不存放在单个神经元，而是分散在大量神经元上共同编码</span><span class="term">叠加（superposition）：模型用有限神经元在高维空间里压缩存储远超维度的概念</span><span class="term">组合（composition）：多个特征以不同方式组合起来表达复杂信息</span><span class="term">神经元（neuron）：神经网络中的基本计算单元，类似大脑神经细胞</span><span class="term">维度灾难：数据维度越高，需处理的组合空间越庞大、越难处理的问题</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 可解释性</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/distributed-representations-composition-superposition</li>
+</ul>
+<p>可解释性研究
+2023 年 5 月 4 日
+<a href="https://transformer-circuits.pub/2023/superposition-composition/index.html">阅读论文</a></p>
+<h2>摘要</h2>
+<p>分布式表征是神经科学和联结主义 AI 方法中的经典思想。我们经常被问到我们关于叠加的工作与它的关系。自从发表我们关于叠加的<a href="https://transformer-circuits.pub/2022/toy_model/index.html">原始论文</a>以来，我们有更多时间反思这两个主题之间的关系，并与人们讨论，因此想扩展我们<a href="https://transformer-circuits.pub/2022/toy_model/index.html#related-codes">早期在相关工作部分</a>的讨论，分享一些想法。（我们非常关注叠加和分布式表征的结构，因为将表征分解为独立组件<a href="https://transformer-circuits.pub/2022/mech-interp-essay/index.html">是摆脱维数灾难</a>和理解神经网络所必需的。）</p>
+<p>在我们看来，"分布式表征"可能被理解为包含两个不同的思想，我们将它们称为"组合"（composition）和"叠加"（superposition）。1 这两种不同的分布式表征概念在泛化以及可以从它们线性计算什么函数方面具有非常不同的性质。虽然一种表征可以同时使用两者，但存在一种使它们从根本上处于紧张关系的权衡！2  </p>
+<p>为使这一点具体化，我们将考虑神经元可能表征不同颜色形状的几种潜在方式。这些可爱的例子借自 <a href="https://persee.fr/doc/intel_0769-4113_1989_num_8_2_873">Thorpe (1989)</a>，他创建这些例子是为了展示神经科学中"局部编码"（local code）和"分布式编码"（distributed code）思想之间的各种可能性。Thorpe 提供了四种示例编码——"局部"、"半局部"、"半分布式"和"高度分布式"。传统上，这些可能被视为处于"局部"和"分布式"之间的谱系上。我们将再次考虑这些例子，并提出一种替代观点，即这些例子反而在叠加和组合这两个不同维度上变化。  </p>
+<p>按照 Thorpe 的做法，本文档将聚焦于神经元具有二元激活的示例。这显著简化了可能性空间，但它仍然是一个足够丰富的空间，可以提出有趣的问题
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/distributed-representations-composition-superposition"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/distributed-representations-composition-superposition"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>一个未发布的研究版 Claude 在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而构建的数字签名方案。第二个攻击发现了一种攻击缩减轮数 AES（使用最广泛的分组密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>项目 Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，考察 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Distributed Representations: Composition &amp; Superposition</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/distributed-representations-composition-superposition</li>
+</ul>
+<h1>Distributed Representations: Composition &amp; Superposition</h1>
+<p>May 4, 2023
+<a href="https://transformer-circuits.pub/2023/superposition-composition/index.html">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>Distributed representations are a classic idea in both neuroscience and connectionist approaches to AI. We're often asked how our work on superposition relates to it. Since publishing our <a href="https://transformer-circuits.pub/2022/toy_model/index.html">original paper</a> on superposition, we've had more time to reflect on the relationship between the topics and discuss it with people, and wanted to expand on our <a href="https://transformer-circuits.pub/2022/toy_model/index.html#related-codes">earlier discussion</a> in the related work section and share a few thoughts. (We care a lot about superposition and the structure of distributed representations because decomposing representations into independent components <a href="https://transformer-circuits.pub/2022/mech-interp-essay/index.html">is necessary to escape the curse of dimensionality</a> and understand neural networks.)  </p>
+<p>It seems to us that "distributed representations" might be understood as containing two different ideas, which we'll call "composition" and "superposition". 1 These two different notions of distributed representations have very different properties in terms of generalization and what functions can be linearly computed from them. And while a representation can use both, there's a trade-off that puts them fundamentally in tension! 2  </p>
+<p>To make this concrete, we'll consider a few potential ways neurons might represent shapes of different colors. These lovely examples are borrowed from <a href="https://persee.fr/doc/intel_0769-4113_1989_num_8_2_873">Thorpe (1989)</a>, who created them to demonstrate various possibilities between the idea of a "local code" and a "distributed code" in neuroscience. Thorpe provides four example codes – "local", "semi-local", "semi-distributed", and "high-distributed". These might traditionally be seen as being on a spectrum between being "local" and "distributed". We'll consider these examples again and offer an alternative view in which the examples instead vary on two different dimensions of superposition and composition.  </p>
+<p>Following Thorpe, this note will focus on examples where neurons have binary activations. This significantly simplifies the space of possibilities, but it's still a rich enough space to have interesting questions
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/distributed-representations-composition-superposition"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/distributed-representations-composition-superposition"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

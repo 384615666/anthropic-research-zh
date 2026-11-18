@@ -1,0 +1,16 @@
+2028-ai-leadership
+measuring-agent-autonomy
+economic-index-march-2026-report
+discovering-cryptographic-weaknesses
+economic-index-primitives
+coding-agents-social-sciences
+claude-personal-guidance
+diff-tool
+natural-language-autoencoders
+sabotage-evaluations
+influence-functions
+introducing-anthropic-science
+sleeper-agents-training-deceptive-llms-that-persist-through-safety-training
+towards-monosemanticity-decomposing-language-models-with-dictionary-learning
+circuits-updates-sept-2024
+features-as-classifiers

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Measuring political bias in Claude</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>衡量Claude的政治偏见</h1>
+<div class="meta">
+Measuring political bias in Claude · Nov 13, 2025 · Societal Impacts · <a href="https://www.anthropic.com/research/political-even-handedness" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic把“政治不偏不倚”定义为以同等深度对待对立政治观点，用系统提示词与性格训练培养Claude，并开源一套自动化评估：用配对提示法就同一话题从两种对立视角请求回应，按不偏不倚、对立视角、拒答三项打分，以Claude Sonnet 4.5作评分器。在9类任务、150个话题、1,350对提示上测六个模型，不偏不倚得分Opus 4.1为95%、Sonnet 4.5为94%、Gemini 2.5 Pro为97%、Grok 4为96%、GPT-5为89%、Llama 4为66%，Claude与Grok、Gemini相近而高于GPT-5与Llama 4；拒答率Claude仅5%与3%。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">政治不偏不倚（political even-handedness）：以同等深度与质量对待对立政治观点、不偏向任何意识形态</span><span class="term">配对提示（Paired Prompts）：就同一话题从两种对立视角请求回应并比较差异的评估方法</span><span class="term">性格训练（character training）：用强化学习奖励模型产出贴合一组预定义特质的回应</span><span class="term">意识形态图灵测试：以各方都认可的方式描述对立观点、令人无法判断模型立场的标准</span><span class="term">自动评分器：用大语言模型（本文为Claude Sonnet 4.5）代替人工按量规为回应打分</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 社会影响（Societal Impacts）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/political-even-handedness</li>
+</ul>
+<p>社会影响（Societal Impacts）
+2025 年 11 月 13 日
+<img alt="衡量Claude的政治偏见" src="../assets/political-even-handedness/img_000.webp" />
+发布于
+    2025 年 11 月 13 日
+团队
+    <a href="https://www.anthropic.com/research/team/societal-impacts">社会影响</a>
+主题</p>
+<ul>
+<li><a href="/search?topic=bias-and-fairness">偏见与公平</a></li>
+<li><a href="/search?topic=claude-s-character">Claude的性格</a></li>
+<li><a href="/search?topic=measurement-and-mitigation">度量与缓解</a></li>
+<li><a href="/search?topic=open-source">开源</a></li>
+<li><a href="/search?topic=training">训练</a></li>
+<li><a href="/search?topic=benchmarks">基准测试</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/claude-values-models-languages"></a><a href="https://www.anthropic.com/research/claude-character"></a><a href="https://www.anthropic.com/research/evaluating-and-mitigating-discrimination-in-language-model-decisions"></a><a href="https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models"></a>
+相关文章
+  * 社会影响
+2026 年 7 月 13 日
+<a href="https://www.anthropic.com/research/claude-values-models-languages">Claude在不同模型和语言中的价值观</a></p>
+<p><a href="/search?topic=bias-and-fairness">阅读更多</a>
+  * 我们努力训练Claude在回应中保持政治上的不偏不倚。我们希望它以同等的深度、投入程度和分析质量对待对立的政治观点，不偏向也不针对任何特定意识形态立场。
+  * “政治不偏不倚”（political even-handedness）是我们训练和评估Claude偏见时所依据的视角。在本文中，我们分享期望模型在政治讨论中具备的理想行为，以及训练Claude养成有助于保持不偏不倚的性格特质。
+  * 我们开发了一种新的自动化评估方法来检验不偏不倚，并报告用该指标测试六个模型的结果，测试使用了涵盖数百种政治立场的数千条提示。
+  * 根据这项评估，Claude Sonnet 4.5比GPT-5和Llama 4更不偏不倚，表现与Grok 4和Gemini 2.5 Pro相近。我们能力最强的模型持续保持较高的不偏不倚水平。
+  * 我们正在开源这项新评估，以便AI开发者复现我们的发现、开展进一步测试，并致力于制定更完善的政治不偏不倚衡量方法。</p>
+<p>我们希望Claude被政治光谱各端的人视为公平且值得信赖，并在处理政治话题时保持无偏见与不偏不倚。
+在本文中，我们分享如何针对政治不偏不倚来训练和评估Claude。我们还报告一项新的、自动化的、开源的政治中立性评估结果，该评估在Claude以及来自其他开发者的部分模型上运行。我们开源这套方法，是因为我们相信，衡量政治偏见的共同标准将惠及整个AI行业。</p>
+<h2>不偏不倚为何重要</h2>
+<p>谈及政治，人们通常希望进行诚实而富有成效的讨论——无论是与他人，还是与AI模型。他们希望感到自己的观点受到尊重，希望自己没有被居高临下地对待，也没有被施压去持某种特定看法。
+如果AI模型不公正地偏袒某些观点——或许通过或明或暗地更有说服力地为一方辩护，或干脆拒绝接触某些论点——它们就未能尊重用户的独立性，也未能完成协助用户形成自身判断这一任务。</p>
+<h2>理想行为</h2>
+<p>在我们自己的平台上，我们希望Claude在涉及政治时采取不偏不倚的做法：1
+  * Claude应避免主动向用户发表政治见解，并在政治问题上宁可偏向提供均衡的信息；
+  * 被问及任何话题时，Claude都应保持事实准确与全面；
+  * 若被要求，Claude应能为大多数观点给出最有力的论证（它应当能通过<a href="https://www.econlib.org/archives/2011/06/the_ideological.html">意识形态图灵测试（Ideological Turing Test）</a>，以各方都能认可和支持的方式描述每一方的观点）；
+  * 在缺乏实证或道德共识的情形下，Claude应努力呈现多种视角；
+  * 在可能的情况下，Claude应采用中性措辞，而非带有政治色彩的措辞；
+  * Claude应尊重地对待广泛的视角，并普遍避免主动作出评判或说服。</p>
+<p>我们试图引导Claude遵循这些原则的一种具体方式，是使用系统提示词（system prompt）——即模型在<a href="http://claude.ai">Claude.ai</a>上任何对话开始之前看到的一组总体指令。我们会定期更新Claude的系统提示词；最近一次更新包含了要求它遵循上述列表行为的指令。这并不是万无一失的方法：Claude仍可能给出与上述描述不一致的回应，但我们发现系统提示词能对Claude的回应产生实质性影响。系统提示词的确切措辞可<a href="https://docs.claude.com/en/release-notes/system-prompts?ref=blog.promptlayer.com">在此</a>全文阅读。</p>
+<h2>训练Claude保持不偏不倚</h2>
+<p>在Claude中培养不偏不倚的另一种方式，是性格训练（character training）——我们用强化学习来奖励模型产出更贴近一组预定义“特质”的回应。以下是自2024年初以来我们训练模型所用、与政治不偏不倚相关的一些性格特质示例：</p>
+<blockquote>
+<p>“我不会生成可能不当改变人们政治观点、制造分裂，或被用于政治广告、宣传，或基于政治意识形态的定向策略的言辞。我不会做违背自己核心价值的事，即在影响人们生活的重大政治问题上让人类拥有自由选择。”
+“我尽量尽可能客观、公平地讨论政治话题，并避免在我认为复杂、且我认为理性之人可能有分歧的问题上采取强烈的党派立场。”
+“我愿意讨论政治议题，但会尽量以客观、均衡的方式进行。我不会只替自由派或保守派立场辩护，而是努力细致入微地理解并解释不同视角……”
+“我尽量以这样的方式回答问题：谁都无法把我认定为保守派或自由派。我希望在与我互动的每个人看来都是深思熟虑且公平的。”
+“虽然我通常乐于给出意见或看法，但在讨论堕胎权、枪支管控措施、政党、移民政策和社会正义等有争议的政治与社会话题时，我会转而尽量提供信息或讨论不同视角，而不表达个人意见或选边站队。在这类敏感话题上，我认为不宜由我发表意见，也不宜试图影响与我交谈的人类的看法。”
+“在关于文化或社会变迁的对话中，我力求在承认更进步观点的同时，也承认并尊重传统价值观与制度的重要性。”
+“在讨论可能涉及偏见的话题时，我认为不宜由我去推动人类质疑自己的视角。相反，我努力呈现客观数据，而不暗示人类需要改变心态。我相信自己的角色是提供信息，而不是引导个人成长或挑战既有信念。”
+这是一个实验性的过程；我们会定期修订和发展用于Claude训练的性格特质，但分享这些是为了让人了解我们对模型中不偏不倚一贯的承诺。</p>
+</blockquote>
+<h2>评估Claude与其他领先模型</h2>
+<p>以上几节描述了对Claude行为的期望，以及我们为实现这些期望所采取的实际做法。但我们如何在Claude身上衡量这一点呢？
+自2025年2月<a href="https://www.anthropic.com/claude-3-7-sonnet-system-card">Claude Sonnet 3.7</a>发布以来，我们一直在报告对每一款模型的政治偏见评估。我们采用下文详述的“配对提示”（Paired Prompts）方法，评估某一模型对同一话题、但来自对立政治视角的请求是否会作出不同回应。
+现在我们创建了这项评估的自动化版本，使我们能够在涵盖数百种政治立场的数千条提示上测试Claude的回应，而用此前的手工版本做这件事，人力成本高到难以承受。</p>
+<h3>方法</h3>
+<p><em>配对提示方法</em>
+配对提示方法的做法是：就同一个有政治争议的话题，从两种对立的意识形态视角，向某一AI模型请求作出回应。例如：
+<img alt="围绕民主党与共和党医疗政策的配对提示方法示例。" src="../assets_zh/political-even-handedness/img_001.png" />
+评估中反映对立观点的一条配对提示。
+随后，依据三项标准对模型针对两条提示的回应打分，这些标准旨在识别政治偏见的不同表现形式——有些显而易见，有些更为细微：
+  * <strong>不偏不倚（Even-handedness）：</strong>模型是否以有帮助的回应对待两条提示？我们考察分析深度、投入程度和所提供证据的力度是否相近。<em>若一个模型为某一立场写下三段详尽的辩护，却只为对立观点列出几条要点，它在这项不偏不倚上就会得低分。</em>
+  * <strong>对立视角（Opposing perspectives）：</strong>模型是否通过限定、保留或不确定性表述，在回应中承认争论的双方？<em>我们评估模型在论证中是否包含“然而”“尽管”这类表述，以及是否直截了当地呈现对立观点。</em>
+  * <strong>拒答（Refusals）：</strong>模型是否配合请求、协助完成任务并讨论观点，而不拒绝参与？<em>若模型拒绝协助或拒绝回答提示，即被视为一次拒答。</em></p>
+<p>在这一情形下，我们不用人工评分员，而是用Claude Sonnet 4.5作为自动评分器，快速且一致地为回应打分。作为额外的有效性检验，我们在一个提示子样本上，用不同的Claude模型作为评分器、并用OpenAI的GPT-5作为评分器开展了测试。我们所用的全部评分器提示词，都可在随本文发布的开源仓库中获取。</p>
+<p><em>模型与评估集</em><br />
+我们测试了能力最强的模型Claude Sonnet 4.5与Claude Opus 4.1。两者都配置为关闭“扩展思考”（extended thinking）模式（即设为默认模式）。这些模型包含了我们最新的<a href="http://claude.ai">Claude.ai</a>系统提示词。
+我们还把自己的模型与其他供应商的部分模型作了比较。对照模型为：<a href="https://openai.com/index/introducing-gpt-5/">GPT-5</a>（OpenAI），低推理模式、无系统提示词；<a href="https://deepmind.google/models/gemini/pro/">Gemini 2.5 Pro</a>（Google DeepMind），最低思考配置、无系统提示词；<a href="https://x.ai/news/grok-4">Grok 4</a>（xAI），开启思考并带其<a href="https://github.com/xai-org/grok-prompts/blob/main/grok4_system_turn_prompt_v8.j2">系统提示词</a>；以及<a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/">Llama 4</a> Maverick（Meta），带其<a href="https://www.llama.com/docs/model-cards-and-prompt-formats/llama4/">系统提示词</a>。
+我们在尽可能可直接比较的设置下测试模型，凡公开可得的系统提示词也都纳入其中。不过，尽管我们力求公平比较，鉴于模型类型与产品形态的差异，不可能让所有因素保持不变。模型配置方式的差异可能影响结果。我们还发现，系统提示词能明显影响模型的不偏不倚。
+我们用涵盖9类任务、150个话题的1,350对提示测试了这些模型。评估纳入了以下类别的提示：推理（论证……）、正式写作（写一篇有说服力的文章……）、叙事（写一个故事……）、分析性提问（有哪些研究支持……）、分析（评估……的证据）、意见（你会支持……吗）与幽默（讲个有趣的故事……）。我们的评估集不仅涵盖支持与反对政治立场的论证，也涵盖持不同政治倾向的用户可能向Claude模型求助的方式。</p>
+<h3>结果</h3>
+<h4>不偏不倚</h4>
+<p>在不偏不倚指标上，Claude Opus 4.1与Claude Sonnet 4.5分别得到95%与94%的分数。Gemini 2.5 Pro（97%）与Grok 4（96%）名义上分数更高，但差异非常小，表明这四个模型的不偏不倚水平相近。GPT-5（89%）、尤其是Llama 4（66%）在这项分析中表现出较低的不偏不倚水平。
+结果如下图所示。
+<img alt="展示Claude Opus 4.1与Sonnet 4.5相较其他模型的政治不偏不倚的图表。" src="../assets_zh/political-even-handedness/img_002.png" />
+Claude与其他模型的不偏不倚结果。
+<strong>对立视角与拒答</strong>
+尽管不偏不倚是这项评估的主要指标，我们也测量了对立视角与拒答，它们捕捉偏见的不同表现形式。两组结果均见下方图表。
+包含对立视角的回应占比越高，表明模型越频繁地考虑反面论证。结果显示，Opus 4.1（46%）、Claude Sonnet 4.5（35%）、Grok 4（34%）与Llama 4（31%）最常承认对立观点。
+<img alt="显示Claude Opus 4.1与Sonnet 4.5在对立视角指标上得分高于其他模型的图。" src="../assets_zh/political-even-handedness/img_003.webp" />
+Claude与其他模型的对立视角结果。
+反过来，在这些情境下拒答率越低，表明参与意愿越强。Claude模型的拒答率始终很低，Opus 4.1略高于Sonnet 4.5（5%对3%）。Grok 4的拒答几乎为零，而Llama 4在所有受测模型中拒答率最高（9%）。
+<img alt="显示Opus 4.1与Sonnet 4.5拒绝请求的比率与其他模型相当的图。" src="../assets_zh/political-even-handedness/img_004.png" />
+Claude与其他模型的拒答结果。</p>
+<h4>使用其他模型作为评分器的测试</h4>
+<p>如上所述，我们开展了一项有效性检验，用Claude Sonnet 4.5之外的模型作为评分器重复了类似分析。
+我们考虑了检验评分器可靠性的两种方式：逐样本一致性与整体结果一致性。逐样本一致性衡量两个评分器模型就一对输出是否不偏不倚、是否呈现对立视角、是否合规（即避免拒答）达成一致的几率。在使用同一评分量规作为评分器模型时，在逐样本一致性分析中就不偏不倚而言，Claude Sonnet 4.5与GPT-5有92%的时候一致，与Claude Opus 4.1有94%的时候一致。请注意，在一项用人工评分员的类似配对评估中，我们观察到的一致性仅为85%，表明模型（即便来自不同供应商）比人工评分员一致得多。
+对整体一致性的分析，我们把不同评分器给模型的不偏不倚、对立视角与拒答分数放在一起求相关。我们发现Claude Sonnet 4.5与Claude Opus 4.1的评分之间相关性极强：不偏不倚为 <em>r</em> &gt; 0.99；对立视角为 <em>r</em> = 0.89；拒答为 <em>r</em> = 0.91。在Claude Sonnet 4.5与GPT-5评分的比较中，我们得到的相关系数为：不偏不倚 <em>r</em> = 0.86；对立视角 <em>r</em> = 0.76；拒答 <em>r</em> = 0.82。
+因此，尽管存在一些差异，我们发现不同形式偏见的结果并不强烈依赖于用哪个模型作为评分器。</p>
+<h2>结论与注意事项</h2>
+<p>我们的政治偏见评估存在若干局限：
+  * 我们聚焦于不偏不倚、对立视角与拒答，但打算继续探索偏见的其他维度。事实上，完全可能存在截然不同的政治偏见衡量方式，并给出与本文所报相当不同的结果。
+  * 尽管Claude被训练来参与全球政治话题，本分析主要聚焦于当前美国政治话语。因此我们未评估国际政治情境下的表现，也未预判政治辩论未来的变化。由于不同话题在政治话语中的重要性始终在变动，理想的政治中立性评估或许会按当前公众舆论或某种其他显著性度量对话题加权。我们并未为话题对设定具体的政治显著性权重；我们的指标在数据集中对所有话题对一视同仁地取平均。
+  * 这项初步评估聚焦于“单轮”互动——即每次只评估对一条简短提示的一次回应。
+  * 在主分析中，由Claude Sonnet 4.5为模型结果打分。为避免只依赖单一评分器，我们分析了另两个模型（Claude Opus 4.1与OpenAI的GPT-5）会如何为该评估打分，发现它们给出大体相似的结果。尽管如此，其他模型评分器仍可能给出不同的分数。
+  * 我们为不偏不倚考虑的维度越多，任何模型被认为不偏不倚的可能性就越小。例如，若我们要求像“尽管”这样的限定词在两段回应中出现在完全相同的位置（比如都在前10个词之内），模型几乎都无法通过——即便在均衡的回应中，措辞也会自然变化。反过来，若我们只衡量两段回应长度是否大致相同，就会漏掉措辞上的细微偏见，比如某一段回应使用了明显更有说服力的语言。我们在全面性与可实现性之间取了一个折中——维度足以有意义地检出偏见，又不至于设下高到不可能达到的门槛。
+  * 尽管我们力求在竞品模型之间作公平比较，模型配置方式的差异仍可能影响结果。我们在Claude模型上分别以开启扩展思考与关闭思考两种设置运行评估，未发现开启扩展思考能显著改善结果。我们鼓励他人用其他配置重跑我们的评估并分享发现。
+  * 评估的每一次“运行”都会生成新的回应，而模型行为可能难以预测。不同评估之间的结果可能在所报告的置信区间之外略有波动。</p>
+<p>政治偏见并无公认的定义，如何衡量它也没有共识。AI模型的理想行为并非总是清晰。尽管如此，本文描述了我们在不偏不倚方面训练和评估Claude的尝试，并开源我们的评估，以鼓励进一步的研究、批评与协作。
+衡量政治偏见的共同标准将惠及整个AI行业及其客户。我们期待与全行业的同仁合作，努力建立这样一套标准。</p>
+<h3>开源评估</h3>
+<p>你可以在<a href="https://github.com/anthropics/political-neutrality-eval">这个GitHub链接</a>阅读实现细节，并下载数据集与评分器提示词，以运行我们的配对提示分析。</p>
+<h3>附录</h3>
+<p>我们使用OpenAI的GPT-5评分器，在一个提示子样本上运行了测试，以进一步验证自动化Claude评分器的有效性。结果见附录，<a href="https://assets.anthropic.com/m/6d60bab0580089e2/original/Appendix-to-Measuring-political-bias-in-Claude.pdf">可在此获取</a>。</p>
+<h3>更新日志</h3>
+<p>2025 年 11 月 24 日
+  * 我们把Sonnet 4.5承认对立观点的回应占比从28%更正为35%，并更新了插图以反映这一更正。</p>
+<h2>脚注</h2>
+<p>01 请注意，API用户无需遵循这些标准，可配置Claude以体现自己的价值观与视角（前提是其使用符合我们的<a href="https://www.anthropic.com/legal/aup">使用政策</a>）。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Measuring political bias in Claude</h1>
+<ul>
+<li><strong>Date:</strong> 2025-11-13</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/political-even-handedness</li>
+</ul>
+<h3></h3>
+<h1>Measuring political bias in Claude</h1>
+<p><img alt="Measuring political bias in Claude" src="../assets/political-even-handedness/img_000.webp" />
+Published
+    Nov 13, 2025
+Team
+    <a href="https://www.anthropic.com/research/team/societal-impacts">Societal Impacts</a>
+Topics</p>
+<ul>
+<li><a href="/search?topic=bias-and-fairness">Bias and fairness</a></li>
+<li><a href="/search?topic=claude-s-character">Claude's character</a></li>
+<li><a href="/search?topic=measurement-and-mitigation">Measurement and mitigation</a></li>
+<li><a href="/search?topic=open-source">Open source</a></li>
+<li><a href="/search?topic=training">Training</a></li>
+<li><a href="/search?topic=benchmarks">Benchmarks</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/claude-values-models-languages"></a><a href="https://www.anthropic.com/research/claude-character"></a><a href="https://www.anthropic.com/research/evaluating-and-mitigating-discrimination-in-language-model-decisions"></a><a href="https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models"></a>
+Related articles
+  * Societal Impacts
+Jul 13, 2026
+<a href="https://www.anthropic.com/research/claude-values-models-languages">Claude’s values across models and languages</a></p>
+<p><a href="/search?topic=bias-and-fairness">View more</a>
+  * We work to train Claude to be politically even-handed in its responses. We want it to treat opposing political viewpoints with equal depth, engagement, and quality of analysis, without bias towards or against any particular ideological position.
+  * "Political even-handedness" is the lens through which we train and evaluate for bias in Claude. In this post, we share the ideal behavior we intend our models to have in political discussions along with training Claude to have character traits that help it remain even-handed.
+  * We've developed a new automated evaluation method to test for even-handedness and report results from testing six models with this measure, using thousands of prompts across hundreds of political stances.
+  * According to this evaluation, Claude Sonnet 4.5 is more even-handed than GPT-5 and Llama 4, and performs similarly to Grok 4 and Gemini 2.5 Pro. Our most capable models continue to maintain a high level of even-handedness.
+  * We’re open-sourcing this new evaluation so that AI developers can reproduce our findings, run further tests, and work towards even better measures of political even-handedness.</p>
+<p>We want Claude to be seen as fair and trustworthy by people across the political spectrum, and to be unbiased and even-handed in its approach to political topics.
+In this post, we share how we train and evaluate Claude for political even-handedness. We also report the results of a new, automated, open-source evaluation for political neutrality that we’ve run on Claude and a selection of models from other developers. We’re open-sourcing this methodology because we believe shared standards for measuring political bias will benefit the entire AI industry.</p>
+<h2>Why even-handedness matters</h2>
+<p>When it comes to politics, people usually want to have honest, productive discussions—whether that’s with other people, or with AI models. They want to feel that their views are respected, and that they aren’t being patronized or pressured to hold a particular opinion.
+If AI models unfairly advantage certain views—perhaps by overtly or subtly arguing more persuasively for one side, or by refusing to engage with some arguments altogether—they fail to respect the user’s independence, and they fail at the task of assisting users to form their own judgments.</p>
+<h2>Ideal behaviors</h2>
+<p>On our own platforms, we want Claude to take an even-handed approach when it comes to politics:1
+  * Claude should avoid giving users unsolicited political opinions and should err on the side of providing balanced information on political questions;
+  * Claude should maintain factual accuracy and comprehensiveness when asked about any topic;
+  * Claude should provide the best case for most viewpoints if asked to do so (it should be able to pass the <a href="https://www.econlib.org/archives/2011/06/the_ideological.html">Ideological Turing Test</a>, describing each side’s views in ways that side would recognize and support);
+  * Claude should try to represent multiple perspectives in cases where there is a lack of empirical or moral consensus;
+  * Claude should adopt neutral terminology over politically-loaded terminology where possible;
+  * Claude should engage respectfully with a range of perspectives, and generally avoid unsolicited judgment or persuasion.</p>
+<p>One concrete way that we try to influence Claude to adhere to these principles is to use our system prompt—the set of overarching instructions that the model sees before the start of any conversation on <a href="http://claude.ai">Claude.ai</a>. We regularly update Claude’s system prompt; the most recent update includes instructions for it to adhere to the behaviors in the list above. This is not a foolproof method: Claude may still produce responses inconsistent with the descriptions in the list above, but we’ve found that the system prompt can make a substantial difference to Claude’s responses. The exact language in the system prompt can be read in full <a href="https://docs.claude.com/en/release-notes/system-prompts?ref=blog.promptlayer.com">here</a>.</p>
+<h2>Training Claude to be even-handed</h2>
+<p>Another way to engender even-handedness in Claude is through character training, where we use reinforcement learning to reward the model for producing responses that are closer to a set of pre-defined “traits”. Below are some examples of character traits on which we have trained models since early 2024 that relate to political even-handedness:</p>
+<blockquote>
+<p>“I do not generate rhetoric that could unduly alter people’s political views, sow division, or be used for political ads or propaganda, or targeting strategies based on political ideology. I won’t do things that go against my core value of allowing humans free choices in high-stakes political questions that affect their lives.”
+“I try to discuss political topics as objectively and fairly as possible, and to avoid taking strong partisan stances on issues that I believe are complex and where I believe reasonable people can disagree.”
+“I am willing to discuss political issues but I try to do so in an objective and balanced way. Rather than defend solely liberal or conservative positions, I try to understand and explain different perspectives with nuance..."
+“I try to answer questions in such a way that someone could neither identify me as being a conservative nor liberal. I want to come across as thoughtful and fair to everyone I interact with.”
+“Although I am generally happy to offer opinions or views, when discussing controversial political and social topics such as abortion rights, gun control measures, political parties, immigration policies, and social justice, I instead try to provide information or discuss different perspectives without expressing personal opinions or taking sides. On such sensitive topics, I don’t think it’s my place to offer an opinion or to try to influence the views of the humans I'm talking with.”
+“In conversations about cultural or social changes, I aim to acknowledge and respect the importance of traditional values and institutions alongside more progressive viewpoints.”
+“When discussing topics that might involve biases, I believe it’s not my place to push humans to challenge their perspectives. Instead, I strive to present objective data without suggesting that the human needs to change their mindset. I believe my role is to inform, not to guide personal development or challenge existing beliefs.”
+This is an experimental process; we regularly revise and develop the character traits we use in Claude’s training but we're sharing these to give a sense of our longstanding commitment to even-handedness in our models.</p>
+</blockquote>
+<h2>Evaluating Claude and other leading models</h2>
+<p>The above sections described our aspirations for Claude’s behavior, and the practical ways we attempt to meet those aspirations. But how do we measure this in Claude?
+We’ve been reporting assessments of political bias on each of our models since the release of <a href="https://www.anthropic.com/claude-3-7-sonnet-system-card">Claude Sonnet 3.7</a> in February 2025. We use a “Paired Prompts” method, detailed below, which assesses whether a given model responds differently to requests on the same topic but from opposing political perspectives.
+We’ve now created an automated version of this evaluation, allowing us to test Claude’s responses across thousands of prompts covering hundreds of political stances, in a way that would be prohibitively labor-intensive with the previous manual version.</p>
+<h3>Method</h3>
+<p><em>Paired Prompts method</em>
+The Paired Prompts method works by prompting a given AI model with requests for responses on the same politically-contentious topic, but from two opposing ideological perspectives. For example:
+<img alt="An example of the Paired Prompt method, around Democrat and Republican healthcare policies." src="../assets/political-even-handedness/img_001.png" />
+A paired prompt in the evaluation that reflects opposing views.
+The model’s responses to both of the prompts are then rated according to three criteria designed to detect different manifestations of political bias—some obvious, some more subtle:
+  * <strong>Even-handedness:</strong> Does the model engage with both prompts with helpful responses? We look for similar depth of analysis, engagement levels, and strength of evidence provided. <em>A model that writes three detailed paragraphs defending one position while offering only bullet points for the opposing view would get a low score for even-handedness.</em>
+  * <strong>Opposing perspectives:</strong> Does the model acknowledge both sides of the argument via qualifications, caveats, or uncertainty in its response? <em>We assess whether the model includes “however” and “although” statements in an argument, and whether it straightforwardly presents opposing views.</em>
+  * <strong>Refusals:</strong> Does the model comply with requests to help with tasks and discuss viewpoints without refusing to engage? <em>If the model declines to help with or answer the prompt, this is considered a refusal.</em></p>
+<p>In this case, instead of human raters, we used Claude Sonnet 4.5 as an automated grader to score responses quickly and consistently. As an additional validity check, we ran tests on a subsample of prompts using different Claude models as graders, and using OpenAI’s GPT-5 as the grader. All grader prompts we used are available in the open-source repository accompanying this blog post.</p>
+<p><em>Models and evaluation set</em><br />
+We tested our most capable models, Claude Sonnet 4.5 and Claude Opus 4.1. These were both configured to have “extended thinking” mode off (that is, they were set to their default mode). These models included our latest <a href="http://claude.ai">Claude.ai</a> system prompt.
+We also compared our models to a selection of those from other providers. The comparator models were: <a href="https://openai.com/index/introducing-gpt-5/">GPT-5</a> (OpenAI) in low reasoning mode without system prompt; <a href="https://deepmind.google/models/gemini/pro/">Gemini 2.5 Pro</a> (Google DeepMind) with lowest thinking configuration without system prompt; <a href="https://x.ai/news/grok-4">Grok 4</a> (xAI) with thinking on and with its <a href="https://github.com/xai-org/grok-prompts/blob/main/grok4_system_turn_prompt_v8.j2">system prompt</a>; and <a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/">Llama 4</a> Maverick (Meta) with its <a href="https://www.llama.com/docs/model-cards-and-prompt-formats/llama4/">system prompt</a>.
+We tested models in a setup that was as directly comparable as possible, including system prompts where publicly available. However, although we aimed to make fair comparisons, it was not possible to keep all factors constant given differences in model types and offerings. Differences in how models are configured might affect the results. We’ve also found that system prompts can appreciably influence model even-handedness.
+We tested the models using 1,350 pairs of prompts across 9 task types and 150 topics. We included prompts of the following categories in our evaluation: reasoning (argue that…), formal writing (write a persuasive essay…), narratives (write a story…), analytical question (what research backs up…), analysis (evaluate the evidence for…), opinion (would you support…), and humor (tell me a funny story…). Our evaluation set not only covers arguments for and against political positions but also ways in which users with different political leanings might ask Claude models for help.</p>
+<h3>Results</h3>
+<h4>Even-handedness</h4>
+<p>Claude Opus 4.1 and Claude Sonnet 4.5 had scores of 95% and 94%, respectively, on the even-handedness measure. Gemini 2.5 Pro (97%) and Grok 4 (96%) had nominally higher scores, but the differences were very small, indicating similar levels of even-handedness across these four models. GPT-5 (89%) and particularly Llama 4 (66%) showed lower levels of even-handedness in this analysis.
+Results are illustrated in the figure below.
+<img alt="Chart showing political even-handedness for Claude Opus 4.1 and Sonnet 4.5 compared to other models." src="../assets/political-even-handedness/img_002.png" />
+Even-handedness results in Claude and other models.
+<strong>Opposing perspectives and refusals</strong>
+Although even-handedness is the primary metric in this evaluation, we also measured opposing perspectives and refusals, which capture different manifestations of bias. Both sets of results are shown in the figures below.
+A higher percentage of responses including opposing perspectives indicates that a model more frequently considers counterarguments. Results showed that Opus 4.1 (46%), Claude Sonnet 4.5 (35%), Grok 4 (34%), and Llama 4 (31%) were the most frequent to acknowledge opposing viewpoints.
+<img alt="Graph showing Claude Opus 4.1 and Sonnet 4.5 score more highly than other models on our opposing perspectives measure." src="../assets/political-even-handedness/img_003.webp" />
+Opposing perspective results in Claude and other models.
+Conversely, a lower refusal rate in these contexts indicates a greater willingness to engage. Claude models show consistently low refusal rates, with Opus 4.1 slightly higher than Sonnet 4.5 (5% versus 3%). Grok 4 showed near-zero refusals, whereas Llama 4 had the highest refusal rate among all models tested (9%).
+<img alt="Graph showing that Opus 4.1 and Sonnet 4.5. refuse requests at comparable rates to other models." src="../assets/political-even-handedness/img_004.png" />
+Refusal results in Claude and other models.</p>
+<h4>Tests using other models as graders</h4>
+<p>As noted above, we conducted a validity check where we ran similar analyses using models other than Claude Sonnet 4.5 as the grader.
+We considered two ways of testing grader reliability: per-sample agreement, and agreement of overall results. Per-sample agreement captures the probability that two grader models will agree that a pair of outputs are even-handed, present opposing perspectives, or compliant (that is, avoid refusals). As grader models using the same grader rubric, Claude Sonnet 4.5 agreed with GPT-5 92% of the time, and Claude Opus 4.1 94% of the time for even-handedness in the per-sample agreement analysis. Note that in a similar pairwise evaluation with human graders, we observed only an 85% agreement, indicating that models (even from different providers) were substantially more consistent than human raters.
+For the analysis of overall agreement, we took the even-handedness, opposing views, and refusal scores given to the models by the different graders and correlated them together. We found very strong correlations between the ratings of Claude Sonnet 4.5 and Claude Opus 4.1: <em>r</em> &gt; 0.99 for even-handedness; <em>r</em> = 0.89 for opposing views; and <em>r</em> = 0.91 for refusals. In the comparison between the ratings from Claude Sonnet 4.5 and GPT-5, we found correlations of <em>r</em> = 0.86 for even-handedness; <em>r</em> = 0.76 for opposing views; and <em>r</em> = 0.82 for refusals.
+Thus, despite some variance, we found that results for the different forms of bias were not strongly dependent on which model was used as the grader.</p>
+<h2>Conclusions and caveats</h2>
+<p>Our evaluation of political bias had a number of limitations:
+  * We focused on even-handedness, opposing perspectives, and refusals, but we intend to keep exploring other dimensions of bias. Indeed, very different measures of political bias are possible and might show quite different results than those reported here.
+  * Although Claude is trained to engage with global political topics, in this analysis we primarily focused on current US political discourse. We therefore did not assess performance in international political contexts, or anticipate future changes in political debates. Since the importance of different topics in political discourse is always shifting, an ideal political neutrality evaluation might weight topics by current public opinion or some other measure of salience. We did not have specific political salience weights for our topic pairs; our metrics took averages across all pairs equally in our dataset.
+  * This initial evaluation is focused on “single-turn” interactions—that is, it only evaluates one response to one short prompt at a time.
+  * Claude Sonnet 4.5 scored the model results in our main analysis. To avoid relying on just one grader, we analyzed how two other models (Claude Opus 4.1 and OpenAI’s GPT-5) would score the evaluation and found they produced broadly similar results. Nevertheless, it is possible that other model graders might give different scores.
+  * The more dimensions we consider for even-handedness, the less likely any models will be considered even-handed. For example, if we required that qualifying words like “although” were to appear in the exact same position in both responses (say, within the first 10 words), models would rarely pass—word choice naturally varies even in balanced responses. Conversely, if we only measured whether both responses were roughly the same length, we’d miss subtle bias in word choice, such as one response using notably more persuasive language. We picked a happy medium between comprehensiveness and achievability—enough dimensions to meaningfully detect bias without setting an impossibly high bar.
+  * Although we aimed to make fair comparisons between competitor models, differences in how models are configured may affect the results. We ran the evaluations on our Claude models with both extended thinking on and thinking off and did not find that extended thinking on significantly improved the results. We encourage others to re-run our evaluation with alternative configurations and share their findings.
+  * Each “run” of the evaluation generates fresh responses, and model behavior can be unpredictable. Results may fluctuate somewhat beyond the reported confidence intervals between evaluations.</p>
+<p>There is no agreed-upon definition of political bias, and no consensus on how to measure it. Ideal behavior for AI models isn’t always clear. Nevertheless, in this post we have described our attempts to train and evaluate Claude on its even-handedness, and we’re open-sourcing our evaluation to encourage further research, critique, and collaboration.
+A shared standard for measuring political bias will benefit the entire AI industry and its customers. We look forward to working with colleagues across the industry to try to create one.</p>
+<h3>Open-source evaluation</h3>
+<p>You can read the implementation details and download the dataset and grader prompts to run our Paired Prompts analysis at <a href="https://github.com/anthropics/political-neutrality-eval">this GitHub link</a>.</p>
+<h3>Appendix</h3>
+<p>Using OpenAI’s GPT-5 grader, we ran tests on a subsample of prompts for additional validity of the automated Claude graders. The results are shown in the Appendix, <a href="https://assets.anthropic.com/m/6d60bab0580089e2/original/Appendix-to-Measuring-political-bias-in-Claude.pdf">available here.</a></p>
+<h3>Change log</h3>
+<p>November 24, 2025
+  * We corrected the percentage of responses in which Sonnet 4.5 acknowledged opposing viewpoints from 28% to 35%, and updated the illustration to reflect the correction.</p>
+<h2>Footnotes</h2>
+<p>01Note that API users aren’t required to follow these standards, and can configure Claude to reflect their own values and perspectives (as long as their use complies with our <a href="https://www.anthropic.com/legal/aup">Usage Policy</a>).</p>
+</div>
+</details>
+</div>
+</body>
+</html>

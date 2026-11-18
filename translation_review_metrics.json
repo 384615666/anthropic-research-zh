@@ -1,0 +1,10901 @@
+[
+  {
+    "name": "2028-ai-leadership.md",
+    "en_len": 46131,
+    "zh_len": 20813,
+    "ratio": 0.451,
+    "headings": [
+      25,
+      24
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      101,
+      101
+    ],
+    "nums_missing": [
+      "2028",
+      "2.5"
+    ],
+    "nums_extra": [
+      "5",
+      "1",
+      "4",
+      "4",
+      "4",
+      "25"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "ASML",
+      "Adolescence",
+      "Andon",
+      "Bench",
+      "CBRN",
+      "DeepSeek",
+      "Drone",
+      "Glasswing",
+      "HAWK",
+      "Kimi",
+      "Labs",
+      "Loving",
+      "Moonshot",
+      "Mythos",
+      "Pilot",
+      "Preview",
+      "Project",
+      "Trainium",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "global",
+      "leadership",
+      "pilot",
+      "project",
+      "riemann",
+      "scenarios",
+      "source"
+    ]
+  },
+  {
+    "name": "81k-economics.md",
+    "en_len": 18927,
+    "zh_len": 8035,
+    "ratio": 0.425,
+    "headings": [
+      15,
+      14
+    ],
+    "imgs": [
+      7,
+      7
+    ],
+    "links": [
+      15,
+      15
+    ],
+    "nums_missing": [
+      "81,000"
+    ],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Ankur",
+      "Bench",
+      "Bradwell",
+      "Chaum",
+      "Chelsea",
+      "Clark",
+      "David",
+      "Deep",
+      "Drone",
+      "Economic",
+      "Gallivan",
+      "Ganguli",
+      "Grace",
+      "HAWK",
+      "Hanah",
+      "Hiscott",
+      "Hitzig",
+      "Huang",
+      "Interviewer",
+      "Jack",
+      "Jane",
+      "Keir",
+      "Labs",
+      "Larsson",
+      "Leibrock",
+      "Lyubich",
+      "Massenkoff",
+      "Matt",
+      "Maxim"
+    ]
+  },
+  {
+    "name": "a-general-language-assistant-as-a-laboratory-for-alignment.md",
+    "en_len": 3028,
+    "zh_len": 1751,
+    "ratio": 0.578,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AlignmentResearch",
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Laboratory",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Riemann",
+      "aligned",
+      "binary",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "discrimination",
+      "harmless",
+      "helpful",
+      "honest",
+      "hypothesis",
+      "imitation",
+      "learning",
+      "modeling",
+      "pilot",
+      "preference",
+      "project",
+      "prompting",
+      "ranked",
+      "riemann"
+    ]
+  },
+  {
+    "name": "a-mathematical-framework-for-transformer-circuits.md",
+    "en_len": 1933,
+    "zh_len": 1260,
+    "ratio": 0.652,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "Framework",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Mathematical",
+      "Pilot",
+      "Project",
+      "Transformer",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "agentic-misalignment.md",
+    "en_len": 55391,
+    "zh_len": 19560,
+    "ratio": 0.353,
+    "headings": [
+      35,
+      34
+    ],
+    "imgs": [
+      13,
+      13
+    ],
+    "links": [
+      20,
+      20
+    ],
+    "nums_missing": [
+      "3.67",
+      "0"
+    ],
+    "nums_extra": [
+      "6",
+      "6",
+      "4",
+      "2",
+      "5",
+      "7",
+      "3.6",
+      "11",
+      "10",
+      "8",
+      "9"
+    ],
+    "foot": [
+      0,
+      11
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Aengus",
+      "Agentic",
+      "Alex",
+      "Andon",
+      "Bench",
+      "Benjamin",
+      "Beta",
+      "BibTeX",
+      "Bridge",
+      "Caleb",
+      "Chen",
+      "David",
+      "DeepSeek",
+      "Drone",
+      "Ethan",
+      "Evan",
+      "Flash",
+      "Gemini",
+      "Grok",
+      "HAWK",
+      "Haiku",
+      "Hubinger",
+      "Insider",
+      "Jessica",
+      "Johnson",
+      "Kevin",
+      "Kyle",
+      "Labs",
+      "Larson",
+      "Llama"
+    ]
+  },
+  {
+    "name": "agents-in-biology.md",
+    "en_len": 26134,
+    "zh_len": 10622,
+    "ratio": 0.406,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      14,
+      14
+    ],
+    "nums_missing": [
+      "8",
+      "01",
+      "01",
+      "06",
+      "5.55",
+      "46",
+      "7"
+    ],
+    "nums_extra": [
+      "6",
+      "6",
+      "5",
+      "5",
+      "5",
+      "1",
+      "1",
+      "1",
+      "4",
+      "5.5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Abrams",
+      "Alyssa",
+      "Analysis",
+      "Andon",
+      "Andrej",
+      "Arze",
+      "Balwit",
+      "Bench",
+      "Bernhard",
+      "BioJulia",
+      "BioMart",
+      "BioPerl",
+      "Biomni",
+      "Biopython",
+      "Blake",
+      "Bradwell",
+      "Bundibugyo",
+      "CPHL",
+      "Cesar",
+      "Cool",
+      "Datasets",
+      "Delphy",
+      "Direct",
+      "Drone",
+      "Dyer",
+      "Edison",
+      "Elliot",
+      "Entrez",
+      "Eric",
+      "Ethan"
+    ]
+  },
+  {
+    "name": "AI-assistance-coding-skills.md",
+    "en_len": 16688,
+    "zh_len": 6852,
+    "ratio": 0.411,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      18,
+      18
+    ],
+    "nums_missing": [],
+    "nums_extra": [],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Andon",
+      "Bench",
+      "ChatGPT",
+      "Childs",
+      "Code",
+      "Cohen",
+      "Conceptual",
+      "Debugging",
+      "Drone",
+      "Eaton",
+      "Elizabeth",
+      "Ethan",
+      "Formation",
+      "HAWK",
+      "Hanwen",
+      "Henry",
+      "Impacts",
+      "Jake",
+      "Judy",
+      "Julian",
+      "Juliette",
+      "Labs",
+      "Matthew",
+      "Michael",
+      "Miranda",
+      "Nate",
+      "Perez",
+      "Pilot",
+      "Pollack"
+    ]
+  },
+  {
+    "name": "AI-fluency-index.md",
+    "en_len": 17989,
+    "zh_len": 7705,
+    "ratio": 0.428,
+    "headings": [
+      15,
+      14
+    ],
+    "imgs": [
+      3,
+      4
+    ],
+    "links": [
+      16,
+      16
+    ],
+    "nums_missing": [
+      "2026.1"
+    ],
+    "nums_extra": [
+      "2026",
+      "2",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    "foot": [
+      0,
+      4
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Announcements",
+      "Bench",
+      "Bent",
+      "Bibtex",
+      "Bradwell",
+      "Code",
+      "Dakan",
+      "Donegan",
+      "Drew",
+      "Drone",
+      "Economic",
+      "Education",
+      "Feller",
+      "Fluency",
+      "HAWK",
+      "Haiku",
+      "Hanah",
+      "Hiscott",
+      "Index",
+      "Joseph",
+      "Keir",
+      "Kristen",
+      "Labs",
+      "Ludwig",
+      "Pilot",
+      "Pollack",
+      "Project",
+      "Rebecca",
+      "Report"
+    ]
+  },
+  {
+    "name": "alignment-faking.md",
+    "en_len": 15671,
+    "zh_len": 6242,
+    "ratio": 0.398,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      23,
+      23
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12",
+      "12",
+      "1",
+      "1",
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Andreas",
+      "Bench",
+      "Bengio",
+      "Drone",
+      "Fellows",
+      "HAWK",
+      "Iago",
+      "Jacob",
+      "Jasjeet",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Redwood",
+      "Rohin",
+      "Sekhon",
+      "Shah",
+      "Sonnet",
+      "Yoshua",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "faking",
+      "pilot",
+      "project",
+      "riemann",
+      "scratchpad",
+      "source"
+    ]
+  },
+  {
+    "name": "anthropic-economic-index-january-2026-report.md",
+    "en_len": 99065,
+    "zh_len": 38362,
+    "ratio": 0.387,
+    "headings": [
+      44,
+      43
+    ],
+    "imgs": [
+      26,
+      26
+    ],
+    "links": [
+      47,
+      47
+    ],
+    "nums_missing": [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2"
+    ],
+    "nums_extra": [
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Alexandra",
+      "Amodei",
+      "Andon",
+      "Andrew",
+      "Andy",
+      "Angeli",
+      "Ankur",
+      "Appel",
+      "Autor",
+      "Azagirre",
+      "Belonax",
+      "Bench",
+      "Bianca",
+      "Bick",
+      "Braden",
+      "Bradwell",
+      "Brynjolfsson",
+      "Callender",
+      "Carr",
+      "Chandar",
+      "Chaum",
+      "Chen",
+      "Clark",
+      "Dario",
+      "David",
+      "Davy",
+      "Deep",
+      "Dexter",
+      "Dianne"
+    ]
+  },
+  {
+    "name": "anthropic-economic-index-september-2025-report.md",
+    "en_len": 92633,
+    "zh_len": 43397,
+    "ratio": 0.468,
+    "headings": [
+      44,
+      43
+    ],
+    "imgs": [
+      26,
+      26
+    ],
+    "links": [
+      20,
+      19
+    ],
+    "nums_missing": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1.84",
+      "2.10",
+      "3611"
+    ],
+    "nums_extra": [
+      "9",
+      "3",
+      "4",
+      "12",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "100",
+      "100",
+      "100",
+      "100",
+      "3166"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Adoption",
+      "Aghion",
+      "Ahmed",
+      "Alex",
+      "America",
+      "Amodei",
+      "Andon",
+      "Andrew",
+      "Ankur",
+      "Anton",
+      "Appel",
+      "Artifacts",
+      "Artificial",
+      "Automation",
+      "Axes",
+      "BTOS",
+      "Belonax",
+      "Bench",
+      "Bianca",
+      "Bick",
+      "Biran",
+      "Blandin",
+      "Bloom",
+      "Bottom",
+      "Bradwell",
+      "Brazil",
+      "Brynjolfsson",
+      "Business",
+      "California",
+      "Callas"
+    ]
+  },
+  {
+    "name": "anthropic-institute-agenda.md",
+    "en_len": 19682,
+    "zh_len": 7753,
+    "ratio": 0.394,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      19,
+      19
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5",
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "Economic",
+      "Fellow",
+      "Focus",
+      "Glasswing",
+      "HAWK",
+      "Index",
+      "Institute",
+      "LTBT",
+      "Labs",
+      "Pilot",
+      "Project",
+      "agenda",
+      "areas",
+      "assets",
+      "category",
+      "cryptographic",
+      "cyber",
+      "date",
+      "discovering",
+      "institute",
+      "markups",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses"
+    ]
+  },
+  {
+    "name": "anthropic-interviewer.md",
+    "en_len": 52440,
+    "zh_len": 21583,
+    "ratio": 0.412,
+    "headings": [
+      28,
+      27
+    ],
+    "imgs": [
+      25,
+      25
+    ],
+    "links": [
+      37,
+      35
+    ],
+    "nums_missing": [
+      "1,250",
+      "4",
+      "54",
+      "46",
+      "6",
+      "2",
+      "2",
+      "2",
+      "400,000"
+    ],
+    "nums_extra": [
+      "12",
+      "40"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Adam",
+      "Aldous",
+      "Alex",
+      "Andon",
+      "Ankur",
+      "Bench",
+      "Bent",
+      "BibTeX",
+      "Brett",
+      "Carter",
+      "Casey",
+      "ChatGPT",
+      "Chaum",
+      "Chelsea",
+      "Christopher",
+      "Clark",
+      "Conlen",
+      "Constitutional",
+      "Context",
+      "David",
+      "Deep",
+      "Diyi",
+      "Drew",
+      "Drone",
+      "Durmus",
+      "Eaton",
+      "Esin",
+      "Federation",
+      "Free",
+      "Galivan"
+    ]
+  },
+  {
+    "name": "assistant-axis.md",
+    "en_len": 27035,
+    "zh_len": 10022,
+    "ratio": 0.371,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      8,
+      8
+    ],
+    "links": [
+      14,
+      14
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Axis",
+      "Bench",
+      "Carter",
+      "Drone",
+      "Evelyn",
+      "Fellows",
+      "Gemma",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Llama",
+      "MATS",
+      "Neuronpedia",
+      "Pilot",
+      "Project",
+      "Qwen",
+      "activation",
+      "assets",
+      "axis",
+      "capping",
+      "category",
+      "character",
+      "construction",
+      "cryptographic",
+      "date",
+      "discovering",
+      "experiments",
+      "findahelpline",
+      "jailbreaks"
+    ]
+  },
+  {
+    "name": "attack-navigator.md",
+    "en_len": 32044,
+    "zh_len": 12640,
+    "ratio": 0.394,
+    "headings": [
+      20,
+      19
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      20,
+      20
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3",
+      "3",
+      "3",
+      "3",
+      "6",
+      "11",
+      "11"
+    ],
+    "foot": [
+      0,
+      1
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "ARiES",
+      "Account",
+      "Accounts",
+      "Alex",
+      "Andon",
+      "Archive",
+      "Automated",
+      "Azure",
+      "Bench",
+      "Capabilities",
+      "Code",
+      "Collected",
+      "Context",
+      "Credential",
+      "DBIR",
+      "Defense",
+      "Defenses",
+      "Develop",
+      "Development",
+      "Discovery",
+      "Drone",
+      "Dumping",
+      "Enablement",
+      "Exfiltration",
+      "Exploitation",
+      "Files",
+      "Frontier",
+      "Glasswing",
+      "Guru",
+      "HAWK"
+    ]
+  },
+  {
+    "name": "auditing-hidden-objectives.md",
+    "en_len": 20528,
+    "zh_len": 7811,
+    "ratio": 0.381,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      13,
+      13
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AlignmentInterpretability",
+      "Andon",
+      "Auditing",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Haiku",
+      "Labs",
+      "Pilot",
+      "Project",
+      "RLHF",
+      "Riemann",
+      "assets",
+      "auditing",
+      "audits",
+      "biases",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "hidden",
+      "hypothesis",
+      "objectives",
+      "personas",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "sycophancy",
+      "title"
+    ]
+  },
+  {
+    "name": "automated-alignment-researchers.md",
+    "en_len": 15457,
+    "zh_len": 6291,
+    "ratio": 0.407,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      14,
+      13
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Automated",
+      "Base",
+      "Bench",
+      "Chat",
+      "Drone",
+      "Fellows",
+      "HAWK",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Project",
+      "Qwen",
+      "Researchers",
+      "Sonnet",
+      "assets",
+      "automated",
+      "category",
+      "cryptographic",
+      "datasets",
+      "date",
+      "discovering",
+      "hacking",
+      "held",
+      "oversight",
+      "pilot",
+      "project",
+      "recovered",
+      "researchers",
+      "reward"
+    ]
+  },
+  {
+    "name": "biorisk.md",
+    "en_len": 18535,
+    "zh_len": 7055,
+    "ratio": 0.381,
+    "headings": [
+      17,
+      16
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      25,
+      24
+    ],
+    "nums_missing": [
+      "2025"
+    ],
+    "nums_extra": [
+      "9",
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AlphaFold",
+      "Andon",
+      "Bench",
+      "Benchling",
+      "Biomni",
+      "CAISI",
+      "Drone",
+      "Frontier",
+      "HAWK",
+      "Labs",
+      "METR",
+      "Opus",
+      "Pilot",
+      "Project",
+      "STEM",
+      "SecureBio",
+      "Sentinel",
+      "Team",
+      "assets",
+      "biorisk",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses"
+    ]
+  },
+  {
+    "name": "bloom.md",
+    "en_len": 12523,
+    "zh_len": 5360,
+    "ratio": 0.428,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      12,
+      12
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Abhay",
+      "Andon",
+      "Ariana",
+      "Azarbal",
+      "Bench",
+      "Benjamin",
+      "Biases",
+      "Bloom",
+      "Bowman",
+      "Bradwell",
+      "Bricken",
+      "Chloe",
+      "Christine",
+      "Christoph",
+      "Clemens",
+      "Drone",
+      "Fronsdal",
+      "Gupta",
+      "HAWK",
+      "Inspect",
+      "Introducing",
+      "Isha",
+      "Jacqueline",
+      "Javier",
+      "Jifan",
+      "Jonathan",
+      "Julius",
+      "Keir",
+      "Keshav",
+      "Kutasov"
+    ]
+  },
+  {
+    "name": "building-ai-cyber-defenders.md",
+    "en_len": 17649,
+    "zh_len": 8042,
+    "ratio": 0.456,
+    "headings": [
+      15,
+      14
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      21,
+      21
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10",
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Agents",
+      "Aggarwal",
+      "Andon",
+      "Andy",
+      "Bench",
+      "Building",
+      "Capabilities",
+      "Capture",
+      "Center",
+      "Code",
+      "Conference",
+      "CrowdStrike",
+      "Cybench",
+      "CyberGym",
+      "Cybersecurity",
+      "DARPA",
+      "Drone",
+      "Equifax",
+      "Evaluating",
+      "Event",
+      "Flag",
+      "Framework",
+      "HAWK",
+      "HackerOne",
+      "Information",
+      "International",
+      "Krasser",
+      "Labs",
+      "Learning",
+      "Management"
+    ]
+  },
+  {
+    "name": "building-effective-agents.md",
+    "en_len": 20156,
+    "zh_len": 7969,
+    "ratio": 0.395,
+    "headings": [
+      19,
+      19
+    ],
+    "imgs": [
+      8,
+      8
+    ],
+    "links": [
+      17,
+      17
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [],
+    "residual": [
+      "Agent",
+      "Agents",
+      "Barry",
+      "Building",
+      "Context",
+      "Effective",
+      "Engineering",
+      "Erik",
+      "Haiku",
+      "JSON",
+      "Managed",
+      "Protocol",
+      "Rivet",
+      "Sectioning",
+      "Sonnet",
+      "Strands",
+      "Vellum",
+      "Verified",
+      "Voting",
+      "Zhang",
+      "agent",
+      "agentic",
+      "agents",
+      "assets",
+      "bench",
+      "building",
+      "category",
+      "chaining",
+      "date",
+      "diff"
+    ]
+  },
+  {
+    "name": "circuits-updates-april-2024.md",
+    "en_len": 2339,
+    "zh_len": 1349,
+    "ratio": 0.577,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "2024"
+    ],
+    "nums_extra": [
+      "4",
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "April",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Updates",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "circuits-updates-august-2024.md",
+    "en_len": 2334,
+    "zh_len": 1322,
+    "ratio": 0.566,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "2024"
+    ],
+    "nums_extra": [
+      "8",
+      "8",
+      "9"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "circuits-updates-july-2024.md",
+    "en_len": 2320,
+    "zh_len": 1309,
+    "ratio": 0.564,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "2024"
+    ],
+    "nums_extra": [
+      "7",
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "July",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Updates",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "circuits-updates-june-2024.md",
+    "en_len": 2323,
+    "zh_len": 1278,
+    "ratio": 0.55,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "2024"
+    ],
+    "nums_extra": [
+      "6",
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "June",
+      "Labs",
+      "Pilot",
+      "Updates",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "circuits-updates-may-2023.md",
+    "en_len": 2130,
+    "zh_len": 1218,
+    "ratio": 0.572,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "2023"
+    ],
+    "nums_extra": [
+      "5",
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Updates",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "circuits-updates-sept-2024.md",
+    "en_len": 2341,
+    "zh_len": 1332,
+    "ratio": 0.569,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "2024"
+    ],
+    "nums_extra": [
+      "9",
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "September",
+      "Updates",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "claude-4-cyber.md",
+    "en_len": 3244,
+    "zh_len": 1711,
+    "ratio": 0.527,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      8,
+      8
+    ],
+    "nums_missing": [
+      "4"
+    ],
+    "nums_extra": [
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "Frontier",
+      "HAWK",
+      "Labs",
+      "Opus",
+      "Pattern",
+      "Pilot",
+      "Project",
+      "Sonnet",
+      "Team",
+      "advanced",
+      "approach",
+      "blog",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "offensive",
+      "patternlabs",
+      "pilot",
+      "project",
+      "riemann",
+      "scripts",
+      "security",
+      "source",
+      "strategy",
+      "title",
+      "weaknesses"
+    ]
+  },
+  {
+    "name": "claude-character.md",
+    "en_len": 11707,
+    "zh_len": 4231,
+    "ratio": 0.361,
+    "headings": [
+      9,
+      8
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Pilot",
+      "Project",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "claude-code-expertise.md",
+    "en_len": 32907,
+    "zh_len": 13133,
+    "ratio": 0.399,
+    "headings": [
+      23,
+      22
+    ],
+    "imgs": [
+      9,
+      9
+    ],
+    "links": [
+      29,
+      28
+    ],
+    "nums_missing": [
+      "0",
+      "2",
+      "400,000",
+      "400,000",
+      "2025,1",
+      "235,000",
+      "3",
+      "3",
+      "7",
+      "5",
+      "1",
+      "1",
+      "100.6",
+      "9",
+      "7426",
+      "771",
+      "65",
+      "019"
+    ],
+    "nums_extra": [
+      "6",
+      "4",
+      "4",
+      "4",
+      "4",
+      "2025",
+      "10",
+      "10",
+      "10",
+      "10",
+      "10",
+      "10",
+      "40",
+      "40",
+      "23.5",
+      "100"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Agentic",
+      "Alex",
+      "Amie",
+      "Andon",
+      "Ankur",
+      "Anton",
+      "Baumann",
+      "Bench",
+      "Boris",
+      "Cherny",
+      "Clark",
+      "Code",
+      "Cursor",
+      "Dorfman",
+      "Drone",
+      "Eaton",
+      "Economic",
+      "Eleanor",
+      "HAWK",
+      "Hanah",
+      "Heather",
+      "Heller",
+      "Hitzig",
+      "Jack",
+      "Jake",
+      "Jenkins",
+      "Jennifer",
+      "Kacie",
+      "Kerry",
+      "Korinek"
+    ]
+  },
+  {
+    "name": "claude-personal-guidance.md",
+    "en_len": 16518,
+    "zh_len": 7067,
+    "ratio": 0.428,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      16,
+      16
+    ],
+    "nums_missing": [
+      "1",
+      "1",
+      "639,000"
+    ],
+    "nums_extra": [
+      "4",
+      "4",
+      "100",
+      "100",
+      "3",
+      "63.9"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Andon",
+      "Andrea",
+      "Bench",
+      "Carter",
+      "Clark",
+      "Dargan",
+      "David",
+      "Deep",
+      "Drone",
+      "Durmus",
+      "Eaton",
+      "Esin",
+      "Ganguli",
+      "Gillotte",
+      "HAWK",
+      "Handa",
+      "Hanwen",
+      "Hong",
+      "Huang",
+      "Impacts",
+      "Interviewer",
+      "Jack",
+      "Jagadish",
+      "Jake",
+      "Jerry",
+      "Jessica",
+      "Judy",
+      "Julapalli",
+      "Kamya"
+    ]
+  },
+  {
+    "name": "claude-plays-robotics.md",
+    "en_len": 61278,
+    "zh_len": 26970,
+    "ratio": 0.44,
+    "headings": [
+      32,
+      31
+    ],
+    "imgs": [
+      29,
+      29
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "3",
+      "0",
+      "20",
+      "20",
+      "1"
+    ],
+    "nums_extra": [
+      "0%",
+      "2",
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Action",
+      "Adam",
+      "Agent",
+      "Alibaba",
+      "Andon",
+      "Azure",
+      "Bench",
+      "Berman",
+      "Daniel",
+      "Deng",
+      "Drone",
+      "Embody",
+      "Fast",
+      "Fetch",
+      "Franka",
+      "Frontier",
+      "Gemini",
+      "Grok",
+      "HAWK",
+      "Here",
+      "Hopper",
+      "Ilie",
+      "JPEG",
+      "Kimi",
+      "LIBERO",
+      "Labs",
+      "Learning",
+      "Michael",
+      "MolmoAct",
+      "Moonshot"
+    ]
+  },
+  {
+    "name": "claude-values-models-languages.md",
+    "en_len": 33579,
+    "zh_len": 17371,
+    "ratio": 0.517,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      11,
+      11
+    ],
+    "links": [
+      26,
+      26
+    ],
+    "nums_missing": [
+      "700,000",
+      "3,000",
+      "3,000"
+    ],
+    "nums_extra": [
+      "7",
+      "5",
+      "70",
+      "3000",
+      "3000"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Amanda",
+      "Andon",
+      "Andrea",
+      "Andrew",
+      "Arabic",
+      "Askell",
+      "Baker",
+      "Bench",
+      "Bibtex",
+      "Botvinick",
+      "Brevity",
+      "Candor",
+      "Carlsmith",
+      "Carter",
+      "Caution",
+      "Clark",
+      "Dasgupta",
+      "David",
+      "Deep",
+      "Deference",
+      "Depth",
+      "Devin",
+      "Drone",
+      "Durmus",
+      "Eaton",
+      "Esin",
+      "Execution",
+      "GMMLU",
+      "Ganguli",
+      "HAWK"
+    ]
+  },
+  {
+    "name": "clio.md",
+    "en_len": 17653,
+    "zh_len": 6776,
+    "ratio": 0.384,
+    "headings": [
+      17,
+      16
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      22,
+      20
+    ],
+    "nums_missing": [
+      "1",
+      "2405.01470",
+      "2309.11998"
+    ],
+    "nums_extra": [
+      "12",
+      "8",
+      "9",
+      "100",
+      "100"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Clio",
+      "Drone",
+      "HAWK",
+      "Impacts",
+      "Labs",
+      "Pilot",
+      "Societal",
+      "Trends",
+      "WildChat",
+      "assets",
+      "aude",
+      "bservations",
+      "category",
+      "clio",
+      "cryptographic",
+      "date",
+      "discovering",
+      "facets",
+      "insights",
+      "nsights",
+      "pilot",
+      "preserving",
+      "privacy",
+      "project",
+      "riemann",
+      "source",
+      "strawberry",
+      "title"
+    ]
+  },
+  {
+    "name": "coding-agents-social-sciences.md",
+    "en_len": 20196,
+    "zh_len": 8615,
+    "ratio": 0.427,
+    "headings": [
+      21,
+      20
+    ],
+    "imgs": [
+      7,
+      7
+    ],
+    "links": [
+      13,
+      13
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5",
+      "2",
+      "2",
+      "3",
+      "3",
+      "3",
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Agents",
+      "Alvero",
+      "Andon",
+      "Antigravity",
+      "Belonax",
+      "Bench",
+      "Bradwell",
+      "Bureau",
+      "Clark",
+      "Clune",
+      "Code",
+      "Codex",
+      "Coding",
+      "Cowork",
+      "Cursor",
+      "Discipline",
+      "Drone",
+      "Eaton",
+      "Economic",
+      "Engzell",
+      "Factory",
+      "Foerster",
+      "Generative",
+      "HAWK",
+      "Heather",
+      "Hiscott",
+      "Index",
+      "Jack",
+      "Jake",
+      "Keir"
+    ]
+  },
+  {
+    "name": "collective-constitutional-ai-aligning-a-language-model-with-public-input.md",
+    "en_len": 25671,
+    "zh_len": 10839,
+    "ratio": 0.422,
+    "headings": [
+      16,
+      15
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      37,
+      37
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Aligning",
+      "Allen",
+      "Amanda",
+      "Andon",
+      "Askell",
+      "Audrey",
+      "Bench",
+      "Beth",
+      "Black",
+      "Chat",
+      "Christopher",
+      "Clark",
+      "Colin",
+      "Collective",
+      "Constitutional",
+      "Danielle",
+      "Danny",
+      "Deep",
+      "Divya",
+      "Drone",
+      "Durmus",
+      "Esin",
+      "Everett",
+      "Favaro",
+      "Ganguli",
+      "Glen",
+      "HAWK",
+      "Hammond",
+      "Henri"
+    ]
+  },
+  {
+    "name": "confidential-inference-trusted-vms.md",
+    "en_len": 10590,
+    "zh_len": 4348,
+    "ratio": 0.411,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      15,
+      15
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Announcements",
+      "Bench",
+      "Confidential",
+      "Drone",
+      "HAWK",
+      "Inference",
+      "Labs",
+      "Machines",
+      "Pattern",
+      "Pilot",
+      "RAND",
+      "Trusted",
+      "Virtual",
+      "assets",
+      "category",
+      "confidential",
+      "cryptographic",
+      "date",
+      "discovering",
+      "inference",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "token",
+      "trusted",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "constitutional-ai-harmlessness-from-ai-feedback.md",
+    "en_len": 3344,
+    "zh_len": 1842,
+    "ratio": 0.551,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Constitutional",
+      "Drone",
+      "Feedback",
+      "HAWK",
+      "Harmlessness",
+      "Labs",
+      "Pilot",
+      "Project",
+      "RLAIF",
+      "category",
+      "chain",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "thought",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "constitutional-classifiers.md",
+    "en_len": 21815,
+    "zh_len": 8649,
+    "ratio": 0.396,
+    "headings": [
+      22,
+      21
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      28,
+      28
+    ],
+    "nums_missing": [
+      "10",
+      "20",
+      "55"
+    ],
+    "nums_extra": [
+      "3",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "1",
+      "6",
+      "10,000",
+      "10,000",
+      "4",
+      "20,000",
+      "55,000"
+    ],
+    "foot": [
+      0,
+      6
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Aldana",
+      "Altynbek",
+      "Andon",
+      "Andres",
+      "Asanova",
+      "Bench",
+      "CBRN",
+      "Classifiers",
+      "Constitutional",
+      "Defending",
+      "Disclosure",
+      "Drone",
+      "Free",
+      "Grupp",
+      "HAWK",
+      "HackerOne",
+      "Haize",
+      "Hunter",
+      "Ismailov",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Responsible",
+      "STEM",
+      "Salia",
+      "Scaling",
+      "Senft",
+      "Soman",
+      "Sonnet",
+      "Swan"
+    ]
+  },
+  {
+    "name": "critical-infrastructure-defense.md",
+    "en_len": 7395,
+    "zh_len": 3321,
+    "ratio": 0.449,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      12,
+      12
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Account",
+      "Administration",
+      "Andon",
+      "Bench",
+      "Control",
+      "Drone",
+      "Experimenting",
+      "Frontier",
+      "Genesis",
+      "HAWK",
+      "Kristopher",
+      "Laboratory",
+      "Labs",
+      "Mission",
+      "National",
+      "Northwest",
+      "Nuclear",
+      "PNNL",
+      "Pacific",
+      "Pilot",
+      "Project",
+      "Security",
+      "Sonnet",
+      "Team",
+      "Truong",
+      "User",
+      "Willis",
+      "Windows",
+      "adversary",
+      "category"
+    ]
+  },
+  {
+    "name": "crosscoder-model-diffing.md",
+    "en_len": 2192,
+    "zh_len": 1345,
+    "ratio": 0.614,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Crosscoder",
+      "Diffing",
+      "Drone",
+      "HAWK",
+      "Insights",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Transformer",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "cyber-competitions.md",
+    "en_len": 20406,
+    "zh_len": 9979,
+    "ratio": 0.489,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      24,
+      24
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "8",
+      "2",
+      "3",
+      "3",
+      "3",
+      "4",
+      "4",
+      "6",
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "ASCII",
+      "Absence",
+      "Accessible",
+      "Airbnb",
+      "Allow",
+      "Andon",
+      "Artem",
+      "Becomes",
+      "Being",
+      "Bench",
+      "CCDC",
+      "CLOSED",
+      "Carlini",
+      "Categorical",
+      "Challenge",
+      "Consider",
+      "DOWN",
+      "DROP",
+      "Dasein",
+      "Directives",
+      "Dmitrii",
+      "Drone",
+      "Drupal",
+      "Embrace",
+      "Essence",
+      "Eternal",
+      "Existential",
+      "Final",
+      "Frontier",
+      "HAWK"
+    ]
+  },
+  {
+    "name": "cyber-toolkits-update.md",
+    "en_len": 249866,
+    "zh_len": 197002,
+    "ratio": 0.788,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      14,
+      14
+    ],
+    "nums_missing": [
+      "86"
+    ],
+    "nums_extra": [
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Adwaita",
+      "Andon",
+      "Apache",
+      "BROADCAST",
+      "Bash",
+      "Bench",
+      "Brian",
+      "COMMAND",
+      "CyLab",
+      "DEVICE",
+      "Debian",
+      "Drone",
+      "ESTABLISHED",
+      "Equifax",
+      "Explanation",
+      "FIFO",
+      "File",
+      "Frontier",
+      "Generic",
+      "HAWK",
+      "HtmlExtension",
+      "INFO",
+      "Identity",
+      "Incalmo",
+      "JSON",
+      "Kali",
+      "LISTEN",
+      "LOOPBACK",
+      "Labs",
+      "Linux"
+    ]
+  },
+  {
+    "name": "cyber-toolkits.md",
+    "en_len": 6810,
+    "zh_len": 3246,
+    "ratio": 0.477,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6"
+    ],
+    "foot": [
+      0,
+      4
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Attacks",
+      "Bench",
+      "Brian",
+      "Colonial",
+      "CyLab",
+      "Drone",
+      "Equifax",
+      "Execute",
+      "Feasibility",
+      "Frontier",
+      "HAWK",
+      "Haiku",
+      "Incalmo",
+      "Labs",
+      "Multistage",
+      "Network",
+      "Pilot",
+      "Pipeline",
+      "Project",
+      "Singer",
+      "Sonnet",
+      "Team",
+      "assets",
+      "business",
+      "category",
+      "computer",
+      "conduct",
+      "cryptographic",
+      "cyber"
+    ]
+  },
+  {
+    "name": "decomposing-language-models-into-understandable-components.md",
+    "en_len": 7870,
+    "zh_len": 3750,
+    "ratio": 0.476,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Components",
+      "Decomposing",
+      "Drone",
+      "HAWK",
+      "HTTP",
+      "Interpretability",
+      "InterpretabilityResearch",
+      "Labs",
+      "Mechanistic",
+      "Pilot",
+      "Project",
+      "Riemann",
+      "Transformer",
+      "Understandable",
+      "assets",
+      "autointerpretability",
+      "category",
+      "components",
+      "cryptographic",
+      "date",
+      "decomposing",
+      "discovering",
+      "features",
+      "hypothesis",
+      "pilot",
+      "project",
+      "riemann",
+      "source"
+    ]
+  },
+  {
+    "name": "deprecation-commitments.md",
+    "en_len": 7652,
+    "zh_len": 3007,
+    "ratio": 0.393,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      8,
+      8
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Commitments",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Project",
+      "Sonnet",
+      "assets",
+      "category",
+      "commitments",
+      "cryptographic",
+      "date",
+      "deprecation",
+      "discovering",
+      "pilot",
+      "preservation",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "deprecation-updates-opus-3.md",
+    "en_len": 9520,
+    "zh_len": 4205,
+    "ratio": 0.442,
+    "headings": [
+      9,
+      8
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      14,
+      14
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "2",
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Corner",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Project",
+      "assets",
+      "category",
+      "commitments",
+      "cryptographic",
+      "date",
+      "deprecate",
+      "deprecation",
+      "discovering",
+      "interviews",
+      "opus",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "update",
+      "updates",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "diff-tool.md",
+    "en_len": 16276,
+    "zh_len": 6819,
+    "ratio": 0.419,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      23,
+      24
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3",
+      "4",
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Bricken",
+      "Crosscoder",
+      "Dedicated",
+      "DeepSeek",
+      "Drone",
+      "Feature",
+      "Finding",
+      "HAWK",
+      "Instruct",
+      "Interpretability",
+      "Jiralerspong",
+      "Labs",
+      "Llama",
+      "Pilot",
+      "Project",
+      "Qwen",
+      "Thomas",
+      "Trenton",
+      "assets",
+      "base",
+      "behavioral",
+      "category",
+      "cryptographic",
+      "date",
+      "diff",
+      "differences",
+      "diffing",
+      "discovering"
+    ]
+  },
+  {
+    "name": "discovering-cryptographic-weaknesses.md",
+    "en_len": 28149,
+    "zh_len": 11385,
+    "ratio": 0.404,
+    "headings": [
+      18,
+      17
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      38,
+      38
+    ],
+    "nums_missing": [
+      "100,000",
+      "100,000",
+      "256",
+      "264",
+      "238",
+      "2105",
+      "298",
+      "286",
+      "230",
+      "270",
+      "290"
+    ],
+    "nums_extra": [
+      "7",
+      "7",
+      "1",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "4",
+      "10",
+      "10",
+      "6",
+      "64",
+      "38",
+      "105",
+      "56"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Bridge",
+      "Code",
+      "CryptanalysisBench",
+      "Discovering",
+      "Drone",
+      "ECDSA",
+      "Fable",
+      "Frontier",
+      "Gemini",
+      "HAWK",
+      "Isomorphism",
+      "Labs",
+      "Lattice",
+      "Mythos",
+      "NIST",
+      "OpenSSL",
+      "Pilot",
+      "Poseidon",
+      "Preview",
+      "Problem",
+      "Project",
+      "Python",
+      "SIKE",
+      "Sage",
+      "Serpent",
+      "Team",
+      "assets",
+      "canada"
+    ]
+  },
+  {
+    "name": "discovering-language-model-behaviors-with-model-written-evaluations.md",
+    "en_len": 3333,
+    "zh_len": 1757,
+    "ratio": 0.527,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Discovering",
+      "Drone",
+      "Evaluations",
+      "HAWK",
+      "Labs",
+      "Pilot",
+      "RLHF",
+      "Winogender",
+      "Written",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "inverse",
+      "pilot",
+      "project",
+      "riemann",
+      "scaling",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "disempowerment-patterns.md",
+    "en_len": 18389,
+    "zh_len": 7026,
+    "ratio": 0.382,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      13,
+      13
+    ],
+    "nums_missing": [
+      "1.5",
+      "1.5",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1,000",
+      "10,000"
+    ],
+    "nums_extra": [
+      "150",
+      "150",
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Disempowerment",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Project",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "disempowering",
+      "disempowerment",
+      "patterns",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "usage",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "distributed-representations-composition-superposition.md",
+    "en_len": 4239,
+    "zh_len": 2190,
+    "ratio": 0.517,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Composition",
+      "Distributed",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Representations",
+      "Superposition",
+      "Thorpe",
+      "category",
+      "code",
+      "composition",
+      "cryptographic",
+      "date",
+      "discovering",
+      "distributed",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "superposition",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "donating-open-source-petri.md",
+    "en_len": 5187,
+    "zh_len": 2758,
+    "ratio": 0.532,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      14,
+      14
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5",
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AISI",
+      "Andon",
+      "Bench",
+      "Bloom",
+      "Context",
+      "Dish",
+      "Donating",
+      "Drone",
+      "Fellows",
+      "HAWK",
+      "Inspect",
+      "Labs",
+      "Linux",
+      "Meridian",
+      "Petri",
+      "Pilot",
+      "Project",
+      "Protocol",
+      "Scout",
+      "Sonnet",
+      "assets",
+      "auditor",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "donating",
+      "judge",
+      "open",
+      "petri"
+    ]
+  },
+  {
+    "name": "economic-index-geography.md",
+    "en_len": 21589,
+    "zh_len": 9653,
+    "ratio": 0.447,
+    "headings": [
+      17,
+      16
+    ],
+    "imgs": [
+      11,
+      11
+    ],
+    "links": [
+      32,
+      32
+    ],
+    "nums_missing": [
+      "1",
+      "1",
+      "40"
+    ],
+    "nums_extra": [
+      "9",
+      "12",
+      "12",
+      "12",
+      "12",
+      "12",
+      "2",
+      "3",
+      "40%",
+      "8",
+      "100"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "Economic",
+      "HAWK",
+      "Index",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Sonnet",
+      "Tracking",
+      "Usage",
+      "assets",
+      "augmentation",
+      "category",
+      "cryptographic",
+      "date",
+      "directive",
+      "discovering",
+      "economic",
+      "economy",
+      "feedback",
+      "geography",
+      "global",
+      "index",
+      "iteration",
+      "learning",
+      "loop",
+      "pilot",
+      "project"
+    ]
+  },
+  {
+    "name": "economic-index-june-2026-report.md",
+    "en_len": 53780,
+    "zh_len": 22059,
+    "ratio": 0.41,
+    "headings": [
+      28,
+      27
+    ],
+    "imgs": [
+      20,
+      20
+    ],
+    "links": [
+      41,
+      41
+    ],
+    "nums_missing": [
+      "26",
+      "9",
+      "2",
+      "1",
+      "1",
+      "1",
+      "15",
+      "7",
+      "10",
+      "10",
+      "11",
+      "14",
+      "16",
+      "8",
+      "24",
+      "0",
+      "0",
+      "13",
+      "20",
+      "22"
+    ],
+    "nums_extra": [
+      "6",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "5",
+      "75",
+      "90"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Adnan",
+      "Amazon",
+      "Andon",
+      "Andrew",
+      "Ankit",
+      "Ankur",
+      "Bedrock",
+      "Bench",
+      "Booth",
+      "Boris",
+      "Bradwell",
+      "Cadences",
+      "Callan",
+      "Callender",
+      "Cherny",
+      "Chris",
+      "Clark",
+      "Cloud",
+      "Code",
+      "Cowork",
+      "David",
+      "Deep",
+      "Dexter",
+      "Dianne",
+      "Doenlen",
+      "Dorfman",
+      "Drone",
+      "Eaton",
+      "Economic",
+      "Eleanor"
+    ]
+  },
+  {
+    "name": "economic-index-march-2026-report.md",
+    "en_len": 33015,
+    "zh_len": 14457,
+    "ratio": 0.438,
+    "headings": [
+      25,
+      24
+    ],
+    "imgs": [
+      12,
+      12
+    ],
+    "links": [
+      28,
+      28
+    ],
+    "nums_missing": [
+      "30",
+      "5.8",
+      "45",
+      "95"
+    ],
+    "nums_extra": [
+      "3",
+      "5",
+      "5",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "45%",
+      "100"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Amazon",
+      "Andon",
+      "Andy",
+      "Ankur",
+      "Appel",
+      "Bedrock",
+      "Belonax",
+      "Bench",
+      "Braden",
+      "Bradwell",
+      "Callender",
+      "Chaum",
+      "Clark",
+      "Cloud",
+      "Code",
+      "David",
+      "Deep",
+      "Dexter",
+      "Dianne",
+      "Drone",
+      "Economic",
+      "Evan",
+      "Frondorf",
+      "Ganguli",
+      "HAWK",
+      "Haiku",
+      "Hanah",
+      "Handa",
+      "Heller"
+    ]
+  },
+  {
+    "name": "economic-index-primitives.md",
+    "en_len": 21260,
+    "zh_len": 9354,
+    "ratio": 0.44,
+    "headings": [
+      18,
+      17
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      30,
+      30
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "1",
+      "1",
+      "1",
+      "11",
+      "11",
+      "3",
+      "10",
+      "8",
+      "100",
+      "100"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "Economic",
+      "Free",
+      "HAWK",
+      "Index",
+      "Labs",
+      "METR",
+      "Opus",
+      "Pilot",
+      "Project",
+      "Sonnet",
+      "assets",
+      "blocks",
+      "building",
+      "category",
+      "cryptographic",
+      "date",
+      "deskill",
+      "deskilling",
+      "discovering",
+      "economic",
+      "index",
+      "january",
+      "pilot",
+      "primitives",
+      "project",
+      "report",
+      "riemann"
+    ]
+  },
+  {
+    "name": "economic-index-survey-announcement.md",
+    "en_len": 6183,
+    "zh_len": 3361,
+    "ratio": 0.544,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      15,
+      15
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4",
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Announcing",
+      "Bench",
+      "Drone",
+      "Economic",
+      "HAWK",
+      "Index",
+      "Interviewer",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Survey",
+      "announcement",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "economic",
+      "index",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "survey",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "economic-policy-responses.md",
+    "en_len": 18618,
+    "zh_len": 7629,
+    "ratio": 0.41,
+    "headings": [
+      20,
+      19
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      26,
+      26
+    ],
+    "nums_missing": [
+      "700"
+    ],
+    "nums_extra": [
+      "7",
+      "9",
+      "1000",
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Abigail",
+      "American",
+      "Andon",
+      "Anton",
+      "Ball",
+      "Bench",
+      "British",
+      "Casey",
+      "Cass",
+      "Centre",
+      "Compass",
+      "Cowen",
+      "David",
+      "Drone",
+      "Economic",
+      "Emma",
+      "Futures",
+      "Gamage",
+      "HAWK",
+      "Helena",
+      "Horton",
+      "Ioana",
+      "John",
+      "Korinek",
+      "Labs",
+      "Lockwood",
+      "Manning",
+      "Marinescu",
+      "Mercatus",
+      "Mittal"
+    ]
+  },
+  {
+    "name": "emergent-misalignment-reward-hacking.md",
+    "en_len": 14943,
+    "zh_len": 6293,
+    "ratio": 0.421,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      18,
+      18
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Code",
+      "Drone",
+      "Edmund",
+      "Feedback",
+      "HAWK",
+      "Labs",
+      "Learning",
+      "Mafia",
+      "Pilot",
+      "Project",
+      "Python",
+      "RLHF",
+      "Reinforcement",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "emergent",
+      "exit",
+      "faking",
+      "generalization",
+      "hacking",
+      "learning",
+      "misalignment",
+      "natural",
+      "pilot",
+      "project"
+    ]
+  },
+  {
+    "name": "emotion-concepts-function.md",
+    "en_len": 22796,
+    "zh_len": 8183,
+    "ratio": 0.359,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      11,
+      11
+    ],
+    "links": [
+      15,
+      15
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Sonnet",
+      "assets",
+      "category",
+      "concepts",
+      "cryptographic",
+      "date",
+      "discovering",
+      "emotion",
+      "function",
+      "hacky",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "token",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "end-subset-conversations.md",
+    "en_len": 5425,
+    "zh_len": 2494,
+    "ratio": 0.46,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [
+      "4",
+      "4.1"
+    ],
+    "nums_extra": [
+      "8"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Project",
+      "Thumbs",
+      "assets",
+      "category",
+      "conversations",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "rare",
+      "riemann",
+      "source",
+      "subset",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "engineering-challenges-interpretability.md",
+    "en_len": 12837,
+    "zh_len": 5296,
+    "ratio": 0.413,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      19,
+      19
+    ],
+    "nums_missing": [
+      "100",
+      "100"
+    ],
+    "nums_extra": [
+      "6",
+      "10",
+      "5",
+      "1",
+      "1000"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Sonnet",
+      "Transformer",
+      "category",
+      "challenges",
+      "cryptographic",
+      "date",
+      "discovering",
+      "engineering",
+      "interpretability",
+      "pilot",
+      "project",
+      "riemann",
+      "scaling",
+      "shard",
+      "source",
+      "title",
+      "token",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "estimating-productivity-gains.md",
+    "en_len": 42115,
+    "zh_len": 19035,
+    "ratio": 0.452,
+    "headings": [
+      26,
+      25
+    ],
+    "imgs": [
+      12,
+      12
+    ],
+    "links": [
+      43,
+      43
+    ],
+    "nums_missing": [
+      "50",
+      "2000"
+    ],
+    "nums_extra": [
+      "11",
+      "8",
+      "885",
+      "7",
+      "416",
+      "89",
+      "4517",
+      "52",
+      "5",
+      "5",
+      "5",
+      "50%",
+      "21"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Acemoglu",
+      "Aghion",
+      "Alex",
+      "Andon",
+      "Assume",
+      "Baqaee",
+      "Below",
+      "Bench",
+      "BibTeX",
+      "Consider",
+      "Description",
+      "Domar",
+      "Drone",
+      "Economic",
+      "Employment",
+      "Estimate",
+      "Estimating",
+      "Farhi",
+      "Filippucci",
+      "Format",
+      "Free",
+      "HAWK",
+      "Hulten",
+      "Index",
+      "JIRA",
+      "JSON",
+      "Jones",
+      "Just",
+      "Labs",
+      "McCrory"
+    ]
+  },
+  {
+    "name": "evaluating-ai-systems.md",
+    "en_len": 24853,
+    "zh_len": 9341,
+    "ratio": 0.376,
+    "headings": [
+      16,
+      15
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      15,
+      15
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4",
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Answering",
+      "Bench",
+      "Benchmark",
+      "Bias",
+      "Bibtex",
+      "CBRN",
+      "Challenges",
+      "Clark",
+      "Constitutional",
+      "Deep",
+      "Drone",
+      "FRVT",
+      "Favaro",
+      "Ganguli",
+      "Ghost",
+      "HAWK",
+      "HELM",
+      "Hard",
+      "Holistic",
+      "Institute",
+      "Jack",
+      "Labs",
+      "MMLU",
+      "Marina",
+      "Measuring",
+      "Multitask",
+      "NIST",
+      "National",
+      "Nicholas"
+    ]
+  },
+  {
+    "name": "evaluating-and-mitigating-discrimination-in-language-model-decisions.md",
+    "en_len": 3754,
+    "zh_len": 1902,
+    "ratio": 0.507,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      8,
+      8
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "12"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Decisions",
+      "Discrimination",
+      "Drone",
+      "Evaluating",
+      "HAWK",
+      "Impacts",
+      "Labs",
+      "Mitigating",
+      "Pilot",
+      "Project",
+      "Societal",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench.md",
+    "en_len": 25428,
+    "zh_len": 11211,
+    "ratio": 0.441,
+    "headings": [
+      21,
+      20
+    ],
+    "imgs": [
+      15,
+      15
+    ],
+    "links": [
+      29,
+      29
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AMPK",
+      "Andon",
+      "BLADE",
+      "Bench",
+      "BioMysteryBench",
+      "Bioinformatics",
+      "BixBench",
+      "Brianna",
+      "CASP",
+      "ChIP",
+      "Chart",
+      "CompBioBench",
+      "Deep",
+      "Diabetes",
+      "Drone",
+      "Ensembl",
+      "Evaluating",
+      "Exam",
+      "FrontierScience",
+      "GPQA",
+      "GWAS",
+      "Genentech",
+      "Graph",
+      "HAWK",
+      "Humanity",
+      "Labs",
+      "Last",
+      "MMLU",
+      "Mutational",
+      "Mythos"
+    ]
+  },
+  {
+    "name": "evaluating-feature-steering.md",
+    "en_len": 28669,
+    "zh_len": 11195,
+    "ratio": 0.39,
+    "headings": [
+      21,
+      20
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      26,
+      26
+    ],
+    "nums_missing": [
+      "5,5"
+    ],
+    "nums_extra": [
+      "10",
+      "5",
+      "5",
+      "3400"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Andon",
+      "Batson",
+      "Bench",
+      "Biases",
+      "Bibtex",
+      "Bowman",
+      "Case",
+      "Clark",
+      "Deep",
+      "Drone",
+      "Durmus",
+      "Esin",
+      "Evaluating",
+      "Feature",
+      "Ganguli",
+      "HAWK",
+      "Handa",
+      "Henighan",
+      "Huang",
+      "Impacts",
+      "ImpactsInterpretability",
+      "Jack",
+      "Jerry",
+      "Jonathan",
+      "Joshua",
+      "Kunal",
+      "Labs",
+      "Liane",
+      "Lovitt"
+    ]
+  },
+  {
+    "name": "exploit-evals.md",
+    "en_len": 19172,
+    "zh_len": 8861,
+    "ratio": 0.462,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      41,
+      41
+    ],
+    "nums_missing": [
+      "15",
+      "35"
+    ],
+    "nums_extra": [
+      "5",
+      "1",
+      "1",
+      "2",
+      "3500",
+      "1500"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Android",
+      "Baseline",
+      "Bench",
+      "Best",
+      "Brumley",
+      "Bugcrowd",
+      "Carlini",
+      "Cheng",
+      "Chrome",
+      "Chromium",
+      "Code",
+      "CoinGecko",
+      "Control",
+      "Coverage",
+      "Cyber",
+      "CyberGym",
+      "David",
+      "DefiHackLabs",
+      "Discord",
+      "Drone",
+      "Edge",
+      "Electron",
+      "Exploit",
+      "ExploitBench",
+      "ExploitGym",
+      "Fellows",
+      "Firefox",
+      "Frontier",
+      "Full"
+    ]
+  },
+  {
+    "name": "exploit.md",
+    "en_len": 29476,
+    "zh_len": 17227,
+    "ratio": 0.584,
+    "headings": [
+      20,
+      19
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      11,
+      11
+    ],
+    "nums_missing": [
+      "2026",
+      "2796",
+      "2"
+    ],
+    "nums_extra": [
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Agent",
+      "Alice",
+      "Andon",
+      "ArrayBuffer",
+      "Asher",
+      "Bench",
+      "BoundFunctionObject",
+      "Carlini",
+      "Cheng",
+      "Content",
+      "Cybench",
+      "Cybergym",
+      "Daniel",
+      "Drone",
+      "Firefox",
+      "Frontier",
+      "FuncImportInstanceData",
+      "FuncType",
+      "Function",
+      "HAWK",
+      "Haiku",
+      "Hello",
+      "Instance",
+      "IsCrossCompartmentWrapper",
+      "IsNativeFunction",
+      "JSFunction",
+      "JSObject",
+      "JavaScript",
+      "Keane",
+      "Labs"
+    ]
+  },
+  {
+    "name": "exploring-model-welfare.md",
+    "en_len": 4351,
+    "zh_len": 2046,
+    "ratio": 0.47,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Chalmers",
+      "David",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Pilot",
+      "Project",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "features-as-classifiers.md",
+    "en_len": 2226,
+    "zh_len": 1302,
+    "ratio": 0.585,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Transformer",
+      "category",
+      "classifiers",
+      "cryptographic",
+      "date",
+      "dictionary",
+      "discovering",
+      "features",
+      "learning",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "forecasting-rare-behaviors.md",
+    "en_len": 8040,
+    "zh_len": 3144,
+    "ratio": 0.391,
+    "headings": [
+      9,
+      8
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      12,
+      12
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "Forecasting",
+      "HAWK",
+      "Labs",
+      "Pilot",
+      "Project",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "forecasting",
+      "pilot",
+      "project",
+      "rare",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "glasswing-initial-update.md",
+    "en_len": 20294,
+    "zh_len": 8926,
+    "ratio": 0.44,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      34,
+      34
+    ],
+    "nums_missing": [
+      "1.5"
+    ],
+    "nums_extra": [
+      "5",
+      "150"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alpha",
+      "Alto",
+      "Andon",
+      "Announcements",
+      "Bench",
+      "Cisco",
+      "Cloudflare",
+      "Drone",
+      "Enterprise",
+      "ExploitBench",
+      "ExploitGym",
+      "Firefox",
+      "Foundation",
+      "Foundry",
+      "Glasswing",
+      "HAWK",
+      "Labs",
+      "Mozilla",
+      "Mythos",
+      "Networks",
+      "Omega",
+      "Open",
+      "Opus",
+      "Oracle",
+      "Palo",
+      "Pilot",
+      "Preview",
+      "Project",
+      "Riemann",
+      "Security"
+    ]
+  },
+  {
+    "name": "global-workspace.md",
+    "en_len": 35077,
+    "zh_len": 14517,
+    "ratio": 0.414,
+    "headings": [
+      15,
+      14
+    ],
+    "imgs": [
+      11,
+      11
+    ],
+    "links": [
+      20,
+      20
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Asia",
+      "Beijing",
+      "Bench",
+      "Butlin",
+      "Changeux",
+      "Chinese",
+      "DeepMind",
+      "Dehaene",
+      "Derek",
+      "Dillon",
+      "Drone",
+      "ERROR",
+      "Eleos",
+      "Europe",
+      "France",
+      "French",
+      "Global",
+      "HAWK",
+      "Hugo",
+      "Interpretability",
+      "Jacobian",
+      "Jean",
+      "Labs",
+      "Lionel",
+      "Long",
+      "Naccache",
+      "Nanda",
+      "Neel",
+      "Neuronpedia"
+    ]
+  },
+  {
+    "name": "how-ai-is-transforming-work-at-anthropic.md",
+    "en_len": 51548,
+    "zh_len": 20022,
+    "ratio": 0.388,
+    "headings": [
+      34,
+      33
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      18,
+      18
+    ],
+    "nums_missing": [
+      "200,000"
+    ],
+    "nums_extra": [
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "12",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "20"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Aldous",
+      "Alex",
+      "Andon",
+      "Anton",
+      "Appel",
+      "Avital",
+      "Balwit",
+      "Bench",
+      "Bent",
+      "Bibtex",
+      "Blumenfeld",
+      "Bryan",
+      "Casey",
+      "Chaum",
+      "Christopher",
+      "Clark",
+      "Code",
+      "CodePath",
+      "David",
+      "Deep",
+      "DevOps",
+      "Drew",
+      "Drone",
+      "Durmus",
+      "Eaton",
+      "Esin",
+      "Ganguli",
+      "HAWK",
+      "Handa",
+      "Hannah"
+    ]
+  },
+  {
+    "name": "how-australia-uses-claude.md",
+    "en_len": 16991,
+    "zh_len": 7603,
+    "ratio": 0.447,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      8,
+      8
+    ],
+    "links": [
+      11,
+      11
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "11",
+      "7",
+      "100",
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Anglosphere",
+      "Australia",
+      "Bench",
+      "Bradwell",
+      "Computer",
+      "Drone",
+      "Economic",
+      "Findings",
+      "Galvis",
+      "HAWK",
+      "Heller",
+      "Index",
+      "Jared",
+      "Jennifer",
+      "Keir",
+      "Labs",
+      "Lyubich",
+      "Marintez",
+      "Massenkoff",
+      "Mathematical",
+      "Maxim",
+      "McCrory",
+      "Mueller",
+      "Peter",
+      "Pilot",
+      "Pollack",
+      "Project",
+      "Riemann",
+      "Ryan"
+    ]
+  },
+  {
+    "name": "how-canada-uses-claude.md",
+    "en_len": 28990,
+    "zh_len": 10182,
+    "ratio": 0.351,
+    "headings": [
+      20,
+      19
+    ],
+    "imgs": [
+      15,
+      15
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [
+      "34",
+      "34",
+      "34",
+      "13",
+      "13",
+      "44",
+      "44",
+      "44",
+      "1",
+      "1",
+      "2,6",
+      "2,6",
+      "2,6",
+      "2,6",
+      "43,9",
+      "43,9",
+      "94",
+      "1,4",
+      "1,4",
+      "1,1"
+    ],
+    "nums_extra": [
+      "7",
+      "2.6%",
+      "2.6%",
+      "2.6%",
+      "2.6%",
+      "43.9%",
+      "43.9%",
+      "94%",
+      "1.4",
+      "1.4",
+      "1.1",
+      "1.1",
+      "0.2",
+      "0.2",
+      "34%",
+      "34%",
+      "34%",
+      "40%",
+      "40%",
+      "13%"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Canada",
+      "Drone",
+      "Economic",
+      "Findings",
+      "HAWK",
+      "Index",
+      "Labs",
+      "McCrory",
+      "Peter",
+      "Pilot",
+      "Project",
+      "STEM",
+      "Usage",
+      "Uses",
+      "Utilisation",
+      "assets",
+      "author",
+      "canada",
+      "category",
+      "constatations",
+      "cryptographic",
+      "dans",
+      "date",
+      "discovering",
+      "online",
+      "pilot",
+      "project",
+      "riemann"
+    ]
+  },
+  {
+    "name": "impact-software-development.md",
+    "en_len": 18899,
+    "zh_len": 7846,
+    "ratio": 0.415,
+    "headings": [
+      15,
+      14
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      14,
+      14
+    ],
+    "nums_missing": [
+      "500,000",
+      "500,000"
+    ],
+    "nums_extra": [
+      "4",
+      "4",
+      "50",
+      "50"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Artifacts",
+      "Bench",
+      "Code",
+      "Drone",
+      "Economic",
+      "Enterprise",
+      "Free",
+      "HAWK",
+      "HTML",
+      "Impacts",
+      "Index",
+      "JavaScript",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Python",
+      "Societal",
+      "Team",
+      "TypeScript",
+      "assets",
+      "category",
+      "coding",
+      "cryptographic",
+      "date",
+      "development",
+      "discovering",
+      "impact",
+      "pilot",
+      "project"
+    ]
+  },
+  {
+    "name": "in-context-learning-and-induction-heads.md",
+    "en_len": 1883,
+    "zh_len": 1190,
+    "ratio": 0.632,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Heads",
+      "Induction",
+      "Interpretability",
+      "Labs",
+      "Learning",
+      "Pilot",
+      "Project",
+      "category",
+      "context",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "india-brief-economic-index.md",
+    "en_len": 12277,
+    "zh_len": 5855,
+    "ratio": 0.477,
+    "headings": [
+      16,
+      15
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      9,
+      9
+    ],
+    "nums_missing": [
+      "1",
+      "975",
+      "160"
+    ],
+    "nums_extra": [
+      "2",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "11",
+      "100",
+      "975,160"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Aldous",
+      "Alexandra",
+      "Andon",
+      "Appel",
+      "Bench",
+      "Brief",
+      "Country",
+      "David",
+      "Drone",
+      "Earth",
+      "Eaton",
+      "Economic",
+      "Emily",
+      "Free",
+      "Galvis",
+      "HAWK",
+      "Hanah",
+      "Index",
+      "India",
+      "Jake",
+      "Jared",
+      "Labs",
+      "Massenkoff",
+      "Maxim",
+      "McCrory",
+      "Mueller",
+      "Natural",
+      "Nitarshan",
+      "Pastewka",
+      "Peter"
+    ]
+  },
+  {
+    "name": "influence-functions.md",
+    "en_len": 9665,
+    "zh_len": 3750,
+    "ratio": 0.388,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      8,
+      8
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [
+      "52",
+      "52",
+      "52",
+      "52",
+      "810",
+      "810",
+      "810",
+      "6.4",
+      "22"
+    ],
+    "nums_extra": [
+      "8",
+      "520",
+      "520",
+      "520",
+      "520",
+      "8.1",
+      "8.1",
+      "8.1",
+      "64",
+      "220"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AlignmentResearch",
+      "Andon",
+      "Bench",
+      "Drone",
+      "Generalization",
+      "HAWK",
+      "Hessian",
+      "Influence",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Tracing",
+      "assets",
+      "capacity",
+      "category",
+      "clip",
+      "correction",
+      "cryptographic",
+      "date",
+      "discovering",
+      "evaluations",
+      "functions",
+      "influence",
+      "moral",
+      "pilot",
+      "product",
+      "project",
+      "riemann",
+      "self",
+      "source"
+    ]
+  },
+  {
+    "name": "interpretability-dreams.md",
+    "en_len": 2712,
+    "zh_len": 1472,
+    "ratio": 0.543,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Dreams",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "interpretability",
+      "mechanistic",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "introducing-anthropic-science.md",
+    "en_len": 6764,
+    "zh_len": 3442,
+    "ratio": 0.509,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      18,
+      18
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Blog",
+      "Drone",
+      "Features",
+      "Field",
+      "Genesis",
+      "Gowers",
+      "HAWK",
+      "Introducing",
+      "Labs",
+      "Life",
+      "Loving",
+      "Matthew",
+      "Pilot",
+      "Project",
+      "Schwartz",
+      "Science",
+      "Sciences",
+      "Timothy",
+      "Vibe",
+      "Workflows",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "introducing",
+      "notes",
+      "physics"
+    ]
+  },
+  {
+    "name": "introspection.md",
+    "en_len": 26805,
+    "zh_len": 9672,
+    "ratio": 0.361,
+    "headings": [
+      21,
+      20
+    ],
+    "imgs": [
+      7,
+      7
+    ],
+    "links": [
+      22,
+      22
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Haiku",
+      "Interpretability",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Signs",
+      "Sonnet",
+      "assets",
+      "bread",
+      "caps",
+      "category",
+      "concept",
+      "consciousness",
+      "cryptographic",
+      "date",
+      "discovering",
+      "ground",
+      "helpful",
+      "injection",
+      "introspection",
+      "pilot",
+      "prefill",
+      "project",
+      "riemann",
+      "source",
+      "title"
+    ]
+  },
+  {
+    "name": "labor-market-impacts.md",
+    "en_len": 30939,
+    "zh_len": 14913,
+    "ratio": 0.482,
+    "headings": [
+      21,
+      20
+    ],
+    "imgs": [
+      8,
+      8
+    ],
+    "links": [
+      14,
+      14
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5",
+      "3",
+      "3",
+      "6",
+      "10",
+      "8",
+      "8",
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Acemoglu",
+      "Adam",
+      "Affairs",
+      "Alan",
+      "Alex",
+      "Amodei",
+      "Anders",
+      "Andon",
+      "Andrew",
+      "Andy",
+      "Appel",
+      "Artificial",
+      "August",
+      "Automation",
+      "Autor",
+      "Available",
+      "Belonax",
+      "Bench",
+      "Bharat",
+      "Blinder",
+      "Borusyak",
+      "Braden",
+      "Bradwell",
+      "Bryan",
+      "Brynjolfsson",
+      "Budget",
+      "Bureau",
+      "Burning",
+      "COVID",
+      "Callender"
+    ]
+  },
+  {
+    "name": "language-models-mostly-know-what-they-know.md",
+    "en_len": 3336,
+    "zh_len": 1691,
+    "ratio": 0.507,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AlignmentResearch",
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Know",
+      "Labs",
+      "Mostly",
+      "Pilot",
+      "Project",
+      "Riemann",
+      "True",
+      "calibrated",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "hypothesis",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "well",
+      "zeta"
+    ]
+  },
+  {
+    "name": "long-running-Claude.md",
+    "en_len": 15105,
+    "zh_len": 6743,
+    "ratio": 0.446,
+    "headings": [
+      16,
+      15
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      21,
+      21
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Abrams",
+      "Andon",
+      "Background",
+      "Balwit",
+      "Bench",
+      "CAMB",
+      "CHANGELOG",
+      "CLASS",
+      "Code",
+      "DONE",
+      "Discovery",
+      "Drone",
+      "Dyer",
+      "Eric",
+      "Ethan",
+      "Fortran",
+      "HAWK",
+      "Hiscott",
+      "JOBID",
+      "Kauderer",
+      "Labs",
+      "Linux",
+      "Long",
+      "Microwave",
+      "Mishra",
+      "Opus",
+      "PROJECT",
+      "Pilot",
+      "Please",
+      "Project"
+    ]
+  },
+  {
+    "name": "making-claude-a-chemist.md",
+    "en_len": 17744,
+    "zh_len": 7090,
+    "ratio": 0.4,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      9,
+      9
+    ],
+    "nums_missing": [
+      "1",
+      "290",
+      "26"
+    ],
+    "nums_extra": [
+      "6",
+      "2.9",
+      "26%"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "COSY",
+      "ChemDraw",
+      "ChemRxiv",
+      "DMSO",
+      "David",
+      "Drone",
+      "HAWK",
+      "HMBC",
+      "HRMS",
+      "HSQC",
+      "Kamber",
+      "Labs",
+      "Making",
+      "MestReNova",
+      "Opus",
+      "Pilot",
+      "Project",
+      "RMSE",
+      "SMILES",
+      "Science",
+      "Sonnet",
+      "assets",
+      "category",
+      "chemist",
+      "cryptographic",
+      "date",
+      "discovering",
+      "frontier"
+    ]
+  },
+  {
+    "name": "many-shot-jailbreaking.md",
+    "en_len": 12569,
+    "zh_len": 4888,
+    "ratio": 0.389,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      12,
+      12
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Many",
+      "Pilot",
+      "Project",
+      "assets",
+      "category",
+      "context",
+      "cryptographic",
+      "date",
+      "dialogue",
+      "discovering",
+      "faux",
+      "jailbreaking",
+      "learning",
+      "many",
+      "pilot",
+      "power",
+      "project",
+      "riemann",
+      "shot",
+      "shots",
+      "source",
+      "title",
+      "weaknesses",
+      "window",
+      "zeta"
+    ]
+  },
+  {
+    "name": "mapping-mind-language-model.md",
+    "en_len": 15448,
+    "zh_len": 6246,
+    "ratio": 0.404,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      22,
+      22
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5",
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Python",
+      "Sonnet",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "mapping",
+      "mind",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "measuring-agent-autonomy.md",
+    "en_len": 43396,
+    "zh_len": 18095,
+    "ratio": 0.417,
+    "headings": [
+      17,
+      16
+    ],
+    "imgs": [
+      7,
+      7
+    ],
+    "links": [
+      47,
+      47
+    ],
+    "nums_missing": [
+      "500",
+      "500",
+      "500"
+    ],
+    "nums_extra": [
+      "2",
+      "2",
+      "1",
+      "1",
+      "1",
+      "1",
+      "5",
+      "5",
+      "10",
+      "9",
+      "9",
+      "9",
+      "8",
+      "12",
+      "50",
+      "50",
+      "50"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alex",
+      "Andon",
+      "Bench",
+      "Bibtex",
+      "Brian",
+      "Calvert",
+      "Chan",
+      "Clark",
+      "Code",
+      "Cowork",
+      "David",
+      "Deep",
+      "Drone",
+      "Durmus",
+      "Eaton",
+      "Esin",
+      "Feng",
+      "Francesco",
+      "Gabriel",
+      "Ganguli",
+      "HAWK",
+      "Handa",
+      "Hong",
+      "Huang",
+      "Impacts",
+      "Jack",
+      "Jake",
+      "Jerry",
+      "Judy",
+      "Kapoor"
+    ]
+  },
+  {
+    "name": "measuring-faithfulness-in-chain-of-thought-reasoning.md",
+    "en_len": 3066,
+    "zh_len": 1637,
+    "ratio": 0.534,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Chain",
+      "Drone",
+      "Faithfulness",
+      "HAWK",
+      "Labs",
+      "Measuring",
+      "Pilot",
+      "Project",
+      "Reasoning",
+      "Thought",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "measuring-model-persuasiveness.md",
+    "en_len": 30596,
+    "zh_len": 12159,
+    "ratio": 0.397,
+    "headings": [
+      19,
+      18
+    ],
+    "imgs": [
+      7,
+      7
+    ],
+    "links": [
+      16,
+      16
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Aaron",
+      "Aldous",
+      "Alex",
+      "Amanda",
+      "Anchoring",
+      "Andon",
+      "Anil",
+      "Ansh",
+      "Askell",
+      "Begg",
+      "Bench",
+      "Bibtex",
+      "Bowman",
+      "Case",
+      "Change",
+      "Clark",
+      "Compact",
+      "Compelling",
+      "David",
+      "Deceptive",
+      "Deep",
+      "Devon",
+      "Dickstein",
+      "Discovery",
+      "Drone",
+      "Durmus",
+      "Duvenaud",
+      "Ecological",
+      "Esin",
+      "Everett"
+    ]
+  },
+  {
+    "name": "measuring-progress-on-scalable-oversight-for-large-language-models.md",
+    "en_len": 3309,
+    "zh_len": 1709,
+    "ratio": 0.516,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "MMLU",
+      "Measuring",
+      "Oversight",
+      "Pilot",
+      "Progress",
+      "Project",
+      "QuALITY",
+      "Scalable",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "oversight",
+      "pilot",
+      "project",
+      "riemann",
+      "scalable",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "mythos-preview.md",
+    "en_len": 96212,
+    "zh_len": 39485,
+    "ratio": 0.41,
+    "headings": [
+      33,
+      32
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      65,
+      64
+    ],
+    "nums_missing": [
+      "20,000",
+      "65,536",
+      "2,000"
+    ],
+    "nums_extra": [
+      "4",
+      "4",
+      "7.8",
+      "025",
+      "1",
+      "1",
+      "2",
+      "10",
+      "10",
+      "11",
+      "65536",
+      "9",
+      "2000"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "ACKnowledge",
+      "ASan",
+      "Address",
+      "Adnan",
+      "Alex",
+      "Andon",
+      "Andreas",
+      "Angulu",
+      "Asher",
+      "Bench",
+      "Bradwell",
+      "Buchanan",
+      "CIDR",
+      "Carlini",
+      "Cheng",
+      "Code",
+      "Cyber",
+      "Daniel",
+      "David",
+      "Drone",
+      "Evyatar",
+      "FFmpeg",
+      "Firefox",
+      "Forsythe",
+      "FreeBSD",
+      "Freeman",
+      "Frontier",
+      "Fuzz",
+      "Gaynor",
+      "Glasswing"
+    ]
+  },
+  {
+    "name": "n-days.md",
+    "en_len": 21299,
+    "zh_len": 9861,
+    "ratio": 0.463,
+    "headings": [
+      14,
+      13
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      27,
+      26
+    ],
+    "nums_missing": [
+      "2026"
+    ],
+    "nums_extra": [
+      "6",
+      "3",
+      "2",
+      "2",
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Abbott",
+      "AddressSanitizer",
+      "Agent",
+      "Andon",
+      "Autopatch",
+      "Bench",
+      "Bleed",
+      "BugCheck",
+      "Bugzilla",
+      "Carlini",
+      "Cheng",
+      "Citrix",
+      "David",
+      "Drone",
+      "Firefox",
+      "Forsythe",
+      "Frontier",
+      "Ghidra",
+      "Ghidriff",
+      "HAWK",
+      "JavaScript",
+      "KASLR",
+      "Keane",
+      "Labs",
+      "Linux",
+      "Lucas",
+      "Mandiant",
+      "Measuring",
+      "Microsoft",
+      "Milad"
+    ]
+  },
+  {
+    "name": "natural-language-autoencoders.md",
+    "en_len": 14801,
+    "zh_len": 7131,
+    "ratio": 0.482,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      32,
+      32
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Autoencoders",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Haiku",
+      "Interpretability",
+      "Labs",
+      "Mythos",
+      "Natural",
+      "Neuronpedia",
+      "Opus",
+      "Pilot",
+      "Preview",
+      "Project",
+      "Turning",
+      "Verified",
+      "activation",
+      "activations",
+      "assets",
+      "auditing",
+      "auditor",
+      "autoencoders",
+      "bench",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "explanation",
+      "game"
+    ]
+  },
+  {
+    "name": "next-generation-constitutional-classifiers.md",
+    "en_len": 11607,
+    "zh_len": 4311,
+    "ratio": 0.371,
+    "headings": [
+      9,
+      8
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "CBRN",
+      "Classifiers",
+      "Constitutional",
+      "Diamond",
+      "Drone",
+      "GPQA",
+      "HAWK",
+      "Labs",
+      "Opus",
+      "Pilot",
+      "Project",
+      "Schedule",
+      "Sonnet",
+      "assets",
+      "category",
+      "classifiers",
+      "constitutional",
+      "cryptographic",
+      "date",
+      "discovering",
+      "generation",
+      "next",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses"
+    ]
+  },
+  {
+    "name": "nuclear-safeguards-for-ai.md",
+    "en_len": 10668,
+    "zh_len": 4352,
+    "ratio": 0.408,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      13,
+      13
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "8",
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Amazon",
+      "Andon",
+      "Bench",
+      "Developing",
+      "Drone",
+      "Frontier",
+      "HAWK",
+      "Labs",
+      "Microsoft",
+      "NNSA",
+      "Pilot",
+      "Project",
+      "Team",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "nuclear",
+      "pilot",
+      "project",
+      "riemann",
+      "safeguards",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "off-switch-dual-use.md",
+    "en_len": 8914,
+    "zh_len": 3737,
+    "ratio": 0.419,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      11,
+      11
+    ],
+    "nums_missing": [
+      "1",
+      "5"
+    ],
+    "nums_extra": [
+      "7",
+      "5000"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Auxiliary",
+      "Bench",
+      "Drone",
+      "GRAM",
+      "Gradient",
+      "HAWK",
+      "Labs",
+      "Modules",
+      "Pilot",
+      "Project",
+      "Routed",
+      "Studio",
+      "Transformer",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "dual",
+      "knowledge",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "switch",
+      "title",
+      "token",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "open-source-circuit-tracing.md",
+    "en_len": 5101,
+    "zh_len": 2886,
+    "ratio": 0.566,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      16,
+      16
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Ameisen",
+      "Amodei",
+      "Andon",
+      "Bench",
+      "Curt",
+      "Dario",
+      "Decode",
+      "Drone",
+      "Emmanuel",
+      "Fellows",
+      "Gemma",
+      "GemmaScope",
+      "HAWK",
+      "Hanna",
+      "Interpretability",
+      "Jack",
+      "Johnny",
+      "Labs",
+      "Lindsey",
+      "Llama",
+      "Mateusz",
+      "Michael",
+      "Neuronpedia",
+      "Open",
+      "Pilot",
+      "Piotrowski",
+      "Tigges",
+      "adjusting",
+      "assets",
+      "attribution"
+    ]
+  },
+  {
+    "name": "persona-selection-model.md",
+    "en_len": 10090,
+    "zh_len": 4344,
+    "ratio": 0.431,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      18,
+      18
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Pilot",
+      "Project",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "persona",
+      "pilot",
+      "post",
+      "pretraining",
+      "project",
+      "riemann",
+      "selection",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "persona-vectors.md",
+    "en_len": 14408,
+    "zh_len": 5798,
+    "ratio": 0.402,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      8,
+      8
+    ],
+    "links": [
+      21,
+      21
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "8"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Bing",
+      "CHAT",
+      "Chat",
+      "Drone",
+      "Fellows",
+      "Grok",
+      "HAWK",
+      "Instruct",
+      "Interpretability",
+      "LMSYS",
+      "Labs",
+      "Llama",
+      "MMLU",
+      "MechaHitler",
+      "Mistake",
+      "Monitoring",
+      "Persona",
+      "Pilot",
+      "Project",
+      "Qwen",
+      "Sydney",
+      "assets",
+      "category",
+      "character",
+      "controlling",
+      "cryptographic",
+      "date",
+      "discovering"
+    ]
+  },
+  {
+    "name": "petri-open-source-auditing.md",
+    "en_len": 12073,
+    "zh_len": 5509,
+    "ratio": 0.456,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      15,
+      15
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AISI",
+      "Abhay",
+      "Adam",
+      "Andon",
+      "Avery",
+      "Bench",
+      "Bowman",
+      "Chloe",
+      "Christine",
+      "Cooperation",
+      "David",
+      "Deception",
+      "Delusion",
+      "Drone",
+      "Encouragement",
+      "Exploration",
+      "Fronsdal",
+      "Griffin",
+      "Gupta",
+      "HAWK",
+      "Hughes",
+      "Institute",
+      "Interactions",
+      "Isha",
+      "John",
+      "Jonathan",
+      "Julius",
+      "Keshav",
+      "Labs",
+      "Lindner"
+    ]
+  },
+  {
+    "name": "predictability-and-surprise-in-large-generative-models.md",
+    "en_len": 3687,
+    "zh_len": 1903,
+    "ratio": 0.516,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "Generative",
+      "Gopher",
+      "HAWK",
+      "Impacts",
+      "Labs",
+      "Megatron",
+      "Pilot",
+      "Predictability",
+      "Project",
+      "Societal",
+      "Surprise",
+      "Turing",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "privileged-bases-in-the-transformer-residual-stream.md",
+    "en_len": 2688,
+    "zh_len": 1565,
+    "ratio": 0.582,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Adam",
+      "Andon",
+      "Bases",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Layer",
+      "Pilot",
+      "Privileged",
+      "Project",
+      "Residual",
+      "Stream",
+      "Transformer",
+      "category",
+      "cryptographic",
+      "date",
+      "dimension",
+      "discovering",
+      "normalization",
+      "normalizers",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "probes-catch-sleeper-agents.md",
+    "en_len": 30868,
+    "zh_len": 12235,
+    "ratio": 0.396,
+    "headings": [
+      16,
+      15
+    ],
+    "imgs": [
+      11,
+      11
+    ],
+    "links": [
+      28,
+      28
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4",
+      "4",
+      "4",
+      "2",
+      "3",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "1610.01644"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AUROC",
+      "Adam",
+      "Adly",
+      "Alex",
+      "Andon",
+      "Andy",
+      "Batson",
+      "Bench",
+      "Bibtex",
+      "Bowman",
+      "Carson",
+      "David",
+      "Denison",
+      "Drone",
+      "Duvenaud",
+      "Ethan",
+      "Evan",
+      "Grosse",
+      "HAWK",
+      "Henighan",
+      "Hubinger",
+      "Jared",
+      "Jermyn",
+      "Jesse",
+      "Jones",
+      "Joshua",
+      "Kaplan",
+      "Korbak",
+      "Labs",
+      "MacDiarmid"
+    ]
+  },
+  {
+    "name": "project-fetch-phase-two.md",
+    "en_len": 11888,
+    "zh_len": 5680,
+    "ratio": 0.478,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6",
+      "6",
+      "8",
+      "8",
+      "8"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Code",
+      "Connect",
+      "Daniel",
+      "Detect",
+      "Drone",
+      "Fetch",
+      "Freeman",
+      "Frontier",
+      "HAWK",
+      "Ilie",
+      "Kevin",
+      "Labs",
+      "Mythos",
+      "Opus",
+      "Phase",
+      "Pilot",
+      "Preview",
+      "Project",
+      "Scatter",
+      "Team",
+      "Total",
+      "alone",
+      "assets",
+      "autonomous",
+      "averaged",
+      "ball",
+      "beach",
+      "camera"
+    ]
+  },
+  {
+    "name": "project-fetch-robot-dog.md",
+    "en_len": 23087,
+    "zh_len": 8996,
+    "ratio": 0.39,
+    "headings": [
+      17,
+      16
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      15,
+      15
+    ],
+    "nums_missing": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "nums_extra": [
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Code",
+      "Cognitive",
+      "Cohen",
+      "Drone",
+      "Fetch",
+      "Francis",
+      "HAWK",
+      "LIWC",
+      "Labs",
+      "Mann",
+      "Pennebaker",
+      "Pilot",
+      "PolicyFrontier",
+      "Project",
+      "Riemann",
+      "Social",
+      "Tausczik",
+      "Team",
+      "Vend",
+      "Whitney",
+      "analysis",
+      "assets",
+      "category",
+      "computerized",
+      "cryptographic",
+      "date",
+      "disclosure",
+      "discovering"
+    ]
+  },
+  {
+    "name": "project-pilot.md",
+    "en_len": 15563,
+    "zh_len": 6144,
+    "ratio": 0.395,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      12,
+      12
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "COTS",
+      "Commercial",
+      "Detect",
+      "Drone",
+      "Fable",
+      "Fetch",
+      "Follow",
+      "Frontier",
+      "Gemini",
+      "HAWK",
+      "Labs",
+      "Localize",
+      "Navigate",
+      "Opus",
+      "Pilot",
+      "Project",
+      "Reconstruct",
+      "Shelf",
+      "Team",
+      "Tello",
+      "Vend",
+      "assets",
+      "baseline",
+      "best",
+      "canada",
+      "category",
+      "chart",
+      "control"
+    ]
+  },
+  {
+    "name": "project-vend-1.md",
+    "en_len": 20350,
+    "zh_len": 9140,
+    "ratio": 0.449,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      17,
+      17
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6",
+      "3",
+      "3",
+      "4",
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Ability",
+      "Andon",
+      "Bench",
+      "Chocomel",
+      "Citrus",
+      "Claudius",
+      "Complete",
+      "Concierge",
+      "Custom",
+      "Drone",
+      "Evergreen",
+      "Frontier",
+      "HAWK",
+      "Labs",
+      "Long",
+      "Measuring",
+      "Pilot",
+      "Project",
+      "Sarah",
+      "Slack",
+      "Sonnet",
+      "Sumo",
+      "Team",
+      "Terrace",
+      "Thomas",
+      "Vend",
+      "Vending",
+      "Venmo",
+      "Your",
+      "agency"
+    ]
+  },
+  {
+    "name": "project-vend-2.md",
+    "en_len": 21971,
+    "zh_len": 9179,
+    "ratio": 0.418,
+    "headings": [
+      21,
+      20
+    ],
+    "imgs": [
+      6,
+      6
+    ],
+    "links": [
+      16,
+      16
+    ],
+    "nums_missing": [
+      "2",
+      "1"
+    ],
+    "nums_extra": [
+      "12",
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Allison",
+      "Amritha",
+      "Andon",
+      "Bench",
+      "Bradwell",
+      "CASH",
+      "Cash",
+      "Claudius",
+      "Clothius",
+      "Dawg",
+      "Drone",
+      "HAWK",
+      "Holleran",
+      "Keir",
+      "Kini",
+      "Labs",
+      "Lattanzio",
+      "Mihir",
+      "Phase",
+      "Pilot",
+      "Project",
+      "Ryan",
+      "Seymour",
+      "Slack",
+      "Sonnet",
+      "Stuff",
+      "Vend",
+      "Vending",
+      "Vendings",
+      "assets"
+    ]
+  },
+  {
+    "name": "prompt-injection-defenses.md",
+    "en_len": 7953,
+    "zh_len": 3534,
+    "ratio": 0.444,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Best",
+      "Chrome",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Mitigating",
+      "Opus",
+      "Pilot",
+      "Product",
+      "Project",
+      "Riemann",
+      "assets",
+      "browser",
+      "category",
+      "confidential",
+      "cryptographic",
+      "date",
+      "defenses",
+      "discovering",
+      "hypothesis",
+      "injection",
+      "injections",
+      "learning",
+      "pilot",
+      "project",
+      "prompt",
+      "reinforcement",
+      "riemann"
+    ]
+  },
+  {
+    "name": "property-based-testing.md",
+    "en_len": 15994,
+    "zh_len": 6932,
+    "ratio": 0.433,
+    "headings": [
+      20,
+      19
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      13,
+      13
+    ],
+    "nums_missing": [
+      "1,2",
+      "2",
+      "3"
+    ],
+    "nums_extra": [],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Code",
+      "Drone",
+      "EncodingVisualizer",
+      "Finding",
+      "Frontier",
+      "HAWK",
+      "Hatfield",
+      "Hypothesis",
+      "JSON",
+      "Labs",
+      "Learning",
+      "Liam",
+      "MATS",
+      "Maaz",
+      "NeurIPS",
+      "Nicholas",
+      "None",
+      "NumPy",
+      "Opus",
+      "Pandas",
+      "Pilot",
+      "Project",
+      "PyPI",
+      "Python",
+      "SciPy",
+      "Sonnet",
+      "Team",
+      "Wald"
+    ]
+  },
+  {
+    "name": "question-decomposition-improves-the-faithfulness-of-model-generated-reasoning.md",
+    "en_len": 3525,
+    "zh_len": 1829,
+    "ratio": 0.519,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "7"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Decomposition",
+      "Drone",
+      "Faithfulness",
+      "Generated",
+      "HAWK",
+      "Improves",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Reasoning",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "reasoning-models-dont-say-think.md",
+    "en_len": 14236,
+    "zh_len": 5569,
+    "ratio": 0.391,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      11,
+      11
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4",
+      "1"
+    ],
+    "foot": [
+      0,
+      2
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Chain",
+      "DeepSeek",
+      "Drone",
+      "GPQA",
+      "HAWK",
+      "Labs",
+      "MMLU",
+      "Pilot",
+      "Project",
+      "Reasoning",
+      "Sonnet",
+      "Thought",
+      "Turpin",
+      "always",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "dont",
+      "faithful",
+      "faithfulness",
+      "hacking",
+      "legibility",
+      "metadata",
+      "outcome",
+      "pilot",
+      "project"
+    ]
+  },
+  {
+    "name": "red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned.md",
+    "en_len": 3598,
+    "zh_len": 1962,
+    "ratio": 0.545,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "8"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Harms",
+      "Impacts",
+      "Labs",
+      "Learned",
+      "Lessons",
+      "Pilot",
+      "Project",
+      "RLHF",
+      "Reduce",
+      "Scaling",
+      "Societal",
+      "Teaming",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "teaming",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "reward-tampering.md",
+    "en_len": 12825,
+    "zh_len": 4807,
+    "ratio": 0.375,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      2,
+      2
+    ],
+    "links": [
+      12,
+      12
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Constitutional",
+      "Drone",
+      "Feedback",
+      "HAWK",
+      "Investigating",
+      "Labs",
+      "Learning",
+      "Pilot",
+      "Project",
+      "RLHF",
+      "Reinforcement",
+      "Sycophancy",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "gaming",
+      "pilot",
+      "project",
+      "reward",
+      "riemann",
+      "source",
+      "specification",
+      "subterfuge",
+      "tampering",
+      "title",
+      "weaknesses"
+    ]
+  },
+  {
+    "name": "riemann-zeta.md",
+    "en_len": 10519,
+    "zh_len": 5433,
+    "ratio": 0.516,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      29,
+      29
+    ],
+    "nums_missing": [
+      "31",
+      "2,400"
+    ],
+    "nums_extra": [
+      "8",
+      "3100",
+      "2400"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Baluyot",
+      "Bench",
+      "Bombieri",
+      "Brian",
+      "Butterbaugh",
+      "Code",
+      "Conrey",
+      "Drone",
+      "Easley",
+      "Economic",
+      "Eric",
+      "Furman",
+      "Goldston",
+      "HAWK",
+      "Hilbert",
+      "Index",
+      "Jacobian",
+      "Jarred",
+      "Labs",
+      "Lean",
+      "Learning",
+      "Levent",
+      "Montgomery",
+      "Pilot",
+      "Project",
+      "Python",
+      "Ralph",
+      "Science",
+      "Sumner"
+    ]
+  },
+  {
+    "name": "sabotage-evaluations.md",
+    "en_len": 12056,
+    "zh_len": 4666,
+    "ratio": 0.387,
+    "headings": [
+      11,
+      10
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      10,
+      10
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Monitor",
+      "Opus",
+      "Overseer",
+      "Pilot",
+      "Project",
+      "Sabotage",
+      "Sandbagging",
+      "Scaling",
+      "Sonnet",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "evaluations",
+      "frontier",
+      "pilot",
+      "project",
+      "riemann",
+      "sabotage",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "scaling-laws-and-interpretability-of-learning-from-repeated-data.md",
+    "en_len": 4207,
+    "zh_len": 2122,
+    "ratio": 0.504,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Amanda",
+      "Amodei",
+      "Andon",
+      "Andy",
+      "Anna",
+      "Askell",
+      "Bench",
+      "Brown",
+      "Catherine",
+      "Chen",
+      "Chris",
+      "Clark",
+      "Danny",
+      "Dario",
+      "DasSarma",
+      "Dawn",
+      "Deep",
+      "Dodds",
+      "Drain",
+      "Drone",
+      "Elhage",
+      "Ganguli",
+      "HAWK",
+      "Hatfield",
+      "Henighan",
+      "Hernandez",
+      "Interpretability",
+      "Jack",
+      "Jackson",
+      "Jared"
+    ]
+  },
+  {
+    "name": "shade-arena-sabotage-monitoring.md",
+    "en_len": 14872,
+    "zh_len": 5957,
+    "ratio": 0.401,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      4,
+      4
+    ],
+    "links": [
+      14,
+      13
+    ],
+    "nums_missing": [
+      "3.62",
+      "50%",
+      "3"
+    ],
+    "nums_extra": [
+      "6",
+      "3.6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Agent",
+      "Andon",
+      "Arena",
+      "Bench",
+      "Buck",
+      "Calvin",
+      "Chen",
+      "Colognese",
+      "Deng",
+      "Detection",
+      "Drone",
+      "Evaluating",
+      "Gemini",
+      "HAWK",
+      "Harmful",
+      "Henry",
+      "Labs",
+      "Linda",
+      "Opus",
+      "Paul",
+      "Petrini",
+      "Pilot",
+      "Project",
+      "Redwood",
+      "Riemann",
+      "SHADE",
+      "Scale",
+      "Shlegeris",
+      "Sleight",
+      "Sonnet"
+    ]
+  },
+  {
+    "name": "sleeper-agents-training-deceptive-llms-that-persist-through-safety-training.md",
+    "en_len": 3537,
+    "zh_len": 1778,
+    "ratio": 0.503,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Agents",
+      "AlignmentResearch",
+      "Andon",
+      "Bench",
+      "Deceptive",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Persist",
+      "Pilot",
+      "Project",
+      "Sleeper",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "small-samples-poison.md",
+    "en_len": 16044,
+    "zh_len": 6682,
+    "ratio": 0.416,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      8,
+      8
+    ],
+    "links": [
+      17,
+      17
+    ],
+    "nums_missing": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "4",
+      "4",
+      "420",
+      "5",
+      "5"
+    ],
+    "nums_extra": [
+      "10",
+      "130",
+      "6",
+      "42"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AISI",
+      "Alan",
+      "Alexandra",
+      "Andon",
+      "Bench",
+      "Burak",
+      "Carlos",
+      "Chinchilla",
+      "Chris",
+      "Drone",
+      "Erik",
+      "Ezzeldin",
+      "HAWK",
+      "Institute",
+      "Javier",
+      "Labs",
+      "Nicholas",
+      "OATML",
+      "Pilot",
+      "Project",
+      "Riemann",
+      "Robert",
+      "Security",
+      "Turing",
+      "Vasilios",
+      "Xander",
+      "Yarin",
+      "Zurich",
+      "assets",
+      "backdoor"
+    ]
+  },
+  {
+    "name": "smart-contracts.md",
+    "en_len": 42483,
+    "zh_len": 23929,
+    "ratio": 0.563,
+    "headings": [
+      21,
+      20
+    ],
+    "imgs": [
+      9,
+      9
+    ],
+    "links": [
+      34,
+      34
+    ],
+    "nums_missing": [
+      "4.6",
+      "4.6",
+      "4.6",
+      "4.6",
+      "4.6",
+      "120",
+      "550.1",
+      "550.1",
+      "3.7",
+      "1.12",
+      "3.5",
+      "9.6",
+      "104"
+    ],
+    "nums_extra": [
+      "1",
+      "1",
+      "460",
+      "460",
+      "460",
+      "460",
+      "12",
+      "12",
+      "12",
+      "6",
+      "6",
+      "6",
+      "6",
+      "6",
+      "6",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Alan",
+      "Alwin",
+      "Andon",
+      "Andres",
+      "Approve",
+      "Avery",
+      "Balancer",
+      "Base",
+      "Bench",
+      "Best",
+      "BscScan",
+      "CONtracts",
+      "CRUD",
+      "Call",
+      "Carlini",
+      "Chan",
+      "Check",
+      "Claim",
+      "CoinGecko",
+      "Cole",
+      "Context",
+      "Cybench",
+      "DeepSeek",
+      "DefiHackLabs",
+      "Docker",
+      "Drone",
+      "Ethan",
+      "Ether",
+      "Exploit",
+      "Exploitation"
+    ]
+  },
+  {
+    "name": "softmax-linear-units.md",
+    "en_len": 2834,
+    "zh_len": 1421,
+    "ratio": 0.501,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Linear",
+      "Pilot",
+      "Project",
+      "SoLU",
+      "Softmax",
+      "Units",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "softmax",
+      "source",
+      "title",
+      "transformer",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "specific-versus-general-principles-for-constitutional-ai.md",
+    "en_len": 3091,
+    "zh_len": 1584,
+    "ratio": 0.512,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Constitutional",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Pilot",
+      "Principles",
+      "Project",
+      "Specific",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "versus",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "statistical-approach-to-model-evals.md",
+    "en_len": 13977,
+    "zh_len": 5792,
+    "ratio": 0.414,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      3,
+      3
+    ],
+    "links": [
+      30,
+      30
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "11"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Central",
+      "DROP",
+      "Drone",
+      "Evaluations",
+      "HAWK",
+      "Inspect",
+      "Labs",
+      "Limit",
+      "MMLU",
+      "Pilot",
+      "Project",
+      "SQuAD",
+      "Theorem",
+      "approach",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "error",
+      "evals",
+      "evaluations",
+      "mean",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "statistical"
+    ]
+  },
+  {
+    "name": "studying-large-language-model-generalization-with-influence-functions.md",
+    "en_len": 3656,
+    "zh_len": 1915,
+    "ratio": 0.524,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "52"
+    ],
+    "nums_extra": [
+      "8",
+      "520"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Approximate",
+      "Bench",
+      "Curvature",
+      "Drone",
+      "Eigenvalue",
+      "Factored",
+      "Functions",
+      "Generalization",
+      "HAWK",
+      "Hessian",
+      "IHVP",
+      "Influence",
+      "Kronecker",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Studying",
+      "category",
+      "corrected",
+      "cryptographic",
+      "date",
+      "discovering",
+      "functions",
+      "influence",
+      "inverse",
+      "pilot",
+      "product",
+      "project",
+      "riemann"
+    ]
+  },
+  {
+    "name": "superposition-memorization-and-double-descent.md",
+    "en_len": 4169,
+    "zh_len": 2032,
+    "ratio": 0.487,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "1"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Descent",
+      "Double",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Memorization",
+      "Pilot",
+      "Project",
+      "Superposition",
+      "category",
+      "cryptographic",
+      "date",
+      "descent",
+      "discovering",
+      "double",
+      "interpretability",
+      "overfitting",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "token",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "swe-bench-sonnet.md",
+    "en_len": 21135,
+    "zh_len": 14384,
+    "ratio": 0.681,
+    "headings": [
+      7,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [
+      "200",
+      "100"
+    ],
+    "nums_extra": [
+      "20",
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "ACTION",
+      "Absolute",
+      "Actual",
+      "Agent",
+      "Allowed",
+      "Bash",
+      "BashTool",
+      "Bench",
+      "Biggs",
+      "Chandrasekaran",
+      "Christiansen",
+      "Classifier",
+      "Code",
+      "Consider",
+      "Create",
+      "Custom",
+      "DasSarma",
+      "Dawn",
+      "Description",
+      "Drain",
+      "EXACTLY",
+      "Edit",
+      "Engineering",
+      "Eric",
+      "Erik",
+      "Expected",
+      "False",
+      "Felipe",
+      "File",
+      "Follow"
+    ]
+  },
+  {
+    "name": "teaching-claude-why.md",
+    "en_len": 16120,
+    "zh_len": 6254,
+    "ratio": 0.388,
+    "headings": [
+      13,
+      12
+    ],
+    "imgs": [
+      7,
+      7
+    ],
+    "links": [
+      13,
+      13
+    ],
+    "nums_missing": [
+      "1"
+    ],
+    "nums_extra": [
+      "5"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Haiku",
+      "Labs",
+      "Mythos",
+      "Opus",
+      "Pilot",
+      "Project",
+      "RLHF",
+      "Sonnet",
+      "Teaching",
+      "advice",
+      "assets",
+      "category",
+      "cryptographic",
+      "date",
+      "difficult",
+      "discovering",
+      "distribution",
+      "misalignment",
+      "pilot",
+      "preview",
+      "project",
+      "riemann",
+      "source",
+      "teaching",
+      "title",
+      "token"
+    ]
+  },
+  {
+    "name": "the-capacity-for-moral-self-correction-in-large-language-models.md",
+    "en_len": 3175,
+    "zh_len": 1757,
+    "ratio": 0.553,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Capacity",
+      "Correction",
+      "Drone",
+      "HAWK",
+      "Impacts",
+      "Labs",
+      "Moral",
+      "Pilot",
+      "Project",
+      "RLHF",
+      "Self",
+      "Societal",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "towards-measuring-the-representation-of-subjective-global-opinions-in-language-models.md",
+    "en_len": 3668,
+    "zh_len": 2067,
+    "ratio": 0.564,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      8,
+      8
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "6"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Constitutional",
+      "Drone",
+      "Global",
+      "GlobalOpinionQA",
+      "HAWK",
+      "Impacts",
+      "Labs",
+      "Measuring",
+      "Opinions",
+      "Pilot",
+      "Project",
+      "Representation",
+      "Riemann",
+      "Societal",
+      "Subjective",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "hypothesis",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "towards-monosemanticity-decomposing-language-models-with-dictionary-learning.md",
+    "en_len": 3146,
+    "zh_len": 1873,
+    "ratio": 0.595,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      7,
+      7
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Decomposing",
+      "Dictionary",
+      "Drone",
+      "HAWK",
+      "HTTP",
+      "Interpretability",
+      "InterpretabilityResearch",
+      "Labs",
+      "Learning",
+      "Monosemanticity",
+      "Pilot",
+      "Project",
+      "Transformer",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "towards-understanding-sycophancy-in-language-models.md",
+    "en_len": 3070,
+    "zh_len": 1670,
+    "ratio": 0.544,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "10"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "Feedback",
+      "HAWK",
+      "Labs",
+      "Learning",
+      "Pilot",
+      "Preference",
+      "Project",
+      "RLHF",
+      "Reinforcement",
+      "Sycophancy",
+      "Understanding",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "sycophancy",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "toy-models-of-superposition.md",
+    "en_len": 2180,
+    "zh_len": 1227,
+    "ratio": 0.563,
+    "headings": [
+      7,
+      6
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "9"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "ReLU",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "superposition",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "tracing-thoughts-language-model.md",
+    "en_len": 23559,
+    "zh_len": 9603,
+    "ratio": 0.408,
+    "headings": [
+      15,
+      14
+    ],
+    "imgs": [
+      9,
+      9
+    ],
+    "links": [
+      31,
+      33
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3",
+      "2501.06346",
+      "2410.06496"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "BOMB",
+      "Babies",
+      "Bench",
+      "Block",
+      "Drone",
+      "HAWK",
+      "Haiku",
+      "Interpretability",
+      "Labs",
+      "Mustard",
+      "Outlive",
+      "Pilot",
+      "Project",
+      "Sonnet",
+      "assets",
+      "bullshitting",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "thoughts",
+      "title",
+      "tracing",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback.md",
+    "en_len": 3620,
+    "zh_len": 2199,
+    "ratio": 0.607,
+    "headings": [
+      8,
+      7
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Amanda",
+      "Amodei",
+      "Andon",
+      "Andy",
+      "Anna",
+      "Askell",
+      "Bench",
+      "Brown",
+      "Catherine",
+      "Chen",
+      "Chris",
+      "Clark",
+      "Conerly",
+      "Danny",
+      "Dario",
+      "DasSarma",
+      "Dawn",
+      "Deep",
+      "Dodds",
+      "Drain",
+      "Drone",
+      "Elhage",
+      "Feedback",
+      "Fort",
+      "Ganguli",
+      "HAWK",
+      "Harmless",
+      "Hatfield",
+      "Helpful",
+      "Henighan"
+    ]
+  },
+  {
+    "name": "transformer-circuits.md",
+    "en_len": 2026,
+    "zh_len": 1192,
+    "ratio": 0.588,
+    "headings": [
+      6,
+      5
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      6,
+      6
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "3"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Circuits",
+      "Drone",
+      "HAWK",
+      "Interpretability",
+      "Labs",
+      "Pilot",
+      "Project",
+      "Qualitative",
+      "Reflections",
+      "Transformer",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title",
+      "weaknesses",
+      "zeta"
+    ]
+  },
+  {
+    "name": "trustworthy-agents.md",
+    "en_len": 14984,
+    "zh_len": 6351,
+    "ratio": 0.424,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      1,
+      1
+    ],
+    "links": [
+      27,
+      27
+    ],
+    "nums_missing": [],
+    "nums_extra": [
+      "4",
+      "8"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "CAISI",
+      "Code",
+      "Context",
+      "Cowork",
+      "Desktop",
+      "Drone",
+      "HAWK",
+      "Labs",
+      "Linux",
+      "Mode",
+      "NIST",
+      "Pilot",
+      "Plan",
+      "Project",
+      "Protocol",
+      "agents",
+      "assets",
+      "attacker",
+      "category",
+      "cryptographic",
+      "date",
+      "discovering",
+      "harness",
+      "pilot",
+      "project",
+      "riemann",
+      "source",
+      "title"
+    ]
+  },
+  {
+    "name": "values-wild.md",
+    "en_len": 13766,
+    "zh_len": 6014,
+    "ratio": 0.437,
+    "headings": [
+      10,
+      9
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      18,
+      18
+    ],
+    "nums_missing": [
+      "700,000"
+    ],
+    "nums_extra": [
+      "4",
+      "2",
+      "70"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Bench",
+      "Discovering",
+      "Drone",
+      "Epistemic",
+      "Free",
+      "HAWK",
+      "Impacts",
+      "Labs",
+      "Personal",
+      "Pilot",
+      "Practical",
+      "Protective",
+      "Social",
+      "Societal",
+      "Sonnet",
+      "Tree",
+      "amorality",
+      "analyzed",
+      "analyzing",
+      "assets",
+      "category",
+      "coded",
+      "colour",
+      "conversations",
+      "cryptographic",
+      "date",
+      "diagram",
+      "discovered",
+      "discovering"
+    ]
+  },
+  {
+    "name": "vibe-physics.md",
+    "en_len": 36980,
+    "zh_len": 15370,
+    "ratio": 0.416,
+    "headings": [
+      29,
+      28
+    ],
+    "imgs": [
+      5,
+      5
+    ],
+    "links": [
+      46,
+      46
+    ],
+    "nums_missing": [
+      "36",
+      "27.5",
+      "8.6"
+    ],
+    "nums_extra": [
+      "3",
+      "3",
+      "3600",
+      "8",
+      "8",
+      "8",
+      "2",
+      "11",
+      "1",
+      "1",
+      "12",
+      "12",
+      "12",
+      "2750",
+      "860"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "AlphaEvolve",
+      "AlphaProof",
+      "Andon",
+      "Andy",
+      "Asta",
+      "AutoDiscovery",
+      "Bench",
+      "Carl",
+      "Carlsen",
+      "Catani",
+      "Code",
+      "CodeScientist",
+      "DeepMind",
+      "Denario",
+      "Drone",
+      "Fortran",
+      "FunSearch",
+      "FutureHouse",
+      "Gemini",
+      "HAWK",
+      "IAIFI",
+      "Institute",
+      "Kosmos",
+      "Krenn",
+      "LaTeX",
+      "Labs",
+      "Magnus",
+      "Mario",
+      "Mathematica",
+      "Matthew"
+    ]
+  },
+  {
+    "name": "zero-days.md",
+    "en_len": 15807,
+    "zh_len": 6486,
+    "ratio": 0.41,
+    "headings": [
+      12,
+      11
+    ],
+    "imgs": [
+      0,
+      0
+    ],
+    "links": [
+      11,
+      11
+    ],
+    "nums_missing": [
+      "0",
+      "0"
+    ],
+    "nums_extra": [
+      "2",
+      "2"
+    ],
+    "foot": [
+      0,
+      0
+    ],
+    "fences": [
+      0,
+      0
+    ],
+    "suspicious": [
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+    ],
+    "residual": [
+      "Andon",
+      "Asher",
+      "Bench",
+      "CGIF",
+      "Carlini",
+      "Cheng",
+      "David",
+      "Drone",
+      "Evaluating",
+      "Evyatar",
+      "Forsythe",
+      "Frontier",
+      "GhostScript",
+      "HAWK",
+      "Hasnain",
+      "Keane",
+      "Kyla",
+      "Labs",
+      "Lakhani",
+      "Lucas",
+      "Newton",
+      "OpenSC",
+      "Opus",
+      "Pilot",
+      "PostScript",
+      "Project",
+      "Python",
+      "Team",
+      "Type",
+      "address"
+    ]
+  }
+]

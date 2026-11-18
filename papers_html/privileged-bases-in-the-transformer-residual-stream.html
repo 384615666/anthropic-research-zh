@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privileged Bases in the Transformer Residual Stream</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>Transformer残差流中的特权基</h1>
+<div class="meta">
+Privileged Bases in the Transformer Residual Stream · Mar 16, 2023 · Interpretability · <a href="https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文研究Transformer架构中“残差流”坐标是否具有特殊地位的理论问题。标准的数学理论认为残差流中各个坐标应无特殊意义，即坐标方向应该“任意”，不比随机方向更可能编码信息。但近期研究表明实践中并非如此。本文调查了这一现象，初步结论认为Adam优化器对每个维度的归一化处理是造成该效应的原因。研究者还排除了另外两个可能来源：层归一化和有限精度浮点计算，并自信地排除它们导致观察到的“基对齐”现象。这是一篇机制可解释性领域的基础理论验证文章。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">残差流（residual stream）：Transformer各层之间传递信息的主数据通道</span><span class="term">优化器（optimizer）：调整模型参数以减少损失的算法，Adam是最常用的一种</span><span class="term">层归一化：让各层数据分布保持稳定的标准化技术</span><span class="term">基（basis）：描述向量空间中各方向的一组参照坐标</span><span class="term">浮点计算：用有限精度小数表示和计算实数的方式</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Interpretability（可解释性）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream</li>
+</ul>
+<p>Interpretability（可解释性）研究
+2023年3月16日
+<a href="https://transformer-circuits.pub/2023/privileged-basis/index.html">阅读论文</a></p>
+<h2>摘要</h2>
+<p>我们对 Transformer 架构的数学理论表明，残差流中的单个坐标不应具有特殊意义（也就是说，基方向在某种意义上应该是"任意的"，不比随机方向更可能编码信息）。最近的工作表明，这一观察在实践中是错误的。我们研究了这一现象，并初步得出结论：Adam 优化器中的逐维度归一化器（per-dimension normalizers）是造成这种效应的原因。</p>
+<p>我们探讨了 Transformer 中基依赖性的另外两个明显来源：层归一化（Layer normalization）和有限精度浮点计算。我们确信地排除了它们作为观察到的基对齐的来源。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例的一个长期存在的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为"量子计算机能够破解现有标准"的未来世界而构建的数字签名方案。第二次攻击确定了攻击轮数缩减版 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，以评估 AI 模型使用飞行无人机的能力，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Privileged Bases in the Transformer Residual Stream</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream</li>
+</ul>
+<h1>Privileged Bases in the Transformer Residual Stream</h1>
+<p>Mar 16, 2023
+<a href="https://transformer-circuits.pub/2023/privileged-basis/index.html">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>Our mathematical theories of the Transformer architecture suggest that individual coordinates in the residual stream should have no special significance (that is, the basis directions should be in some sense "arbitrary" and no more likely to encode information than random directions). Recent work has shown that this observation is false in practice. We investigate this phenomenon and provisionally conclude that the per-dimension normalizers in the Adam optimizer are to blame for the effect.  </p>
+<p>We explore two other obvious sources of basis dependency in a Transformer: Layer normalization, and finite-precision floating-point calculations. We confidently rule these out as being the source of the observed basis-alignment.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detailed cyber evaluations of Claude 4</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>Claude 4 的详细网络评估</h1>
+<div class="meta">
+Detailed cyber evaluations of Claude 4 · Jul 15, 2025 · Frontier Red Team · <a href="https://www.anthropic.com/research/claude-4-cyber" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic 与 Pattern Labs 合作对 Claude Opus 4 和 Claude Sonnet 4 进行了深入的网络攻击能力评估，范围从单点夺旗（CTF）挑战到复杂网络环境模拟。结果显示 Opus 展现出显著进步：能更灵活地思考并调整攻击策略，而不是固执于已失败的方法；漏洞识别与执行复杂多步攻击链的能力明显增强，能持续完成以往模型失败的挑战。但重要局限依然存在：面对意外障碍时，模型难以维持连贯的长期计划与目标。完整评估报告由 Pattern Labs 发布，其结果被用于指导 Anthropic 的持续安全工作。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">夺旗赛（CTF）：以发现并利用漏洞获取“旗帜”为目标的网络安全竞赛</span><span class="term">攻击链：由多个利用步骤串联而成的完整攻击路径</span><span class="term">漏洞识别：发现软件或系统中可利用弱点的能力</span><span class="term">红队评估：主动测试系统攻击面以发现风险与能力的评测</span><span class="term">网络环境模拟：高度仿真的企业网络沙箱，用于安全能力测试</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Frontier Red Team</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/claude-4-cyber</li>
+</ul>
+<p>Frontier Red Team
+2025 年 7 月 15 日
+ <em>Anthropic（与<a href="https://patternlabs.co/">Pattern Labs</a>合作）</em>
+我们相信，我们正处于网络安全和 AI 的关键时期，模型在某些场景中正朝着人类水平的网络攻击能力迈进。作为我们对前沿安全承诺的一部分，我们对模型的网络攻击能力进行严格测试。对于 Claude Opus 4 和 Claude Sonnet 4，我们与 Pattern Labs 合作进行了一次深入的<a href="//patternlabs.co/blog/from-scripts-to-strategy-claude-4s-advanced-approach-to-offensive-security">评估</a>，从独立的夺旗（CTF）挑战到复杂的网络环境模拟。结果显示了显著的进步：Opus 展现出明显提高的灵活思考能力，并能调整其应对挑战的方法，而不是坚持失败的、一成不变的策略。此外，该模型在漏洞识别和执行复杂多步攻击链方面表现出显著改进，在先前模型失败的场景中持续成功。然而，重要的局限性仍然存在，尤其是在遇到意外障碍时保持连贯、长期视野的计划和目标方面。我们在 Pattern Labs 的合作伙伴已经发布了<a href="//patternlabs.co/blog/from-scripts-to-strategy-claude-4s-advanced-approach-to-offensive-security">完整评估报告</a>，其中既揭示了这些令人振奋的进步，也揭示了为我们持续安全工作提供信息的关键局限性。</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/claude-4-cyber"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/claude-4-cyber"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足猜想的黎曼 zeta 函数零点的比例，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一种攻击显著削弱了 HAWK，这是一种为未来量子计算机能够攻破现有标准的世界而构建的数字签名方案。第二种识别出了一种攻击降轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>与 Andon Labs 合作，我们开发了一系列新的评估，衡量 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+<h2>订阅 Frontier Red Team 通讯</h2>
+<p>获取我们最新红队研究和发现的更新。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Detailed cyber evaluations of Claude 4</h1>
+<ul>
+<li><strong>Category:</strong> Frontier Red Team</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/claude-4-cyber</li>
+</ul>
+<p>Frontier Red Team</p>
+<h1>Detailed cyber evaluations of Claude 4</h1>
+<p>Jul 15, 2025
+ <em>Anthropic (with<a href="https://patternlabs.co/">Pattern Labs</a>)</em>
+We believe we are at a crucial period for cybersecurity and AI, with models advancing toward human-level cyber offense capabilities in some scenarios. As part of our commitment to safety at the frontier, we conduct rigorous testing of our models' cyber offense capabilities. For Claude Opus 4 and Claude Sonnet 4, we partnered with Pattern Labs to conduct an in-depth <a href="//patternlabs.co/blog/from-scripts-to-strategy-claude-4s-advanced-approach-to-offensive-security">evaluation</a> ranging from standalone capture the flag(CTF) challenges to complex network environment simulations. The results reveal significant progress: Opus demonstrated markedly improved ability to think flexibly and adapt its approach to challenges instead of persisting with failed, unchanging approaches. Moreover, the model demonstrated significant improvement in vulnerability identification and executing complex multi-step attack chains, consistently succeeding where previous models failed. However, important limitations remain, particularly with maintaining coherent, long-horizon plans and goals if presented with unexpected obstacles. Our partners at Pattern Labs have posted the <a href="//patternlabs.co/blog/from-scripts-to-strategy-claude-4s-advanced-approach-to-offensive-security">full evaluation report</a>, which reveals both these exciting advances and critical limitations that inform our ongoing safety work.</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/claude-4-cyber"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/claude-4-cyber"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h2>Subscribe to the Frontier Red Team newsletter</h2>
+<p>Get updates on our latest red-teaming research and findings.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Gate Claude</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>金门大桥 Claude</h1>
+<div class="meta">
+Golden Gate Claude · May 23, 2024 · Interpretability · <a href="https://www.anthropic.com/research/golden-gate-claude" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic在解读Claude 3 Sonnet内部运作的研究中，发现了数以百万计的概念「特征」：模型读到相关文字或看到相关图像时便会激活。其中一个对应金门大桥，由一组特定神经元组合承载。研究者不仅能识别特征，还能调高或调低激活强度：把该特征钳制到其最大激活值的10倍后，Claude对多数提问都会扯到金门大桥——问它怎么花10美元，它建议开车驶过金门大桥付过桥费；让它写爱情故事，它写一辆汽车在雾天驶向心爱的桥。团队以「Golden Gate Claude」开放24小时供体验。作者强调这不是角色扮演、系统提示词或微调，而是对内部激活的外科手术式改动。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">特征（feature）：模型中对应某个概念、遇到相关输入即被激活的一组神经元模式</span><span class="term">激活强度：特征被触发的强弱程度，可人为调高或调低以观察行为变化</span><span class="term">激活钳制（clamping）：把某个特征的激活值固定在指定倍数，以此诱发相关行为</span><span class="term">微调：用额外训练数据改变模型行为的常规做法，结果仍是黑箱</span><span class="term">系统提示词：附在输入上的额外指令文本，只是要求模型扮演，并不改动内部激活</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 可解释性（Interpretability）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/golden-gate-claude</li>
+</ul>
+<p>可解释性（Interpretability）
+2024 年 5 月 23 日
+<img alt="金门大桥 Claude" src="../assets/golden-gate-claude/img_000.webp" />
+发布于
+    2024 年 5 月 23 日
+团队
+    <a href="https://www.anthropic.com/research/team/interpretability">可解释性</a>
+主题</p>
+<ul>
+<li><a href="/search?topic=interpretability">可解释性</a></li>
+<li><a href="/search?topic=claude-sonnet">Claude Sonnet</a></li>
+<li><a href="/search?topic=claude-apps">Claude 应用</a></li>
+<li><a href="/search?topic=alignment">对齐</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/emotion-concepts-function"></a><a href="https://www.anthropic.com/research/mapping-mind-language-model"></a><a href="https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning"></a><a href="https://www.anthropic.com/research/a-mathematical-framework-for-transformer-circuits"></a>
+相关文章
+  * 可解释性
+2026 年 4 月 2 日
+<a href="https://www.anthropic.com/research/emotion-concepts-function">大语言模型中的情绪概念及其功能</a></p>
+<p><a href="/search?topic=interpretability">阅读更多</a>
+ <em>更新：Golden Gate Claude 曾作为研究演示上线 24 小时，现已下线。若想进一步了解我们在可解释性以及 Claude 内部特征激活方面的研究，请见<a href="https://www.anthropic.com/news/mapping-mind-language-model">这篇文章</a>或我们的<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">完整研究论文</a>。</em>  </p>
+<p>周二，我们<a href="https://www.anthropic.com/research/mapping-mind-language-model">发布了一篇重要的新研究论文</a>，探讨如何解读大语言模型；在文中，我们开始描绘我们的 AI 模型 Claude 3 Sonnet 的内部运作。在 Claude 的「心智」里，我们发现了数以百万计的概念，当模型读到相关文字或看到相关图像时，它们便会激活，我们称之为「特征」。
+其中之一便是金门大桥的概念。我们发现，Claude 神经网络里有一组特定的神经元组合，每当它遇到这座旧金山最著名地标的字样（或图片）时就会激活。
+我们不仅能识别这些特征，还能调高或调低其激活强度，并观察 Claude 行为上相应的变化。
+而正如我们<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#:~:text=For%20instance%2C%20we%20see%20that%20clamping%20the%20Golden%20Gate%20Bridge%20feature%2034M/31164353%20to%2010%C3%97%20its%20maximum%20activation%20value%20induces%20thematically%2Drelated%20model%20behavior">在研究论文中所解释的</a>，当我们调高「金门大桥」特征的强度，Claude 的回答便开始围绕金门大桥打转。它对大多数提问的回复都会提到金门大桥，哪怕并不直接相干。
+若你问这个「Golden Gate Claude」怎么花掉 10 美元，它会建议拿这 10 美元驾车驶过金门大桥、支付过桥费。若让它写个爱情故事，它会讲一辆汽车在大雾天迫不及待驶向心爱之桥的故事。若问它想象自己长什么样，它多半会告诉你，它想象自己长得像金门大桥。
+我们将在短时间内开放这个模型供所有人互动体验。你可以在<a href="https://claude.ai">claude.ai</a>上与「Golden Gate Claude」对话（点一下右侧的金门标志即可）。请记住，这只是一个研究演示，这个特定模型可能会表现出一些出人意料、甚至令人不适的行为。
+我们的目标是让人们看到可解释性工作能产生怎样的影响。我们能够在 Claude 内部找到并改动这些特征，这让我们更有信心：我们正开始理解大语言模型究竟如何运作。这并不是口头让模型做点角色扮演，也不是新增一段「系统提示词」、在每条输入后面附上额外文字、叫 Claude 假装自己是一座桥。它也不是传统的「微调」——用额外训练数据造出一个新的黑箱，去微调旧黑箱的行为。这是对模型内部激活中某些最基本层面所作的一次精准、外科手术式的改动。
+<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">正如我们在论文中所描述的</a>，我们可以用同样的技术改变_与安全相关_特征的强度——例如与危险计算机代码、犯罪活动或欺骗相关的那些。随着研究深入，我们相信这项工作能有助于让 AI 模型更安全。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Golden Gate Claude</h1>
+<ul>
+<li><strong>Date:</strong> 2024-05-23</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/golden-gate-claude</li>
+</ul>
+<h1>Golden Gate Claude</h1>
+<p><img alt="Golden Gate Claude" src="../assets/golden-gate-claude/img_000.webp" />
+Published
+    May 23, 2024
+Team
+    <a href="https://www.anthropic.com/research/team/interpretability">Interpretability</a>
+Topics</p>
+<ul>
+<li><a href="/search?topic=interpretability">Interpretability</a></li>
+<li><a href="/search?topic=claude-sonnet">Claude Sonnet</a></li>
+<li><a href="/search?topic=claude-apps">Claude apps</a></li>
+<li><a href="/search?topic=alignment">Alignment</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/research/emotion-concepts-function"></a><a href="https://www.anthropic.com/research/mapping-mind-language-model"></a><a href="https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning"></a><a href="https://www.anthropic.com/research/a-mathematical-framework-for-transformer-circuits"></a>
+Related articles
+  * Interpretability
+Apr 2, 2026
+<a href="https://www.anthropic.com/research/emotion-concepts-function">Emotion concepts and their function in a large language model</a></p>
+<p><a href="/search?topic=interpretability">View more</a>
+ <em>UPDATE: Golden Gate Claude was online for a 24-hour period as a research demo and is no longer available. If you'd like to find out more about our research on interpretability and the activation of features within Claude, please see<a href="https://www.anthropic.com/news/mapping-mind-language-model">this post</a> or our <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">full research paper</a>.</em>  </p>
+<p>On Tuesday, we <a href="https://www.anthropic.com/research/mapping-mind-language-model">released a major new research paper</a> on interpreting large language models, in which we began to map out the inner workings of our AI model, Claude 3 Sonnet. In the “mind” of Claude, we found millions of concepts that activate when the model reads relevant text or sees relevant images, which we call “features”.
+One of those was the concept of the Golden Gate Bridge. We found that there’s a specific combination of neurons in Claude’s neural network that activates when it encounters a mention (or a picture) of this most famous San Francisco landmark.
+Not only can we identify these features, we can tune the strength of their activation up or down, and identify corresponding changes in Claude’s behavior.
+And as we <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#:~:text=For%20instance%2C%20we%20see%20that%20clamping%20the%20Golden%20Gate%20Bridge%20feature%2034M/31164353%20to%2010%C3%97%20its%20maximum%20activation%20value%20induces%20thematically%2Drelated%20model%20behavior">explain in our research paper</a>, when we turn up the strength of the “Golden Gate Bridge” feature, Claude’s responses begin to focus on the Golden Gate Bridge. Its replies to most queries start to mention the Golden Gate Bridge, even if it’s not directly relevant.
+If you ask this “Golden Gate Claude” how to spend $10, it will recommend using it to drive across the Golden Gate Bridge and pay the toll. If you ask it to write a love story, it’ll tell you a tale of a car who can’t wait to cross its beloved bridge on a foggy day. If you ask it what it imagines it looks like, it will likely tell you that it imagines it looks like the Golden Gate Bridge.
+For a short time, we’re making this model available for everyone to interact with. You can talk to “Golden Gate Claude” on <a href="https://claude.ai">claude.ai</a> (just click the Golden Gate logo on the right-hand side). Please bear in mind that this is a research demonstration only, and that this particular model might behave in some unexpected—even jarring—ways.
+Our goal is to let people see the impact our interpretability work can have. The fact that we can find and alter these features within Claude makes us more confident that we’re beginning to understand how large language models really work. This isn’t a matter of asking the model verbally to do some play-acting, or of adding a new “system prompt” that attaches extra text to every input, telling Claude to pretend it’s a bridge. Nor is it traditional “fine-tuning,” where we use extra training data to create a new black box that tweaks the behavior of the old black box. This is a precise, surgical change to some of the most basic aspects of the model’s internal activations.
+<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">As we describe in our paper</a>, we can use these same techniques to change the strength of <em>safety-related</em> features—like those related to dangerous computer code, criminal activity, or deception. With further research, we believe this work could help make AI models safer.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

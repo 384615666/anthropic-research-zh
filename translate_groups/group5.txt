@@ -1,0 +1,16 @@
+claude-plays-robotics
+claude-values-models-languages
+measuring-model-persuasiveness
+Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
+project-vend-1
+cyber-competitions
+building-ai-cyber-defenders
+project-pilot
+emergent-misalignment-reward-hacking
+project-fetch-phase-two
+nuclear-safeguards-for-ai
+donating-open-source-petri
+superposition-memorization-and-double-descent
+measuring-progress-on-scalable-oversight-for-large-language-models
+circuits-updates-july-2024
+transformer-circuits

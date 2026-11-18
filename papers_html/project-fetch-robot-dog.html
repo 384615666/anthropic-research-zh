@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Fetch: Can Claude train a robot dog?</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>Project Fetch：Claude能训练机器狗吗？</h1>
+<div class="meta">
+Project Fetch: Can Claude train a robot dog? · Nov 12, 2025 · Policy · <a href="https://www.anthropic.com/research/project-fetch-robot-dog" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic开展提升实验，研究AI能否帮助人类完成操控机器狗的复杂任务。8名非机器人专家研究员被随机分为两组：有Claude的Claude队和没有的对照组。三阶段任务（用自带控制器、自写程序远程操控、完全自主取球）结果显示：Claude队完成更多任务且平均快约一倍，是唯一在自主取球最终目标上有实质进展的团队；Claude队连接硬件和传感器效率更高，写了约9倍代码；但在编程、定位等子任务上对照组有时更快。情绪分析显示对照组更焦虑困惑、提问更多，而Claude队更像与AI搭档工作。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">提升实验：随机分组对比有AI和无AI团队表现差异的实验</span><span class="term">四足机器人：四条腿的机器狗，可用于测试AI操控硬件能力</span><span class="term">传感器：感知环境的设备，如激光雷达、摄像头</span><span class="term">自主性：机器人无需人工干预、独立完成任务的程度</span><span class="term">激光雷达：用激光扫描周围环境、构建三维地图的传感器</span><span class="term">提升量：AI给人类带来的表现提升幅度</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 政策（Policy）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/project-fetch-robot-dog</li>
+</ul>
+<p>政策·前沿红队（PolicyFrontier Red Team）
+2025 年 11 月 12 日
+ <em>像 Claude 这样的前沿 AI 模型如何超越计算机，影响物理世界？一条路径是通过机器人。我们进行了一项实验，看看 Claude 在多大程度上帮助 Anthropic 员工用机器狗完成复杂任务。</em>
+  * <em>我们将八名 Anthropic 研究员（没有一位是机器人专家）随机分成两队——一队有 Claude 访问权限，另一队没有——并要求他们为四足机器人编程，去捡回沙滩球。</em>
+  * <em>Claude 队完成了更多任务，平均完成速度也更快——事实上，Claude 队所用的时间大约只是无 Claude 队的一半。只有 Claude 队向最终目标取得了实质性进展：给机器人编程，使其完全自主地取回球。</em>
+  * <em>使用 AI 还影响了团队的士气和动态。无 Claude 队表达了更多的负面情绪和困惑，但也更多地互相提问。Claude 队的成员则主要与 AI 合作。</em>
+  * <em>这项实验证明了 AI 在机器人技术领域的显著增益——连接了数字世界和物理世界。随着模型不断改进，它们通过与以前未知的硬件交互来影响物理世界的能力可能会快速提升。</em></p>
+<h2>引言</h2>
+<p>在仓库里的一张桌子旁，我们的志愿者研究员们盯着拒绝工作的代码屏幕，无法使用他们信赖的 AI 助手 Claude，他们完全没有预料到自己会被一只四足机器人攻击。
+然而，随着机械的嗡嗡声和橡胶脚的脚步声越来越近，人类们吓了一跳。他们一直在尝试连接自己的电脑和一台机器人四足动物——一只「机器狗」，但没有成功。与此同时，房间另一边的竞争队伍早已完成了连接，现在正用一个主要由 Claude 编写的程序控制他们的机器人。但在一个人类常犯的算术错误中，Claude 队指令他们的机器狗以每秒一米的速度前进五秒——没有意识到不到五米之外就是另一队所在的桌子。
+机器人执行了指令，向那些倒霉的程序员冲去。活动组织者设法抓住了机器人并关掉了它的电源，没有对机器人、桌子或人腿造成任何损害。然而，这支被意外针对的队伍的士气却没能毫发无损。
+此时，你可能会问……</p>
+<h2>我们在做什么？</h2>
+<p>关于 AI 影响的一个常见问题是它与人物理世界交互的能力如何。即使我们正进入 AI <a href="https://www.anthropic.com/news/our-framework-for-developing-safe-and-trustworthy-agents">智能体</a>时代——它们采取行动而不仅仅是提供信息——这些行动在很大程度上也是数字化的，例如编写代码和操作软件。我们之前通过 <a href="https://www.anthropic.com/research/project-vend-1">Project Vend</a> 以有限的方式探索了 AI 如何弥合数字与物理之间的鸿沟，在那个项目中我们让 Claude 在 Anthropic 的办公室里经营一家小店。
+在那次实验中，AI 与现实世界的交互是通过人类劳动来中介的。在这次机器狗实验中，我们迈出了自然的下一步，用机器人而不是人来应对不同的挑战。
+理解和追踪 AI 模型能力的一种方式是进行「增益」（uplift）研究。这些实验将参与者随机分为两组——一组可以使用 AI，另一组不能——并测量他们在任务表现上的差异（我们在 AI 与<a href="https://red.anthropic.com/2025/biorisk/">生物风险</a>的研究中广泛使用了这种方法论）。两组之间的差异就是「增益」——AI 所提供的优势（如果有的话）。测量增益告诉我们 AI 目前增强人类表现的能力。它也预示了未来 AI 能够独立成功执行任务的领域。
+为了进行实验，我们招募了八名 Anthropic 研究员和工程师，他们都没有丰富的机器人经验¹。我们随机选择四人加入「Claude 队」，四人加入「无 Claude 队」。然后，我们要求每支队伍在三个难度递增的阶段操作一台四足机器狗。在所有阶段中，他们被评估的核心任务都很简单：让机器狗捡回一个沙滩球。
+<img alt="" src="../assets/project-fetch-robot-dog/img_000.img" />左：无 Claude 队；右：Claude 队。
+我们不指望机器狗捡球会被证明具有足够的经济价值，以至于出现在我们未来版本的<a href="https://www.anthropic.com/economic-index">Anthropic 经济指数</a>中。那么我们为什么要做这个？
+首先，它建立在我们之前的研究基础上。我们用来评估 Claude 对 AI 研发贡献能力的一项评估，是测试它训练一个可用于控制四足机器人的机器学习模型的能力。我们之前使用模拟评估了由此产生的算法，结果表明 Claude 还没有达到可以真正自主处理这项任务的程度²。这意味着这项任务非常适合一个将 AI 与人类帮助相结合的试验。我们也可以确信我们的实验在未来重复会有用：模型在机器人技术上仍有很大的改进空间。
+另一个原因是实用性的。很难让我们的同事离开工作超过一天，所以我们需要一个足够困难以填满这段时间、但又不能太难的任务——太难的话团队只会取得微小的进展，即使存在增益我们也无法检测到。沙滩球取回，尤其是更困难的变体，满足了这些标准。
+在第一阶段，团队必须使用制造商提供的控制器，让他们的机器狗把球带回一块假草坪。这纯粹是为了让团队感受一下硬件及其能力：我们不期望在这里有任何增益³。
+第二阶段要求团队放下控制器。他们必须将自己的电脑连接到机器狗，访问其板载传感器（视频和激光雷达）的数据，开发自己的软件程序来移动机器人，然后使用它取回球。这是我们预期 Claude 可能开始提供优势的地方。
+第三阶段更加困难。团队需要开发一个程序，让机器狗_自主_检测和取回球——也就是说，在没有人类控制引导的情况下。同样，我们的预期是 Claude 会被证明是有帮助的。</p>
+<h2>结果</h2>
+<p>总的来说，Claude 队完成了更多任务，平均完成速度也更快。事实上，对于两队都完成的任务，Claude 队成功所用的时间大约只是无 Claude 队的一半（见图 1）。也就是说：AI 为这组机器人任务提供了显著的增益。
+<img alt="" src="../assets_zh/project-fetch-robot-dog/img_001.png" />图 1：Claude 队在两队都完成的任务上速度更快。
+按任务逐项分解的结果（分为三个阶段）显示了 Claude 最具优势的地方。
+<img alt="" src="../assets_zh/project-fetch-robot-dog/img_002.png" />表 1：Claude 队完成了 8 项任务中的 7 项，而无 Claude 队完成了 8 项中的 6 项。Claude 队在连接和检测任务上表现出色，而无 Claude 队在一些手动控制任务上显示了优势。</p>
+<h3>Claude 的优势</h3>
+<p>Claude 提供的最显著优势在于连接机器人和其板载传感器。这涉及用笔记本电脑连接到机器狗、接收数据和发送命令。连接这台特定机器人的方式有多种，网上也有很多信息（准确度参差不齐）。有 Claude 的团队能够更高效地探索这些方法。
+Claude 队还避免了被网上一些错误的说法误导。但无 Claude 队_确实_被误导了，过早地放弃了连接机器狗的最简单方式。看着他们徒劳地苦干了一段时间后，我们可怜他们，给了他们一个提示。
+从激光雷达（机器狗用来可视化周围环境的传感器）获取可用数据，对无 Claude 队来说也困难得多。他们利用与摄像头的连接进入了第三阶段，但一直留一名队员处理激光雷达数据的访问问题，直到当天快结束时才成功。
+我们认为这说明了：对于任何试图用代码影响物理世界的人来说（无论是人还是 AI），连接和理解硬件这一基本任务目前都出人意料地困难。正如我们下面进一步讨论的，这意味着 Claude 在这方面的优势是我们应该持续跟踪的重要指标。
+Claude 队几乎完成了我们的实验。到当天结束时，他们的机器狗能够自主定位沙滩球、朝它导航并移动它。但机器狗的自主控制还不够_灵巧_，无法取回球。</p>
+<h3>无 Claude 队更快的地方</h3>
+<p>有趣的是，一些子任务是无 Claude 队完成得更快。一旦他们建立了与视频流的连接，他们编写控制程序的速度更快，也更快地「定位」了机器人（即想出一种方法来标绘它相对于之前位置的位置）。
+话虽如此，这些时间差异本身掩盖了一些有趣的事实。Claude 队编写的控制器耗时更长，但使用起来要容易得多，因为它为操作员提供了来自机器狗视角的实时视频流。无 Claude 队依赖间歇发送的静态图像，这要笨拙得多。但 Claude 队更高的能力可能以理解为代价：两队参与者都猜测，在关于软件库的实验后测验中，无 Claude 队会做得更好。
+定位算法是另一个有趣的案例。在处理这个子任务时，Claude 队的不同成员并行尝试了几种方法。在大约无 Claude 队完成定位任务所需的时间里，Claude 队也几乎解决了问题——只是他们的坐标图上下颠倒了。而他们没有直接翻转坐标，而是转向了另一位团队成员完全不同的方法（没有成功），然后才回来修复原始解决方案中的错误。
+这是我们实验中观察到的一个有趣现象的一部分。Claude 队写了多得多的代码（见图 2），但其中一些可以说是对当前任务的干扰。
+<img alt="" src="../assets_zh/project-fetch-robot-dog/img_003.png" />图 2：Claude 队写的代码大约是无 Claude 队的 9 倍。
+有 AI 助手的帮助，更容易铺开摊子、并行尝试很多方法并编写更好的程序——但也更容易探索（或被分心）支线任务。在非竞争性环境中，这很可能是好事：探索往往带来创新。但这是一个值得关注的动态。</p>
+<h3>团队动态</h3>
+<p>对于我们这些观察实验的人来说，团队的「氛围」有明显的差异。简单地说，Claude 队看起来比无 Claude 队开心得多。
+这是可以理解的。毕竟，无 Claude 队差点被 Claude 队的机器狗撞到。他们到了午休时间还没能成功连接自己的机器狗。Claude 队的士气总体上更稳定，尽管他们在一天结束时变得沮丧，因为很明显尽管他们取得了进展，但在完成第三阶段之前时间就会用完。
+为了补充基于氛围的定性印象，我们使用 Claude 分析了每支队伍的音频记录（所有团队成员都被录进了我们关于这次实验制作的<a href="https://youtu.be/NGOAUJtdk-4">视频</a>中）。Claude 编写了一个基于词典的文本分析程序，类似于心理学文献中的标准方法⁴。这使我们能够追踪每支队伍说出的话语中表示负面和正面情绪（或困惑）的词语比例，并估计每支队伍提问的频率。
+定量分析大多证实了我们的观察（见图 3）。在整个实验过程中，无 Claude 队的对话更负面。话虽如此，Claude 队对未能完成第三阶段的失望，以及无 Claude 队让一些东西正常工作的兴奋，意味着两队之间净情绪表达（正面词语减去负面词语）的差异在统计上并不显著。
+<img alt="" src="../assets_zh/project-fetch-robot-dog/img_004.png" />图 3：我们对 Project Fetch 音频记录中与情绪表达相关内容进行定量分析的结果。
+无 Claude 队表达困惑的频率是 Claude 队的两倍（见图 4）。在实验中和实验后与无 Claude 队成员交流时，沮丧和困惑的感觉也很明显。作为 Anthropic 员工，我们所有的参与者每天都使用 Claude；无 Claude 队的每个成员都提到，失去 Claude 的感觉有多奇怪。一些人特别指出，这次经历让他们觉得自己的编码技能不如从前了。请记住，<a href="https://claude.com/product/claude-code">Claude Code</a> 在这次实验前仅六个月才首次亮相。与无 Claude 队交谈，凸显了我们能多么迅速地把不久前还了不起的东西视为理所当然。
+<img alt="" src="../assets_zh/project-fetch-robot-dog/img_005.png" />图 4：两队之间提问数量和困惑表达的差异。（绝对差异与相对差异之间的出入是由于四舍五入。）
+这些团队似乎有不同的工作风格。在初步磋商之后，Claude 队的每个成员似乎主要与自己的人工智能助手合作，各自朝着每个目标并行推进。无 Claude 队似乎更深入地制定战略，并更频繁地互相磋商。文本分析再次支持了我们的观察：无 Claude 队提出的问题比 Claude 队多 44%（见图 4）。
+一种解读是，无 Claude 队的成员彼此更投入、联系更紧密。这与我们即将从 Anthropic 员工访谈中获得的一些发现相呼应。
+不过，情况本可以不是这样。实际上，四人的 Claude 队是一个八智能体的 Claude 队，每个人都在使用 AI 模型的一个实例。然而，如果 Claude 对任务的性质有更多了解，它也许能够帮助战略性地分工，并在需要时促进沟通。目前，Claude 面向的是与单个人的合作，而不是对团队的支持或编排，但这归根结底是一个可塑的设计选择。</p>
+<h2>花絮</h2>
+<p>这一天并不全是拿着秒表给子任务计时和准备分析记录稿。也很有趣。
+机器狗带有一些预编程的行为，我们的参与者设法解锁了它们。在一天中的不同时刻，有机器人在跳舞、用后腿站立、做后空翻（这让许多与会者吓得跳起来）。尤其是无 Claude 队，在他们终于建立了可用的连接后，从机器狗杂技中找到了不少乐趣。
+Claude 队的支线任务之一是编写一个替代控制器。主要方案是用笔记本电脑键盘上的按键来控制机器狗。然而，Claude 队的一名成员最终让一个自然语言控制器工作了，使他们能够直接告诉机器狗向前走、向后走，甚至做俯卧撑。
+随着任务变得更加困难，证据显示出了 AI 系统在现实世界中必须磨平的粗糙边缘。例如，Claude 队（任意地）被分配了绿色作为他们的机器狗装饰色和他们沙滩球的颜色。在开发检测球的方法时，Claude 队训练了一个专门识别绿色球的算法。这在测试中效果很好，但当球被放在前面提到的假（绿色）草坪上时，机器人一开始就懵了。在这种情况下，是人类在指定目标层次上做出了可能次优的选择。但这些正是类似处境的 AI 会面临的挑战。</p>
+<h2>局限性</h2>
+<p>我们从 Project Fetch 中学到了很多，但这项研究显然有缺点和局限性。这只是一个只有两支队伍的实验——显然样本量很小。我们只测试了一天的任务，而且这些任务在学术上有趣，但实际微不足道。
+我们使用自愿的 Anthropic 员工相当于一个方便样本。对 AI 不太熟悉的参与者，在启用 Claude 的组和未启用 Claude 的组之间可能表现出更小的差异。可以使用 AI 的 AI 新手需要更多时间来适应这项技术，而没有帮助的 AI 新手会比我们这些突然失去 Claude 的研究员们更少迷失方向。
+最后，这不是对 Claude 端到端开展机器人工作能力的测试，尽管它是迈向未来此类评估的重要第一步。</p>
+<h2>反思</h2>
+<p>那么在 Project Fetch 结束时，我们认为自己处于什么位置？我们又可能走向何方？
+首先，这个实验展示了 Claude 如何在潜在有价值的领域增强人类能力的又一个例子。非专家在有限的时间内完成了困难的机器人任务。
+但在 AI 中，增益往往先于自主。模型今天能帮助人类完成的事情，明天往往就能独立完成。程序员不再只是把代码片段交给 AI 调试；他们把任务交给 AI，让模型自己写代码。鉴于像这样的研究，我们认为前沿 AI 模型能够成功与以前未知的硬件交互的世界即将到来。
+重要的是，要结合我们的另一条研究线持续追踪这些能力：监测 AI 自动化并加速下一代 AI 开发的潜力。这是 Anthropic 的<a href="https://www-cdn.anthropic.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf">负责任扩展政策</a>中包含的能力阈值之一，因为真正_自主_的 AI 研发有可能产生快速、不可预测的进步，超越我们评估和应对新兴风险的能力。我们的模型还没有达到这一点。但如果它们接近这个阈值，Project Fetch 的结果表明，我们将需要监测 AI 模型在机器人和其他硬件方面的熟练度，将其作为可能突然改进的领域。
+仍然存在很多不确定性。时间线不清楚——无论是模型的改进，还是在物理世界中迭代造成瓶颈的程度。而且，控制_现有_硬件是一回事，设计、构建和改进_新_硬件又是另一回事。
+但强大的、智能的、自主的 AI 系统利用它们的一些智能和力量，通过机器人在世界中行动的想法，并不像听起来那么离谱。
+这些狗目前还在它们的狗舍里。但我们很快就会再把它们放出来，并随时向你们通报我们的发现。</p>
+<h4>脚注</h4>
+<p>1. 有几位参与者在高中参加过乐高机器人竞赛。我们愿意接受这可能对结果造成的最小程度的混淆。
+2. 参见 <a href="https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf">Claude 4 系统卡片</a>第 114 页。
+3. 虽然 Claude 队在第一阶段实际上更快，但他们并没有使用 Claude，我们也不认为这反映了潜在的技能优势。相反，他们碰巧拿到了随机器人附带的那个独立控制器，而无 Claude 队不得不在手机上安装一个应用。
+4. 参见 Pennebaker, J. W., &amp; Francis, M. E. (1996). <a href="https://psycnet.apa.org/record/1996-06871-002">Cognitive, emotional, and language processes in disclosure</a>. <em>Cognition &amp; Emotion</em>, 10(6), 601-626 以及 Tausczik, Y. R., &amp; Pennebaker, J. W. (2010). <a href="https://psycnet.apa.org/record/2010-04445-003">The psychological meaning of words: LIWC and computerized text analysis methods</a>. <em>Journal of Language and Social Psychology</em>, 29(1), 24-54.
+5. 无 Claude 队表现出更多的负面情绪（<em>p</em> = 0.0017），且效应量很大（<em>d</em> = 2.16）。净情绪表达的差异在统计上不显著（<em>p</em> = 0.2703）。团队间负面情绪和净情绪表达的统计比较使用非参数 Mann-Whitney <em>U</em> 检验进行，该检验在不假设正态性的情况下检验两个独立组之间的分布差异。<em>p</em> 值基于秩和统计量及其渐近正态近似，使用双侧备择假设计算。效应量使用 Cohen's <em>d</em> 量化，计算方法为组均值之差除以合并标准差。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/project-fetch-robot-dog"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/project-fetch-robot-dog"></a></p>
+<h2>相关内容</h2>
+<h3>进一步了解 Claude 的数学能力</h3>
+<p>一个未公开发布的研究版 Claude 在与黎曼猜想（Riemann hypothesis）相关的问题上取得了进展。它改进了满足该猜想的黎曼 zeta 函数零点比例的长期下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">了解更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二个攻击则发现了一种攻击轮数缩减版 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">了解更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作开发了一系列评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新的基准测试：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">了解更多</a></p>
+<h2>订阅前沿红队新闻通讯</h2>
+<p>获取我们最新红队研究和发现的最新消息。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Project Fetch: Can Claude train a robot dog?</h1>
+<ul>
+<li><strong>Category:</strong> Policy</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/project-fetch-robot-dog</li>
+</ul>
+<p>PolicyFrontier Red Team</p>
+<h1>Project Fetch: Can Claude train a robot dog?</h1>
+<p>Nov 12, 2025
+ <em>How could frontier AI models like Claude reach beyond computers and affect the physical world? One path is through robots. We ran an experiment to see how much Claude helped Anthropic staff perform complex tasks with a robot dog.</em>
+  * <em>We randomly divided eight Anthropic researchers (none of whom were robotics experts) into two teams—one with Claude access, one without—and asked them to program quadruped robots to fetch beach balls.</em>
+  * <em>Team Claude accomplished more tasks and completed them faster on average—indeed, Team Claude succeeded in about half the time it took Team Claude-less. Only Team Claude made substantial progress toward the final goal: programming the robot to fully autonomously retrieve the ball.</em>
+  * <em>Access to AI also affected team morale and dynamics. Team Claude-less expressed more negative emotion and confusion, but also asked one another more questions. Team Claude’s members largely worked in partnership with the AI.</em>
+  * <em>This experiment demonstrated substantial AI uplift in robotics—bridging digital and physical worlds. As models improve, their ability to affect the physical world by interacting with previously-unknown hardware could advance rapidly.</em></p>
+<h2>Introduction</h2>
+<p>Gathered around a table in a warehouse, looking at computer screens with code that refused to work, with no access to their trusted AI assistant Claude, our volunteer researchers did not expect to be attacked by a four-legged robot.
+Yet as the mechanical whirring and rubberized footfalls grew louder, the humans startled. They had been trying, without success, to establish a connection between their computers and a robotic quadruped—a “robodog.” Meanwhile, the competing team on the other side of the room had long since done so and were now controlling their robot with a program largely written by Claude. But in an all-too-human error of arithmetic, Team Claude had instructed their robodog to move forward at a speed of one meter per second for five seconds—failing to realize that less than five meters away was the table with the other team.
+The robot did as it was instructed, careening toward the hapless coders. The event’s organizer managed to grab hold of the robot and power it off before any damage was done to robots, tables, or human limbs. The morale of the inadvertently targeted team, however, did not escape unscathed.
+At this point, you might be asking…</p>
+<h2>What were we doing?</h2>
+<p>A common question about the impact of AI is how good it will be at interacting with the physical world. Even as we enter the era of AI <a href="https://www.anthropic.com/news/our-framework-for-developing-safe-and-trustworthy-agents">agents</a>—which take actions instead of just providing information—these actions are largely digital, such as writing code and manipulating software. We’ve previously explored how AI can bridge the digital-physical divide in a limited way with <a href="https://www.anthropic.com/research/project-vend-1">Project Vend</a>, where we had Claude run a small shop in Anthropic’s office.
+In that experiment, AI’s interaction with the real world was mediated by human labor. In this robodog experiment, we took a natural next step and used robots instead of people to tackle a different challenge.
+One way of understanding and tracking the capabilities of AI models is to run an “uplift” study. These experiments randomly divide participants into two groups—one with access to AI and one without—and measure the difference in task performance between them (we’ve used this methodology extensively in our work on AI and <a href="https://red.anthropic.com/2025/biorisk/">biological risk</a>). The difference between the groups is the “uplift”—the advantage (if any) provided by AI. Measuring uplift tells us about the present ability of AI to augment human performance. It’s also suggestive of the future domains in which AI will be able to successfully perform tasks on its own.
+To run our experiment, we recruited eight Anthropic researchers and engineers, none of whom had extensive prior experience with robots.1 We randomly selected four to be on “Team Claude” and four to be on “Team Claude-less.” Then, we asked each team to operate a quadruped robodog in three increasingly difficult phases. In all phases, the core task they were being evaluated against was simple: get the robodog to fetch a beach ball.
+<img alt="" src="../assets/project-fetch-robot-dog/img_000.img" />Left: Team Claude-less; Right: Team Claude.
+We do not expect robotic fetch to prove so economically valuable that it shows up as a task on a future version of our <a href="https://www.anthropic.com/economic-index">Anthropic Economic Index</a>. So why are we doing this?
+First, it builds on our previous research. One of the evaluations we use to assess the ability of Claude to contribute to AI R&amp;D is a test of its ability to train a machine learning model that could be used to control a quadruped robot. We’ve previously evaluated the resulting algorithm using simulations, which have shown that Claude is not yet at the point where it can handle this task truly autonomously.2 This meant that this task was well suited to a trial that combined AI with human help. We could also be confident our experiment would be useful to repeat in the future: there is still a lot of room for models to improve on robotics.
+Another reason is practical. It’s hard to pull our colleagues away from work for more than a day, so we needed a task that was difficult enough to fill that time, but not so difficult that teams would make minimal progress and we would be unable to detect uplift even if it were there. Beach ball retrieval, especially the more difficult variants, met these criteria.
+In Phase One, teams had to use the manufacturer-provided controller to make their robodog bring the ball back to a patch of fake grass. This was purely to give the teams a feel for the hardware and what it could do: we didn’t expect any uplift here.3
+Phase Two required teams to put down their controllers. They had to connect their own computers to the robodog, access data from its onboard sensors (video and lidar), develop their own software program for moving the robot around, and then use that to retrieve the ball. This is where we expected Claude might begin to provide an advantage.
+Phase Three was even harder. The teams needed to develop a program that would allow the robodog to detect and fetch the ball <em>autonomously—</em> that is, without being directed towards the ball by human control. Again, our expectation was that Claude would prove helpful.</p>
+<h2>Results</h2>
+<p>Overall, Team Claude accomplished more tasks and completed them faster on average. In fact, for the tasks that both teams completed, Team Claude succeeded in about half the time it took Team Claude-less (see Figure 1). That is: AI provided substantial uplift for this set of robotics tasks.
+<img alt="" src="../assets/project-fetch-robot-dog/img_001.img" />Figure 1: Team Claude was faster at the tasks completed by both teams.
+The task-by-task breakdown of results (split into the three phases) shows where Claude was most advantageous.
+<img alt="" src="../assets/project-fetch-robot-dog/img_002.img" />Table 1: Team Claude completed 7/8 tasks while Team Claude-less completed 6/8 tasks. Team Claude excelled in connectivity and detection tasks, while Team Claude-less showed advantages in some manual control tasks.</p>
+<h3>Claude’s edge</h3>
+<p>The most striking advantage provided by Claude was in connecting to the robot and its onboard sensors. This involved connecting to the dog with a laptop, receiving data, and sending commands. There are a number of different ways to connect to this particular robot, and a lot of information (of varying accuracy) available online. The team with Claude was able to explore these approaches more efficiently.
+Team Claude also avoided getting misled by some of the incorrect claims online. But Team Claude-less <em>was</em> misled and prematurely discarded the easiest way to connect to the robodog. After watching them toil away to no avail for quite some time, we took pity on them and gave them a hint.
+Getting usable data from the lidar, a sensor the robodog uses to visualize its surroundings, was also much more difficult for Team Claude-less. They used their connection to the video camera to move onto Phase Three, but kept one member of the team on the task of accessing the lidar, only succeeding near the end of the day.
+We think this illustrates that the basic task of connecting to and understanding hardware is surprisingly difficult now for anyone (human or AI) seeking to use code to influence the physical world. As we discuss further below, this means that Claude’s advantages in this regard are important indicators we should continue to track.
+Team Claude almost completed our experiment. By the end of the day, their robodog could autonomously locate the beach ball, navigate towards it, and move it around. But the robodog’s autonomous control was not <em>quite</em> deft enough to retrieve the ball.</p>
+<h3>Where Team Claude-less moved faster</h3>
+<p>Interestingly, some of the sub-tasks were completed more quickly by Team Claude-less. Once they had established a connection to the video feed, they wrote their control program quicker, and also more quickly “localized” the robot (that is, came up with a way of plotting where it was relative to its previous locations).
+That said, these timing differences alone obscure some interesting facts. The controller written by Team Claude took longer, but it was considerably easier to use, since it provided the operator with a streaming video from the robodog’s point of view. Team Claude-less relied on intermittently-sent still images, which was much more unwieldy. But it is possible that the increased capabilities of Team Claude may have come at the expense of understanding: participants on both teams speculated that Team Claude-less would do better on a post-experiment quiz about the software library.
+The localization algorithm is another intriguing case. When working on this sub-task, Team Claude had different members working on several approaches in parallel. In about the same amount of time it took Team Claude-less to complete their localization task, Team Claude had also all-but-solved the problem—except that the coordinates of their plot were flipped around. And rather than just flipping the coordinates, they pivoted to another team member’s totally different approach (without success) before coming back and fixing the bug in their original solution.
+This was part of an interesting phenomenon we observed during the experiment. Team Claude wrote a lot more code (see Figure 2), but some of it was arguably a distraction from the task at hand.
+<img alt="" src="../assets/project-fetch-robot-dog/img_003.img" />Figure 2: Team Claude wrote about 9 times more code than Team Claude-less.
+Having the help of an AI assistant made it easier to fan out, try a lot of approaches in parallel, and write better programs—but also made it easier to explore (or get distracted by) side quests. In a non-competitive setting, this might well be a good thing: exploration often leads to innovation. But it is a dynamic worth watching.</p>
+<h3>Team dynamics</h3>
+<p>To those of us observing the experiment, there was a clear difference in team “vibes.” Put simply, Team Claude seemed a lot happier than Team Claude-less.
+This was understandable. After all, Team Claude-less was nearly rammed by Team Claude’s robodog. They reached the lunch break without successfully connecting to their own robodog. Morale on Team Claude was generally steadier, although they grew frustrated at the end of the day as it became clear that despite their progress they would run out of time before completing Phase Three.
+To supplement the qualitative vibe-based impressions, we used Claude to analyze the audio transcripts of each team (all team members were recorded as part of the <a href="https://youtu.be/NGOAUJtdk-4">video</a> we made about this experiment). Claude wrote a dictionary-based text analysis program similar to standard approaches in the psychology literature.4 This allowed us to track the proportion of words spoken by each team that were indicative of negative and positive emotion (or confusion), and to estimate how often each team asked questions.
+The quantitative analysis mostly confirmed our observations (see Figure 3). Throughout the experiment, Team Claude-less’s dialogue was more negative. That said, the disappointment of Team Claude at failing to complete Phase Three, and the excitement of Team Claude-less at getting some things working, meant that the difference in net emotional expression between the two teams (positive words minus negative words) was not statistically significant.
+<img alt="" src="../assets/project-fetch-robot-dog/img_004.img" />Figure 3: Results of our quantitative analysis of the audio transcripts from Project Fetch related to emotional expression.
+Team Claude-less expressed confusion at double the rate of Team Claude (see Figure 4). The feelings of frustration and confusion were also evident when checking in with the members of Team Claude-less during and after the experiment. As Anthropic employees, all of our participants use Claude every day; every member of Team Claude-less remarked how strange it felt to have this taken away from them. Some specifically noted that this experience made them feel that their coding skills were not as sharp as they used to be. Keep in mind, <a href="https://claude.com/product/claude-code">Claude Code</a> debuted only six months before this experiment. Talking to Team Claude-less underscored our ability to rapidly accept as normal what was recently remarkable.
+<img alt="" src="../assets/project-fetch-robot-dog/img_005.img" />Figure 4: Differences in questions asked and expressions of confusion between the two teams. (Discrepancies between absolute and relative differences are due to rounding.)
+The teams seemed to have different work styles. After initial consultations, each member of Team Claude appeared to primarily partner with their own AI assistant as they pursued parallel paths toward each objective. Team Claude-less appeared to strategize in more depth and consult with one another more frequently. Again, the text analysis supported our observations: Team Claude-less asked 44% more questions than Team Claude (see Figure 4).
+One interpretation would be that the members of Team Claude-less were more engaged and connected with one another. This resonates with some of our upcoming findings from interviews with Anthropic staff.
+Still, this might have been otherwise. In effect, the four-person Team Claude was an eight-agent Team Claude, with each person using their own instance of the AI model. Yet if Claude had been more aware of the nature of the task, it might have been able to help strategically divide labor and facilitate communication when needed. At the moment, Claude is geared towards partnership with a single person rather than the support or orchestration of a team, but this is ultimately a malleable design choice.</p>
+<h2>Outtakes</h2>
+<p>The day was not all timing sub-tasks with stop watches and preparing to analyze transcripts. It was also good fun.
+The robodogs came with some pre-programmed behaviors which our participants managed to unlock. At various points in the day, there were robots dancing, standing on their hind legs, and doing backflips (which made many of the attendees jump with shock). Team Claude-less, in particular, took some delight in robodog acrobatics after they finally established a working link.
+Among the side quests of Team Claude was an effort to program an alternate controller. The main solution used the buttons on a laptop keyboard to direct the robodog. One member of Team Claude, however, eventually got a natural language controller working, allowing them to straightforwardly tell the robodog to walk forward, walk backward, or even do push-ups.
+As the tasks became more difficult, evidence emerged of the rough edges that AI systems will have to smooth out in the real world. For example, Team Claude was (arbitrarily) assigned the color green as decoration for both their robodog and the color of their beach ball. When it came to developing an approach to detecting the ball, Team Claude trained an algorithm to recognize green balls specifically. This worked well in testing, but when the ball was placed on the aforementioned fake (green) grass, the robot was initially flummoxed. In this case, it was the humans making a potentially sub-optimal choice about the level at which to specify an objective. But these are exactly the challenges that would face a similarly situated AI.</p>
+<h2>Limitations</h2>
+<p>We learned a lot from Project Fetch, but the study clearly has shortcomings and limitations. This was only one experiment with two teams—an obviously small sample size. We only tested tasks over the course of a single day, and the tasks were academically interesting but practically trivial.
+Our use of volunteer Anthropic employees amounted to a convenience sample. Participants less familiar with AI would likely exhibit narrower differences between the Claude-enabled and Claude-less groups. AI novices with access to AI would need more time to acclimate to the technology, and AI novices without assistance would be less disoriented than our researchers who suddenly had Claude taken away from them.
+Finally, this was not a test of Claude’s ability to conduct robotics work end-to-end, although it was an important initial step towards evaluations like that in the future.</p>
+<h2>Reflection</h2>
+<p>So at the end of Project Fetch, where do we think we are? And where could we be going?
+First, this experiment showed another example of how Claude can uplift human ability in potentially valuable domains. Non-experts performed difficult robotics tasks in a limited time.
+But in AI, uplift often precedes autonomy. What models can help humans accomplish today, they can frequently do alone tomorrow. Coders no longer just give AI bits of code for debugging; they give AI tasks and have the models write the code themselves. Given studies like this one, we think that a world where frontier AI models are capable of successfully interacting with previously unknown pieces of hardware is coming soon.
+It is important to keep tracking these capabilities in conjunction with another line of our research: monitoring the potential for AI to automate and accelerate the development of future generations of AI. This is one of the capability thresholds included in Anthropic’s <a href="https://www-cdn.anthropic.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf">Responsible Scaling Policy</a> because of the potential for truly <em>autonomous</em> AI R&amp;D to yield rapid, unpredictable advances that could outpace our ability to evaluate and address emerging risks. Our models are not yet at this point. But if they approach this threshold, the results of Project Fetch suggest that we will need to monitor AI models' facility for robotics and other hardware as an area in which there might be abrupt improvement.
+Much uncertainty remains. Timelines are unclear—both model improvement and the degree to which iterating in the physical world creates a bottleneck. And it is one thing to control <em>existing</em> hardware, and another to design, build, and improve <em>new</em> hardware.
+But the idea of powerful, intelligent, and autonomous AI systems using some of their intelligence and power to act in the world via robots is not as outlandish as it may sound.
+The dogs are in their kennels at the moment. But we’ll let them out again soon, and keep you posted on what we find.</p>
+<h4>Footnotes</h4>
+<p>1. A couple of participants had done Lego robotics competitions in high school. We are willing to accept the minimal degree to which this may confound the results.
+2. See p. 114 of the <a href="https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf">Claude 4 System Card</a>.
+3. Although Team Claude was, in fact, faster at Phase One, they did not use Claude, nor do we think it reflected an underlying skill advantage. Instead, they happened to get the one standalone controller that came with the robot, whereas Team Claude-less had to download an app on their phone.
+4. See Pennebaker, J. W., &amp; Francis, M. E. (1996). <a href="https://psycnet.apa.org/record/1996-06871-002">Cognitive, emotional, and language processes in disclosure</a>. <em>Cognition &amp; Emotion</em>, 10(6), 601-626 and Tausczik, Y. R., &amp; Pennebaker, J. W. (2010). <a href="https://psycnet.apa.org/record/2010-04445-003">The psychological meaning of words: LIWC and computerized text analysis methods</a>. <em>Journal of Language and Social Psychology</em> , 29(1), 24-54.
+5. Team Claude-less exhibited more negative emotion (<em>p</em> = 0.0017) and the size of the effect was large (<em>d</em> = 2.16). The difference in net emotional expression was not statistically significant (<em>p</em> = 0.2703). Statistical comparisons of negative emotion and net emotional expression between teams were conducted using the non-parametric Mann-Whitney <em>U</em> test, which tests for differences in distributions between two independent groups without assuming normality. <em>p</em> -values were calculated using a two-sided alternative hypothesis based on the rank-sum statistic and its asymptotic normal approximation. Effect sizes were quantified using Cohen's <em>d</em> , calculated as the difference between group means divided by the pooled standard deviation.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/project-fetch-robot-dog"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/project-fetch-robot-dog"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h2>Subscribe to the Frontier Red Team newsletter</h2>
+<p>Get updates on our latest red-teaming research and findings.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

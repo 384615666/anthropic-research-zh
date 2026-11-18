@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Long-running Claude for scientific computing</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>用于科学计算的长时间运行Claude</h1>
+<div class="meta">
+Long-running Claude for scientific computing · Mar 23, 2026 · Science · <a href="https://www.anthropic.com/research/long-running-Claude" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文介绍如何用Claude Code在科学计算中运行多日、自主式的编码工作流。研究者Siddharth Mishra-Sharma以“实现宇宙学玻尔兹曼求解器的可微版本”为例，展示了核心模式：在CLAUDE.md中制定清晰计划；用CHANGELOG.md记录进度、失败方法等作为跨会话的持久记忆；以参考实现CLASS作为“测试神谕”不断验证；用git提交推送监控进度；在tmux中运行、允许随时检入。结果Claude在数天内从零实现求解器并达到亚百分之一精度，把数月到数年的工作压缩到几天。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">代理（agent）：能自主规划并执行多步骤任务的AI系统</span><span class="term">测试神谕（test oracle）：用来判断AI工作是否正确的外部参考标准</span><span class="term">自动微分：自动计算函数梯度，方便用梯度方法优化</span><span class="term">梯度（gradient）：函数变化方向的数学量，机器学习优化依赖它</span><span class="term">会话（session）：一次连续的AI对话或工作过程</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 科学</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/long-running-Claude</li>
+</ul>
+<p>科学
+2026 年 3 月 23 日
+<img alt="用于科学计算的长时间运行 Claude" src="../assets/long-running-Claude/img_000.svg" />
+<em>在这篇文章中，Discovery 团队的研究员 Siddharth Mishra-Sharma 解释了如何将多日的智能体编码工作流程——测试预言机（test oracle）、持久记忆和编排模式——应用到科学计算任务中，即使不在自己的专业领域内。</em></p>
+<h3><strong>前提</strong></h3>
+<p>目前大多数使用 AI 智能体的科学家都处于对话式循环中，紧绷地管理着过程的每一步。随着过去一年左右模型在<a href="https://metr.org/time-horizons/">长时程任务上显著变得更好</a>，一种新的工作方式出现了：与其介入每一个细节，我们可以指定高层目标，让一队智能体自主工作。这使得原本可能需要我们几天、几周甚至几个月的项目，能在仅仅几小时内完成。某些类型的科学任务非常适合这种模式，例如重新实现数值求解器、将用旧 Fortran 方言编写的遗留科学软件转换为现代语言，以及对照参考实现调试大型代码库。这些任务的特点是工作范围明确、成功标准清晰，人类监督可以是偶尔的而不是持续的。
+Anthropic 的 <a href="https://www.anthropic.com/engineering/building-c-compiler">C 编译器项目</a>展示了这一模式的一个版本，Claude 在大约 2,000 个会话中工作，构建了一个能够编译 Linux 内核的 C 编译器。这篇文章描述了如何使用 Claude Code 为科学计算任务设置类似的模式，以典型的学术实验室为背景。作为一个具体例子，我将逐步介绍使用 Claude Opus 4.6 <a href="https://github.com/smsharma/clax">实现宇宙学玻尔兹曼求解器的可微分版本</a>。这是一种数值代码，用于预测大爆炸余晖——宇宙微波背景（Cosmic Microwave Background，CMB）——的统计性质。它通过演化早期宇宙中光子、重子、中微子和暗物质的耦合方程来实现这一点。
+像 <a href="http://class-code.net/">CLASS</a> 和 <a href="https://camb.info/">CAMB</a> 这样的玻尔兹曼求解器是宇宙学中科学基础设施的核心部分，使我们能够利用 <em>Planck</em> 和 <em>Simons Observatory</em> 等巡天的数据来约束宇宙学模型。一个可微分的版本——能够将梯度传播通过整个求解器——使得基于梯度的推理方法成为可能，极大地加速参数估计。用 JAX 编写是一个自然的选择，因为它几乎免费地给了我们自动微分和对加速器（例如 GPU）的兼容性。</p>
+<p>值得注意的是，这个任务不在我的核心科学领域内——我对这些工具和科学有高层面的熟悉度，但没有在合理时间内自己完成它的专业知识。_确实_拥有这方面专业知识的团队已经在 JAX 中构建了<a href="https://arxiv.org/abs/2311.03291">可微分的</a><a href="https://arxiv.org/abs/2602.15104">求解器</a>，具有 CLASS 中功能的一个子集。这些努力通常代表数月到数年的研究人员时间。这里的重点是看一个智能体能否在非领域专家的最小引导下走得更远。
+这类任务在结构上不同于 C 编译器项目，后者可以分派给大量并行智能体。另一方面，玻尔兹曼求解器是一个深度耦合的流水线——在模拟早期宇宙重组时，一个小的数值错误或糟糕的近似可以微妙地偏移下游的一切。因此它需要一套不同的智能体技能。调试需要因果地追踪整个链条并借鉴领域知识，这可能更适合一个按顺序工作的智能体，在需要时生成子智能体，并使用参考实现来对差异进行二分定位。
+我们将使用运行 SLURM 作业调度器的 HPC 集群作为我们的计算环境，但核心思想——进度文件、测试预言机、带有清晰规则的智能体提示词——无论你在哪里运行 Claude Code 都适用。</p>
+<h3><strong>起草计划并在本地迭代</strong></h3>
+<p>在这种转向管理自主研究智能体团队的方式中，你应该花大部分时间（与 Claude 协商）精心制作一套清晰阐明项目交付物和相关背景的指令。这些指令应该放在根目录的 CLAUDE.md 文件中。Claude 会特别对待这个文件，将其保持在上下文中，并参照它来制定总体计划。至关重要的是，Claude 可以在工作时编辑这些指令，在解决问题时为未来的工作更新它们。
+<a href="https://github.com/smsharma/clax/blob/6a6b2330cf25edded1bb31ec57a0091aa794a5d3/CLAUDE.md">这里</a>是宇宙学玻尔兹曼求解器项目早期的一个 CLAUDE.md，显示了在最初尝试编写求解器后编码化的总体计划和设计决策。为了得出这个，我指定了项目的高层目标——与参考 CLASS 实现实现完全的功能对等，同时完全可微分，并在主要科学交付物上对 CLASS 有 0.1% 的精度目标——并与 Claude 迭代，直到计划看起来令人满意。鉴于 0.1% 是两个经典玻尔兹曼代码 CLASS 和 CAMB 之间的典型一致水平，这似乎是一个很好的科学目标。</p>
+<h3><strong>跨会话的记忆</strong></h3>
+<p>进度文件（我们按惯例在这里称为 CHANGELOG.md）是智能体的便携式长期记忆，起到某种实验室笔记的作用。在 CLAUDE.md 中，Claude 被指示在这个文件中跟踪进度。
+一个好的进度文件可能跟踪当前状态、已完成的任务、失败的方法及其失败原因、关键检查点处的精度表，以及已知的局限。失败的方法很重要——没有它们，后续会话会重新尝试同样的死胡同。一个条目可能看起来像：“尝试对扰动 ODE 使用 Tsit5，系统太刚性。切换到 Kvaerno5。”<a href="https://github.com/smsharma/clax/blob/main/CHANGELOG.md">这里</a>是运行示例的变更日志，展示了这些元素。</p>
+<h3><strong>测试预言机</strong></h3>
+<p>虽然通过智能体进行更开放的科学发展肯定即将到来，但今天长时间运行的自主科学工作关键地依赖于智能体有一种知道它是否在取得进展的方式。对于科学代码，这可能是一个参考实现、一个清晰可量化的目标，或一个现有的测试套件。指示智能体在工作时扩展测试套件并运行测试，以防止回归，也可能有帮助。在我的示例任务中，Claude 被指示使用 <a href="https://github.com/lesgourg/class_public">CLASS C 源码</a>作为参考实现来构建并持续运行单元测试。</p>
+<h3><strong>Git 作为协调工具</strong></h3>
+<p>Git 可以是一种以不干预的方式监控和协调智能体进展的好方法。智能体应该在每个有意义的工作单元后提交并推送。这给了你可恢复的历史（如果出了差错），使进展在本地可见，并防止工作丢失——例如，如果你的计算分配在会话中途用完的话。
+实际上，这可以是在 CLAUDE.md 中的一组指令，例如“在每个有意义的工作单元后提交并推送。每次提交前运行 <code>pytest tests/ -x -q</code>。永远不要提交破坏现有通过测试的代码。”
+为了引导智能体，你总是可以 SSH 到集群并手动重新提示和/或更新它的指令。更符合人体工程学的做法通常只是让本地实例的 Claude Code SSH 进去并为你运行命令；这也将适用于下面描述的一切。</p>
+<h3><strong>执行循环</strong></h3>
+<p>如上所述，通常有用的是先在本地迭代计划，直到你有一个看起来合理并编码在 CLAUDE.md 中的计划。从那里，在计算节点上终端复用器（如 tmux）内启动一个 Claude Code 会话，告诉智能体在哪里找到你的代码库，然后让它自己工作。因为会话在 tmux 内运行，你可以分离、合上笔记本电脑，并偶尔检查进展（就玻尔兹曼求解器而言，我会在手机上查看 GitHub，例如在排队买咖啡时）。
+在 HPC 集群上，你可能会通过 SLURM 调度器请求一个节点，一个在 tmux 会话中启动 Claude Code 的示例作业脚本可能看起来像下面这样：</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name=claude-agent
+#SBATCH --partition=GPU-shared
+#SBATCH --gres=gpu:h100-32:1
+#SBATCH --time=48:00:00
+#SBATCH --output=agent_%j.log
+cd $PROJECT/my-solver
+source .venv/bin/activate
+export TERM=xterm-256color
+tmux new-session -d -s claude "claude; exec bash"
+tmux wait-for claude
+</code></pre>
+<p>作业启动后，你附加到 tmux 会话，给 Claude Code 指示（例如，“阅读 CHANGELOG.md 并接手下一个任务”），当你满意它在正轨上时分离。你可以随时重新附加以检查、引导或启动新任务，使用类似这样的命令：</p>
+<pre><code>srun --jobid=JOBID --overlap --pty tmux attach -t claude
+</code></pre>
+<p><strong>Ralph 循环：</strong> 随着模型能力的增强，它们需要更少的定制编排，如提示词工程、RAG 或上下文填充。然而，在某个时间点，提供一定程度的脚手架作为能力提升可能是有用的。例如，当前模型可能遭受_智能体懒惰_（agentic laziness）——当被要求完成一个复杂的多部分任务时，它们有时会找到一个借口在完成整个任务之前停下来（“时间不早了，我们明天再继续吧？”）。
+为了规避这一点，一个有用的编排模式是 <a href="https://ghuntley.com/loop/"><em>Ralph 循环</em></a>，它本质上是一个_for_循环，当智能体声称完成时把它踢回上下文中，并问它是否_真的_做完了。这对长时间运行的任务可能很有用，因为智能体会承认任务没有达到规格，并继续工作直到达标。其他类似的模式包括 <a href="https://github.com/gsd-build/get-shit-done">GSD</a>（以及<a href="https://arxiv.org/abs/2603.20179">领域特定</a>的<a href="https://github.com/psi-oss/get-physics-done">变体</a>），以及 Claude Code 原生的 /loop 命令。
+Ralph 可以通过 /plugin 安装。在 Claude Code 中一个典型的调用提示词可能看起来像：</p>
+<pre><code>/ralph-loop:ralph-loop “Please keep working on the task until the success criterion of 0.1% accuracy across the entire parameter range is achieved.” --max-iterations 20 --completion-promise “DONE”
+</code></pre>
+<p>这里，Claude 将迭代最多 20 次，直到它用一句“DONE”咒语保证任务完成。</p>
+<h3><strong>结果</strong></h3>
+<p>Claude 在几天内从零开始<a href="https://github.com/smsharma/clax">这个项目</a>，在它的各种输出上与参考 CLASS 实现达到了亚百分比级的一致。我请 Claude 在项目过程中重建代码一些主要输出——各种 CMB 角功率谱——的精度，并标注开发过程中的里程碑。它生成了下面的图，展示了通往亚百分比精度的路径。
+<img alt="" src="../assets_zh/long-running-Claude/img_001.webp" />智能体在代码库上工作时通往亚百分比精度的路径。</p>
+<p>智能体的开发轨迹有些笨拙。例如，它的测试覆盖存在明显的空白——有一段时间它只在单个（基准）参数点上测试代码，大幅缩小了它的抓虫覆盖面。它也会犯初级错误，例如在规范约定上绊倒，或者花几个小时追逐一个宇宙学家会立刻发现的 bug，但它持续朝着亚百分比精度这个既定目标取得进展。
+这个项目的一个副产品是，通过观看 git 提交历史，我学到了关于玻尔兹曼求解器及其所建模物理的惊人数量的知识。这个项目不是来自我的核心科学领域，但跟随 Claude 的渐进式进展并查证我不认识的东西，被证明是一种有效吸收科学知识的方式。<a href="https://github.com/smsharma/clax/commits/main/">提交日志</a>读起来像一个快速、超级字面化的博士后写的实验室笔记。
+虽然最终的求解器不是生产级的（例如，它并非在每个区间都达到与参考 CLASS 实现可接受的精度一致），但它证明了智能体驱动的开发可以将数月甚至数年的研究人员工作压缩到几天。
+这种压缩改变了什么算作空闲时间。AI 研究中的普遍体验是隔夜启动一个实验（例如一次训练运行），然后早上看到结果的满足感。不运行实验带有机会成本。如今，不运行智能体感觉也有成本。如果你有算力和具有明确定义成功标准的项目，那么每个_没有_智能体为你工作的夜晚，都是被搁置的潜在进展。</p>
+<h3><strong>致谢</strong></h3>
+<p>我们感谢 Eric Kauderer-Abrams 的同行评审，以及 Xander Balwit、Ethan Dyer 和 Rebecca Hiscott 提供的有益反馈。</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/long-running-Claude"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/long-running-Claude"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界：满足该猜想的黎曼 zeta 函数零点的比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二次攻击确定了一种攻击减轮 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+<h2>订阅 Anthropic Science</h2>
+<p>获取 AI 辅助发现、实用工作流程和跨科学领域实地笔记的专题内容。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Long-running Claude for scientific computing</h1>
+<ul>
+<li><strong>Category:</strong> Science</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/long-running-Claude</li>
+</ul>
+<p>Science</p>
+<h1>Long-running Claude for scientific computing</h1>
+<p>Mar 23, 2026
+<img alt="Long-running Claude for scientific computing" src="../assets/long-running-Claude/img_000.svg" />
+ <em>In this post, Siddharth Mishra-Sharma</em> , <em>a researcher on the Discovery team, explains how to apply multi-day agentic coding workflows—test oracles, persistent memory, and orchestration patterns—to scientific computing tasks even outside of one’s domain.</em></p>
+<h3><strong>The premise</strong></h3>
+<p>Most scientists currently using AI agents work in a conversational loop, managing each step of the process on a tight leash. As models have become <a href="https://metr.org/time-horizons/">significantly better at long-horizon tasks</a> over the last year or so, a new way of working emerged: rather than getting involved with every detail, we can specify the high-level objective and set a team of agents loose to work autonomously. This makes it possible to complete projects in mere hours that might otherwise take us days, weeks, or even months. Certain types of scientific tasks fit well within this model, e.g., reimplementing a numerical solver, converting legacy scientific software written in an old Fortran dialect to a modern language, and debugging a large codebase against a reference implementation. These are tasks where the work is well-scoped, the success criteria are clear, and human oversight can be occasional rather than continuous.
+Anthropic’s <a href="https://www.anthropic.com/engineering/building-c-compiler">C compiler project</a> demonstrated a version of this, where Claude worked across roughly 2,000 sessions to build a C compiler capable of compiling the Linux kernel. This post describes how to set up a similar pattern for scientific computing tasks using Claude Code, with a typical academic lab in mind. As a concrete example, I will walk through using Claude Opus 4.6 to <a href="https://github.com/smsharma/clax">implement a differentiable version of a cosmological Boltzmann solver</a>. This is numerical code that predicts the statistical properties of the afterglow of the Big Bang—the Cosmic Microwave Background, or CMB. It does this by evolving coupled equations for photons, baryons, neutrinos, and dark matter through the early universe.
+Boltzmann solvers like <a href="http://class-code.net/">CLASS</a> and <a href="https://camb.info/">CAMB</a> are core pieces of scientific infrastructure in cosmology, allowing us to constrain cosmological models using data from surveys like <em>Planck</em> and the <em>Simons Observatory.</em> A differentiable version—one that can propagate gradients through the full solver—enables the use of gradient-based inference methods, dramatically speeding up parameter estimation. Writing it in JAX is a natural fit here, since it gives us automatic differentiation and compatibility with accelerators (e.g., GPUs) essentially for free.   </p>
+<p>Notably, the task isn’t in my core scientific domain—I have a high-level familiarity with the tools and the science, but don’t have the expertise to complete it myself in any reasonable time frame. Groups who <em>do</em> have that expertise have built <a href="https://arxiv.org/abs/2311.03291">differentiable</a> <a href="https://arxiv.org/abs/2602.15104">solvers</a> in JAX with a subset of the features present in CLASS. These efforts typically represent months to years of researcher-time. The point here was to see if an agent could go further with minimal steering from a non-domain expert.
+This kind of task is structurally different from the C compiler project, which can be farmed out to a large number of parallel agents. A Boltzmann solver, on the other hand, is a deeply coupled pipeline—a small numerical error or poor approximation in modeling how the early universe recombines can subtly shift everything downstream. It thus requires a different set of agent skills. Debugging requires tracing causally through the entire chain and drawing from domain knowledge, which may be better suited to a single agent working sequentially, spawning subagents as needed, and using the reference implementation to bisect discrepancies.
+We'll use an HPC cluster running the SLURM job scheduler as our compute environment, but the core ideas—a progress file, a test oracle, an agent prompt with clear rules—apply regardless of where you run Claude Code.</p>
+<h3><strong>Draft a plan and iterate locally</strong></h3>
+<p>In this shift toward managing an autonomous research team of agents, you should spend most of your time (in consultation with Claude), crafting a set of instructions that clearly articulates the project’s deliverables and relevant context. These instructions should live in a CLAUDE.md file located in the root directory. Claude treats this file specially, keeping it in context and referencing it for the overall plan. Crucially, Claude can edit these instructions as it works, updating them for future work as it works through issues.
+<a href="https://github.com/smsharma/clax/blob/6a6b2330cf25edded1bb31ec57a0091aa794a5d3/CLAUDE.md">Here</a> is an early CLAUDE.md for the cosmological Boltzmann solver project, showing the overall plan and design decisions codified after an initial attempt at writing the solver. To arrive at this, I specified the high-level goals of the project—achieving full feature-parity with the reference CLASS implementation while being fully differentiable, and having an accuracy target of 0.1% against CLASS in the main science deliverables—and iterated with Claude until the plan seemed satisfactory. Given that 0.1% is the typical level of agreement between the two canonical Boltzmann codes CLASS and CAMB, this seemed like a good science target.</p>
+<h3><strong>Memory across sessions</strong></h3>
+<p>The progress file, which by convention we call here CHANGELOG.md, is the agent’s portable long-term memory, acting as a sort of lab notes. In CLAUDE.md, Claude was instructed to keep track of progress in this file.
+A good progress file might track current status, completed tasks, failed approaches and why they didn't work, accuracy tables at key checkpoints, and known limitations. The failed approaches are important—without them, successive sessions will re-attempt the same dead ends. An entry might look like: “Tried using Tsit5 for the perturbation ODE, system is too stiff. Switched to Kvaerno5.” <a href="https://github.com/smsharma/clax/blob/main/CHANGELOG.md">Here</a> is the changelog for the running example, showing these elements.</p>
+<h3><strong>The test oracle</strong></h3>
+<p>While more open-ended scientific discovery via agents is certainly on the horizon, long-running autonomous scientific work today crucially depends on the agent having a way to know whether it’s making progress. For scientific code, this could be a reference implementation, a clearly quantifiable objective, or an existing test suite. It can also be helpful to instruct the agent to expand the test suite and run tests as it works, to prevent regressions. In my example task, Claude was instructed to construct and continuously run unit tests using <a href="https://github.com/lesgourg/class_public">CLASS C source</a> as a reference implementation.</p>
+<h3><strong>Git as coordination</strong></h3>
+<p>Git can be a good way to monitor and coordinate the agent’s progress in a hands-off manner. The agent should commit and push after every meaningful unit of work. This gives you a recoverable history if something goes awry, makes progress visible locally, and prevents work from being lost if, for instance, your compute allocation runs out mid-session.
+Practically, this could be a set of instructions in CLAUDE.md, e.g. “Commit and push after every meaningful unit of work. Run <code>pytest tests/ -x -q</code> before every commit. Never commit code that breaks existing passing tests.”
+For steering the agent, you can always SSH into the cluster and manually re-prompt and/or update its instructions. It is typically more ergonomic to simply ask a local instance of Claude Code to SSH in and run commands for you; this will also apply to everything described below.</p>
+<h3><strong>The execution loop</strong></h3>
+<p>As mentioned above, it’s often useful to first iterate on the plan locally until you have one that looks reasonable and is encoded in CLAUDE.md. From there, start a Claude Code session inside a terminal multiplexer like tmux on a compute node, tell the agent where to find your codebase, and let it cook. Because the session runs inside tmux, you can detach, close your laptop, and occasionally check on progress (in the case of the Boltzmann solver, I would check in on GitHub on my phone, e.g. while waiting in line for a coffee).
+On an HPC cluster you might request a node through the SLURM scheduler, and an example job script that launches Claude Code in a tmux session might look like the following:</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name=claude-agent
+#SBATCH --partition=GPU-shared
+#SBATCH --gres=gpu:h100-32:1
+#SBATCH --time=48:00:00
+#SBATCH --output=agent_%j.log
+cd $PROJECT/my-solver
+source .venv/bin/activate
+export TERM=xterm-256color
+tmux new-session -d -s claude "claude; exec bash"
+tmux wait-for claude
+</code></pre>
+<p>Once the job starts, you attach to the tmux session, give Claude Code direction (e.g., “Read CHANGELOG.md and pick up the next task”), and detach when you're satisfied it's on the right track. You can re-attach whenever you want to check in, steer, or start a new task using something like:</p>
+<pre><code>srun --jobid=JOBID --overlap --pty tmux attach -t claude
+</code></pre>
+<p><strong>The Ralph loop:</strong> As models get more capable, they require less bespoke orchestration such as prompt engineering, RAG, or context stuffing. At a given point in time, however, it can be useful to provide some level of scaffolding as a capability uplift. For example, current models can suffer from <em>agentic laziness</em> —when asked to complete a complex, multi-part task, they can sometimes find an excuse to stop before finishing the entire task (“It’s getting late, let’s pick back up again tomorrow?”).
+To circumvent this, a useful orchestration pattern is the <a href="https://ghuntley.com/loop/"><em>Ralph loop</em></a>, which is essentially a <em>for</em> loop which kicks the agent back into context when it claims completion, and asks if it’s <em>really</em> done. This can be useful for long-running tasks since the agent will admit the task is not up to spec, and continue working until it is. Other similar patterns include <a href="https://github.com/gsd-build/get-shit-done">GSD</a> (and <a href="https://arxiv.org/abs/2603.20179">domain-specific</a> <a href="https://github.com/psi-oss/get-physics-done">variants</a>) as well as the native-to-Claude Code /loop command.
+Ralph can be installed via /plugin. A typical invocation prompt in Claude Code could look like</p>
+<pre><code>/ralph-loop:ralph-loop “Please keep working on the task until the success criterion of 0.1% accuracy across the entire parameter range is achieved.” --max-iterations 20 --completion-promise “DONE”
+</code></pre>
+<p>Here, Claude will iterate up to 20 times until it guarantees that the task is done with a “DONE” incantation.</p>
+<h3><strong>The result</strong></h3>
+<p>Claude worked on <a href="https://github.com/smsharma/clax">the project</a> from scratch over a few days, reaching sub-percent agreement with the reference CLASS implementation across its various outputs. I asked Claude to reconstruct the accuracy of some of the main outputs of the code—the various CMB angular power spectra—over the course of the project, also labeling milestones during development. It produced the plot below, illustrating the path to sub-percent accuracy.
+<img alt="" src="../assets/long-running-Claude/img_001.img" />The path to sub-percent accuracy over time as the agent worked on the codebase.  </p>
+<p>The agent’s development trajectory was somewhat clunky. For example, there were clear gaps in its test coverage—for a while it was only testing the code at a single (fiducial) parameter point, drastically reducing its bug-catching surface area. It can also make elementary mistakes, such as tripping over gauge conventions or spending hours chasing bugs that a cosmologist would spot instantly, but it kept making sustained progress towards the stated goal of sub-percent accuracy.
+A side effect of the project was that I learned a surprising amount about Boltzmann solvers and the physics they model by watching the git commit history. The project isn’t drawn from my core scientific domain, but following Claude’s incremental progress and looking up what I didn't recognize turned out to be an effective way to osmose the science. The <a href="https://github.com/smsharma/clax/commits/main/">commit log</a> reads like lab notes from a fast, hyper-literal postdoc.
+While the resulting solver is not production-grade (e.g., it doesn’t match the reference CLASS implementation to an acceptable accuracy in every regime), it demonstrates that agent-driven development can compress months or even years of researcher work into days.
+This kind of compression changes what counts as idle time. A universal experience in AI research is to launch an experiment (e.g., a training run) overnight and then have the satisfaction of seeing the results in the morning. Not running the experiment comes with an opportunity cost. These days, not running agents feels like it has a cost as well. If you have the compute and projects with well-defined success criteria, every night you <em>don't</em> have agents working for you is potential progress left on the table.</p>
+<h3><strong>Acknowledgments __</strong></h3>
+<p>We thank Eric Kauderer-Abrams for peer-review, as well as Xander Balwit, Ethan Dyer, and Rebecca Hiscott for providing helpful feedback.</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/long-running-Claude"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/long-running-Claude"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h2>Subscribe to Anthropic Science</h2>
+<p>Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

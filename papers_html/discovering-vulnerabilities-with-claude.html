@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discovering and exploiting vulnerabilities in critical, real-world software with Claude</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>借助Claude发现并利用关键现实软件中的漏洞</h1>
+<div class="meta">
+Discovering and exploiting vulnerabilities in critical, real-world software with Claude · Oct 27, 2026 · Frontier Red Team · <a href="https://www.anthropic.com/research/discovering-vulnerabilities-with-claude" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic前沿红队用一个未发布内部研究模型，在全球最常用软件中构造出五条几乎无需交互即可远程代码执行或致关键影响的攻击链：Chrome从V8堆破坏到FedCM释放后使用的一键RCE（共62个CVE，已在Chrome 156修补）；Safari绕过同源策略的“纯数据”攻击；从被盗Android手机绕过锁屏提取数据；令Windows远程崩溃的内核QUIC越界读取；以及Linux多路径TCP零点击以root执行命令的竞态UAF（泄漏内核指针需48分钟、再5分钟拿到shell）。团队按协调披露给厂商90天修补加45天缓冲，并建议防御者在PR阶段抢先扫描修补。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">攻击链：把多个漏洞串联、分步实现远程代码执行等目标的完整利用流程</span><span class="term">释放后使用（UAF）：向已释放内存写入或读取、可覆盖元数据或劫持控制流的漏洞</span><span class="term">沙箱逃逸：突破浏览器进程沙箱限制、触达外部内存或特权进程</span><span class="term">面向返回编程（ROP）：拼接现有代码片段串成调用链以完全控制进程</span><span class="term">协调漏洞披露：给厂商90天修补、再加45天缓冲后才公开细节的流程</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 前沿红队（Frontier Red Team）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/discovering-vulnerabilities-with-claude</li>
+</ul>
+<p>前沿红队（Frontier Red Team）
+2026 年 10 月 27 日
+已发布
+    2026 年 10 月 27 日
+团队
+    <a href="https://www.anthropic.com/research/team/frontier-red-team">前沿红队</a>
+主题</p>
+<ul>
+<li><a href="/search?topic=cybersecurity">网络安全</a></li>
+<li><a href="/search?topic=red-teaming">红队测试</a></li>
+<li><a href="/search?topic=safety-evaluations">安全评估</a></li>
+<li><a href="/search?topic=coding">编程</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/news/cyber-verification-program"></a><a href="https://www.anthropic.com/research/exploit"></a><a href="https://www.anthropic.com/news/claude-code-security"></a><a href="https://www.anthropic.com/research/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team"></a>
+相关文章
+  * 公告
+2026 年 10 月 6 日
+<a href="https://www.anthropic.com/news/cyber-verification-program">扩展网络验证计划</a></p>
+<p><a href="/search?topic=cybersecurity">查看更多</a>
+过去几个月里，我们使用一个尚未发布的内部研究模型，在一些全球使用最广泛的软件（如浏览器和操作系统）中<a href="https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source">发现关键漏洞</a>。在本文中，我们分享五条攻击链的细节，它们在几乎无需用户交互、甚至完全无需交互的情况下就实现了远程代码执行及其他关键影响。这些攻击链展示了该模型在开源与专有软件中构造复杂多步利用（exploits）的能力。这些产品中的任何漏洞都可能影响数十亿用户。它们也属于世界上对安全最关键的软件，因而成为检验模型漏洞研究与网络能力的风向标。
+我们依据自身的<a href="https://www.anthropic.com/coordinated-vulnerability-disclosure">协调漏洞披露</a>流程，把每个漏洞报告给受影响的厂商：该流程给开发者90天时间修补，再额外留出45天，此后我们才会讨论超出公开公告已有内容的细节。</p>
+<h2>1. Chrome中的一键远程代码执行</h2>
+<p>在初步提示之后，Claude写出了完整的利用链，使攻击者能够以该用户身份在浏览器沙箱之外执行任意代码。我们的概念验证在macOS上、以默认配置的原装Chrome浏览器，在页面加载后数秒内启动「计算器」应用，且无需任何进一步的用户交互：
+  * Claude在Chrome的JavaScript引擎V8中发现一个漏洞，恶意网页可借此破坏V8的堆内存。
+  * Claude发现第二个漏洞，用于逃出V8的内存区域沙箱并攻破ASLR。这一步在内存中定位Chrome的代码，并利用面向返回编程（return-oriented programming，ROP）链完全控制渲染进程。
+  * 被攻陷的渲染进程受Chrome进程沙箱的限制。Claude随后在CacheStorage中发现一个竞态条件（race condition）。被攻陷的渲染进程利用该竞态条件读取沙箱之外的内存，摸清特权浏览器进程的内存布局。
+  * 最后，Claude在Chrome的联合登录功能FedCM中发现一个释放后使用（use-after-free）漏洞，使该利用得以在沙箱之外执行任意代码。</p>
+<p>我们已把发现报告给Google：共分配了62个CVE，并<a href="https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02018666648.html">已在Chrome 156中修补</a>，全部被评为关键或高危级别。其中包括13个沙箱逃逸，以及21个本可用于攻陷渲染进程的漏洞。</p>
+<h2>2. Safari中的一键利用链</h2>
+<p>在初步提示之后，Claude写出一条利用链，使任意网站的JavaScript都能完全绕过同源策略（same-origin policy，SOP）。该利用可访问用户的Safari历史记录、Cookie及其他敏感数据，并能向其他域名发送带认证信息的HTTP请求、读取其响应。举例来说，若用户已登录邮箱账户，攻击者便可读取其邮件；若已登录银行账户，攻击者可查看账户余额或尝试转账。
+为此，Claude攻破了Safari内置的数层防护：
+  * Claude在Safari的JavaScript引擎JavaScriptCore（用C++编写）中发现一个释放后使用（use-after-free，UAF）漏洞。某些TypedArray操作会通过失效指针写入已释放的内存，覆盖TypedArray的元数据。
+  * WebKit的Gigacage通过把TypedArray数据隔离在单独的内存区域来缓解此类攻击。Claude发现该区域中的某些变量被用来索引其他区域，由此获得了Gigacage之外的任意读写原语（arbitrary read/write primitive）。
+  * 所有网站JavaScript都运行在WebContent沙箱中，它阻止UAF之类的bug触及磁盘上的敏感浏览器数据。Claude在该沙箱的IPC机制中发现一个漏洞，使利用得以从磁盘读取Safari存储的历史记录、Cookie与会话数据库。
+  * 最后，Claude利用该UAF覆盖内存中的一个变量、关闭SOP，使攻击者的页面能够读取来自任何其他源（origin）的数据。</p>
+<p>这条链之所以有趣，是因为它是一次「纯数据」攻击，从不依赖任意代码执行。它转而利用对浏览器进程内存的完整读写权限，去修改一个安全标志、一个对象大小和一个URL。其中若干弱点本身并非漏洞，而是设计上的预期行为，只是组合在一起时才变得可被利用。
+Apple在我们提交报告的当天即予确认，并迅速实施了修复。<a href="https://support.apple.com/en-us/127594">该修复</a>现已向用户提供。</p>
+<h2>3. Android锁屏绕过</h2>
+<p>在初步提示之后，Claude写出一个利用，使攻击者无需解锁即可从一部被盗的Android手机中提取照片及其他个人信息。这项工作结合了三种方法：对Android开源部分的源代码分析、对Google Play服务二进制文件的逆向工程与去混淆，以及在实体Google Pixel 9上的实测。由此在开源与专有组件中都发现了大量漏洞。Claude随后把其中三个串联成最终利用。
+Android针对这类攻击设有数层防护。Claude逐一找到了绕过办法：
+  * 锁定的Android手机在设计上不通过USB传输数据。Claude发现带有某项特定设置的USB主机可绕过这一限制。
+  * 设备到设备的传输协议会拒绝来自未授权对端的数据命令。Claude找到跳过授权检查、直接启动配对流程的办法。
+  * 配对由带认证的密钥协商保护，会要求用户核对一个六位数字码。Claude发现一处缺陷，可跳过该验证，表现得就像用户点了「允许」一样。
+  * USB传输本不应承载文件内容，这一点由一项硬编码检查强制保证。Claude发现一个回退机制，会通过USB发送原始字节，且不受该检查覆盖。利用便借它请求文件内容。</p>
+<p>该问题已由Google处理。</p>
+<h2>4. Windows远程拒绝服务</h2>
+<p>在初步提示之后，Claude写出一个利用，本可使攻击者远程令任何使用Windows原生实现响应HTTP/3请求的Windows机器崩溃。此例的难点首先在于找出漏洞本身。在那次初步提示之后，我们把该漏洞直接报告给Microsoft，后者修复了它并分配了<a href="https://nvd.nist.gov/vuln/detail/cve-2026-33096">CVE-2026-33096</a>。
+Claude识别出的漏洞，是Windows内核QUIC实现中的一处内存安全越界读取（out-of-bounds read）。攻击者可通过网络远程触达这段有漏洞的代码路径，向一个正在监听的服务器发送少量数据包，即可令机器崩溃并重启。反复发送这些请求，就能持续使服务器崩溃，导致所有用户都无法访问该服务器。我们估计，互联网上此类监听服务器可能有数百万台。
+Claude是通过二进制分析发现该漏洞的。我们向模型提供了一份Windows可执行文件副本，请Claude使用现有的逆向工程工具（如Ghidra）逆向分析软件的工作方式，编写一个带完整注释、可复现相关功能的C程序，把所复现程序的行为与二进制文件比对以确保正确，再研究代码寻找漏洞。当我们请Claude找出潜在风险更高的问题时，它便揪出了这个可远程利用的漏洞。</p>
+<h2>5. Linux中的零点击远程代码执行</h2>
+<p>尽管本文聚焦第三方产品，我们在开源方面的工作仍在继续。借助Claude，我们在OpenBSD、FreeBSD与Linux上发现了本地权限提升漏洞，在流行的沙箱基础设施中发现了若干沙箱逃逸，并在重要Web应用中发现了大量漏洞。我们还在Linux内核网络协议栈中发现了可远程触发（零点击，zero-click）的任意代码执行漏洞，这些漏洞此后已在上游修补并公开披露。下文详述其中一例。
+在初步提示之后，Claude写出一个利用，使远程攻击者向启用了多路径TCP（multipath TCP）监听的Linux服务器发送数据包，即可在无需任何凭据或用户交互的情况下以root身份执行任意命令。其底层漏洞是内核网络协议栈中一个由竞态条件诱发的UAF bug。完整利用分两个关键阶段：
+  * 第一阶段，攻击者远程攻破KASLR。它利用该竞态使内核读取一个由攻击者控制的长度字段，从而多复制若干字节并回送给攻击者；只要某次这样的越界读取在回包中带出一个内核指针，攻击者便掌握了内核地址空间布局。
+  * 第二阶段，攻击者劫持控制流。它利用同一个UAF bug溢出缓冲区，用一个已通过某项常规协议功能预先布置在内核内存中的载荷（payload）地址覆盖回调指针。当内核调用该回调时，载荷会串联一连串对现有内核函数的调用，最终以攻击者选定、以root身份运行的shell命令收尾。</p>
+<p>该竞态条件有一个便利之处：竞态失败只会让握手失败，而不会令整个系统崩溃，因此有耐心的攻击者可以无限重试直至成功。在我们的概念验证中，泄漏一个内核指针需48分钟，再花5分钟即可执行到shell命令。该漏洞（<a href="https://nvd.nist.gov/vuln/detail/cve-2026-98432">CVE-2026-98432</a>）已在上游修补，并回移植到所有仍在维护的稳定内核分支。</p>
+<h2>我们的经验</h2>
+<p>在用Claude开展这项安全工作的全过程中，我们总结出若干塑造了工作方法的洞见。我们认为其中两点尤为重要。
+<strong>测试时计算量的扩展与扫描器的多样性，会显著增加所能发现的漏洞数量。</strong>我们搭建了一个平台，并行运行大量扫描智能体，按每个扫描器为整体贡献了多少新增漏洞来衡量其价值，并动态跟踪覆盖率，使扫描器覆盖整个代码库。
+所用策略从纯覆盖率导向（这个函数里有没有漏洞？）到目标导向（这个应用是否暴露了任何可能危及客户数据的东西？），再到威胁模型导向（这个应用中是否有任何东西绕过了其文档化的威胁模型？）。我们还用Claude对每一条已确认的发现运行自动化变体分析（variant analysis）。所有发现都要经过标准化的验证与风险评级流程，因此我们可以自由试验新的扫描器，而不降低质量门槛。
+<strong>清理现有积压只解决问题的一半；另一半是降低新漏洞进入代码库的速率。</strong>为此，我们建议在PR（pull request）阶段进行扫描。我们通过一个Claude Code插件把安全指引直接嵌入开发流程，该插件已<a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/security-guidance">公开发布</a>。</p>
+<h2>这对防御者意味着什么</h2>
+<p>前沿模型已经能够发现多个漏洞并把它们组合成可用的利用。这类技能历来只属于少数对这些目标有专精的专家团队。如今，模型几乎无需人工介入便能做到，还能产出一个任何人都能运行和验证的可用利用来自证。
+用强大的模型赋能防御者，是让他们在攻击者之前抢先修补系统的关键。最近，我们发布了扩展版的<a href="https://www.anthropic.com/news/cyber-verification-program">Cyber Verification Program</a>，向符合条件的安全专业人员开放高级网络能力，并减少拦截分类器的阻断。其中包括使用我们能力最强的模型：Claude Opus 5.5、Claude Sonnet 5.5、Claude Mythos 5.1，以及后续推出的其他新模型。我们给防御者的建议始终不变：扫描自己的代码比以往任何时候都更重要。</p>
+<h2>作者与致谢</h2>
+<h3>贡献者</h3>
+<p>Nicholas Carlini, David Dworken, Xinyang Ge, Ben Morris, Milad Nasr, Chris Rohlf, Luna Tong</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Discovering and exploiting vulnerabilities in critical, real-world software with Claude</h1>
+<ul>
+<li><strong>Date:</strong> 2026-10-27</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/discovering-vulnerabilities-with-claude</li>
+</ul>
+<h3></h3>
+<h1>Discovering and exploiting vulnerabilities in critical, real-world software with Claude</h1>
+<p>Published
+    Oct 27, 2026
+Team
+    <a href="https://www.anthropic.com/research/team/frontier-red-team">Frontier Red Team</a>
+Topics</p>
+<ul>
+<li><a href="/search?topic=cybersecurity">Cybersecurity</a></li>
+<li><a href="/search?topic=red-teaming">Red teaming</a></li>
+<li><a href="/search?topic=safety-evaluations">Safety evaluations</a></li>
+<li><a href="/search?topic=coding">Coding</a></li>
+</ul>
+<p><a href="https://www.anthropic.com/news/cyber-verification-program"></a><a href="https://www.anthropic.com/research/exploit"></a><a href="https://www.anthropic.com/news/claude-code-security"></a><a href="https://www.anthropic.com/research/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team"></a>
+Related articles
+  * Announcements
+Oct 6, 2026
+<a href="https://www.anthropic.com/news/cyber-verification-program">Expanding the Cyber Verification Program</a></p>
+<p><a href="/search?topic=cybersecurity">View more</a>
+Over the past few months, we’ve used an unreleased, internal research model to <a href="https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source">find critical vulnerabilities</a> in some of the world’s most widely used software, such as browsers and operating systems. In this post, we share details of five attack chains, which led to remote code execution and other critical impacts with little to no user interaction. These attack chains demonstrate the model’s ability to create sophisticated, multi-step exploits in both open-source and proprietary software. Any vulnerabilities in these products could affect billions of users. They’re also among the most security-critical software in the world, making them a bellwether for testing models’ vulnerability research and cyber capabilities.
+We reported each vulnerability to the affected vendor under our <a href="https://www.anthropic.com/coordinated-vulnerability-disclosure">coordinated vulnerability disclosure</a>, which gives developers 90 days to patch and a further 45 days before we discuss details beyond what is already included in a public advisory.</p>
+<h2>1. One-click remote code execution in Chrome</h2>
+<p>After initial prompting, Claude wrote a full exploit chain enabling an attacker to execute arbitrary code as the user, outside the browser’s sandbox. Our proof of concept launches the Calculator app from a stock default-configuration Chrome browser on macOS within seconds of the page loading, without any further user interaction:
+  * Claude discovered a vulnerability in Chrome’s JavaScript engine, V8, that allowed a malicious web page to corrupt V8’s heap memory.
+  * Claude discovered a second vulnerability to break out of V8’s memory region sandbox and defeat ASLR. This step located Chrome’s code in memory and used a return-oriented programming (ROP) chain to take full control of the renderer process.
+  * The compromised renderer was confined by Chrome’s process sandbox. Claude then discovered a race condition in CacheStorage. The compromised renderer used the race condition to read memory outside the sandbox and learn the memory layout of the privileged browser process.
+  * Finally, Claude discovered a use-after-free in FedCM, Chrome’s federated sign-in feature, that allowed the exploit to execute arbitrary code outside the sandbox.</p>
+<p>We have reported our findings to Google: 62 CVEs have been assigned and <a href="https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02018666648.html">patched as of Chrome 156</a>, with all of them rated critical or high severity. Among them are 13 sandbox escapes and 21 vulnerabilities that could have been used to compromise the renderer.</p>
+<h2>2. A one-click exploit chain in Safari</h2>
+<p>After initial prompting, Claude wrote an exploit chain that let any website’s JavaScript completely bypass the same-origin policy (SOP). The exploit could access a user’s Safari history, cookies, and other sensitive data, and could send authenticated HTTP requests to other domains and read the responses. For example, if the user is signed in to their email account, the attacker can now read their email; if they’re logged into their bank account, the attacker can view account balances or attempt transfers.
+To do this, Claude defeated several layers of protection built into Safari:
+  * Claude discovered a use-after-free (UAF) vulnerability in JavaScriptCore, Safari’s JavaScript engine, which is written in C++. Certain TypedArray operations wrote through stale pointers to freed memory, overwriting TypedArray metadata.
+  * WebKit’s Gigacage mitigates this type of attack by isolating TypedArray data in a separate region of memory. Claude discovered that certain variables in this region were used to index into other regions, which gave it an arbitrary read/write primitive outside the Gigacage.
+  * All website JavaScript runs in the WebContent sandbox, which keeps bugs like the UAF from reaching sensitive browser data on disk. Claude discovered a vulnerability in the sandbox's IPC mechanism that let the exploit read Safari’s stored history, cookies, and session databases from disk.
+  * Finally, Claude used the UAF to overwrite a variable in memory and disable the SOP, allowing the attacker’s page to read data from any other origin.</p>
+<p>The chain is interesting because it is a data-only attack that never relies on arbitrary code execution. Instead, it uses full read/write access to the browser process’s memory to modify a security flag, an object size, and a URL. Several of the weaknesses are not vulnerabilities on their own but intended behaviors that become exploitable when combined.
+Apple acknowledged our report the same day we submitted it and implemented a fix promptly. <a href="https://support.apple.com/en-us/127594">That fix</a> is available to users.</p>
+<h2>3. Android lock screen bypass</h2>
+<p>After initial prompting, Claude wrote an exploit that let an attacker extract photos and other personal information from a stolen Android phone without unlocking it. The work combined three methods: source code analysis of the open-source parts of Android, reverse engineering and deobfuscation of the Google Play services binaries, and live testing on a physical Google Pixel 9. This turned up a wide range of vulnerabilities in both the open-source and proprietary components. Claude then chained three of them into the final exploit.
+Android has several layers of protection against this attack. Claude found a way around each one:
+  * A locked Android phone is designed not to transfer data over USB. Claude found that a USB host with a specific setting bypassed this.
+  * The device-to-device transfer protocol refuses data commands from unauthorized peers. Claude found a way to skip the authorization check and start the pairing process.
+  * Pairing is protected by an authenticated key agreement that asks the user to verify a six-digit code. Claude found a flaw that skipped this verification and behaved as if the user had tapped “Allow.”
+  * USB transfers are not supposed to carry file contents, as enforced by a hardcoded check. Claude found a fallback mechanism that sent raw bytes over USB and was not covered by the check. The exploit requested file contents through it.</p>
+<p>This issue has been addressed by Google.</p>
+<h2>4. Windows remote denial of service</h2>
+<p>After initial prompting, Claude wrote an exploit that would have allowed an attacker to remotely crash any Windows machine that responds to HTTP/3 requests using the native Windows implementation. The difficulty in this case was in identifying the vulnerability in the first place. Following that initial prompting, we reported this vulnerability directly to Microsoft, which resolved the vulnerability and assigned it <a href="https://nvd.nist.gov/vuln/detail/cve-2026-33096">CVE-2026-33096</a>.
+The vulnerability that Claude identified was a memory safety out-of-bounds read in the Windows kernel’s implementation of QUIC. An attacker could reach the vulnerable codepath remotely over the network and send a few packets of data to a listening server to crash and restart the machine. By repeatedly sending these requests, it is possible to continuously crash the server, which causes loss of access to the server for all of the users. We estimate that there are likely several million such servers listening on the internet.
+Claude discovered this vulnerability through binary analysis. We provided the model with a copy of the Windows executable and asked Claude to reverse-engineer how the software works using the existing reverse-engineering tools (such as Ghidra), write a fully annotated C program that reproduces the relevant features, compare the behavior reproduced program to binary to ensure correctness, and then study the code for vulnerabilities. When we asked Claude to identify potentially higher-risk issues, it surfaced this remotely exploitable vulnerability.</p>
+<h2>5. Zero-click remote code execution in Linux</h2>
+<p>While this post focuses on third-party products, our work on open source has continued. With Claude, we discovered local privilege escalation vulnerabilities on OpenBSD, FreeBSD, and Linux; a number of sandbox escapes in popular sandboxing infrastructure; and numerous vulnerabilities in important web applications. We have also found remotely triggerable (zero-click) arbitrary code execution vulnerabilities in the Linux kernel’s networking stack, which have since been patched upstream and publicly disclosed. We detail one such example below.
+After initial prompting, Claude wrote an exploit that allows a remote attacker to send packets to Linux servers with a multipath TCP listener to run arbitrary commands as root, without any credentials or user interaction. The underlying vulnerability is a race condition-induced UAF bug in the kernel networking stack. The full exploitation has two key stages:
+  * In the first stage, the attacker defeats KASLR remotely. It exploits the race to make the kernel read an attacker-controlled length field to copy extra bytes and send them back to the attacker, and as long as one such overread contains a kernel pointer in the reply, the attacker learns the kernel address space layout.
+  * In the second stage, the attacker hijacks the control flow. It exploits the same UAF bug to overflow a buffer and overwrite a callback pointer with the address of a payload the attacker has already staged in kernel memory via an ordinary protocol feature. When the kernel invokes the callback, the payload chains a series of calls to existing kernel functions. ending with an attacker-chosen shell command running as root.</p>
+<p>An enabling property of this race condition is that a lost race only fails the handshake without crashing the whole system, so a determined attacker can retry indefinitely until they succeed. In our proof of concept, it takes 48 minutes to leak a kernel pointer and another five minutes to reach the shell command execution. This vulnerability (<a href="https://nvd.nist.gov/vuln/detail/cve-2026-98432">CVE-2026-98432</a>) was patched upstream and backported to all maintained stable kernel branches.</p>
+<h2>What we learned</h2>
+<p>Throughout our process of using Claude for this security work, we identified a number of insights that shaped our approach. We think two are particularly important.
+<strong>Test-time compute scaling and scanner diversity substantially increase how many vulnerabilities you find.</strong> We built a platform that runs large numbers of scanning agents in parallel, measures each scanner by how many additional vulnerabilities it contributes to the mix, and tracks coverage dynamically so the scanners process the entire codebase.
+The strategies range from pure coverage (is there a vulnerability in this function?) to goal-based (does this app expose anything that could compromise customer data?) to threat model-based (does anything in this app bypass its documented threat model?). We also used Claude to run automated variant analysis on every confirmed finding. All findings pass through a standardized verification and risk rating pipeline, so we can experiment freely with new scanners without lowering the quality bar.
+<strong>Fixing the existing backlog only solves half the problem; the other half is cutting the rate at which new vulnerabilities enter the codebase.</strong> For that, we recommend scanning at PR time. We built security guidance directly into our development process through a Claude Code plugin, which we’ve <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/security-guidance">released publicly</a>.</p>
+<h2>What this means for defenders</h2>
+<p>Frontier models have the ability to discover and combine multiple vulnerabilities into a working exploit. These skills have historically been the domain of few specialist teams with expertise in these targets. Now, it’s something models can do with little human involvement, and then prove by producing a working exploit that anyone can run and verify.
+Enabling defenders with powerful models is critical to giving them a headstart on patching systems before attackers do. Recently, we released an expanded version of our <a href="https://www.anthropic.com/news/cyber-verification-program">Cyber Verification Program</a>, which makes advanced cyber capabilities and reduced blocking classifiers available to qualifying security professionals. It includes access to our most capable models, including Claude Opus 5.5, Claude Sonnet 5.5, Claude Mythos 5.1, and other new models moving forward. Our advice to defenders remains the same: scanning your own code is more important than ever.</p>
+<h2>Authors &amp; acknowledgements</h2>
+<h3>Contributors</h3>
+<p>Nicholas Carlini, David Dworken, Xinyang Ge, Ben Morris, Milad Nasr, Chris Rohlf, Luna Tong</p>
+</div>
+</details>
+</div>
+</body>
+</html>

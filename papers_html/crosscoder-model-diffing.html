@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights on Crosscoder Model Diffing</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>跨编码器模型差异分析（更新）</h1>
+<div class="meta">
+Insights on Crosscoder Model Diffing · Feb 20, 2025 · Interpretability · <a href="https://www.anthropic.com/research/crosscoder-model-diffing" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">这是 Anthropic 可解释性团队的一项探索性进展，主题是“跨编码器模型差异分析”——一种理解两个语言模型内部差异的技术。研究发现一个意外现象：仅属于单一模型的“专属特征”往往比共享特征更多义、激活更密集，因而难以解读。借助玩具模型实验，作者认为该现象源于有限特征容量的竞争——共享特征能同时解释两个模型的激活，专属特征就必须编码更多信息才能保住自己的配额。缓解方法是引入少量降低稀疏惩罚的“指定共享特征”，使专属特征更单义、可解释。用于真实模型后，成功分离出能反映模型间预期行为差异的特征。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">模型差异分析（model diffing）：对比两个模型内部表征以找出行为差异来源的技术</span><span class="term">跨编码器（crosscoder）：同时编码两个模型激活、找出共享特征的稀疏自编码器变体</span><span class="term">稀疏自编码器（sparse autoencoder）：用少量稀疏特征重建网络激活的可解释性工具</span><span class="term">特征（feature）：神经网络内部表征中对应某个可理解概念的方向或分量</span><span class="term">多义性（polysemantic）：一个特征同时对应多个不相关概念、难以解释的性质</span><span class="term">单义性（monosemantic）：一个特征只对应一个清晰概念、易于解释的性质</span><span class="term">稀疏惩罚（sparsity penalty）：训练中鼓励模型只用少数特征的约束项</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 可解释性（Interpretability）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/crosscoder-model-diffing</li>
+</ul>
+<p>可解释性（Interpretability）
+2025 年 2 月 20 日
+<a href="https://transformer-circuits.pub/2025/crosscoder-diffing-update/index.html">阅读 Transformer Circuits</a>
+在上面的链接中，我们报告了 Anthropic 可解释性团队在交叉编码器模型差异分析（Crosscoder Model Diffing）方面的一些进展中的工作，这些工作可能会引起积极从事该领域研究的研究者的兴趣。</p>
+<p>与以往一样，我们希望读者把这些结果当作一位同事在实验室会议上花几分钟分享的一些想法或初步实验，而不是一篇成熟的论文。</p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/crosscoder-model-diffing"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/crosscoder-model-diffing"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布的研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例的一个长期未破的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">了解更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二个攻击发现了一种攻击轮数缩减的 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">了解更多</a></p>
+<h3>Project Pilot：AI 能操控无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估来测试 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">了解更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Insights on Crosscoder Model Diffing</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/crosscoder-model-diffing</li>
+</ul>
+<p>Interpretability</p>
+<h1>Insights on Crosscoder Model Diffing</h1>
+<p>Feb 20, 2025
+<a href="https://transformer-circuits.pub/2025/crosscoder-diffing-update/index.html">Read Transformer Circuits</a>
+At the link above, we report some developing work from the Anthropic Interpretability team on Crosscoder Model Diffing, which might be of interest to researchers working actively in this space. 
+As ever, we'd ask readers to treat these results like those of a colleague sharing some thoughts or preliminary experiments for a few minutes at a lab meeting, rather than a mature paper.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/crosscoder-model-diffing"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/crosscoder-model-diffing"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

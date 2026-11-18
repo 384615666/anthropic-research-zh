@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Capacity for Moral Self-Correction in Large Language Models</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>大语言模型的道德自我纠正能力</h1>
+<div class="meta">
+The Capacity for Moral Self-Correction in Large Language Models · Feb 15, 2023 · Societal Impacts · <a href="https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文通过三个实验检验一个假设：经 RLHF 训练的语言模型具备&quot;道德自我纠正&quot;能力——当被明确要求时，能够避免产生有害输出。结果提供了强有力的支持证据：道德自我纠正能力在 22B 参数规模的模型上出现，并随模型规模和 RLHF 训练的增加而增强。研究者认为，达到这一规模后，模型获得两种能力：能遵循指令，且能学习刻板印象、偏见、歧视等复杂的有害性规范概念，从而按指令回避特定类型的有害输出。作者认为这些结果对于训练遵守伦理原则的语言模型是&quot;谨慎乐观&quot;的依据。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">道德自我纠正（moral self-correction）：模型被要求时能够避免产出有害内容的能力</span><span class="term">RLHF：基于人类反馈的强化学习，用人类偏好打分来训练模型</span><span class="term">参数（parameter）：模型中可调节的内部数值，规模大小的标志之一</span><span class="term">有害性规范（normative concepts of harm）：关于刻板印象、偏见、歧视等伤害的判断准则</span><span class="term">指令遵循（instruction following）：模型理解和执行人类指令的能力</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 社会影响（Societal Impacts）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models</li>
+</ul>
+<p>社会影响（Societal Impacts）
+2023 年 2 月 15 日
+<a href="https://arxiv.org/abs/2302.07459">阅读论文</a></p>
+<h2>摘要</h2>
+<p>我们检验这样一个假设：使用从人类反馈中进行强化学习（RLHF）训练的语言模型，如果被指示这样做，具有「道德自我纠正」的能力——即避免产生有害输出。我们在三个不同的实验中都发现了支持这一假设的有力证据，每个实验都揭示了道德自我纠正的不同侧面。我们发现道德自我纠正的能力在 22B 模型参数时出现，并且通常随模型规模增大和 RLHF 训练而提高。我们相信，在这个规模水平上，语言模型获得了可以用于道德自我纠正的两种能力：（1）它们可以遵循指令，（2）它们可以学习复杂的规范性伤害概念，如刻板印象、偏见和歧视。因此，它们可以遵循指令以避免某些种类的道德有害输出。我们相信，我们的结果有理由让人对训练语言模型遵守伦理原则的能力持谨慎乐观态度。</p>
+<h2>政策备忘录</h2>
+<p><a href="https://www-cdn.anthropic.com/d14f58fe8f611858bc37ff8686bbda71e4927ce6/Anthropic_MoralSelfCorrection_v3.pdf">道德自我纠正政策备忘录</a>
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布的研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例的一个长期未破的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">了解更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二个攻击发现了一种攻击轮数缩减的 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">了解更多</a></p>
+<h3>Project Pilot：AI 能操控无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估来测试 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">了解更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>The Capacity for Moral Self-Correction in Large Language Models</h1>
+<ul>
+<li><strong>Category:</strong> Societal Impacts</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models</li>
+</ul>
+<p>Societal Impacts</p>
+<h1>The Capacity for Moral Self-Correction in Large Language Models</h1>
+<p>Feb 15, 2023
+<a href="https://arxiv.org/abs/2302.07459">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>We test the hypothesis that language models trained with reinforcement learning from human feedback (RLHF) have the capability to "morally self-correct" -- to avoid producing harmful outputs -- if instructed to do so. We find strong evidence in support of this hypothesis across three different experiments, each of which reveal different facets of moral self-correction. We find that the capability for moral self-correction emerges at 22B model parameters, and typically improves with increasing model size and RLHF training. We believe that at this level of scale, language models obtain two capabilities that they can use for moral self-correction: (1) they can follow instructions and (2) they can learn complex normative concepts of harm like stereotyping, bias, and discrimination. As such, they can follow instructions to avoid certain kinds of morally harmful outputs. We believe our results are cause for cautious optimism regarding the ability to train language models to abide by ethical principles.</p>
+<h2>Policy Memo</h2>
+<p><a href="https://www-cdn.anthropic.com/d14f58fe8f611858bc37ff8686bbda71e4927ce6/Anthropic_MoralSelfCorrection_v3.pdf">Moral Self-Correction Policy Memo</a>
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

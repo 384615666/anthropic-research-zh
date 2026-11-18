@@ -1,0 +1,45 @@
+---
+title: Announcing the Anthropic Economic Index Survey
+url: https://www.anthropic.com/research/economic-index-survey-announcement
+date: Apr 22, 2026
+category: Economic Research
+source: https://www.anthropic.com/research
+---
+
+# Announcing the Anthropic Economic Index Survey
+
+- **Date:** 
+- **Category:** Economic Research
+- **Source:** https://www.anthropic.com/research/economic-index-survey-announcement
+
+---
+
+Economic Research
+# Announcing the Anthropic Economic Index Survey 
+Apr 22, 2026
+![Announcing the Anthropic Economic Index Survey ](assets/economic-index-survey-announcement/img_000.svg)
+The [Economic Research](<https://www.anthropic.com/research/team/economic-research>) team is launching the Anthropic Economic Index Survey, a monthly survey conducted through [Anthropic Interviewer](<https://privacy.claude.com/en/articles/12996960-how-does-anthropic-interviewer-collect-and-use-my-data>).
+Understanding AI's economic impact requires moving beyond the quantitative data we have today. Usage and diffusion metrics tell us how AI is being deployed, and traditional labor market indicators—like employment rates, wage trends, and layoffs—track what has already happened, often with meaningful delay. Both are essential, but neither captures how people experience the changes to the economy that AI brings, nor what they expect to happen as AI capabilities advance.
+While AI is poised to have large effects, there is substantial uncertainty about how AI will affect jobs, productivity, and unemployment (and on what timeline). To forecast a transition that is still unfolding, we need to hear from the people who are living through it, and we need to do so on a cadence that can identify changes as they emerge.
+In the Anthropic Economic Index Survey, we aim to capture a rich new corpus of qualitative data. This effort complements a [companion report](<https://www.anthropic.com/research/81k-economics>) that takes an economic lens to the[ 81,000 open-ended ](<https://www.anthropic.com/features/81k-interviews>)survey responses collected through Anthropic Interviewer in December. We’ll ask Claude users about if AI is changing their work today—which tasks they may be handing off, if they’re seeing productivity gains, what shifts they may be observing in hiring and roles—their expectations for the future, and what they hope a well-handled transition looks like.
+Collecting these data monthly will enable measurement of not just what people experience and expect, but how quickly their views shift as AI capabilities evolve. Combined with Claude usage data in a [privacy-preserving way](<https://www.anthropic.com/research/clio>), these first-hand accounts can surface change before it shows up in aggregate labor market data.
+The survey launches today. Each month, we will invite a small, randomly selected group of Claude users: anyone with a personal account at least two weeks old may be invited. We will rotate the sample each month so that we hear from as broad a range of people as possible over time. If you’re invited, you’ll see a banner on [claude.ai](<http://claude.ai/redirect/website.v1.717d2411-5712-4598-bfa5-4e6f82851145>), or get an email if you use Claude primarily on mobile. We’d love you to take part. We plan to publish insights in future Anthropic Economic Index reports and other research briefs. For more information, see the FAQ below.
+## Frequently asked questions
+**How do I access the study?**
+From today, a small random sample of Claude users with accounts at least two weeks old will see an invitation in [claude.ai](<http://claude.ai/redirect/website.v1.717d2411-5712-4598-bfa5-4e6f82851145>), the Cowork desktop app, or an email if you use Claude only on mobile. We invite a new set of Claude users each month, so if you’re not selected this time, keep an eye out.
+**What will the study ask me?**
+We will use Anthropic Interviewer to ask you about your work, what changes you’ve noticed in your role or organization, how you expect that to shift over the next year, and how you hope an economy shaped by AI will look in ten years.
+**How will you use the data?**
+We will analyze the insights from this study as part of our economic research, publish our findings, and use this to improve our models and services in ways that reflect what we’ve learned. The data we collect through this study will be processed according to our [Supplemental Privacy Policy](<https://privacy.claude.com/en/articles/14139821-supplemental-anthropic-interviewer-privacy-policy>). We may also include de-identified responses in published findings, from users who opt in. [Learn more.](<https://privacy.claude.com/en/articles/12996960-how-does-anthropic-interviewer-collect-and-use-my-data>)
+_If you have further questions, reach out via the message icon in the lower right corner of our[Help Center](<https://support.claude.com/en/articles/9015913-how-to-get-support>)._
+[](<https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/economic-index-survey-announcement>)[](<https://www.linkedin.com/shareArticle?mini=true&url=https://www.anthropic.com/research/economic-index-survey-announcement>)
+## Related content
+### Learning more about Claude's mathematical capabilities
+An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+[Read more](</research/riemann-zeta>)
+### Discovering cryptographic weaknesses with Claude
+cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+[Read more](</research/discovering-cryptographic-weaknesses>)
+### Project Pilot: Can AI control a drone?
+Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+[Read more](</research/project-pilot>)

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interpretability Dreams</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>可解释性之梦</h1>
+<div class="meta">
+Interpretability Dreams · May 24, 2023 · Interpretability · <a href="https://www.anthropic.com/research/interpretability-dreams" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文是Anthropic对机制可解释性研究远景的阐述。当前研究致力于为机制可解释性打下基础，重点是攻克“叠加”这一难题。本文总结了推动这些基础工作的目标愿景——如果能够克服当前挑战，未来可能实现哪些令人兴奋的研究方向。作者希望阐明应对可解释性规模化等挑战的长期路径，特别是解析超大神经网络的方法。由于团队此前专注于基础性问题，其长期规模化路线往往不够清晰，本文通过梳理这一愿景，说明如何化解“用机械方法分析巨量神经网络似乎难以实现”的疑虑。这是一篇动机阐释性文章而非实验论文。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">机制可解释性：逆向解析神经网络内部具体计算机制的领域</span><span class="term">叠加（superposition）：模型用有限神经元压缩存储超出维度的概念</span><span class="term">规模化（scalability）：把研究方法从小型模型扩展到超大模型的能力</span><span class="term">可解释性（interpretability）：理解AI内部运作、让模型“可读”的研究领域</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 可解释性</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/interpretability-dreams</li>
+</ul>
+<p>可解释性/研究
+2023 年 5 月 24 日
+<a href="https://transformer-circuits.pub/2023/interpretability-dreams/index.html">阅读论文</a></p>
+<h2>摘要</h2>
+<p>我们目前的研究旨在为机制可解释性（mechanistic interpretability）研究奠定基础。特别是，我们专注于尝试解决<a href="https://transformer-circuits.pub/2022/toy_model/index.html">叠加</a>（superposition）的挑战。在这样做的时候，重要的是要牢记我们试图为哪些目标奠定基础。这篇文章总结了那些激励人心的愿望——如果我们能克服当前的挑战，我们希望可能实现的令人兴奋的方向。</p>
+<p>我们旨在提供对我们解决机制可解释性其他挑战（尤其是可扩展性）的愿景的洞见。因为我们一直专注于基础性问题，我们扩展可解释性和应对其他挑战的长期路径往往晦暗不明。通过阐明这一愿景，我们希望澄清我们如何可能解决一些局限，例如分析大规模神经网络，这些在机制方法中可能天真的看起来难以处理。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/interpretability-dreams"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/interpretability-dreams"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界：满足该猜想的黎曼 zeta 函数零点的比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二次攻击确定了一种攻击减轮 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Interpretability Dreams</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/interpretability-dreams</li>
+</ul>
+<h1>Interpretability Dreams</h1>
+<p>May 24, 2023
+<a href="https://transformer-circuits.pub/2023/interpretability-dreams/index.html">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>Our present research aims to create a foundation for mechanistic interpretability research. In particular, we're focused on trying to resolve the challenge of <a href="https://transformer-circuits.pub/2022/toy_model/index.html">superposition</a>. In doing so, it's important to keep sight of what we're trying to lay the foundations for. This essay summarizes those motivating aspirations – the exciting directions we hope will be possible if we can overcome the present challenges.  </p>
+<p>We aim to offer insight into our vision for addressing mechanistic interpretability's other challenges, especially scalability. Because we have focused on foundational issues, our longer-term path to scaling interpretability and tackling other challenges has often been obscure. By articulating this vision, we hope to clarify how we might resolve limitations, like analyzing massive neural networks, that might naively seem intractable in a mechanistic approach.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/interpretability-dreams"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/interpretability-dreams"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

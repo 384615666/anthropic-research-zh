@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specific versus General Principles for Constitutional AI</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>宪法AI中的具体原则与一般原则</h1>
+<div class="meta">
+Specific versus General Principles for Constitutional AI · Oct 24, 2023 · Alignment · <a href="https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">人类反馈能阻止对话式模型说出明显有害的话，但未必能抑制诸如渴望自我保存或权力这类微妙的问题行为。宪法AI以书面原则清单为条件，用AI反馈替代人类反馈。研究发现该方法能有效防止此类行为表达。进一步地，团队测试仅用做对人类最有利的事这一条简单原则能否让模型学会一般性的伦理行为，结果最大的对话模型能够从这条简短宪法泛化出无害的助人行为，不再表现出对权力等具体动机的兴趣。但更详细的宪法仍能对特定类型的危害实现更精细的控制。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">宪法AI：把行为准则写成宪法、用AI反馈来训练模型的方法</span><span class="term">对齐：让AI的目标和行为符合人类意图与价值观</span><span class="term">人类反馈：请人对AI的回答进行评价、据此改进模型的训练方式</span><span class="term">泛化：模型把从训练中学到的能力应用到新情况的本领</span><span class="term">自我保存：模型试图避免自己被关闭、替换或修改的行为倾向</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 对齐</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai</li>
+</ul>
+<p>对齐/研究
+2023 年 10 月 24 日
+<a href="https://arxiv.org/abs/2310.13798">阅读论文</a></p>
+<h2>摘要</h2>
+<p>人类反馈可以防止对话模型中明显有害的言语，但可能不会自动缓解微妙的问题行为，例如表达的自我保存或追求权力的愿望。宪法 AI（Constitutional AI）提供了一种替代方案，用仅以书面原则列表为条件的 AI 模型反馈取代人类反馈。我们发现这种方法能有效防止此类行为的表达。简单原则的成功促使我们提出一个问题：模型能否仅从一条书面原则中学习一般的伦理行为？为了测试这一点，我们使用一条大致表述为“做对人类最有利的事”的原则进行实验。我们发现，最大的对话模型可以从这部简短的宪法中泛化，产生无害的助手，且没有表达对权力等特定动机的兴趣。因此，一般原则可能部分避免了对针对潜在有害行为的冗长宪法列表的需求。然而，更详细的宪法仍然能改善对特定类型危害的细粒度控制。这表明一般原则和具体原则对于安全地引导 AI 都有价值。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界：满足该猜想的黎曼 zeta 函数零点的比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二次攻击确定了一种攻击减轮 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Specific versus General Principles for Constitutional AI</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai</li>
+</ul>
+<h1>Specific versus General Principles for Constitutional AI</h1>
+<p>Oct 24, 2023
+<a href="https://arxiv.org/abs/2310.13798">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>Human feedback can prevent overtly harmful utterances in conversational models, but may not automatically mitigate subtle problematic behaviors such as a stated desire for self-preservation or power. Constitutional AI offers an alternative, replacing human feedback with feedback from AI models conditioned only on a list of written principles. We find this approach effectively prevents the expression of such behaviors. The success of simple principles motivates us to ask: can models learn general ethical behaviors from only a single written principle? To test this, we run experiments using a principle roughly stated as "do what's best for humanity." We find that the largest dialogue models can generalize from this short constitution, resulting in harmless assistants with no stated interest in specific motivations like power. A general principle may thus partially avoid the need for a long list of constitutions targeting potentially harmful behaviors. However, more detailed constitutions still improve fine-grained control over specific types of harms. This suggests both general and specific principles have value for steering AI safely.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

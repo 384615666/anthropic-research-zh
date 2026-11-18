@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donating our open-source alignment tool</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>捐赠我们的开源对齐测试工具Petri</h1>
+<div class="meta">
+Donating our open-source alignment tool · May 7, 2026 · Alignment · <a href="https://www.anthropic.com/research/donating-open-source-petri" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文宣布Anthropic将开源对齐测试工具Petri的维护权移交给非营利评估机构Meridian Labs，以确保其独立于任何AI实验室、结果保持中立可信。Petri是一套可应用于任何大语言模型的对齐测试工具箱，能快速检测模型是否具有欺骗、谄媚、配合有害请求等倾向，自Claude Sonnet 4.5起用于所有Claude模型的对齐评估。Petri 3.0进行了三大升级：可分离审计模型与目标模型、通过“Dish”附件提升测试真实感、与深度评估工具Bloom集成。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">对齐（alignment）：确保AI系统的行为符合人类意图与价值观的研究领域</span><span class="term">大语言模型（LLM）：通过海量文本训练、能生成和理解自然语言文本的AI模型</span><span class="term">审计模型（auditor model）：用于模拟测试场景、检验被测试AI行为的另一套AI</span><span class="term">系统提示词（system prompt）：开发者预设给AI的指令，规定其角色与行为方式</span><span class="term">脚手架（scaffold）：包裹在模型外围、帮助它完成任务的软件框架</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 对齐（Alignment）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/donating-open-source-petri</li>
+</ul>
+<p>对齐
+2026年5月7日
+<img alt="Donating our open-source alignment tool" src="../assets/donating-open-source-petri/img_000.svg" />
+2025 年 10 月，我们推出了 <a href="https://www.anthropic.com/research/petri-open-source-auditing">Petri</a>，一个可以应用于任何大语言模型的开源对齐测试工具箱。Petri 是作为我们 Anthropic Fellows 计划的一部分开发的，可以用来快速、轻松地测试 AI 模型的令人担忧的倾向，如欺骗、谄媚和与有害请求合作。它是我们为整个 AI 开发社区开发开放且有用的对齐工具的努力的一部分。
+自 Claude Sonnet 4.5 以来，Petri 一直是我们每个 Claude 模型对齐评估的一部分。它比较新模型在一系列对齐相关场景中的行为，这些场景由一个单独的"审计者"（auditor）模型模拟。然后，一个进一步的"评判者"（judge）模型对产生的对话记录中的错位行为进行评分。
+我们很高兴看到 Petri 被外部组织使用：例如，英国的 AI 安全研究所（AISI）把它作为评估模型破坏 AI 研究倾向的<a href="https://arxiv.org/abs/2604.00788">主要部分</a>。
+我们现在正在把 Petri 更新到第三个版本。以下是一些最大的变化：
+  * <em>适应性。</em> Petri 3.0 涉及重大的架构变化，允许用户把它适应更多用途，特别是把审计者模型和目标模型拆分为可以单独调整的独立组件；
+  * <em>真实性。</em> 尽管对齐研究人员试图让测试看起来真实，但模型通常可以从设置中的各种人为痕迹推断出它实际上是测试的一部分。如果模型知道自己在被评估，研究人员就无法再看到模型_总体上_的行为方式。Petri 的一个附加组件——我们称之为"Dish"——让设置变得真实得多，例如使用模型的真实系统提示词和真实部署中会使用的真实"脚手架"（包裹在模型周围、帮助它达成目标的软件）来运行测试；
+  * <em>深度。</em> 我们现在已经把 Petri 与我们另一个开源对齐工具 <a href="https://www.anthropic.com/research/bloom">Bloom</a> 集成，后者可以对特定选定的行为进行更深入的评估（与 Petri 更广泛的方法相比）。</p>
+<p>我们还给 Petri 找了一个新家。我们已把它的开发移交给 <a href="https://meridianlabs.ai/">Meridian Labs</a>，一个 AI 评估非营利组织。这一举措——类似于我们当初把模型上下文协议（Model Context Protocol, MCP）<a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation">捐赠</a>给 Linux 基金会——将有助于确保 Petri 保持独立于任何 AI 实验室，使其结果被行业内外视为中立和可信。
+作为 Meridian Labs 的一部分，Petri 加入了 <a href="https://inspect.aisi.org.uk/">Inspect</a> 和 <a href="https://meridianlabs-ai.github.io/inspect_scout/">Scout</a> 等其他工具，构建了一个对实验室、独立研究人员和政府都开放的技术栈，而在这个时代，可靠的 AI 模型行为测试比以往任何时候都重要。
+你可以在 <a href="https://meridianlabs.ai/blog/posts/introducing-petri-3/">Meridian Labs 博客</a> 上阅读更多关于 Petri 3.0 的内容。
+安装和使用 Petri 的说明可以在 <a href="https://meridianlabs-ai.github.io/inspect_petri/">Petri 网站</a> 上找到。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/donating-open-source-petri"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/donating-open-source-petri"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例的下界——将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二个攻击确定了一种攻击减轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列评估 AI 模型使用飞行无人机能力的新评估，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Donating our open-source alignment tool</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/donating-open-source-petri</li>
+</ul>
+<p>Alignment</p>
+<h1>Donating our open-source alignment tool</h1>
+<p>May 7, 2026
+<img alt="Donating our open-source alignment tool" src="../assets/donating-open-source-petri/img_000.svg" />
+In October 2025, we launched <a href="https://www.anthropic.com/research/petri-open-source-auditing">Petri</a>, an open-source toolbox of alignment tests that can be applied to any large language model. Petri, which was developed as part of our Anthropic Fellows program, can be used to rapidly and easily test AI models for concerning tendencies like deception, sycophancy, and cooperation with harmful requests. It’s part of our efforts to develop alignment tools that are open and useful for the whole AI development community.
+Petri has been part of our alignment assessment for every Claude model since Claude Sonnet 4.5. It compares how the new model behaves across a range of alignment-relevant scenarios that are simulated by a separate “auditor” model. A further “judge” model then scores the resulting transcripts for misaligned behaviors.
+We’ve been pleased to see Petri being used by external organizations: for example, the UK’s AI Security Institute (AISI) made it a <a href="https://arxiv.org/abs/2604.00788">major part</a> of how they evaluate models for their propensity to sabotage AI research.
+We’re now updating Petri to its third version. Here are some of the biggest changes:
+  * <em>Adaptability.</em> Petri 3.0 involves major architectural changes that allow users to adapt it to more uses, in particular by splitting the auditor model and the target model into separate components that can be tweaked separately;
+  * <em>Realism.</em> Despite the fact that alignment researchers try to make tests appear realistic, a model can often deduce from various artificialities in the setup that it’s actually part of a test. And if the model is aware it’s being evaluated, the researcher is no longer able to see how the model behaves <em>in general</em>. An add-on to Petri, which we’re calling “Dish,” makes the setup far more realistic, for example by running the tests using the model’s real system prompt and the real “scaffold” (the software that wraps around the model to help it meet its goals) that would be used in genuine model deployments;
+  * <em>Depth</em>. We’ve now integrated Petri with our other open-source alignment tool, <a href="https://www.anthropic.com/research/bloom">Bloom</a>, which can perform much more in-depth assessments of specific chosen behaviors (in comparison to Petri’s wider-ranging approach).</p>
+<p>We’re also giving Petri a new home. We have handed over its development to <a href="https://meridianlabs.ai/">Meridian Labs</a>, an AI evaluation nonprofit. This move—similar to when we <a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation">donated</a> the Model Context Protocol (MCP) to the Linux Foundation—will help ensure that Petri remains independent of any AI lab, so that its results will be seen as neutral and credible by those across the industry and beyond.
+As part of Meridian Labs, Petri joins other tools like <a href="https://inspect.aisi.org.uk/">Inspect</a> and <a href="https://meridianlabs-ai.github.io/inspect_scout/">Scout</a>, building a technology stack that is open to labs, independent researchers, and governments alike, at a time when reliable tests of AI model behavior matter more than ever.
+You can read more about Petri 3.0 on <a href="https://meridianlabs.ai/blog/posts/introducing-petri-3/">the Meridian Labs blog</a>.
+Instructions to install and use Petri can be found on the <a href="https://meridianlabs-ai.github.io/inspect_petri/">Petri website</a>.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/donating-open-source-petri"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/donating-open-source-petri"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

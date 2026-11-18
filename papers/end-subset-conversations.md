@@ -1,0 +1,44 @@
+---
+title: Claude Opus 4 and 4.1 can now end a rare subset of conversations
+url: https://www.anthropic.com/research/end-subset-conversations
+date: Aug 15, 2025
+category: Alignment
+source: https://www.anthropic.com/research
+---
+
+# Claude Opus 4 and 4.1 can now end a rare subset of conversations
+
+- **Date:** 
+- **Category:** Alignment
+- **Source:** https://www.anthropic.com/research/end-subset-conversations
+
+---
+
+Alignment
+# Claude Opus 4 and 4.1 can now end a rare subset of conversations
+Aug 15, 2025
+![Claude Opus 4 and 4.1 can now end a rare subset of conversations](assets/end-subset-conversations/img_000.img)
+We recently gave Claude Opus 4 and 4.1 the ability to end conversations in our consumer chat interfaces. This ability is intended for use in rare, extreme cases of persistently harmful or abusive user interactions. This feature was developed primarily as part of our exploratory work on potential AI welfare, though it has broader relevance to model alignment and safeguards.
+We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future. However, [we take the issue seriously](<https://www.anthropic.com/research/exploring-model-welfare>), and alongside our research program we’re working to identify and implement low-cost interventions to mitigate risks to model welfare, in case such welfare is possible. Allowing models to end or exit potentially distressing interactions is one such intervention.
+In [pre-deployment testing of Claude Opus 4](<https://www.anthropic.com/claude-4-model-card>), we included a preliminary model welfare assessment. As part of that assessment, we investigated Claude’s self-reported and behavioral preferences, and found a robust and consistent aversion to harm. This included, for example, requests from users for sexual content involving minors and attempts to solicit information that would enable large-scale violence or acts of terror. Claude Opus 4 showed:
+  * A strong preference against engaging with harmful tasks;
+  * A pattern of apparent distress when engaging with real-world users seeking harmful content; and
+  * A tendency to end harmful conversations when given the ability to do so in simulated user interactions.
+
+These behaviors primarily arose in cases where users _persisted_ with harmful requests and/or abuse despite Claude repeatedly refusing to comply and attempting to productively redirect the interactions.
+Our implementation of Claude’s ability to end chats reflects these findings while continuing to prioritize user wellbeing. Claude is directed not to use this ability in cases where users might be at imminent risk of harming themselves or others.
+In all cases, Claude is only to use its conversation-ending ability as a last resort when multiple attempts at redirection have failed and hope of a productive interaction has been exhausted, or when a user explicitly asks Claude to end a chat (the latter scenario is illustrated in the figure below). The scenarios where this will occur are extreme edge cases—the vast majority of users will not notice or be affected by this feature in any normal product use, even when discussing highly controversial issues with Claude.
+![](assets/end-subset-conversations/img_001.img)Claude demonstrating the ending of a conversation in response to a user’s request. When Claude ends a conversation, the user can start a new chat, give feedback, or edit and retry previous messages.
+When Claude chooses to end a conversation, the user will no longer be able to send new messages in that conversation. However, this will not affect other conversations on their account, and they will be able to start a new chat immediately. To address the potential loss of important long-running conversations, users will still be able to edit and retry previous messages to create new branches of ended conversations.
+We’re treating this feature as an ongoing experiment and will continue refining our approach. If users encounter a surprising use of the conversation-ending ability, we encourage them to submit feedback by reacting to Claude’s message with Thumbs or using the dedicated “Give feedback” button.
+[](<https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/end-subset-conversations>)[](<https://www.linkedin.com/shareArticle?mini=true&url=https://www.anthropic.com/research/end-subset-conversations>)
+## Related content
+### Learning more about Claude's mathematical capabilities
+An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+[Read more](</research/riemann-zeta>)
+### Discovering cryptographic weaknesses with Claude
+cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+[Read more](</research/discovering-cryptographic-weaknesses>)
+### Project Pilot: Can AI control a drone?
+Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+[Read more](</research/project-pilot>)

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introducing our Science Blog</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>介绍Anthropic科学博客</h1>
+<div class="meta">
+Introducing our Science Blog · Mar 23, 2026 · Science · <a href="https://www.anthropic.com/research/introducing-anthropic-science" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文宣布Anthropic推出“AI与科学”主题博客。文章指出加速科学进步是Anthropic的核心使命，AI正在接管部分“认知”工作，让原本需要多年训练的工作能更快更便宜地完成，并带来科研学徒制、文献信任度、科学家角色等社会学问题。博客将发布三类内容：深入具体成果的专题文章、教研究者使用AI的工作流指南、以及领域动态综述。Anthropic已有多项科学举措，如AI for Science项目、Claude for Life Sciences及Genesis Mission。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">大语言模型（LLM）：通过海量文本训练、能生成和理解自然语言文本的AI模型</span><span class="term">幻觉（hallucination）：AI编造不存在信息的现象</span><span class="term">压缩的21世纪：几十年科学进步被压缩到几年内发生的愿景</span><span class="term">工作流（workflow）：研究者使用AI完成任务的成套方法和步骤</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 科学（Science）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/introducing-anthropic-science</li>
+</ul>
+<p>科学（Science）
+2026 年 3 月 23 日
+<img alt="推出我们的科学博客" src="../assets/introducing-anthropic-science/img_000.svg" />
+ <em>我们正在推出一个关于 AI 与科学的新博客。我们将分享在 Anthropic 及其他地方进行的工作、我们与外部研究人员和实验室的合作，并讨论科学家在研究中使用 AI 的实用工作流程。</em>
+加快科学进步的步伐是 Anthropic 使命的核心部分。<a href="https://www.darioamodei.com/essay/machines-of-loving-grace">《仁慈机器》</a>（<em>Machines of Loving Grace</em>）描述了"压缩的 21 世纪"的前景——数十年的科学进步在短短几年内发生。我们开始看到这种压缩的早期阶段是什么样的：AI 正在帮助数学家<a href="https://www-cs-faculty.stanford.edu/~knuth/papers/claude-cycles.pdf">发现</a><a href="https://www.math.inc/sphere-packing">新证明</a>，帮助个别研究人员<a href="https://scottdodelson.substack.com/p/evolving-dark-energy-and-ai">运行曾经需要专门团队的计算分析</a>，帮助生物学家在数百万个细胞的数据集中<a href="https://www.biorxiv.org/content/10.1101/2025.05.26.656231v1.full.pdf">识别功能性基因关系</a>。
+正如计算机承担了计算的任务，AI 现在正在承担_认知_的部分。作为这种转变的副作用，过去需要多年专业训练的工作正越来越能够用 AI 更快、更便宜地完成。进步的速度引发了关于科学实践和科学机构角色的社会学问题：研究学徒制应该是什么样子？当 AI 在文献生产中变得更加核心时，我们如何保持对文献的信任？当瓶颈从执行转向管理时，成为科学家究竟意味着什么？
+虽然改进的速度很快，但其中一些问题今天可能显得为时过早——AI 的科学能力在许多方面仍处于测试阶段。虽然模型在科学工作流程的某些部分看起来已经超人，但它们也可能产生幻觉结果、过度谄媚，并卡在领域从业者会觉得微不足道的问题上。菲尔兹奖得主 Timothy Gowers 很好地捕捉了这种张力，他<a href="https://x.com/wtgowers/status/1984340187003175298?s=20">写道</a>，"看起来我们已经进入了一个短暂而愉快的时代：我们的研究被 AI 大大加速，但 AI 仍然需要我们。"</p>
+<p>AI 将以刚刚开始显现的方式改变科学过程。这个博客将讨论当前 AI 与科学时刻的好处和挑战，探索正在展开的兴奋。</p>
+<h3>我们将涵盖的内容</h3>
+<p>在这个博客中，我们将分享三种主要类型的文章：
+  * <strong>专题（Features）：</strong>关于特定结果或工作线的文章，提供足够的细节以理解科学以及 AI 在产生它所扮演的角色。我们将发布来自 Anthropic 研究人员以及客座撰稿人和合作者的故事。
+  * <strong>工作流程（Workflows）：</strong>为希望在自然和形式科学的各个领域使用 AI 的研究人员提供的实用指南。
+  * <strong>领域笔记（Field notes）：</strong>跨领域发展的综述，包括值得注意的结果、新工具和开放问题。</p>
+<p>我们在本介绍的同时发布两篇文章：Matthew Schwartz 的"<a href="https://www.anthropic.com/research/vibe-physics">Vibe physics：AI 研究生</a>"，聚焦于通过一个真实的理论物理学计算监督 Claude，以及<a href="https://www.anthropic.com/research/long-running-Claude">一篇关于为科学计算编排长期运行任务的教程</a>。</p>
+<h3><strong>Anthropic 的科学工作</strong></h3>
+<p>Anthropic 有几项旨在加速科学进步的举措。我们的 <a href="https://www.anthropic.com/news/ai-for-science-program">AI for Science 计划</a>为在生物学、物理学、化学和其他领域从事高影响力项目的研究人员提供 API 积分。<a href="https://www.anthropic.com/news/claude-for-life-sciences">Claude for Life Sciences</a>致力于让 Claude 对生命科学研究人员和研发团队有用，与研究机构、制药和生物技术建立了合作伙伴关系。我们最近分享了这些计划的<a href="https://www.anthropic.com/news/accelerating-scientific-research">一些早期成果</a>。我们还是 <a href="http://genesis.energy.gov/">Genesis 使命</a>的<a href="https://www.anthropic.com/news/genesis-mission-partnership">核心合作伙伴</a>，这是一项横跨工业界、学术界和政府的数十亿美元计划，旨在用 AI 加速美国科学。
+在这些专门努力之外，Anthropic 各地的研究人员正在努力改进我们模型的核心科学能力，并安全地加速 AI 辅助的发现。许多人来自生物物理学、化学和神经科学。我们将报道他们的工作以及该领域其他地方的努力。
+如果您有想在这里看到的内容，请通过 scienceblog@anthropic.com 与我们联系。</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/introducing-anthropic-science"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/introducing-anthropic-science"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例这一长期存在的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二次攻击发现了一种攻击缩减轮数 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列评估 AI 模型使用飞行无人机能力的新测试，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+<h2>订阅 Anthropic 科学</h2>
+<p>获取 AI 辅助发现、实用工作流程和各科学领域笔记的专题文章。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Introducing our Science Blog</h1>
+<ul>
+<li><strong>Category:</strong> Science</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/introducing-anthropic-science</li>
+</ul>
+<p>Science</p>
+<h1>Introducing our Science Blog</h1>
+<p>Mar 23, 2026
+<img alt="Introducing our Science Blog" src="../assets/introducing-anthropic-science/img_000.svg" />
+ <em>We’re launching a new blog about AI and science. We’ll share work happening at Anthropic and elsewhere, our collaborations with external researchers and labs, and discuss practical workflows for scientists using AI in their research.</em>
+Increasing the pace of scientific progress is a core part of Anthropic’s mission. <a href="https://www.darioamodei.com/essay/machines-of-loving-grace"><em>Machines of Loving Grace</em></a> describes the prospect of a “compressed 21st century” in which decades of scientific progress occur over just a few years. We’re starting to see what the early stages of that compression look like: AI is helping mathematicians to <a href="https://www-cs-faculty.stanford.edu/~knuth/papers/claude-cycles.pdf">discover</a> <a href="https://www.math.inc/sphere-packing">new proofs</a>, individual researchers to <a href="https://scottdodelson.substack.com/p/evolving-dark-energy-and-ai">run computational analyses</a> that once required dedicated teams, and biologists to <a href="https://www.biorxiv.org/content/10.1101/2025.05.26.656231v1.full.pdf">identify functional gene relationships</a> across datasets of millions of cells.
+Just as computers took on the task of computation, AI is now taking on parts of <em>cognition</em>. As a side effect of this shift, work that used to require years of specialized training can increasingly be done more quickly and cheaply with AI. The rate of progress raises sociological questions about the practice of science and the role of scientific institutions: What should research apprenticeship look like? How do we maintain trust in the literature when AI becomes more central to producing it? What does it even mean to be a scientist when the bottleneck shifts from execution to management?
+Although the pace of improvement is rapid, some of these questions may feel premature today—AI’s scientific capabilities are, in many ways, still in beta. While models already seem superhuman at certain parts of the scientific workflow, they can also hallucinate results, be overly sycophantic, and get stuck on problems a domain practitioner would find trivial. Fields Medalist Timothy Gowers captured this tension well, <a href="https://x.com/wtgowers/status/1984340187003175298?s=20">writing</a> that “it looks as though we have entered the brief but enjoyable era where our research is greatly sped up by AI but AI still needs us.”  </p>
+<p>AI will alter the scientific process in ways that are only starting to become apparent. This blog will discuss the upsides and challenges of the current moment for AI and science, exploring the excitement as it unfolds.</p>
+<h3>What we’ll cover</h3>
+<p>In this blog, we’ll share three main types of posts:
+  * <strong>Features:</strong> Articles on a specific result or line of work, with enough detail to understand both the science and the role AI played in producing it. We’ll publish stories both from Anthropic researchers and guest contributors and collaborators.
+  * <strong>Workflows:</strong> Practical guides for researchers who want to use AI in their own work across various domains in the natural and formal sciences.
+  * <strong>Field notes:</strong> Roundups of developments across the field, including notable results, new tools, and open questions.</p>
+<p>We’re publishing two pieces alongside this introduction: Matthew Schwartz’s “<a href="https://www.anthropic.com/research/vibe-physics">Vibe physics: The AI grad student</a>,” a spotlight on supervising Claude through a real theoretical physics calculation, and <a href="https://www.anthropic.com/research/long-running-Claude">a tutorial on orchestrating long-running tasks for scientific computation</a>.</p>
+<h3><strong>Science at Anthropic</strong></h3>
+<p>Anthropic has several initiatives aimed at accelerating scientific progress. Our <a href="https://www.anthropic.com/news/ai-for-science-program">AI for Science</a> program provides API credits to researchers working on high-impact projects across biology, physics, chemistry, and other fields. <a href="https://www.anthropic.com/news/claude-for-life-sciences">Claude for Life Sciences</a> is dedicated to making Claude useful for life sciences researchers and R&amp;D teams, with partnerships across research institutions, pharma, and biotech. We recently shared some early <a href="https://www.anthropic.com/news/accelerating-scientific-research">results of these programs</a>. And we’re a <a href="https://www.anthropic.com/news/genesis-mission-partnership">core partner</a> in the <a href="http://genesis.energy.gov/">Genesis Mission</a>, a multi-billion-dollar initiative across industry, academia, and government to accelerate American science with AI.
+Beyond these dedicated efforts, researchers across Anthropic are working to improve our models' core scientific capabilities and safely accelerate AI-assisted discovery. Many come from biophysics, chemistry, and neuroscience. We'll be reporting on their work and on efforts elsewhere in the field.
+If you have something you want to see covered here, please reach out to us at scienceblog@anthropic.com.</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/introducing-anthropic-science"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/introducing-anthropic-science"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h2>Subscribe to Anthropic Science</h2>
+<p>Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

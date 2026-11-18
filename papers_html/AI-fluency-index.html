@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic Education Report: The AI Fluency Index</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>Anthropic 教育报告：AI 流畅度指数</h1>
+<div class="meta">
+Anthropic Education Report: The AI Fluency Index · Feb 23, 2026 · Announcements · <a href="https://www.anthropic.com/research/AI-fluency-index" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本报告提出“AI 流畅度”概念，即人们是否掌握有效、安全使用 AI 的技能。研究者用 4D AI 流畅度框架中的 24 种行为定义流畅度，并用隐私保护工具分析了 2026 年 1 月一周内 9,830 条 Claude.ai 多轮对话。结果显示：最常见的流畅行为是“增强式”协作——把 AI 当思考伙伴而非完全外包；85.7% 的对话呈现迭代与精炼行为，且这类对话呈现其他流畅行为的比例约为其他对话的两倍。但生成制品（代码、文档等）的对话中，用户质疑推理、核查事实的比例反而下降。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">AI 流畅度（AI fluency）：人们有效、安全地使用 AI 协作的能力与行为模式</span><span class="term">迭代与精炼（iteration and refinement）：基于前一轮结果反复修改完善而不是照单全收</span><span class="term">制品（artifact）：AI 生成的具体成果，如代码、文档、应用等</span><span class="term">增强式使用（augmentation）：把 AI 当思考伙伴的协作方式</span><span class="term">行为指标（behavioral indicator）：可观察到的、代表某种能力的具体行为</span><span class="term">相关性（correlation）：两个变量共同变化的统计关系，不等于因果关系</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Announcements（公告）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/AI-fluency-index</li>
+</ul>
+<p>Announcements（公告）
+2026年2月23日
+<img alt="Anthropic 教育报告：AI 流利度指数" src="../assets/AI-fluency-index/img_000.img" />
+人们正在以即使在一年前都难以预测的速度将 AI 工具融入日常工作中。但仅凭采用率并不能告诉我们太多关于这些工具影响的信息。<strong>另一个同样重要的问题是：随着 AI 成为日常生活的一部分，个人是否正在发展熟练使用它的技能？</strong>
+此前的 Anthropic 教育报告研究了<a href="https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude">大学生</a>和<a href="https://www.anthropic.com/news/anthropic-education-report-how-educators-use-claude">教育工作者</a>如何使用 Claude。我们发现学生用它创建报告和分析实验结果；教育工作者用它构建课程材料并使日常工作自动化。但我们知道_任何_使用 AI 的人都可能在自己所做的事情上有所提高。我们想进一步探索这一点，并了解使用 AI 的人如何随着时间推移发展出对这种技术的"流利度（fluency）"。
+在本报告中，我们开始回答这个问题。我们在大量匿名化对话样本中追踪一组我们视为代表 AI 流利度的行为分类法的存在与否。
+与我们最近的<a href="https://www.anthropic.com/research/economic-index-primitives">经济指数（Economic Index）</a>一致，我们发现 AI 流利度最常见的表达方式是_增强式（augmentative）_——将 AI 视为思维伙伴，而不是完全委派工作。事实上，这些对话表现出的 AI 流利度行为数量是快速、来回式聊天的两倍以上。
+但我们也发现，当 AI 产生制品（artifacts）——包括应用、代码、文档或交互式工具——时，用户_更不_可能质疑它的推理（-3.1 个百分点）或识别缺失的上下文（-5.2 个百分点）。这与我们在****<a href="https://www.anthropic.com/research/AI-assistance-coding-skills">最近关于编码技能的研究</a>中观察到的相关模式一致。
+这些初步发现为我们提供了一个基线，可以用来研究 AI 流利度随时间的发展。</p>
+<h2><strong>衡量 AI 流利度</strong></h2>
+<p>为了量化 AI 流利度，我们使用由 Rick Dakan 和 Joseph Feller 教授与 Anthropic 合作开发的 <a href="https://anthropic.skilljar.com/ai-fluency-framework-foundations">4D AI 流利度框架</a>。这个框架帮助我们定义了 24 种我们认为体现了安全有效的人机协作的具体行为。
+在这 24 种行为中，有 11 种（列在下图中）在人类通过 Claude.ai 或 Claude Code 与 Claude 互动时可直接观察。其他 13 种（包括诚实说明 AI 在工作中的角色，或考虑分享 AI 生成输出的后果等）发生在 Claude.ai 的聊天界面之外，因此我们更难追踪。这些不可观察的行为可以说是 AI 流利度中一些影响最大的维度，因此在未来的工作中，我们计划使用定性方法来评估它们。
+在这项研究中，我们专注于 11 种可直接观察的行为。我们使用我们的<a href="https://www.anthropic.com/research/clio">隐私保护分析工具</a>，研究了 2026 年 1 月一个 7 天窗口期内 Claude.ai 上 9,830 段与 Claude 进行多次来回对话的会话。[^1]然后我们测量了这 11 种行为的存在与否；每段对话都可能表现出多种行为的证据。我们通过检查结果在一周中的每一天以及样本中的不同语言之间是否一致来评估样本的可靠性（我们发现是一致的）。[^2]这最终给了我们 AI 流利度指数：对当今人们如何与 AI 协作的基线测量，以及随着模型变化追踪这些行为如何随时间演变的基础。
+<img alt="" src="../assets_zh/AI-fluency-index/img_001.png" /><em>9,830 段 Claude.ai 对话中每种 AI 流利度行为指标的出现率，从最常见到最不常见排序，并按能力着色。</em></p>
+<h2><strong>结果</strong></h2>
+<p>通过我们的第一项研究，我们在 Claude 使用中发现了两个主要模式：AI 流利度与通过与 Claude 进行更长对话的迭代和精炼之间的强关联，以及用户在编码或构建其他输出时流利度行为的变化。</p>
+<h3><strong>流利度与表现出迭代和精炼的对话密切相关</strong></h3>
+<p>数据中最强的模式之一是迭代和精炼与其他所有 AI 流利度行为之间的关系。我们样本中 85.7% 的对话表现出迭代和精炼：在前一轮对话的基础上精炼用户的工作，而不是接受第一个回应就转向新任务。如下方图表所示，这些对话表现出显著更高的其他流利度行为率：
+<img alt="迭代和精炼效应：显示有/无迭代和精炼时行为率的比较表或可视化" src="../assets_zh/AI-fluency-index/img_002.png" /><em>用户迭代和精炼的对话（n=8,424）与没有迭代和精炼的对话（n=1,406）中的行为指标出现率。所有行为在具有迭代和精炼的对话中都明显更普遍。</em>
+平均而言，具有迭代和精炼的对话表现出 2.67 个额外的流利度行为——大约是未迭代率 1.33 的两倍。这对于与评估 Claude 输出相关的流利度行为尤其明显。具有迭代和精炼的对话中，用户质疑 Claude 推理的可能性是 5.6 倍，识别缺失上下文的可能性是 4 倍。</p>
+<h3><strong>在创建输出时，用户变得更加指令化但更少评估</strong></h3>
+<p>我们样本中 12.3% 的对话涉及<a href="https://claude.ai/redirect/website.v1.c4912eba-b7dd-40b1-a1ef-1a55aaf58274/catalog/artifacts">制品（artifacts）</a>，包括代码、文档、交互式工具和其他输出。在这些对话中，人们与 AI 的协作方式大不相同。
+具体来说，我们发现属于"描述（description）"和"委派（delegation）"更广泛主题的行为率显著更高。例如，与非制品对话相比，这些对话中用户澄清目标（+14.7 个百分点）、指定格式（+14.5 个百分点）、提供示例（+13.4 个百分点）和迭代（+9.7 个百分点）的可能性更高。换句话说，他们在工作开始时做了更多来指导 AI。
+但这种指令化并没有对应更高水平的评估或辨别力。<strong>事实上恰恰相反：在创建制品的对话中，用户_更不_可能识别缺失的上下文（-5.2 个百分点）、核实事实（-3.7 个百分点），或通过要求模型解释其理由来质疑模型的推理（-3.1 个百分点）。</strong>我们的<a href="https://www.anthropic.com/research/anthropic-economic-index-january-2026-report">经济指数</a>发现——不出所料——最复杂的任务是 Claude 最吃力的地方，因此这一点似乎尤其值得注意。
+<img alt="制品与非制品对话的比较表或配对柱状图" src="../assets_zh/AI-fluency-index/img_003.png" /><em>有制品（n=1,209）与无制品（n=8,621）对话中的行为指标出现率。描述和委派行为在制品对话中增加，而所有三种辨别行为都减少。</em>
+这种模式有几种可能的解释。可能是因为 Claude 创建了精美、看起来功能完整的输出，对它们似乎没有必要进一步质疑：如果工作_看起来_完成了，用户可能就把它当作完成了。但也可能是制品对话涉及的任务中，事实精确性不如美观或功能重要（例如，设计 UI 与撰写法律分析相比）。或者用户可能通过我们无法观察的渠道评估制品——运行代码、在别处测试应用、与同事分享草稿——而不是在同一初始对话中表达他们的评估。
+无论解释是什么，这个模式都值得关注。随着 AI 模型越来越有能力产生精美外观的输出，批判性评估这些输出的能力——无论是在直接对话中还是通过其他方式——将变得更加有价值，而不是更少。
+发展你自己的 AI 流利度
+与所有技能一样，AI 流利度是一个程度问题——对我们大多数人来说，我们的技术还有很大的发展空间。根据我们数据中的模式，我们发现有三个领域许多用户可以提高他们的技能：</p>
+<p><strong>留在对话中。</strong> 迭代和精炼是我们数据中与所有其他流利度行为最强相关的单一因素。因此，当你得到初始回应时，值得把它只当作一个起点：提出后续问题，对任何感觉不对劲的部分提出异议，并精炼你正在寻找的东西。
+<strong>质疑精美的输出。</strong> 当 AI 模型产生看起来_很好_的东西时，正是停下来问一问的完美时刻：这准确吗？有没有遗漏什么？这个推理站得住脚吗？正如我们上面讨论的，我们的数据显示，精美的输出与较低的批判性评估率同时出现，尽管用户在开始时更努力地指导 Claude 的工作。
+<strong>设定协作的条款。</strong> 只有 30% 的对话中，用户会告诉 Claude 他们希望它如何与他们互动。试着通过添加这样的指令来明确表达："如果我的假设有误，请提出异议"，"在给我答案之前，先带我了解你的推理"，或"告诉我你不确定的地方"。预先建立这些期望可以改变对话其余部分的动态。</p>
+<hr />
+<h2><strong>局限性</strong></h2>
+<p>这项研究带有重要的注意事项：
+  * <strong>样本局限性：</strong> 我们的样本反映的是 2026 年 1 月某一周内在 Claude.ai 上参与多轮对话的用户。由于我们认为这在 AI 工具的扩散中仍然相对较早，这些用户可能偏向于已经对 AI 感到舒适的早期采用者——即可能不代表更广泛的人群。我们的样本应被理解为_这个_人群提供基线，而不是作为通用基准。由于数据来自单一一周，它也无法捕捉任何季节性效应或纵向效应。而且由于它专注于 <a href="http://claude.ai/redirect/website.v1.c4912eba-b7dd-40b1-a1ef-1a55aaf58274">Claude.ai</a>，我们没有捕捉用户如何与其他 AI 平台互动。
+  * <strong>框架覆盖不完整：</strong> 在这项研究中，我们只评估了 24 个行为指标中可在 Claude.ai 对话中直接观察的 11 个。所有与负责任和合乎道德地使用 AI 输出相关的行为都发生在这些对话之外，未被捕捉。
+  * <strong>二元分类：</strong> 对于我们样本中的每段对话，我们将每种行为分类为存在或不存在。但这很可能错过了重要的细微差别——比如有争议或部分表现的行为，或它们之间重叠的信号。
+  * <strong>隐性行为：</strong> 用户可能在头脑中表现出流利度行为（例如根据自己的知识核实 Claude 的主张），而没有在对话中表达这些行为。这对于我们关于制品的数据似乎尤其相关——用户可能通过测试和实际使用来评估 Claude 的输出，而不是通过对话可见的行为。
+  * <strong>相关性发现：</strong> 我们识别的这些关系是相关性的。我们不知道一种行为是否_导致_另一种行为，或者它们是否都反映了某个共同的潜在因素，如任务复杂性或用户偏好。</p>
+<h2><strong>展望未来</strong></h2>
+<p>这项研究为我们提供了一个基线，可以用来评估 AI 流利度如何随时间变化。随着 AI 能力的发展和采用率的增加，我们的目标是了解用户是否在发展更复杂的行为、哪些技能会随着经验自然涌现，以及哪些需要更有意地培养。
+在未来的工作中，我们计划从几个方向扩展分析。首先，我们计划进行"队列分析（cohort analyses）"，比较新用户和有经验的用户，以了解对 AI 的熟悉程度如何与流利度发展相关联。其次，我们计划使用定性研究方法评估无法在 Claude.ai 对话中直接观察的行为。第三，我们旨在探索这项工作提出的_因果_问题——比如鼓励迭代式对话是否会导致更批判性的评估，或者是否有其他干预措施可以更有效地鼓励这一点。
+此外，我们想探索 Claude Code 中的 AI 流利度行为，Claude Code 是一个主要由软件开发人员使用的平台。为准备这项研究，我们进行了一些初步分析，发现 Claude Code 对话与 <a href="http://claude.ai/redirect/website.v1.c4912eba-b7dd-40b1-a1ef-1a55aaf58274">Claude.ai</a> 中的对话之间存在一致性。但这仍然是初步的，Claude Code 非常不同的用户群和功能意味着需要进行更实质性的研究。
+我们预计 AI 流利度的性质将随着时间的推移而大幅发展和演变。通过这项和未来的研究，我们的目标是让这种发展变得可见、可衡量和可操作。</p>
+<h2></h2>
+<p><strong>Bibtex</strong>
+如果你想引用这篇文章，可以使用以下 Bibtex 键：</p>
+<pre><code>@online{swanson2026aifluency,
+author = {Kristen Swanson, Drew Bent, and Zoe Ludwig and Rick Dakan and Joe Feller},
+title = {Anthropic Education Report: The AI Fluency Index},
+date = {2026-02-16},
+year = {2026},
+url = {https://www.anthropic.com/news/anthropic-education-report-the-ai-fluency-index},
+}
+</code></pre>
+<h2><strong>致谢</strong></h2>
+<p>Kristen Swanson 设计了这项研究，领导了分析，并撰写了本报告。Zoe Ludwig 和 Drew Bent 为框架对齐、信息传达和审阅做出了贡献。4D AI 流利度框架由 Rick Dakan 和 Joe Feller 开发。Zack Lee 提供了技术支持。Hanah Ho 帮助可视化数据。Keir Bradwell、Rebecca Hiscott、Ryan Donegan 和 Sarah Pollack 提供了传播审阅和指导。</p>
+<h4>脚注</h4>
+<p>[^1]: 在研究人们如何使用 AI 模型时，保护用户隐私至关重要。对于这个项目，我们使用了我们的<a href="https://www.anthropic.com/research/clio">隐私保护分析工具</a>，它通过将用户对话提炼为高级使用摘要（如"排查代码"或"解释经济概念"）来实现对 AI 使用模式的自底向上发现。对于这项分析，我们运行了 11 个独立的二元分类器（每种行为指标一个），使用 Claude Sonnet 4 进行行为分类，使用 Claude Haiku 3.5 进行语言检测。这意味着一段对话可能指示多种 AI 流利度行为指标。对话通过一个筛选器过滤到具有多次来回的实质性交流，该筛选器排除了问候语、单字交流、测试消息和纯粹的闲聊。对 200 段被筛选掉的聊天的手动审查表明，这类性质的聊天不符合任何 AI 流利度指标的资格，因此我们确信筛选器没有影响研究中观察到的 AI 流利度行为的相对排名。分析中不出现任何个人身份信息。</p>
+<p>[^2]: 行为指标是在一周样本（2025 年 1 月 20-26 日）上计算的，并且逐日保持稳定，大多数行为仅变化 1-5 个百分点。周六某些行为的比率略低（例如，迭代和精炼周六为 81.4%，而工作日峰值为 87.9%），表明休闲使用与有目的使用之间存在适度差异，但没有任何一天显示出有意义的结构性偏差。这些比率在六种语言（英语、法语、西班牙语、中文、日语和德语）中也是一致的，大多数行为跨语言群体的变化不超过 3 个百分点。总之，这些发现表明，这里捕捉的行为模式反映了人们与 AI 互动方式的一致习惯，而不是时间、星期几或语言和文化背景的产物。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/AI-fluency-index"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/AI-fluency-index"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例的一个长期存在的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为"量子计算机能够破解现有标准"的未来世界而构建的数字签名方案。第二次攻击确定了攻击轮数缩减版 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，以评估 AI 模型使用飞行无人机的能力，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Anthropic Education Report: The AI Fluency Index</h1>
+<ul>
+<li><strong>Category:</strong> Announcements</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/AI-fluency-index</li>
+</ul>
+<p>Announcements</p>
+<h1>Anthropic Education Report: The AI Fluency Index</h1>
+<p>Feb 23, 2026
+<img alt="Anthropic Education Report: The AI Fluency Index" src="../assets/AI-fluency-index/img_000.img" />
+People are integrating AI tools into their daily routines at a pace that would have been difficult to predict even a year ago. But adoption alone doesn’t tell us much about the impact of these tools. <strong>A further, equally important question is: as AI becomes part of everyday life, are individuals developing the skills to use it well?</strong>
+Previous Anthropic Education Reports have studied how <a href="https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude">university students</a> and <a href="https://www.anthropic.com/news/anthropic-education-report-how-educators-use-claude">educators</a> use Claude. We found that students use it to create reports and analyze lab results; educators use it to build lesson materials and automate routine work. But we know that <em>any</em> person who uses AI is likely to improve at what they do. We wanted to explore this further, and to understand how people using AI develop “fluency” with this technology over time.
+In this report, we begin answering that question. We track the presence or absence of a taxonomy of behaviors that we take to represent AI fluency across a large sample of anonymized conversations.
+In line with our recent <a href="https://www.anthropic.com/research/economic-index-primitives">Economic Index</a>, we find that the most common expression of AI fluency is <em>augmentative</em> —treating AI as a thought partner, rather than delegating work entirely. In fact, these conversations exhibit more than double the number of AI fluency behaviors than quick, back-and-forth chats.
+But we also find that when AI produces artifacts—including apps, code, documents, or interactive tools—users are <em>less</em> likely to question its reasoning (-3.1 percentage points) or identify missing context (-5.2pp). This aligns with related patterns we observed in our****<a href="https://www.anthropic.com/research/AI-assistance-coding-skills">recent study on coding skills</a>.
+These initial findings present us with a baseline that we can use to study the development of AI fluency over time.</p>
+<h2><strong>Measuring AI fluency</strong></h2>
+<p>To quantify AI fluency, we use the <a href="https://anthropic.skilljar.com/ai-fluency-framework-foundations">4D AI Fluency Framework</a>, developed by Professors Rick Dakan and Joseph Feller in collaboration with Anthropic. This framework helps us define 24 specific behaviors that we take to exemplify safe and effective human-AI collaboration.
+Of these 24 behaviors, 11 (listed in the graph below) are directly observable when humans interact with Claude on Claude.ai or Claude Code. The other 13 (including things like being honest about AI’s role in work, or considering the consequences of sharing AI-generated output), happen outside Claude.ai’s chat interface, so they’re much harder for us to track. These unobservable behaviors are arguably some of the most consequential dimensions of AI fluency, so in future work we plan to use qualitative methods to assess them.
+For this study, we focused on the 11 directly observable behaviors. We used our <a href="https://www.anthropic.com/research/clio">privacy-preserving analysis tool</a> to study 9,830 conversations that included several back-and-forths with Claude on Claude.ai during a 7-day window in January 2026.1 We then measured the presence or absence of the 11 behaviors; each conversation could display evidence of multiple behaviors. We assessed the reliability of our sample by checking whether our results were consistent across each day of the week, and across the different languages in our sample (we found that they were).2 This, finally, gave us the AI Fluency Index: a baseline measurement of how people collaborate with AI today, and a foundation for tracking how those behaviors evolve over time as models change.
+<img alt="" src="../assets/AI-fluency-index/img_001.img" /><em>Prevalence of each AI fluency behavioral indicator across 9,830 Claude.ai conversations, ranked from most to least common and color-coded by competency.</em></p>
+<h2><strong>Results</strong></h2>
+<p>With our first study, we’ve found two main patterns in Claude use: a strong relationship between AI fluency and iteration and refinement through longer conversations with Claude, and changes in users’ fluency behaviors when coding or building other outputs.</p>
+<h3><strong>Fluency is strongly associated with conversations that exhibit iteration and refinement</strong></h3>
+<p>One of the strongest patterns in the data is the relationship between iteration and refinement and every other AI fluency behavior. 85.7% of the conversations in our sample exhibited iteration and refinement: building on previous exchanges to refine the user’s work, rather than accepting the first response and moving to a new task. These conversations showed substantially higher rates of other fluency behaviors, as the chart below shows:
+<img alt="The iteration and refinement effect: Comparison table or visual showing behavior rates with/without iteration and refinement]" src="../assets/AI-fluency-index/img_002.img" /><em>Behavioral indicator prevalence in conversations where the user iterates and refines (n=8,424) versus conversations without iteration and refinement (n=1,406). All behaviors are substantially more prevalent in conversations with iteration and refinement.</em>
+On average, conversations with iteration and refinement exhibit 2.67 additional fluency behaviors—roughly double the non-iterative rate of 1.33. This is especially pronounced for fluency behaviors related to evaluating Claude’s outputs. Conversations with iteration and refinement are 5.6x more likely to involve users questioning Claude’s reasoning, and 4x more likely to see them identify missing context.</p>
+<h3><strong>When creating outputs, users become more directive but less evaluative</strong></h3>
+<p>12.3% of conversations in our sample involved <a href="https://claude.ai/redirect/website.v1.c4912eba-b7dd-40b1-a1ef-1a55aaf58274/catalog/artifacts">artifacts</a>, including code, documents, interactive tools, and other outputs. In these conversations, people collaborated with AI quite differently.
+Specifically, we found substantially higher rates of behaviors that fall within the broader themes of “description” and “delegation.” For instance, these conversations are more likely to see users clarify their goal (+14.7pp), specify a format (+14.5pp), provide examples (+13.4pp), and iterate (+9.7pp) compared to non-artifact conversations. In other words, they’re doing more to direct AI at the outset of their work.
+But this directiveness doesn’t correspond with greater levels of evaluation or discernment.<strong>In fact, it’s the opposite: in conversations where artifacts are created, users are <em>less</em> likely to identify missing context (-5.2pp), check facts (-3.7pp), or question the model’s reasoning by asking it to explain its rationale (-3.1pp).</strong> Our <a href="https://www.anthropic.com/research/anthropic-economic-index-january-2026-report">Economic Index</a> finds that—unsurprisingly—the most complex tasks are where Claude struggles the most, so this seems particularly noteworthy.
+<img alt="Artifact vs. non-artifact comparison table or paired bar chart" src="../assets/AI-fluency-index/img_003.img" /><em>Behavioral indicator prevalence in conversations with artifacts (n=1,209) versus without artifacts (n=8,621). Description and delegation behaviors increase in artifact conversations, while all three discernment behaviors decrease.</em>
+There are several possible explanations for this pattern. It might be that Claude is creating polished, functional-looking outputs, for which it doesn’t seem necessary to question things further: if the work <em>looks</em> finished, users might treat it as such. But it’s also possible that artifact conversations involve tasks where factual precision matters less than aesthetics or functionality (designing a UI, for instance, versus writing a legal analysis). Or users might be evaluating artifacts through channels we can’t observe—running code, testing an app elsewhere, sharing a draft with a colleague—rather than expressing their evaluation within that same initial conversation.
+Whatever the explanation, the pattern is worth paying attention to. As AI models become increasingly capable of producing polished-looking outputs, the ability to critically evaluate those outputs, whether in direct conversation or through other means, will become more valuable rather than less.
+Developing your own AI fluency
+As with all skills, AI fluency is a matter of degree—for most of us, it’s possible to develop our techniques much further. Based on the patterns in our data, there are three areas where we’ve found many users could improve their skills:  </p>
+<p><strong>Staying in the conversation.</strong> Iteration and refinement is the single strongest correlate of all other fluency behaviors in our data. So, when you get an initial response, it’s worth treating it as only a starting point: ask follow-up questions, push back on any parts that don’t feel right, and refine what you’re looking for.<br />
+<strong>Questioning polished outputs.</strong> When AI models produce something that <em>looks</em> good, it’s the perfect moment to pause and ask: is this accurate? Is anything missing? Does this reasoning hold up? As we discussed above, our data show that polished outputs coincide with lower rates of critical evaluation, even though users go to greater lengths to direct Claude’s work at the outset.<br />
+<strong>Setting the terms of the collaboration.</strong> In only 30% of conversations do users tell Claude how they’d like it to interact with them. Try being explicit by adding instructions like, “Push back if my assumptions are wrong,” “Walk me through your reasoning before giving me the answer,” or, “Tell me what you’re uncertain about.” Establishing these expectations up front can change the dynamic of the rest of the conversation.  </p>
+<hr />
+<h2><strong>Limitations</strong></h2>
+<p>This research comes with important caveats:
+  * <strong>Sample limitations:</strong> Our sample reflects Claude.ai users who engaged in multi-turn conversations during a single week in January 2026. Since we think this is still relatively early on in the diffusion of AI tools, these users likely skew towards early adopters who are already comfortable with AI—i.e., who may not represent the broader population. Our sample should be understood as providing a baseline for <em>this</em> population, not as a universal benchmark. Because the data comes from a single week, it is also unable to capture any seasonal or longitudinal effects. And because it’s focused on <a href="http://claude.ai/redirect/website.v1.c4912eba-b7dd-40b1-a1ef-1a55aaf58274">Claude.ai</a>, we don’t capture how users interact with other AI platforms.
+  * <strong>Partial framework coverage:</strong> In this study, we only assessed the 11 of the 24 behavioral indicators that are directly observable in conversations on Claude.ai. All behaviors related to the responsible and ethical use of AI outputs occur outside of these conversations, and are not captured.
+  * <strong>Binary classification:</strong> For each conversation in our sample, we classify each behavior as either present or absent. But this likely misses significant nuance—like arguable or partial demonstrations of behaviors, or overlapping signals between them.
+  * <strong>Implicit behaviors:</strong> Users might demonstrate fluency behaviors mentally (such as fact-checking Claude’s claims against their own knowledge) without expressing these behaviors in conversation. This seems especially relevant for our data on artifacts—users might be evaluating Claude’s outputs through testing and practical use, rather than through conversation-visible behaviors.
+  * <strong>Correlational findings:</strong> The relationships we identify are correlational. We don’t know whether one behavior <em>causes</em> another, or whether they both reflect some common underlying factor, like task complexity or user preferences.</p>
+<h2><strong>Looking ahead</strong></h2>
+<p>This study offers us a baseline that we can use to assess how AI fluency is changing over time. As AI capabilities evolve and adoption increases, we’re aiming to learn whether users are developing more sophisticated behaviors, which skills are emerging naturally with experience, and which will require more intentional development.
+In future work, we plan to extend our analysis in several directions. First, we plan to conduct “cohort analyses,” comparing new users to experienced ones in order to understand how familiarity with AI is correlated with fluency development. Second, we plan to use qualitative research methods to assess the behaviors that aren’t directly observable in Claude.ai conversations. And third, we aim to explore the <em>causal</em> questions that this work raises—like whether encouraging iterative conversations leads to greater critical evaluation, or whether there are other interventions that could encourage this more effectively.
+In addition, we’d like to explore AI fluency behaviors in Claude Code, a platform mostly used by software developers. In preparation for this study, we conducted some initial analysis that found consistency between Claude Code conversations and ones in <a href="http://claude.ai/redirect/website.v1.c4912eba-b7dd-40b1-a1ef-1a55aaf58274">Claude.ai</a>. But this is still preliminary, and Claude Code’s very different user base and functionality implies that more substantial research is necessary.
+We expect that the nature of AI fluency will develop and evolve substantially over time. With this and future research, we’re aiming to make that development visible, measurable, and actionable.</p>
+<h2></h2>
+<p><strong>Bibtex</strong>
+If you’d like to cite this post, you can use the following Bibtex key:</p>
+<pre><code>@online{swanson2026aifluency,
+author = {Kristen Swanson, Drew Bent, and Zoe Ludwig and Rick Dakan and Joe Feller},
+title = {Anthropic Education Report: The AI Fluency Index},
+date = {2026-02-16},
+year = {2026},
+url = {https://www.anthropic.com/news/anthropic-education-report-the-ai-fluency-index},
+}
+</code></pre>
+<h2><strong>Acknowledgements</strong></h2>
+<p>Kristen Swanson designed the research, led the analysis, and wrote this report. Zoe Ludwig and Drew Bent contributed to framework alignment, messaging, and review. The 4D Framework for AI Fluency was developed by Rick Dakan and Joe Feller. Zack Lee provided technical support. Hanah Ho helped visualize the data. Keir Bradwell, Rebecca Hiscott, Ryan Donegan and Sarah Pollack provided communications review and guidance.</p>
+<h4>Footnotes</h4>
+<p>1 When researching how people use AI models, protecting user privacy is paramount. For this project, we used our <a href="https://www.anthropic.com/research/clio">privacy-preserving analysis tool</a>, which enables bottom-up discovery of AI usage patterns by distilling user conversations into high-level usage summaries, such as “troubleshoot code” or “explain economic concepts.” For this analysis, we ran 11 separate binary classifiers (one per behavioral indicator) using Claude Sonnet 4 for behavioral classification and Claude Haiku 3.5 for language detection. This means a single conversation could indicate multiple AI fluency behavioral indicators. Conversations were filtered to substantive exchanges with multiple back-and-forths using a screener that excluded greetings, single-word exchanges, test messages, and pure chitchat. Manual review of 200 chats that were screened out indicated that chats of this nature did not qualify for any AI Fluency indicators, so we feel confident that the screener did not influence the relative rankings of AI fluency behaviors observed in the study. No personally identifiable information appears in the analysis.</p>
+<p>2 Behavioral indicators were calculated across a one-week sample (January 20–26, 2025) and held stable day-to-day, with most behaviors varying by only 1–5 percentage points. Saturday rates were slightly lower for some behaviors (e.g., iteration and refinement was 81.4% for Saturday compared to a weekday peak of 87.9%), suggesting modest differences in casual versus purposeful use, but no day showed meaningful structural deviation. Rates were also consistent across six languages (English, French, Spanish, Chinese, Japanese, and German), with most behaviors varying by 3 percentage points or fewer across language groups. Together, these findings suggest that the behavioral patterns captured here reflect consistent habits in how people engage with AI, rather than being artifacts of timing, day of week, or linguistic and cultural context.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/AI-fluency-index"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/AI-fluency-index"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

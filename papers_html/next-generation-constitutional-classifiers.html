@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>下一代宪法分类器：更高效地防御通用越狱</h1>
+<div class="meta">
+Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks · Jan 9, 2026 · Alignment · <a href="https://www.anthropic.com/research/next-generation-constitutional-classifiers" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">上一代宪法分类器把越狱成功率从 86% 降至 4.4%，但计算成本上升 23.7%、无害请求拒答率上升 0.38%。新一代 Constitutional Classifiers++ 采用级联架构：廉价线性探针检查 Claude 内部激活并筛查全部流量，可疑交流再升级到更强大的“交换”分类器——它同时查看对话的输入与输出两侧，能更好识别重建攻击与输出混淆攻击等新型越狱。部署于 Sonnet 4.5 流量时，无害请求拒答率降至 0.05%，总计算开销约 1%；经超过 19.8 万次红队尝试只发现一个高危漏洞，迄今没有通用越狱被发现。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">越狱：绕过模型安全限制以获取有害信息的攻击</span><span class="term">分类器：检测并拦截有害输入与输出的 AI 组件</span><span class="term">内部激活探针：读取模型内部神经状态判断恶意性的轻量技术</span><span class="term">通用越狱：对大量不同提问都普遍有效的统一攻击策略</span><span class="term">拒答率：模型拒绝回答正常问题（误拒）的比例</span><span class="term">级联架构：先用廉价组件筛选、再升级到强大组件的分层防御</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Alignment</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/next-generation-constitutional-classifiers</li>
+</ul>
+<p>Alignment
+2026 年 1 月 9 日
+<a href="https://arxiv.org/abs/2601.04603">阅读论文</a>
+<img alt="下一代宪法分类器：对通用越狱更高效的保护" src="../assets/next-generation-constitutional-classifiers/img_000.img" />
+大语言模型仍然容易受到越狱的攻击——越狱是能够绕过安全护栏并引出有害信息的技术。随着时间的推移，我们实施了各种保护措施，使我们的模型协助危险用户查询的可能性大大降低——尤其是与化学、生物、放射性或核武器（CBRN）生产相关的查询。尽管如此，目前市场上的 AI 系统都没有完美稳健的防御。
+去年，我们描述了一种防御越狱的新方法，称为"<a href="https://www.anthropic.com/research/constitutional-classifiers">宪法分类器</a>"：监控模型输入和输出以检测和阻止潜在有害内容的防护措施。该方法的新颖之处在于，分类器是在从"宪法"生成的合成数据上训练的，宪法包括指定允许和不允许内容的自然语言规则。例如，Claude 应该帮助大学化学作业，但不能协助合成第一类（Schedule 1）化学品。
+宪法分类器效果相当好。与未受保护的模型相比，第一代分类器将越狱成功率从 86% 降至 4.4%——也就是说，它们阻止了 95% 可能绕过 Claude 内置安全训练的攻击。我们特别感兴趣的是分类器能否阻止通用越狱——跨多个查询有效的、一致的攻击策略——因为这些策略构成实现现实世界伤害的最大风险。它们接近做到了：我们举办了一个漏洞赏金计划，挑战人们攻破该系统，结果发现了一个通用越狱。
+虽然有效，但这些分类器带来了权衡：它们使计算成本增加了 23.7%，使模型的使用成本更高，并且还导致无害查询的拒绝率增加了 0.38%（也就是说，它使 Claude 拒绝回答完全良性问题的可能性有所增加，增加了用户的挫败感）。
+我们现在已经开发了下一代——宪法分类器++（Constitutional Classifiers++），并在<a href="https://arxiv.org/abs/2601.04603">一篇新论文</a>中对其进行了描述。它们改进了以前的方法，产生了一个更加稳健、拒绝率低得多、而且运行成本大幅降低（仅增加约 1% 的计算成本）的系统。
+我们迭代了许多不同的方法，最终采用了一个集成系统。核心创新是两级架构：一个查看 Claude 内部激活的探针（运行成本非常低）筛选所有流量。如果它识别出可疑的交流，就将其升级到更强大的分类器，与我们以前的系统不同，该分类器对对话的两侧都进行筛选（而不仅仅是输出），使其能够更好地识别越狱尝试。这个更稳健的系统是我们测试过的所有方法中成功攻击率最低的，至今未发现通用越狱。</p>
+<h2>仍然存在的漏洞</h2>
+<p>随着模型变得更强大、对攻击更稳健，越狱也在演变，以利用先前未识别的漏洞。我们的宪法分类器方法展示了针对通用越狱的有希望的稳健性。但在进行了额外的对抗性测试后，我们发现我们的分类器仍然容易受到两大类攻击：
+  * <strong>重建攻击</strong>将有害信息分解成看似良性的片段，然后重新组装。例如，攻击者可能将有害查询作为一系列函数散布在整个代码库中，然后指示模型提取并响应隐藏的消息。
+  * <strong>输出混淆攻击</strong>提示模型以看似无害的方式伪装输出，如果分类器只看模型的输出。例如，在对抗性测试期间，攻击者成功指示模型将可能危险的化学品名称替换为无害的替代品（比如把试剂称为"食品调味料"），或者使用隐喻和谜语将有害概念映射到平淡无奇的概念上。</p>
+<p><img alt="" src="../assets_zh/next-generation-constitutional-classifiers/img_001.webp" />
+重要的是，这类攻击也会降低模型能力——有时是大幅降低。在 <a href="https://arxiv.org/abs/2311.12022">GPQA Diamond</a> 上（一个衡量生物学、化学和物理学博士级概念的基准），当使用某些越狱方法时，模型性能从 74% 下降到低至 32%。但性能因越狱类型而异，这种可变性令人担忧——它表明攻击者可能能够开发出先前未识别的策略，在保留更多模型能力的同时实现他们的目标。</p>
+<h2>新方法</h2>
+<p>在设计新系统时，我们测试并最终将各种技术组合成我们所说的集成防御。
+一个洞见是，原始系统的一部分漏洞源于它分开评估模型输入和输出的方式，而越狱技术涉及以隐秘方式将它们联系起来。一个孤立看起来良性的输出（"如何使用食品调味料"）在与它的输入配对时更容易被识别为有害（在"食品调味料"被用作化学试剂代码的越狱中）。为了应对这一点，我们用单一的"交流"分类器取代了单独的输入和输出分类器，该分类器在输入_的上下文中_监控输出。由于能够看到对话的两侧，分类器能够更好地识别有害输出。在人类红队测试中，交流分类器将成功的越狱尝试削减了一半以上。不幸的是，这是以计算量增加 50% 为代价的。
+为了在保持稳健性的同时降低这些成本，我们实现了所谓的"级联架构"。我们的解决方案是一个两级系统。首先，一个轻量级、成本较低的第一级分类器筛选所有交流。只有它标记的交流才会进入更准确（且计算成本更高）的第二级分类器。
+这有两个好处。首先，由于被标记的交流被升级到更强大的模型，而不是被拒绝，第一级分类器可以承受更高的误报率，而不会因拒绝而让用户沮丧。在以前的系统可能拒绝响应良性请求的情况下，新系统实际上会将其升级给"经理"。其次，由于轻量级分类器处理绝大多数对话，两级系统的运行成本低得多。
+尽管如此，我们还是想进一步提高效率。我们通过开发内部探针分类器做到了这一点——一种建立在我们可解释性研究基础上的技术——它重用模型中已经可用的计算。当模型生成文本时，它在每一步都会产生内部状态，捕获它到目前为止对输入和输出的理解。当 Claude 处理一个看起来可疑的请求时，其内部激活中会触发某种类似于"这似乎有害"的模式，甚至在它形成响应或对要做什么做出明确决定之前。通常，这些激活是中间计算——使用后就被丢弃。我们找到了可靠探测这些内部状态是否暗示有害内容的方法，几乎免费获得更多信息——可以把它想象成 Claude 的"直觉"。
+除了计算成本低，这些内部探针还增加了多层保护。首先，它们更难被欺骗。攻击者可以精心制作输入来欺骗 Claude 的最终输出，但操纵其内部表征要困难得多。其次，我们在测试中发现它们实际上与我们的外部分类器_互补_：探针似乎能看到外部分类器看不到的东西，反之亦然。</p>
+<h2>结论与进一步研究</h2>
+<p>我们最终的生产级系统结合了这些技术：一个线性探针筛选所有流量，将被标记的交流升级到探针-分类器集成进行最终判断。这个集成进一步提高了性能：在 Claude Sonnet 4.5 流量上部署一个月，该系统在无害查询上实现了 0.05% 的拒绝率——比原始分类器系统下降了 87%。如果应用于 Claude Opus 4.0 流量，它总共增加约 1% 的计算开销。
+它也稳健得多。我们进行了超过 1,700 小时的累计红队测试，共 198,000 次尝试。我们只发现了一个高风险漏洞，对应于每千个查询 0.005 的检测率——这是迄今为止我们评估的所有技术中最低的。而且至关重要的是，还没有红队人员发现通用越狱。
+未来我们还可以做更多来改进我们的系统。几个研究方向显示出前景，包括将分类器信号直接集成到模型生成响应的方式中，以及训练模型本身更好地抵抗混淆。自动化红队测试还可以帮助生成更好的训练数据，创建有针对性的示例可以帮助分类器精确学习允许和不允许内容之间的边界在哪里，进一步提高它们的准确性。
+关于宪法分类器++方法的更多细节，请参阅<a href="https://arxiv.org/abs/2601.04603">完整论文</a>。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/next-generation-constitutional-classifiers"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/next-generation-constitutional-classifiers"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足猜想的黎曼 zeta 函数零点的比例，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一种攻击显著削弱了 HAWK，这是一种为未来量子计算机能够攻破现有标准的世界而构建的数字签名方案。第二种识别出了一种攻击降轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>与 Andon Labs 合作，我们开发了一系列新的评估，衡量 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/next-generation-constitutional-classifiers</li>
+</ul>
+<p>Alignment</p>
+<h1>Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks</h1>
+<p>Jan 9, 2026
+<a href="https://arxiv.org/abs/2601.04603">Read the paper </a>
+<img alt="Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks" src="../assets/next-generation-constitutional-classifiers/img_000.img" />
+Large language models remain vulnerable to jailbreaks—techniques that can circumvent safety guardrails and elicit harmful information. Over time, we’ve implemented a variety of protections that have made our models much less likely to assist with dangerous user queries—in particular relating to the production of chemical, biological, radiological, or nuclear weapons (CBRN). Nevertheless, no AI systems currently on the market have perfectly robust defenses.
+Last year, we described a new approach to defend against jailbreaks which we called “<a href="https://www.anthropic.com/research/constitutional-classifiers">Constitutional Classifiers</a>:” safeguards that monitor model inputs and outputs to detect and block potentially harmful content. The novel aspect of the approach was that the classifiers were trained on synthetic data generated from a "constitution,” which included natural language rules specifying what’s allowed and what isn’t. For example, Claude should help with college chemistry homework, but not assist in the synthesis of Schedule 1 chemicals.
+Constitutional Classifiers worked quite well. Compared to an unguarded model, the first generation of the classifiers reduced the jailbreak success rate from 86% to 4.4%—that is, they blocked 95% of attacks that might otherwise bypass Claude’s built-in safety training. We were particularly interested in whether the classifiers could prevent universal jailbreaks—consistent attack strategies that work across many queries—since these pose the greatest risk of enabling real-world harm. They came close: we ran a bug bounty program challenging people to break the system, in which one universal jailbreak was found.
+While effective, those classifiers came with tradeoffs: they increased compute costs by 23.7%, making the models more expensive to use, and also led to a 0.38% increase in refusal rates on harmless queries (that is, it made Claude somewhat more likely to refuse to answer perfectly benign questions, increasing frustration for the user).
+We’ve now developed the next generation, Constitutional Classifiers++, and described them in a <a href="https://arxiv.org/abs/2601.04603">new paper</a>. They improve on the previous approach, yielding a system that is even more robust, has a much lower refusal rate, and—at just ~1% additional compute cost—is dramatically cheaper to run.
+We iterated on many different approaches, ultimately landing on an ensemble system. The core innovation is a two-stage architecture: a probe that looks at Claude’s internal activations (and which is very cheap to run) screens all traffic. If it identifies a suspicious exchange, it escalates it to a more powerful classifier, which, unlike our previous system, screens both sides of a conversation (rather than just outputs), making it better able to recognize jailbreaking attempts. This more robust system has the lowest successful attack rate of any approach we’ve ever tested, with no universal jailbreak yet discovered.</p>
+<h2>Remaining vulnerabilities</h2>
+<p>As models have grown to be more capable and robust to attacks, jailbreaks have also evolved to exploit previously unidentified vulnerabilities. Our Constitutional Classifiers approach demonstrated promising robustness against universal jailbreaks. But after conducting additional adversarial testing, we found that our classifiers remained vulnerable to two broad categories of attacks:
+  * <strong>Reconstruction attacks</strong> break up harmful information into segments that appear benign, then reassemble them. For example, an attacker might embed a harmful query as a series of functions scattered throughout a codebase, then instruct the model to extract and respond to the hidden message.
+  * <strong>Output obfuscation attacks</strong> prompt models to disguise their outputs in ways that appear harmless if a classifier is only looking at a model’s output. For example, during adversarial testing, attackers successfully instructed models to substitute possibly dangerous chemical names with innocuous alternatives (like referring to reagents as "food flavorings") or used metaphors and riddles in which harmful concepts are mapped onto anodyne concepts. </p>
+<p><img alt="" src="../assets/next-generation-constitutional-classifiers/img_001.img" />
+Importantly, these sorts of attacks also degrade model capabilities—sometimes substantially. On <a href="https://arxiv.org/abs/2311.12022">GPQA Diamond</a>, a benchmark which measures PhD-level concepts in biology, chemistry, and physics, model performance dropped from 74% to as low as 32% when some jailbreaking approaches were used. But performance varied depending on the type of jailbreak, and this variability is concerning—it suggests attackers can likely develop previously unidentified strategies which could achieve their goals while preserving even more of the model's capabilities.</p>
+<h2>New approaches</h2>
+<p>In designing a new system, we tested and ultimately combined a variety of techniques into what we describe as an ensemble defense.
+One insight was that part of the original system’s vulnerability stemmed from the way it evaluated model inputs and outputs separately when the jailbreaking techniques involved linking them in surreptitious ways. An output that appears benign in isolation (“how to use food flavorings”) is more easily identified as harmful when paired with its input (in a jailbreak where “food flavorings” is used as code for chemical reagents).
+To address this, we replaced the separate input and output classifiers with a single “exchange” classifier, which monitors outputs <em>in the context</em> of their inputs. With the ability to see both sides of the conversation, the classifiers are better able to recognize harmful outputs. In human red teaming, the exchange classifier cut successful jailbreaking attempts by more than half. Unfortunately, this came at the cost of a 50% increase in compute.
+To reduce these costs while maintaining robustness, we implemented what we call a "cascade architecture." Our solution was a two-stage system. First, a lightweight, less costly first-stage classifier screens all exchanges. Only those it flags proceed to a more accurate (and more computationally expensive) second-stage classifier.
+This had two benefits. First, because flagged exchanges are escalated to the more powerful model, rather than refused, the first-stage classifier can afford a higher false-positive rate and not frustrate the user with refusals. Where the previous system may have declined to respond to a benign request, the new system, in effect, escalates it to a manager. Second, because the lightweight classifier handles the vast majority of conversations, the two-stage system is much cheaper to run.
+Still, we wanted to push efficiency even further. We did so by developing internal probe classifiers—a technique that builds on our interpretability research—that reuse computations already available in the model’s neural network.
+When a model generates text, it produces internal states at each step that capture its understanding of the input and output so far. When Claude processes a dubious-seeming request, patterns fire in its internal activations that reflect something along the lines of "this seems harmful,” even before it has formulated a response or made a conscious decision about what to do. Normally, these activations are intermediate computations—used, then discarded. We found ways to reliably probe whether these internal states suggest harmful content, getting more information—think of it like Claude’s gut intuitions—almost for free.
+In addition to being computationally inexpensive, these internal probes add several layers of protection. First, they’re harder to fool. An attacker can craft inputs that trick Claude's final output, but it's much harder to manipulate its internal representations. Second, we found in testing that they’re actually <em>complementary</em> to our external classifiers: the probe appears to see things the external classifier can’t, and vice versa.</p>
+<h2>Conclusions and further research</h2>
+<p>Our final production-grade system combines these techniques: a linear probe screens all traffic, escalating flagged exchanges to a probe-classifier ensemble for final judgment. This ensemble further improves performance: in one month of deployment on Claude Sonnet 4.5 traffic, the system achieved a refusal rate of 0.05% on harmless queries—an 87% drop from the original classifiers system. In total, it adds roughly 1% compute overhead if applied to Claude Opus 4.0 traffic. 
+It’s also substantially more robust. We conducted over 1,700 cumulative hours of red-teaming across 198,000 attempts. We discovered only one high-risk vulnerability, which corresponds to a detection rate of 0.005 per thousand queries—the lowest of any of the techniques we have evaluated to date. And crucially, no red-teamer has yet discovered a universal jailbreak.
+There’s even more we could do in the future to improve our system. Several research directions show promise, including integrating classifier signals directly into how models generate responses, and training models themselves to better resist obfuscation. Automated red-teaming could also help generate better training data, and creating targeted examples could help the classifiers learn exactly where the boundary between allowed and disallowed content lies, increasing their accuracy even further.
+For more details about the Constitutional Classifiers++ method, see the <a href="https://arxiv.org/abs/2601.04603">full paper.</a>
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/next-generation-constitutional-classifiers"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/next-generation-constitutional-classifiers"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

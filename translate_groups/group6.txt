@@ -1,0 +1,16 @@
+agentic-misalignment
+global-workspace
+attack-navigator
+assistant-axis
+constitutional-classifiers
+exploit-evals
+AI-fluency-index
+zero-days
+reasoning-models-dont-say-think
+many-shot-jailbreaking
+deprecation-updates-opus-3
+cyber-toolkits
+training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback
+measuring-faithfulness-in-chain-of-thought-reasoning
+privileged-bases-in-the-transformer-residual-stream
+a-mathematical-framework-for-transformer-circuits

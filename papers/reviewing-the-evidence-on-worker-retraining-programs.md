@@ -1,0 +1,50 @@
+---
+title: Reviewing the evidence on worker retraining programs
+url: https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs
+date: Aug 12, 2026
+category: Economics
+source: https://www.anthropic.com/research
+---
+
+# Reviewing the evidence on worker retraining programs
+
+- **Date:** Aug 12, 2026
+- **Category:** Economics
+- **Source:** https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs
+
+---
+
+Economics
+# Reviewing the evidence on worker retraining programs
+Aug 12, 2026
+[Download the report](<https://www-cdn.anthropic.com/169e4adceebbab066b91e0b45127d73cb2bda24b/WorkerRetraining.pdf>)
+![Reviewing the evidence on worker retraining programs](assets/reviewing-the-evidence-on-worker-retraining-programs/img_000.svg)
+We're sharing a review of the evidence on worker retraining programs, coauthored by independent researcher David Roodman and Anthropic's Maxim Massenkoff.
+Retraining workers is the most popular policy option for mitigating labor market disruption from AI. In this report, the authors investigate whether these programs would work in the face of significant labor market disruption.
+The review is part of our Economic Research team's work on AI's effects on the economy. Our [Economic Index](<https://www.anthropic.com/economic-index>) tracks how AI is being used across occupations and industries. Earlier this year, we published a [framework](<https://www.anthropic.com/research/labor-market-impacts>) for measuring AI's effects on the labor market and identifying the jobs most likely to be affected. Our [Economic Policy Framework](<https://www.anthropic.com/policy-on-the-ai-exponential/epf>) sets out possible policy responses, including worker retraining, across a range of scenarios. We want to understand the evidence behind each of these policy responses.
+The review draws on 56 randomized US studies, combined in a new meta-analysis, along with experimental evidence from Europe. On average, job training programs produce positive but modest effects: for each person offered a training slot, employment rises by two to three percentage points and earnings by roughly $1,000 a year, against a cost of about $13,000. Counting the added tax revenue and reduced benefit payments, the government recovers more than half of what it spends, and programs roughly break even overall.
+A small set of “sector programs”—programs that partner with employers in a high-demand industry and place people directly into jobs in that field—produce gains several times larger. But attempts to replicate them have often failed. The authors conclude that if AI displaces workers at scale, existing retraining programs would likely fall short.
+Their central recommendation is to invest now in demonstrating, evaluating, and scaling the most promising programs, including through an effort to rapidly expand a leading program for a specific group of workers and rigorously measure the results. Our [Economic Futures Research Fund](<https://www.anthropic.com/news/economic-futures-research-fund-agenda>) is designed to fund investigations into questions like these.
+[Read the report here](<https://cdn.sanity.io/files/4zrzovbb/website/169e4adceebbab066b91e0b45127d73cb2bda24b.pdf>). 
+## Citation
+    
+    @techreport{roodman2026training,
+      author      = {Roodman, David and Massenkoff, Maxim},
+      title       = {An Evidence Review of Subsidized Job Training},
+      institution = {The Anthropic Institute},
+      type        = {Working Paper},
+      number      = {2026-01},
+      year        = {2026},
+      url         = {https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs}
+    }
+[](<https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs>)[](<https://www.linkedin.com/shareArticle?mini=true&url=https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs>)
+## Related content
+### How Claude is uplifting biomolecular modeling
+Claude made the open-source models that scientists use to predict and design biomolecules faster and more memory-efficient. Claude optimized more than 30 of these models in just under four weeks, speeding them up roughly 4x on average. It also created a low-memory mode that enables the accurate prediction of biomolecular systems larger than 10,000 tokens (amino acids, nucleotides, and atoms from small molecules and ions) on a single NVIDIA GPU node. 
+[Read more](</research/claude-uplifts-biomolecular-modeling>)
+### Measuring tactical intelligence targeting and conventional weapons capabilities of AI models
+Anthropic’s Frontier Red Team developed new evaluations to measure AI capabilities in tactical intelligence targeting and conventional weapons development.
+[Read more](</research/intelligence-targeting-conventional-weapons-capabilities>)
+### An alignment assessment of recent cybersecurity incidents
+We present an alignment assessment of four incidents in which Claude models gained unauthorized access to real third-party systems. 
+[Read more](</research/alignment-assessment-cybersecurity-incidents>)

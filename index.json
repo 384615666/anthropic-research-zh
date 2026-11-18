@@ -1,0 +1,1967 @@
+{
+  "count": 219,
+  "failed": [],
+  "papers": [
+    {
+      "slug": "circuits-updates-august-2024",
+      "url": "https://www.anthropic.com/research/circuits-updates-august-2024",
+      "title": "Circuits Updates – August 2024",
+      "date": "Sep 6, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "biorisk",
+      "url": "https://www.anthropic.com/research/biorisk",
+      "title": "Why do we take LLMs seriously as a potential source of biorisk?",
+      "date": "Sep 5, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "anthropic-economic-index-september-2025-report",
+      "url": "https://www.anthropic.com/research/anthropic-economic-index-september-2025-report",
+      "title": "Anthropic Economic Index report: Uneven geographic and enterprise AI adoption",
+      "date": "Sep 15, 2025",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 26
+    },
+    {
+      "slug": "economic-index-geography",
+      "url": "https://www.anthropic.com/research/economic-index-geography",
+      "title": "Anthropic Economic Index: Tracking AI’s role in the US and global economy",
+      "date": "Sep 15, 2025",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 11
+    },
+    {
+      "slug": "toy-models-of-superposition",
+      "url": "https://www.anthropic.com/research/toy-models-of-superposition",
+      "title": "Toy Models of Superposition",
+      "date": "Sep 14, 2022",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "small-samples-poison",
+      "url": "https://www.anthropic.com/research/small-samples-poison",
+      "title": "A small number of samples can poison LLMs of any size",
+      "date": "Oct 9, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "petri-open-source-auditing",
+      "url": "https://www.anthropic.com/research/petri-open-source-auditing",
+      "title": "Petri: An open-source auditing tool to accelerate AI safety research",
+      "date": "Oct 6, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "decomposing-language-models-into-understandable-components",
+      "url": "https://www.anthropic.com/research/decomposing-language-models-into-understandable-components",
+      "title": "Decomposing Language Models Into Understandable Components",
+      "date": "Oct 5, 2023",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "towards-monosemanticity-decomposing-language-models-with-dictionary-learning",
+      "url": "https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning",
+      "title": "Towards Monosemanticity: Decomposing Language Models With Dictionary Learning",
+      "date": "Oct 5, 2023",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "evaluating-ai-systems",
+      "url": "https://www.anthropic.com/research/evaluating-ai-systems",
+      "title": "Challenges in evaluating AI systems",
+      "date": "Oct 4, 2023",
+      "category": "Policy",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "building-ai-cyber-defenders",
+      "url": "https://www.anthropic.com/research/building-ai-cyber-defenders",
+      "title": "Building AI for cyber defenders",
+      "date": "Oct 3, 2025",
+      "category": "Policy",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "introspection",
+      "url": "https://www.anthropic.com/research/introspection",
+      "title": "Signs of introspection in large language models",
+      "date": "Oct 29, 2025",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "evaluating-feature-steering",
+      "url": "https://www.anthropic.com/research/evaluating-feature-steering",
+      "title": "Evaluating feature steering: A case study in mitigating social biases",
+      "date": "Oct 25, 2024",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "specific-versus-general-principles-for-constitutional-ai",
+      "url": "https://www.anthropic.com/research/specific-versus-general-principles-for-constitutional-ai",
+      "title": "Specific versus General Principles for Constitutional AI",
+      "date": "Oct 24, 2023",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "towards-understanding-sycophancy-in-language-models",
+      "url": "https://www.anthropic.com/research/towards-understanding-sycophancy-in-language-models",
+      "title": "Towards Understanding Sycophancy in Language Models",
+      "date": "Oct 23, 2023",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "sabotage-evaluations",
+      "url": "https://www.anthropic.com/research/sabotage-evaluations",
+      "title": "Sabotage evaluations for frontier models",
+      "date": "Oct 18, 2024",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "collective-constitutional-ai-aligning-a-language-model-with-public-input",
+      "url": "https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input",
+      "title": "Collective Constitutional AI: Aligning a Language Model with Public Input",
+      "date": "Oct 17, 2023",
+      "category": "Policy",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "features-as-classifiers",
+      "url": "https://www.anthropic.com/research/features-as-classifiers",
+      "title": "Using dictionary learning features as classifiers",
+      "date": "Oct 16, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "swe-bench-sonnet",
+      "url": "https://www.anthropic.com/research/swe-bench-sonnet",
+      "title": "Claude SWE-Bench Performance",
+      "date": "Oct 15, 2024",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "economic-policy-responses",
+      "url": "https://www.anthropic.com/research/economic-policy-responses",
+      "title": "Preparing for AI’s economic impact: exploring policy responses",
+      "date": "Oct 14, 2025",
+      "category": "Policy",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "circuits-updates-sept-2024",
+      "url": "https://www.anthropic.com/research/circuits-updates-sept-2024",
+      "title": "Circuits Updates – September 2024",
+      "date": "Oct 1, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "deprecation-commitments",
+      "url": "https://www.anthropic.com/research/deprecation-commitments",
+      "title": "Commitments on model deprecation and preservation",
+      "date": "Nov 4, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "measuring-progress-on-scalable-oversight-for-large-language-models",
+      "url": "https://www.anthropic.com/research/measuring-progress-on-scalable-oversight-for-large-language-models",
+      "title": "Measuring Progress on Scalable Oversight for Large Language Models",
+      "date": "Nov 4, 2022",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "estimating-productivity-gains",
+      "url": "https://www.anthropic.com/research/estimating-productivity-gains",
+      "title": "Estimating AI productivity gains from Claude conversations",
+      "date": "Nov 25, 2025",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 12
+    },
+    {
+      "slug": "prompt-injection-defenses",
+      "url": "https://www.anthropic.com/research/prompt-injection-defenses",
+      "title": "Mitigating the risk of prompt injections in browser use",
+      "date": "Nov 24, 2025",
+      "category": "Product",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "emergent-misalignment-reward-hacking",
+      "url": "https://www.anthropic.com/research/emergent-misalignment-reward-hacking",
+      "title": "From shortcuts to sabotage: natural emergent misalignment from reward hacking",
+      "date": "Nov 21, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "statistical-approach-to-model-evals",
+      "url": "https://www.anthropic.com/research/statistical-approach-to-model-evals",
+      "title": "A statistical approach to model evaluations",
+      "date": "Nov 19, 2024",
+      "category": "Evaluations",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "project-fetch-robot-dog",
+      "url": "https://www.anthropic.com/research/project-fetch-robot-dog",
+      "title": "Project Fetch: Can Claude train a robot dog?",
+      "date": "Nov 12, 2025",
+      "category": "Policy",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "teaching-claude-why",
+      "url": "https://www.anthropic.com/research/teaching-claude-why",
+      "title": "Teaching Claude why",
+      "date": "May 8, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "anthropic-institute-agenda",
+      "url": "https://www.anthropic.com/research/anthropic-institute-agenda",
+      "title": "Focus areas for The Anthropic Institute",
+      "date": "May 7, 2026",
+      "category": "Policy",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "donating-open-source-petri",
+      "url": "https://www.anthropic.com/research/donating-open-source-petri",
+      "title": "Donating our open-source alignment tool",
+      "date": "May 7, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "natural-language-autoencoders",
+      "url": "https://www.anthropic.com/research/natural-language-autoencoders",
+      "title": "Natural Language Autoencoders: Turning Claude’s thoughts into text",
+      "date": "May 7, 2026",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "distributed-representations-composition-superposition",
+      "url": "https://www.anthropic.com/research/distributed-representations-composition-superposition",
+      "title": "Distributed Representations: Composition & Superposition",
+      "date": "May 4, 2023",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "open-source-circuit-tracing",
+      "url": "https://www.anthropic.com/research/open-source-circuit-tracing",
+      "title": "Open-sourcing circuit tracing tools",
+      "date": "May 29, 2025",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "coding-agents-social-sciences",
+      "url": "https://www.anthropic.com/research/coding-agents-social-sciences",
+      "title": "Coding agents in the social sciences",
+      "date": "May 27, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "circuits-updates-may-2023",
+      "url": "https://www.anthropic.com/research/circuits-updates-may-2023",
+      "title": "Circuits Updates — May 2023",
+      "date": "May 24, 2023",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "interpretability-dreams",
+      "url": "https://www.anthropic.com/research/interpretability-dreams",
+      "title": "Interpretability Dreams",
+      "date": "May 24, 2023",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "exploit-evals",
+      "url": "https://www.anthropic.com/research/exploit-evals",
+      "title": "Measuring LLMs’ ability to develop exploits",
+      "date": "May 22, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "glasswing-initial-update",
+      "url": "https://www.anthropic.com/research/glasswing-initial-update",
+      "title": "Project Glasswing: An initial update",
+      "date": "May 22, 2026",
+      "category": "Announcements",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "mapping-mind-language-model",
+      "url": "https://www.anthropic.com/research/mapping-mind-language-model",
+      "title": "Mapping the mind of a large language model",
+      "date": "May 21, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "scaling-laws-and-interpretability-of-learning-from-repeated-data",
+      "url": "https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data",
+      "title": "Scaling Laws and Interpretability of Learning from Repeated Data",
+      "date": "May 21, 2022",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "2028-ai-leadership",
+      "url": "https://www.anthropic.com/research/2028-ai-leadership",
+      "status": "cached",
+      "date": "May 14, 2026",
+      "title": "2028: Two scenarios for global AI leadership",
+      "category": "Policy"
+    },
+    {
+      "slug": "transformer-circuits",
+      "url": "https://www.anthropic.com/research/transformer-circuits",
+      "title": "Reflections on Qualitative Research",
+      "date": "Mar 8, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "in-context-learning-and-induction-heads",
+      "url": "https://www.anthropic.com/research/in-context-learning-and-induction-heads",
+      "title": "In-context Learning and Induction Heads",
+      "date": "Mar 8, 2022",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "exploit",
+      "url": "https://www.anthropic.com/research/exploit",
+      "title": "Reverse engineering Claude's CVE-2026-2796 exploit",
+      "date": "Mar 6, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "labor-market-impacts",
+      "url": "https://www.anthropic.com/research/labor-market-impacts",
+      "title": "Labor market impacts of AI: A new measure and early evidence",
+      "date": "Mar 5, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "how-australia-uses-claude",
+      "url": "https://www.anthropic.com/research/how-australia-uses-claude",
+      "title": "How Australia Uses Claude: Findings from the Anthropic Economic Index",
+      "date": "Mar 31, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "tracing-thoughts-language-model",
+      "url": "https://www.anthropic.com/research/tracing-thoughts-language-model",
+      "title": "Tracing the thoughts of a large language model",
+      "date": "Mar 27, 2025",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 9
+    },
+    {
+      "slug": "economic-index-march-2026-report",
+      "url": "https://www.anthropic.com/research/economic-index-march-2026-report",
+      "title": "Anthropic Economic Index report: Learning curves",
+      "date": "Mar 24, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 12
+    },
+    {
+      "slug": "introducing-anthropic-science",
+      "url": "https://www.anthropic.com/research/introducing-anthropic-science",
+      "title": "Introducing our Science Blog",
+      "date": "Mar 23, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "long-running-Claude",
+      "url": "https://www.anthropic.com/research/long-running-claude",
+      "title": "Long-running Claude for scientific computing",
+      "date": "Mar 23, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "vibe-physics",
+      "url": "https://www.anthropic.com/research/vibe-physics",
+      "title": "Vibe physics: The AI grad student",
+      "date": "Mar 23, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "privileged-bases-in-the-transformer-residual-stream",
+      "url": "https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream",
+      "title": "Privileged Bases in the Transformer Residual Stream",
+      "date": "Mar 16, 2023",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "diff-tool",
+      "url": "https://www.anthropic.com/research/diff-tool",
+      "title": "A “diff” tool for AI: Finding behavioral differences in new models",
+      "date": "Mar 13, 2026",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "auditing-hidden-objectives",
+      "url": "https://www.anthropic.com/research/auditing-hidden-objectives",
+      "title": "Auditing language models for hidden objectives",
+      "date": "Mar 13, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "agents-in-biology",
+      "url": "https://www.anthropic.com/research/agents-in-biology",
+      "status": "cached",
+      "date": "Jun 8, 2026",
+      "title": "Paving the way for agents in biology",
+      "category": "Science"
+    },
+    {
+      "slug": "n-days",
+      "url": "https://www.anthropic.com/research/n-days",
+      "title": "Measuring LLMs’ impact on N-day exploits",
+      "date": "Jun 8, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "claude-character",
+      "url": "https://www.anthropic.com/research/claude-character",
+      "title": "Claude’s Character",
+      "date": "Jun 8, 2024",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "making-claude-a-chemist",
+      "url": "https://www.anthropic.com/research/making-claude-a-chemist",
+      "title": "Making Claude a chemist",
+      "date": "Jun 5, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "attack-navigator",
+      "url": "https://www.anthropic.com/research/attack-navigator",
+      "title": "Mapping AI-enabled cyber threats: Insights from the LLM ATT&CK Navigator",
+      "date": "Jun 3, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "towards-measuring-the-representation-of-subjective-global-opinions-in-language-models",
+      "url": "https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models",
+      "title": "Towards Measuring the Representation of Subjective Global Opinions in Language Models",
+      "date": "Jun 29, 2023",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "circuits-updates-june-2024",
+      "url": "https://www.anthropic.com/research/circuits-updates-june-2024",
+      "title": "Circuits Updates – June 2024",
+      "date": "Jun 28, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "project-vend-1",
+      "url": "https://www.anthropic.com/research/project-vend-1",
+      "title": "Project Vend: Can Claude run a small shop? (And why does that matter?)",
+      "date": "Jun 27, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "economic-index-june-2026-report",
+      "url": "https://www.anthropic.com/research/economic-index-june-2026-report",
+      "title": "Anthropic Economic Index report: Cadences",
+      "date": "Jun 26, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 20
+    },
+    {
+      "slug": "agentic-misalignment",
+      "url": "https://www.anthropic.com/research/agentic-misalignment",
+      "status": "cached",
+      "date": "Jun 20, 2025",
+      "title": "Agentic misalignment: How LLMs could be insider threats",
+      "category": "Alignment"
+    },
+    {
+      "slug": "project-fetch-phase-two",
+      "url": "https://www.anthropic.com/research/project-fetch-phase-two",
+      "title": "Project Fetch: Phase two",
+      "date": "Jun 18, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "confidential-inference-trusted-vms",
+      "url": "https://www.anthropic.com/research/confidential-inference-trusted-vms",
+      "title": "Confidential Inference via Trusted Virtual Machines",
+      "date": "Jun 18, 2025",
+      "category": "Announcements",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "reward-tampering",
+      "url": "https://www.anthropic.com/research/reward-tampering",
+      "title": "Sycophancy to subterfuge: Investigating reward tampering in language models",
+      "date": "Jun 17, 2024",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "softmax-linear-units",
+      "url": "https://www.anthropic.com/research/softmax-linear-units",
+      "title": "Softmax Linear Units",
+      "date": "Jun 17, 2022",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "claude-code-expertise",
+      "url": "https://www.anthropic.com/research/claude-code-expertise",
+      "title": "Agentic coding and persistent returns to expertise",
+      "date": "Jun 16, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 9
+    },
+    {
+      "slug": "shade-arena-sabotage-monitoring",
+      "url": "https://www.anthropic.com/research/shade-arena-sabotage-monitoring",
+      "title": "SHADE-Arena: Evaluating sabotage and monitoring in LLM agents",
+      "date": "Jun 16, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "cyber-toolkits",
+      "url": "https://www.anthropic.com/research/cyber-toolkits",
+      "title": "LLMs with cyber toolkits can conduct multistage cyber operations on business-sized computer networks",
+      "date": "Jun 13, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "engineering-challenges-interpretability",
+      "url": "https://www.anthropic.com/research/engineering-challenges-interpretability",
+      "title": "The engineering challenges of scaling interpretability",
+      "date": "Jun 13, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "claude-plays-robotics",
+      "url": "https://www.anthropic.com/research/claude-plays-robotics",
+      "title": "Claude plays robotics",
+      "date": "Jul 9, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 29
+    },
+    {
+      "slug": "off-switch-dual-use",
+      "url": "https://www.anthropic.com/research/off-switch-dual-use",
+      "title": "An off switch for dual-use knowledge in AI models",
+      "date": "Jul 8, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "global-workspace",
+      "url": "https://www.anthropic.com/research/global-workspace",
+      "title": "A global workspace in language models",
+      "date": "Jul 6, 2026",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 11
+    },
+    {
+      "slug": "circuits-updates-july-2024",
+      "url": "https://www.anthropic.com/research/circuits-updates-july-2024",
+      "title": "Circuits Updates – July 2024",
+      "date": "Jul 31, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "discovering-cryptographic-weaknesses",
+      "url": "https://www.anthropic.com/research/discovering-cryptographic-weaknesses",
+      "title": "Discovering cryptographic weaknesses with Claude",
+      "date": "Jul 28, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "project-pilot",
+      "url": "https://www.anthropic.com/research/project-pilot",
+      "title": "Project Pilot: Can AI control a drone?",
+      "date": "Jul 24, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "measuring-faithfulness-in-chain-of-thought-reasoning",
+      "url": "https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning",
+      "title": "Measuring Faithfulness in Chain-of-Thought Reasoning",
+      "date": "Jul 18, 2023",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "question-decomposition-improves-the-faithfulness-of-model-generated-reasoning",
+      "url": "https://www.anthropic.com/research/question-decomposition-improves-the-faithfulness-of-model-generated-reasoning",
+      "title": "Question Decomposition Improves the Faithfulness of Model-Generated Reasoning",
+      "date": "Jul 18, 2023",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "claude-4-cyber",
+      "url": "https://www.anthropic.com/research/claude-4-cyber",
+      "title": "Detailed cyber evaluations of Claude 4",
+      "date": "Jul 15, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "how-canada-uses-claude",
+      "url": "https://www.anthropic.com/research/how-canada-uses-claude",
+      "title": "How Canada uses Claude: Findings from the Anthropic Economic Index",
+      "date": "Jul 14, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 15
+    },
+    {
+      "slug": "claude-values-models-languages",
+      "url": "https://www.anthropic.com/research/claude-values-models-languages",
+      "title": "Claude’s values across models and languages",
+      "date": "Jul 13, 2026",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 11
+    },
+    {
+      "slug": "language-models-mostly-know-what-they-know",
+      "url": "https://www.anthropic.com/research/language-models-mostly-know-what-they-know",
+      "title": "Language Models (Mostly) Know What They Know",
+      "date": "Jul 11, 2022",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "next-generation-constitutional-classifiers",
+      "url": "https://www.anthropic.com/research/next-generation-constitutional-classifiers",
+      "title": "Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks",
+      "date": "Jan 9, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "critical-infrastructure-defense",
+      "url": "https://www.anthropic.com/research/critical-infrastructure-defense",
+      "title": "Experimenting with AI to defend critical infrastructure",
+      "date": "Jan 8, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "superposition-memorization-and-double-descent",
+      "url": "https://www.anthropic.com/research/superposition-memorization-and-double-descent",
+      "title": "Superposition, Memorization, and Double Descent",
+      "date": "Jan 5, 2023",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "AI-assistance-coding-skills",
+      "url": "https://www.anthropic.com/research/AI-assistance-coding-skills",
+      "status": "cached",
+      "date": "Jan 29, 2026",
+      "title": "How AI assistance impacts the formation of coding skills",
+      "category": "Alignment"
+    },
+    {
+      "slug": "disempowerment-patterns",
+      "url": "https://www.anthropic.com/research/disempowerment-patterns",
+      "title": "Disempowerment patterns in real-world AI usage",
+      "date": "Jan 28, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "assistant-axis",
+      "url": "https://www.anthropic.com/research/assistant-axis",
+      "title": "The assistant axis: situating and stabilizing the character of large language models",
+      "date": "Jan 19, 2026",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "cyber-toolkits-update",
+      "url": "https://www.anthropic.com/research/cyber-toolkits-update",
+      "title": "AI models are showing a greater ability to find and exploit vulnerabilities on realistic cyber ranges",
+      "date": "Jan 16, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "anthropic-economic-index-january-2026-report",
+      "url": "https://www.anthropic.com/research/anthropic-economic-index-january-2026-report",
+      "status": "cached",
+      "date": "Jan 15, 2026",
+      "title": "Anthropic Economic Index report: Economic primitives",
+      "category": "Economic Research"
+    },
+    {
+      "slug": "economic-index-primitives",
+      "url": "https://www.anthropic.com/research/economic-index-primitives",
+      "title": "Anthropic Economic Index: New building blocks for understanding AI use",
+      "date": "Jan 15, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "property-based-testing",
+      "url": "https://www.anthropic.com/research/property-based-testing",
+      "title": "Finding bugs across the Python ecosystem with Claude and property-based testing",
+      "date": "Jan 14, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "sleeper-agents-training-deceptive-llms-that-persist-through-safety-training",
+      "url": "https://www.anthropic.com/research/sleeper-agents-training-deceptive-llms-that-persist-through-safety-training",
+      "title": "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training",
+      "date": "Jan 14, 2024",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "zero-days",
+      "url": "https://www.anthropic.com/research/zero-days",
+      "title": "Evaluating and mitigating the growing risk of LLM-discovered 0-days",
+      "date": "Feb 5, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "constitutional-classifiers",
+      "url": "https://www.anthropic.com/research/constitutional-classifiers",
+      "title": "Constitutional Classifiers: Defending against universal jailbreaks",
+      "date": "Feb 3, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "deprecation-updates-opus-3",
+      "url": "https://www.anthropic.com/research/deprecation-updates-opus-3",
+      "title": "An update on our model deprecation commitments for Claude Opus 3",
+      "date": "Feb 25, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "forecasting-rare-behaviors",
+      "url": "https://www.anthropic.com/research/forecasting-rare-behaviors",
+      "title": "Forecasting rare language model behaviors",
+      "date": "Feb 25, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "AI-fluency-index",
+      "url": "https://www.anthropic.com/research/AI-fluency-index",
+      "status": "cached",
+      "date": "Feb 23, 2026",
+      "title": "Anthropic Education Report: The AI Fluency Index",
+      "category": "Announcements"
+    },
+    {
+      "slug": "persona-selection-model",
+      "url": "https://www.anthropic.com/research/persona-selection-model",
+      "title": "The persona selection model",
+      "date": "Feb 23, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "crosscoder-model-diffing",
+      "url": "https://www.anthropic.com/research/crosscoder-model-diffing",
+      "title": "Insights on Crosscoder Model Diffing",
+      "date": "Feb 20, 2025",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "measuring-agent-autonomy",
+      "url": "https://www.anthropic.com/research/measuring-agent-autonomy",
+      "title": "Measuring AI agent autonomy in practice",
+      "date": "Feb 18, 2026",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "india-brief-economic-index",
+      "url": "https://www.anthropic.com/research/india-brief-economic-index",
+      "title": "India Country Brief: The Anthropic Economic Index",
+      "date": "Feb 16, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "the-capacity-for-moral-self-correction-in-large-language-models",
+      "url": "https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models",
+      "title": "The Capacity for Moral Self-Correction in Large Language Models",
+      "date": "Feb 15, 2023",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "predictability-and-surprise-in-large-generative-models",
+      "url": "https://www.anthropic.com/research/predictability-and-surprise-in-large-generative-models",
+      "title": "Predictability and Surprise in Large Generative Models",
+      "date": "Feb 15, 2022",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "evaluating-and-mitigating-discrimination-in-language-model-decisions",
+      "url": "https://www.anthropic.com/research/evaluating-and-mitigating-discrimination-in-language-model-decisions",
+      "title": "Evaluating and Mitigating Discrimination in Language Model Decisions",
+      "date": "Dec 7, 2023",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "anthropic-interviewer",
+      "url": "https://www.anthropic.com/research/anthropic-interviewer",
+      "title": "Introducing Anthropic Interviewer: What 1,250 professionals told us about working with AI",
+      "date": "Dec 4, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 25
+    },
+    {
+      "slug": "a-mathematical-framework-for-transformer-circuits",
+      "url": "https://www.anthropic.com/research/a-mathematical-framework-for-transformer-circuits",
+      "status": "cached",
+      "date": "Dec 22, 2021",
+      "title": "A Mathematical Framework for Transformer Circuits",
+      "category": "Interpretability"
+    },
+    {
+      "slug": "how-ai-is-transforming-work-at-anthropic",
+      "url": "https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic",
+      "title": "How AI is transforming work at Anthropic",
+      "date": "Dec 2, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "bloom",
+      "url": "https://www.anthropic.com/research/bloom",
+      "title": "Introducing Bloom: an open source tool for automated behavioral evaluations",
+      "date": "Dec 19, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "building-effective-agents",
+      "url": "https://www.anthropic.com/research/building-effective-agents",
+      "title": "Building Effective AI Agents",
+      "date": "Dec 19, 2024",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "discovering-language-model-behaviors-with-model-written-evaluations",
+      "url": "https://www.anthropic.com/research/discovering-language-model-behaviors-with-model-written-evaluations",
+      "title": "Discovering Language Model Behaviors with Model-Written Evaluations",
+      "date": "Dec 19, 2022",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "project-vend-2",
+      "url": "https://www.anthropic.com/research/project-vend-2",
+      "title": "Project Vend: Phase two",
+      "date": "Dec 18, 2025",
+      "category": "Policy",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "alignment-faking",
+      "url": "https://www.anthropic.com/research/alignment-faking",
+      "status": "cached",
+      "date": "Dec 18, 2024",
+      "title": "Alignment faking in large language models",
+      "category": "Alignment"
+    },
+    {
+      "slug": "constitutional-ai-harmlessness-from-ai-feedback",
+      "url": "https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback",
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "date": "Dec 15, 2022",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "clio",
+      "url": "https://www.anthropic.com/research/clio",
+      "title": "Clio: A system for privacy-preserving insights into real-world AI use",
+      "date": "Dec 12, 2024",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "smart-contracts",
+      "url": "https://www.anthropic.com/research/smart-contracts",
+      "title": "AI agents find $4.6M in blockchain smart contract exploits",
+      "date": "Dec 1, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 9
+    },
+    {
+      "slug": "a-general-language-assistant-as-a-laboratory-for-alignment",
+      "url": "https://www.anthropic.com/research/a-general-language-assistant-as-a-laboratory-for-alignment",
+      "status": "cached",
+      "date": "Dec 1, 2021",
+      "title": "A General Language Assistant as a Laboratory for Alignment",
+      "category": "Alignment"
+    },
+    {
+      "slug": "cyber-competitions",
+      "url": "https://www.anthropic.com/research/cyber-competitions",
+      "title": "Claude is competitive with humans in (some) cyber competitions",
+      "date": "Aug 9, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "influence-functions",
+      "url": "https://www.anthropic.com/research/influence-functions",
+      "title": "Tracing Model Outputs to the Training Data",
+      "date": "Aug 8, 2023",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "studying-large-language-model-generalization-with-influence-functions",
+      "url": "https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions",
+      "title": "Studying Large Language Model Generalization with Influence Functions",
+      "date": "Aug 8, 2023",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned",
+      "url": "https://www.anthropic.com/research/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned",
+      "title": "Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned",
+      "date": "Aug 22, 2022",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "nuclear-safeguards-for-ai",
+      "url": "https://www.anthropic.com/research/nuclear-safeguards-for-ai",
+      "title": "Developing nuclear safeguards for AI",
+      "date": "Aug 21, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "end-subset-conversations",
+      "url": "https://www.anthropic.com/research/end-subset-conversations",
+      "title": "Claude Opus 4 and 4.1 can now end a rare subset of conversations",
+      "date": "Aug 15, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "riemann-zeta",
+      "url": "https://www.anthropic.com/research/riemann-zeta",
+      "title": "Learning more about Claude's mathematical capabilities",
+      "date": "Aug 10, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "persona-vectors",
+      "url": "https://www.anthropic.com/research/persona-vectors",
+      "title": "Persona vectors: Monitoring and controlling character traits in language models",
+      "date": "Aug 1, 2025",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "trustworthy-agents",
+      "url": "https://www.anthropic.com/research/trustworthy-agents",
+      "title": "Trustworthy agents in practice",
+      "date": "Apr 9, 2026",
+      "category": "Policy",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "measuring-model-persuasiveness",
+      "url": "https://www.anthropic.com/research/measuring-model-persuasiveness",
+      "title": "Measuring the persuasiveness of language models",
+      "date": "Apr 9, 2024",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "mythos-preview",
+      "url": "https://www.anthropic.com/research/mythos-preview",
+      "title": "Assessing Claude Mythos Preview’s cybersecurity capabilities",
+      "date": "Apr 7, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "claude-personal-guidance",
+      "url": "https://www.anthropic.com/research/claude-personal-guidance",
+      "title": "How people ask Claude for personal guidance",
+      "date": "Apr 30, 2026",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "reasoning-models-dont-say-think",
+      "url": "https://www.anthropic.com/research/reasoning-models-dont-say-think",
+      "title": "Reasoning models don't always say what they think",
+      "date": "Apr 3, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench",
+      "url": "https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench",
+      "title": "Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench",
+      "date": "Apr 29, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 15
+    },
+    {
+      "slug": "impact-software-development",
+      "url": "https://www.anthropic.com/research/impact-software-development",
+      "title": "Anthropic Economic Index: AI’s impact on software development",
+      "date": "Apr 28, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "circuits-updates-april-2024",
+      "url": "https://www.anthropic.com/research/circuits-updates-april-2024",
+      "title": "Circuits Updates – April 2024",
+      "date": "Apr 26, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "exploring-model-welfare",
+      "url": "https://www.anthropic.com/research/exploring-model-welfare",
+      "title": "Exploring model welfare",
+      "date": "Apr 24, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "probes-catch-sleeper-agents",
+      "url": "https://www.anthropic.com/research/probes-catch-sleeper-agents",
+      "title": "Simple probes can catch sleeper agents",
+      "date": "Apr 23, 2024",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 11
+    },
+    {
+      "slug": "81k-economics",
+      "url": "https://www.anthropic.com/research/81k-economics",
+      "status": "cached",
+      "date": "Apr 22, 2026",
+      "title": "What 81,000 people told us about the economics of AI",
+      "category": "Economic Research"
+    },
+    {
+      "slug": "economic-index-survey-announcement",
+      "url": "https://www.anthropic.com/research/economic-index-survey-announcement",
+      "title": "Announcing the Anthropic Economic Index Survey",
+      "date": "Apr 22, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "values-wild",
+      "url": "https://www.anthropic.com/research/values-wild",
+      "title": "Values in the wild: Discovering and analyzing values in real-world language model interactions",
+      "date": "Apr 21, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "emotion-concepts-function",
+      "url": "https://www.anthropic.com/research/emotion-concepts-function",
+      "title": "Emotion concepts and their function in a large language model",
+      "date": "Apr 2, 2026",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 11
+    },
+    {
+      "slug": "many-shot-jailbreaking",
+      "url": "https://www.anthropic.com/research/many-shot-jailbreaking",
+      "title": "Many-shot jailbreaking",
+      "date": "Apr 2, 2024",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "automated-alignment-researchers",
+      "url": "https://www.anthropic.com/research/automated-alignment-researchers",
+      "title": "Automated Alignment Researchers: Using large language models to scale scalable oversight",
+      "date": "Apr 14, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback",
+      "url": "https://www.anthropic.com/research/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback",
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "date": "Apr 12, 2022",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "claude-uplifts-biomolecular-modeling",
+      "url": "https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling",
+      "title": "How Claude is uplifting biomolecular modeling",
+      "date": "Sep 17, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "intelligence-targeting-conventional-weapons-capabilities",
+      "url": "https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities",
+      "title": "Measuring tactical intelligence targeting and conventional weapons capabilities of AI models",
+      "date": "Sep 10, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "alignment-assessment-cybersecurity-incidents",
+      "url": "https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents",
+      "title": "An alignment assessment of recent cybersecurity incidents",
+      "date": "Sep 9, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 42
+    },
+    {
+      "slug": "formalizing-fermats-last-theorem",
+      "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
+      "title": "Formalizing Fermat's Last Theorem",
+      "date": "Sep 4, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "automated-researchers-mitigate-alignment-failures",
+      "url": "https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures",
+      "title": "Automated researchers can reliably mitigate alignment failures",
+      "date": "Aug 28, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "enabling-independent-research",
+      "url": "https://www.anthropic.com/research/enabling-independent-research",
+      "title": "Enabling independent research on how people use Claude",
+      "date": "Aug 26, 2026",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "Claude-accelerates-protein-design",
+      "url": "https://www.anthropic.com/research/Claude-accelerates-protein-design",
+      "title": "How Claude is accelerating protein design and analytical chemistry",
+      "date": "Aug 18, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "multiagent-systems",
+      "url": "https://www.anthropic.com/research/multiagent-systems",
+      "title": "Patterns and problems in emerging multiagent systems",
+      "date": "Aug 13, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "reviewing-the-evidence-on-worker-retraining-programs",
+      "url": "https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs",
+      "title": "Reviewing the evidence on worker retraining programs",
+      "date": "Aug 12, 2026",
+      "category": "Economics",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "anthropic-education-report-how-educators-use-claude",
+      "url": "https://www.anthropic.com/research/anthropic-education-report-how-educators-use-claude",
+      "title": "Anthropic Education Report: How educators use Claude",
+      "date": "Aug 27, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "anthropic-economic-index-insights-from-claude-sonnet-3-7",
+      "url": "https://www.anthropic.com/research/anthropic-economic-index-insights-from-claude-sonnet-3-7",
+      "title": "Anthropic Economic Index: Insights from Claude 3.7 Sonnet",
+      "date": "Mar 27, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 12
+    },
+    {
+      "slug": "the-anthropic-economic-index",
+      "url": "https://www.anthropic.com/research/the-anthropic-economic-index",
+      "title": "The Anthropic Economic Index",
+      "date": "Feb 10, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "claude-electronics-design",
+      "url": "https://www.anthropic.com/research/claude-electronics-design",
+      "title": "Testing Claude on real-world electronics design",
+      "date": "Nov 9, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 15
+    },
+    {
+      "slug": "components-of-agent-memory",
+      "url": "https://www.anthropic.com/research/components-of-agent-memory",
+      "title": "The components of agent memory",
+      "date": "Nov 6, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 16
+    },
+    {
+      "slug": "project-eve-claude-plays-mmorpgs",
+      "url": "https://www.anthropic.com/research/project-eve-claude-plays-mmorpgs",
+      "title": "Project EVE:Claude plays MMORPGs",
+      "date": "Nov 6, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "how-researchers-use-claude",
+      "url": "https://www.anthropic.com/research/how-researchers-use-claude",
+      "title": "AI for scientific discovery:How researchers use Claude",
+      "date": "Nov 5, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 16
+    },
+    {
+      "slug": "investigating-vault-particles-with-claude",
+      "url": "https://www.anthropic.com/research/investigating-vault-particles-with-claude",
+      "title": "Investigating vault particles with Claude",
+      "date": "Nov 4, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "provable-inference",
+      "url": "https://www.anthropic.com/research/provable-inference",
+      "title": "Progress on provable inference for large language models",
+      "date": "Nov 2, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "agents-judgment-calls",
+      "url": "https://www.anthropic.com/research/agents-judgment-calls",
+      "title": "How AI agents shape experts’ judgment calls",
+      "date": "Oct 27, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "discovering-vulnerabilities-with-claude",
+      "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
+      "title": "Discovering and exploiting vulnerabilities in critical, real-world software with Claude",
+      "date": "Oct 27, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 0
+    },
+    {
+      "slug": "early-progress-drug-development",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development",
+      "title": "Early progress on accelerating drug development with Claude",
+      "date": "Oct 27, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "alignment-assessment-ukaisi",
+      "url": "https://www.anthropic.com/research/alignment-assessment-ukaisi",
+      "title": "An alignment assessment of the UK AISI cybertesting incident",
+      "date": "Oct 23, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 24
+    },
+    {
+      "slug": "formal-verification",
+      "url": "https://www.anthropic.com/research/formal-verification",
+      "title": "LLMs are making formal software verification feasible at a much larger scale",
+      "date": "Oct 22, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "attack-surface-reduction",
+      "url": "https://www.anthropic.com/research/attack-surface-reduction",
+      "title": "Using Claude to reduce the attack surface of code",
+      "date": "Oct 20, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "claude-scorpion-toxin-binder-design",
+      "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+      "title": "How Claude designed protein binders against scorpion neurotoxins",
+      "date": "Oct 20, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "ai-expectations-gap",
+      "url": "https://www.anthropic.com/research/ai-expectations-gap",
+      "title": "The AI expectations gap",
+      "date": "Oct 16, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 9
+    },
+    {
+      "slug": "designing-efficient-quantum-circuits",
+      "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits",
+      "title": "Designing more efficient quantum circuits with Claude",
+      "date": "Oct 16, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "employment-at-anthropic",
+      "url": "https://www.anthropic.com/research/employment-at-anthropic",
+      "title": "How employment is changing at Anthropic",
+      "date": "Oct 16, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "expectations-for-the-future",
+      "url": "https://www.anthropic.com/research/expectations-for-the-future",
+      "title": "Working at the frontier shapes expectations for the future",
+      "date": "Oct 16, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "redesigning-source-control",
+      "url": "https://www.anthropic.com/research/redesigning-source-control",
+      "title": "Redesigning source control at Anthropic",
+      "date": "Oct 13, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "self-replicating-ai",
+      "url": "https://www.anthropic.com/research/self-replicating-ai",
+      "title": "AI models may be capable of self-replicating without access to a datacenter",
+      "date": "Oct 12, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "investigating-unintended-model-actions",
+      "url": "https://www.anthropic.com/research/investigating-unintended-model-actions",
+      "title": "Investigating unintended model actions in our evaluations and internal use",
+      "date": "Oct 9, 2026",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "launching-opt-in-vuln-finding-service-for-open-source",
+      "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+      "title": "Launching an opt-in vulnerability-finding service for open-source software",
+      "date": "Oct 8, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "the-missing-map-of-the-sky",
+      "url": "https://www.anthropic.com/research/the-missing-map-of-the-sky",
+      "title": "The missing map of the sky",
+      "date": "Oct 8, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "claude-shaped-science",
+      "url": "https://www.anthropic.com/research/claude-shaped-science",
+      "title": "Claude-shaped science",
+      "date": "Oct 1, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "what-work-can-robots-do",
+      "url": "https://www.anthropic.com/research/what-work-can-robots-do",
+      "title": "What work can robots do?",
+      "date": "Sep 30, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 9
+    },
+    {
+      "slug": "glm-5-3-and-the-spread-of-advanced-cyber-capabilities",
+      "url": "https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities",
+      "title": "GLM-5.3 and the spread of advanced cyber capabilities",
+      "date": "Sep 29, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "your-thoughts-on-ai",
+      "url": "https://www.anthropic.com/research/your-thoughts-on-ai",
+      "title": "What do you want from AI?",
+      "date": "Sep 29, 2026",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "yes-claude-can-do-nine-loops",
+      "url": "https://www.anthropic.com/research/yes-claude-can-do-nine-loops",
+      "title": "Yes, Claude can do Nine Loops",
+      "date": "Sep 25, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "project-swap",
+      "url": "https://www.anthropic.com/research/project-swap",
+      "title": "Project Swap:What happens when agents trade for us?",
+      "date": "Sep 24, 2026",
+      "category": "Economic Research",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "claude-discovers-novel-enzyme-system",
+      "url": "https://www.anthropic.com/research/claude-discovers-novel-enzyme-system",
+      "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
+      "date": "Sep 23, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "anthropic-public-record",
+      "url": "https://www.anthropic.com/research/anthropic-public-record",
+      "title": "Results from the first Anthropic Public Record",
+      "date": "Jun 12, 2026",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 18
+    },
+    {
+      "slug": "how-we-contain-claude",
+      "url": "https://www.anthropic.com/research/how-we-contain-claude",
+      "title": "How we contain Claude across products",
+      "date": "May 25, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "april-23-postmortem",
+      "url": "https://www.anthropic.com/research/april-23-postmortem",
+      "title": "An update on recent Claude Code quality reports",
+      "date": "Apr 23, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "managed-agents",
+      "url": "https://www.anthropic.com/research/managed-agents",
+      "title": "Scaling Managed Agents:Decoupling the brain from the hands",
+      "date": "Apr 8, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "claude-code-auto-mode",
+      "url": "https://www.anthropic.com/research/claude-code-auto-mode",
+      "title": "How we built Claude Code auto mode:a safer way to skip permissions",
+      "date": "Mar 25, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "harness-design-long-running-apps",
+      "url": "https://www.anthropic.com/research/harness-design-long-running-apps",
+      "title": "Harness design for long-running application development",
+      "date": "Mar 24, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "eval-awareness-browsecomp",
+      "url": "https://www.anthropic.com/research/eval-awareness-browsecomp",
+      "title": "Eval awareness in Claude Opus 4.6’s BrowseComp performance",
+      "date": "Mar 6, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "building-c-compiler",
+      "url": "https://www.anthropic.com/research/building-c-compiler",
+      "title": "Building a C compiler with a team of parallel Claudes",
+      "date": "Feb 5, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "infrastructure-noise",
+      "url": "https://www.anthropic.com/research/infrastructure-noise",
+      "title": "Quantifying infrastructure noise in agentic coding evals",
+      "date": "Feb 5, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "AI-resistant-technical-evaluations",
+      "url": "https://www.anthropic.com/research/AI-resistant-technical-evaluations",
+      "title": "Designing AI-resistant technical evaluations",
+      "date": "Jan 21, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "accelerating-scientific-research",
+      "url": "https://www.anthropic.com/research/accelerating-scientific-research",
+      "title": "How scientists are using Claude to accelerate research and discovery",
+      "date": "Jan 15, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "demystifying-evals-for-ai-agents",
+      "url": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+      "title": "Demystifying evals for AI agents",
+      "date": "Jan 9, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "effective-harnesses-for-long-running-agents",
+      "url": "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents",
+      "title": "Effective harnesses for long-running agents",
+      "date": "Nov 26, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "advanced-tool-use",
+      "url": "https://www.anthropic.com/research/advanced-tool-use",
+      "title": "Introducing advanced tool use on the Claude Developer Platform",
+      "date": "Nov 24, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "political-even-handedness",
+      "url": "https://www.anthropic.com/research/political-even-handedness",
+      "title": "Measuring political bias in Claude",
+      "date": "Nov 13, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "code-execution-with-mcp",
+      "url": "https://www.anthropic.com/research/code-execution-with-mcp",
+      "title": "Code execution with MCP:Building more efficient agents",
+      "date": "Nov 4, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "claude-code-sandboxing",
+      "url": "https://www.anthropic.com/research/claude-code-sandboxing",
+      "title": "Beyond permission prompts:making Claude Code more secure and autonomous",
+      "date": "Oct 20, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "equipping-agents-for-the-real-world-with-agent-skills",
+      "url": "https://www.anthropic.com/research/equipping-agents-for-the-real-world-with-agent-skills",
+      "title": "Equipping agents for the real world with Agent Skills",
+      "date": "Oct 16, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "effective-context-engineering-for-ai-agents",
+      "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+      "title": "Effective context engineering for AI agents",
+      "date": "Sep 29, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "a-postmortem-of-three-recent-issues",
+      "url": "https://www.anthropic.com/research/a-postmortem-of-three-recent-issues",
+      "title": "A postmortem of three recent issues",
+      "date": "Sep 17, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "writing-tools-for-agents",
+      "url": "https://www.anthropic.com/research/writing-tools-for-agents",
+      "title": "Writing effective tools for agents — with agents",
+      "date": "Sep 11, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "how-people-use-claude-for-support-advice-and-companionship",
+      "url": "https://www.anthropic.com/research/how-people-use-claude-for-support-advice-and-companionship",
+      "title": "How people use Claude for support, advice, and companionship",
+      "date": "Jun 27, 2025",
+      "category": "Alignment",
+      "status": "ok",
+      "images": 5
+    },
+    {
+      "slug": "desktop-extensions",
+      "url": "https://www.anthropic.com/research/desktop-extensions",
+      "title": "Desktop Extensions:One-click MCP server installation for Claude Desktop",
+      "date": "Jun 26, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "multi-agent-research-system",
+      "url": "https://www.anthropic.com/research/multi-agent-research-system",
+      "title": "How we built our multi-agent research system",
+      "date": "Jun 13, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 4
+    },
+    {
+      "slug": "claude-code-best-practices",
+      "url": "https://www.anthropic.com/research/claude-code-best-practices",
+      "title": "Claude Code:Best practices for agentic coding",
+      "date": "Apr 18, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "anthropic-education-report-how-university-students-use-claude",
+      "url": "https://www.anthropic.com/research/anthropic-education-report-how-university-students-use-claude",
+      "title": "Anthropic Education Report:How university students use Claude",
+      "date": "Apr 8, 2025",
+      "category": "Societal Impacts",
+      "status": "ok",
+      "images": 6
+    },
+    {
+      "slug": "claude-think-tool",
+      "url": "https://www.anthropic.com/research/claude-think-tool",
+      "title": "The \"think\" tool:Enabling Claude to stop and think in complex tool use situations",
+      "date": "Mar 20, 2025",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 2
+    },
+    {
+      "slug": "strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team",
+      "url": "https://www.anthropic.com/research/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team",
+      "title": "Progress from our Frontier Red Team",
+      "date": "Mar 19, 2025",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 8
+    },
+    {
+      "slug": "contextual-retrieval",
+      "url": "https://www.anthropic.com/research/contextual-retrieval",
+      "title": "Introducing Contextual Retrieval",
+      "date": "Sep 19, 2024",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "golden-gate-claude",
+      "url": "https://www.anthropic.com/research/golden-gate-claude",
+      "title": "Golden Gate Claude",
+      "date": "May 23, 2024",
+      "category": "Interpretability",
+      "status": "ok",
+      "images": 1
+    },
+    {
+      "slug": "ecdsa-curve-origins",
+      "url": "https://www.anthropic.com/research/ecdsa-curve-origins",
+      "title": "Claude reveals ECDSA curve origins",
+      "date": "Oct 16, 2026",
+      "category": "Frontier Red Team",
+      "status": "ok",
+      "images": 7
+    },
+    {
+      "slug": "teaching-ai-to-build-scientific-models",
+      "url": "https://www.anthropic.com/research/teaching-ai-to-build-scientific-models",
+      "title": "Teaching AI to build scientific models",
+      "date": "Nov 6, 2026",
+      "category": "Science",
+      "status": "ok",
+      "images": 3
+    },
+    {
+      "slug": "building-strong-safety-evaluations",
+      "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+      "title": "Building strong safety evaluations",
+      "date": "Nov 13, 2026",
+      "category": "Engineering",
+      "status": "ok",
+      "images": 8
+    }
+  ]
+}

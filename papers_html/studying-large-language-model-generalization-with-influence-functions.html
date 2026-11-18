@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studying Large Language Model Generalization with Influence Functions</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>用影响力函数研究大语言模型的泛化</h1>
+<div class="meta">
+Studying Large Language Model Generalization with Influence Functions · Aug 8, 2023 · Alignment · <a href="https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">论文用影响力函数回答一个反事实问题：如果把某条序列加入训练集，模型参数进而输出会如何变化？传统影响力函数计算需要逆Hessian-向量积（IHVP），代价极高，难以扩展到大型语言模型。研究采用EK-FAC近似，将影响力函数扩展到高达520亿参数的大模型，且在精度相近的情况下使IHVP计算快几个数量级，同时用TF-IDF过滤和查询批处理降低梯度计算成本。论文用影响力函数研究了LLM的泛化模式：影响分布的稀疏性、随规模增长更抽象、数学与编程能力、跨语言泛化和角色扮演行为，并发现一个惊人局限：关键短语顺序翻转后影响几乎降为零。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">影响力函数：估计每条训练数据对模型输出影响程度的统计学方法</span><span class="term">逆Hessian-向量积：一种昂贵的高阶数学运算，是扩展影响力函数的瓶颈</span><span class="term">近似曲率：用近似方法估算参数空间弯曲程度以加速计算</span><span class="term">跨语言泛化：模型把一种语言学到的东西迁移到其他语言的能力</span><span class="term">稀疏性：影响集中在少数数据上而非均匀分布</span><span class="term">角色扮演：模型模拟特定身份或人格进行回答的行为</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 对齐（Alignment）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions</li>
+</ul>
+<p>对齐研究（Alignment Research）
+2023 年 8 月 8 日
+<a href="https://arxiv.org/abs/2308.03296">阅读论文</a></p>
+<h2>摘要</h2>
+<p>当试图更好地洞察机器学习模型以理解并缓解相关风险时，一个潜在有价值的证据来源是：哪些训练示例对给定行为的贡献最大？影响函数（influence functions）旨在回答一个反事实问题：如果给定序列被添加到训练集中，模型的参数（以及因此它的输出）会如何变化？虽然影响函数已经为小模型产生了洞见，但由于计算逆黑塞向量积（inverse-Hessian-vector product，IHVP）的困难，它们很难扩展到大型语言模型（LLM）。我们使用特征值校正的克罗内克因子近似曲率（Eigenvalue-corrected Kronecker-Factored Approximate Curvature，EK-FAC）近似，将影响函数扩展到多达 520 亿参数的大语言模型。在我们的实验中，尽管 IHVP 计算速度快了几个数量级，EK-FAC 仍达到了与传统影响函数估计器相似的精度。我们研究了两种算法技术来降低计算候选训练序列梯度的成本：TF-IDF 过滤和查询批处理。我们使用影响函数来研究 LLM 的泛化模式，包括影响模式的稀疏性、随规模增加的抽象性、数学和编程能力、跨语言泛化以及角色扮演行为。尽管存在许多表面上复杂的泛化形式，我们还是发现了一个令人惊讶的局限性：当关键短语的顺序被颠倒时，影响会衰减到接近零。总的来说，影响函数给了我们一个强大的新工具来研究 LLM 的泛化特性。</p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布的研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例的一个长期未破的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">了解更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二个攻击发现了一种攻击轮数缩减的 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">了解更多</a></p>
+<h3>Project Pilot：AI 能操控无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估来测试 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">了解更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Studying Large Language Model Generalization with Influence Functions</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions</li>
+</ul>
+<h1>Studying Large Language Model Generalization with Influence Functions</h1>
+<p>Aug 8, 2023
+<a href="https://arxiv.org/abs/2308.03296">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>When trying to gain better visibility into a machine learning model in order to understand and mitigate the associated risks, a potentially valuable source of evidence is: which training examples most contribute to a given behavior? Influence functions aim to answer a counterfactual: how would the model's parameters (and hence its outputs) change if a given sequence were added to the training set? While influence functions have produced insights for small models, they are difficult to scale to large language models (LLMs) due to the difficulty of computing an inverse-Hessian-vector product (IHVP). We use the Eigenvalue-corrected Kronecker-Factored Approximate Curvature (EK-FAC) approximation to scale influence functions up to LLMs with up to 52 billion parameters. In our experiments, EK-FAC achieves similar accuracy to traditional influence function estimators despite the IHVP computation being orders of magnitude faster. We investigate two algorithmic techniques to reduce the cost of computing gradients of candidate training sequences: TF-IDF filtering and query batching. We use influence functions to investigate the generalization patterns of LLMs, including the sparsity of the influence patterns, increasing abstraction with scale, math and programming abilities, cross-lingual generalization, and role-playing behavior. Despite many apparently sophisticated forms of generalization, we identify a surprising limitation: influences decay to near-zero when the order of key phrases is flipped. Overall, influence functions give us a powerful new tool for studying the generalization properties of LLMs.</p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/studying-large-language-model-generalization-with-influence-functions"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

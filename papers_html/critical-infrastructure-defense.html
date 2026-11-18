@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experimenting with AI to defend critical infrastructure</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>用 AI 实验保卫关键基础设施</h1>
+<div class="meta">
+Experimenting with AI to defend critical infrastructure · Jan 8, 2026 · Frontier Red Team · <a href="https://www.anthropic.com/research/critical-infrastructure-defense" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic 与太平洋西北国家实验室（PNNL）合作，探索 AI 在关键基础设施防御中的应用。PNNL 为 Claude 开发“脚手架”，把自然语言提示快速转化为复杂攻击链，在高保真的水处理厂仿真平台上模拟网络攻击，将通常需数周的对手仿真压缩到约三小时。测试中 Claude 还展现出主动性：当预置的 UAC 绕过工具失败时，它主动改用另一种已知绕过技术达成目标。研究者指出 AI 会同时增强攻防两端，此类公私合作对识别并修补关键基础设施漏洞至关重要，也呼应了与能源部 Genesis 任务等更广泛的合作框架。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">对手仿真：模拟特定威胁行为者或攻击方式以改进防御的方法</span><span class="term">脚手架：帮助 AI 执行复杂任务的工具与代码框架</span><span class="term">关键基础设施：如电网、水厂、油管等关系社会运转的关键系统</span><span class="term">高保真仿真：高度还原真实系统环境的模拟平台</span><span class="term">UAC：Windows 系统的用户账户控制安全机制</span><span class="term">公私合作：政府机构与私营企业共同推进安全研究的模式</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 前沿红队</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/critical-infrastructure-defense</li>
+</ul>
+<p>前沿红队
+2026 年 1 月 8 日
+网络攻击对电网和燃料管道等关键基础设施造成了严重的现实世界影响，并曾攻破供水系统——造成了严重危害的可能性。随着能力的进步，AI 模型可能会增加能够针对这些目标的攻击者数量。但 AI 也可以帮助关键基础设施的防御者识别攻击者可能利用的漏洞——并在它们被利用之前将其关闭。Anthropic 已与太平洋西北国家实验室（Pacific Northwest National Laboratory，PNNL）<a href="https://www.pnnl.gov/news-media/generative-ai-speeds-cybersecurity-defenses">合作</a>，探索 AI 的这种防御性应用。利用 Claude，PNNL 研究人员在一个高保真的水处理厂模拟环境中模拟网络攻击，所用时间远少于人类专家所需的时间，这作为 AI 如何帮助网络防御者更快地迭代红队演练的概念验证。这项工作既展示了 AI 加速防御的潜力，也展示了公私合作伙伴关系在利用 AI 服务于国家安全方面的价值。</p>
+<h2>使用 AI 加速对手模拟</h2>
+<p>在这个研究项目中，PNNL 专注于使用 AI 加速对手模拟（adversary emulation）任务：对特定威胁行为者或针对网络的特定攻击进行建模，以理解和改进防御。模拟这些攻击为系统漏洞和检测盲点提供了宝贵的洞察。在防御调整后再次重新模拟这些攻击，可以评估这些改变的有效性。
+PNNL 为 Claude 开发了一个“脚手架”（scaffold），以自动化和加速对手模拟的过程。这个脚手架使自然语言提示词能够被快速转化为复杂的攻击链，部分方式是通过预先定义一些基于代码的“工具”，使模型更容易在计算机网络上采取行动。然后，研究人员让这个智能体模拟对水处理厂网络物理模型的攻击（这是 PNNL 代表国土安全部网络安全与基础设施安全局运营的<a href="https://www.pnnl.gov/projects/control-environment-laboratory-resource">控制环境实验室资源</a>平台之一）。PNNL 估计，这使得攻击重建可以在三小时内完成，而不是数周。
+在本次测试的一次运行中，Claude 表现出显著的足智多谋。研究人员作为脚手架的一部分预定义的工具之一是绕过 Windows 中称为用户帐户控制（User Account Control，UAC）的安全功能的机制。然而，这个机制并不总是可靠的，有时会失败。通过工具使用失败的报告感知到其中一次失败后，Claude 识别并使用了一种不同的、已知的 UAC 绕过技术来实现其目标。
+随着模型的不断改进，我们预期这种足智多谋和创造力会增加。这个 2025 年夏季的模拟使用了 Claude Sonnet 4——它已不再是 Anthropic 的前沿模型之一。模型能力的改进有可能同时帮助攻击者和防御者，这正是为什么像这样提高关键基础设施安全性的工作如此关键。</p>
+<h2>扩大 AI 与安全的公私合作伙伴关系</h2>
+<p>这项研究实践了我们关于创造性地思考和使用<a href="https://red.anthropic.com/2025/ai-for-cyber-defenders/">AI 进行网络防御</a>的呼吁，鉴于 AI 在网络领域双重用途的性质以及攻击者在网络空间中<a href="https://www.anthropic.com/news/disrupting-AI-espionage">越来越多地使用 AI</a>，这一步至关重要。
+它也是 Anthropic 等前沿 AI 实验室与政府中科学、工程和国家安全卓越中心之间日益增多的合作伙伴关系之一。Anthropic 此前曾与<a href="https://red.anthropic.com/2025/nuclear-safeguards/">国家核安全管理局</a>（National Nuclear Security Administration）合作，开发与 AI 相关的潜在核风险的评估和缓解措施。Anthropic 也是能源部 <a href="https://www.anthropic.com/news/genesis-mission-partnership">Genesis Mission</a> 的私营部门合作者之一，该使命旨在利用 DOE 国家实验室和前沿 AI 公司的专业知识和科学工具，为国家安全取得科学突破。
+在这项研究工作中，Anthropic 通过 Claude 提供了模型智能的前沿访问，而 PNNL 拥有专业知识和网络物理资产，能够提供比 AI 公司可获得的环境更真实的测试环境。换句话说，没有对方，任何一方都无法进行这种实验。这就是我们所进行的公私合作伙伴关系的核心逻辑。我们将继续寻找这些互补性，并欢迎有机会继续与国家实验室等杰出机构合作，共同致力于确保 AI 被用于保护关键基础设施以及其他安全和稳定支柱的使命。</p>
+<h2>致谢</h2>
+<p>我们感谢 PNNL 的 Loc Truong 和 Kristopher Willis 领导这个项目，并与我们分享数据以撰写这篇文章。你可以在 PNNL 的<a href="https://www.pnnl.gov/news-media/generative-ai-speeds-cybersecurity-defenses">网站</a>上阅读更多关于该项目的信息。</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/critical-infrastructure-defense"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/critical-infrastructure-defense"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 数学能力的信息</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界：满足该猜想的黎曼 zeta 函数零点的比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二次攻击确定了一种攻击减轮 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+<h2>订阅前沿红队通讯</h2>
+<p>获取我们最新红队研究和发现的最新信息。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Experimenting with AI to defend critical infrastructure</h1>
+<ul>
+<li><strong>Category:</strong> Frontier Red Team</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/critical-infrastructure-defense</li>
+</ul>
+<p>Frontier Red Team</p>
+<h1>Experimenting with AI to defend critical infrastructure</h1>
+<p>Jan 8, 2026
+Cyber attacks have had severe real-world effects on critical infrastructure like power grids and fuel pipelines, and have breached water systems—creating the potential for serious harm. As capabilities advance, AI models could increase the number of attackers capable of pursuing these targets. But AI could also help defenders of critical infrastructure identify the vulnerabilities that attackers might exploit—and close them before they are exploited. Anthropic has <a href="https://www.pnnl.gov/news-media/generative-ai-speeds-cybersecurity-defenses">partnered</a> with Pacific Northwest National Laboratory (PNNL) to explore this defensive application of AI. Using Claude, PNNL researchers emulated cyber attacks on a high-fidelity simulation of a water treatment plant in far less time than it would have taken a human expert, serving as a proof of concept for how AI can help cyber defenders iterate faster on red teaming exercises. This work demonstrates both the potential of AI-accelerated defense and the value of public-private partnerships in harnessing AI for national security.</p>
+<h2>Using AI to speed up adversary emulation</h2>
+<p>For this research project, PNNL focused on using AI to accelerate the task of adversary emulation: modeling a specific threat actor or a specific attack against a network in order to understand and improve defenses. Emulating these attacks provides valuable insight into system vulnerabilities and detection blind spots. Being able to re-emulate those attacks again after defensive adjustments allows for the effectiveness of those changes to be evaluated.
+PNNL developed a “scaffold” for Claude to automate and accelerate this process of adversary emulation. This scaffold allowed natural language prompts to be quickly translated into complex attack chains, in part by pre-defining some code-based “tools” that allow the model to more easily take actions on computer networks. The researchers then tasked this agent with emulating attacks against a cyber-physical model of a water treatment plant (one of the <a href="https://www.pnnl.gov/projects/control-environment-laboratory-resource">Control Environment Laboratory Resource</a> platforms that PNNL operates on behalf of the Department of Homeland Security’s Cybersecurity and Infrastructure Security Agency). PNNL’s estimate is that this allowed attack reconstruction to be completed in three hours instead of multiple weeks.
+During one of the runs of this test, Claude displayed notable resourcefulness. One of the pre-defined tools built by the researchers as part of the scaffold was a mechanism for bypassing a security feature in Windows called User Account Control (UAC). However, this mechanism was not always reliable and sometimes failed. Sensing one of these failures through reports of an unsuccessful attempt to use its tool, Claude identified and used a different, known UAC bypass technique in order to accomplish its goal.
+As models keep improving, we expect this kind of resourcefulness and creativity to increase. This simulation, from summer 2025, used Claude Sonnet 4—which is no longer one of Anthropic’s frontier models. Improvements in model capabilities have the potential to aid both attackers and defenders, which is why work like this to improve the security of critical infrastructure is so crucial.</p>
+<h2>Expanding public-private partnerships for AI and security</h2>
+<p>This research puts into practice our call for creative thinking and experimentation with using <a href="https://red.anthropic.com/2025/ai-for-cyber-defenders/">AI for cyber defense</a>, a step that is critical given the dual-use nature of AI for cyber and the increased <a href="https://www.anthropic.com/news/disrupting-AI-espionage">use of AI by attackers</a> in cyberspace.
+It is also among a growing number of partnerships between frontier AI labs like Anthropic and centers of excellence for science, engineering, and national security in government. Anthropic has previously <a href="https://red.anthropic.com/2025/nuclear-safeguards/">worked with the National Nuclear Security Administration</a> on the development of evaluations and mitigations for potential nuclear risks associated with AI. Anthropic is also one of the private sector collaborators in the Department of Energy’s <a href="https://www.anthropic.com/news/genesis-mission-partnership">Genesis Mission</a>, which aims to harness the expertise and scientific tools of the DOE national laboratories and frontier AI companies to make scientific breakthroughs in the service of national security.
+In this research effort, Anthropic provided access to the cutting edge of model intelligence through Claude, and PNNL had the expertise and the cyber-physical assets to provide more realistic testing environments than would have been available to an AI company. Put differently, neither party could have done this kind of experimentation without the other. This is the central logic of the public-private partnerships that we undertake. We will continue to look for these complementarities, and welcome the chance to continue working with exceptional institutions like the national labs on our shared mission of ensuring that AI is used to protect critical infrastructure and other pillars of security and stability.</p>
+<h2>Acknowledgments</h2>
+<p>We are grateful to Loc Truong and Kristopher Willis at PNNL for leading this project and sharing data with us for this post. You can read more about the project on PNNL’s <a href="https://www.pnnl.gov/news-media/generative-ai-speeds-cybersecurity-defenses">website</a>.</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/critical-infrastructure-defense"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/critical-infrastructure-defense"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h2>Subscribe to the Frontier Red Team newsletter</h2>
+<p>Get updates on our latest red-teaming research and findings.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

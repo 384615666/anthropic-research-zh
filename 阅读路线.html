@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic 论文阅读路线</title>
+<style>
+  :root { --bg:#faf9f6; --card:#fff; --text:#1f1f1f; --muted:#6b6b6b; --accent:#c15f3c; --border:#e8e4dc; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+  .header { background:linear-gradient(135deg,#1a1a1a,#2d2d2d); color:#fff; padding:44px 24px 36px; text-align:center; }
+  .header h1 { font-size:28px; font-weight:700; }
+  .header h1 span { color:#cc7857; }
+  .header p { color:#bbb; margin-top:8px; font-size:14px; }
+  .container { max-width:880px; margin:0 auto; padding:30px 20px 70px; }
+  .section { margin-bottom:34px; }
+  .sec-head { display:flex; align-items:center; gap:14px; border-left:5px solid; padding:6px 4px 10px; }
+  .sec-num { display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; color:#fff; font-size:15px; font-weight:500; flex-shrink:0; }
+  .sec-head h2 { font-size:19px; font-weight:600; }
+  .sec-desc { font-size:13px; color:var(--muted); margin-top:2px; }
+  .paperlist { list-style:none; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:6px 0; }
+  .paper { padding:10px 16px; border-bottom:1px solid #f0ece4; }
+  .paper:last-child { border-bottom:none; }
+  .ptitle { font-size:14.5px; font-weight:500; color:var(--text); text-decoration:none; }
+  .ptitle:hover { color:var(--accent); }
+  .pmeta { font-size:12px; color:#999; margin-left:10px; }
+  .pexcerpt { font-size:12.5px; color:var(--muted); margin-top:3px; }
+  .legend { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 20px; margin-bottom:30px; font-size:13.5px; color:#444; }
+  .legend b { color:var(--accent); }
+  .footer { text-align:center; color:var(--muted); font-size:12px; padding:18px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Anthropic <span>论文阅读路线</span></h1>
+  <p>按推荐顺序编排 · 从易到难 · 点击标题直接阅读</p>
+</div>
+<div class="container">
+  <div class="legend">
+    <b>使用建议：</b>按 一 → 七 的顺序读。每篇点开后页面顶部有「返回阅读目录」。读之前建议先过一遍
+    <a href="AI术语讲解.html" style="color:var(--accent)">《AI 术语讲解》</a>的第一、二部分（约 1 小时），
+    之后遇到不懂的术语随时回来查速查表。
+  </div>
+  
+<div class="section">
+  <div class="sec-head" style="border-color:#1D9E75">
+    <span class="sec-num" style="background:#1D9E75">一</span>
+    <div>
+      <h2>热身 · 工程与产品（0 门槛）</h2>
+      <p class="sec-desc">纯科普/产品发布，读起来最轻松，先建立兴趣与信心</p>
+    </div>
+  </div>
+  <ol class="paperlist"><li class="paper">
+  <a class="ptitle" href="papers_html/building-effective-agents.html" target="_blank">构建有效的 AI 智能体</a>
+  <span class="pmeta">Dec 19, 2024 · 工程</span>
+  <div class="pexcerpt">本文总结 Anthropic 与数十个团队合作构建 LLM 智能体的经验，指出最成功的实现往往不用复杂框架，而用简单、可组合的模式。文章区分了“工作流”（由预定…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/swe-bench-sonnet.html" target="_blank">Claude的SWE-Bench表现</a>
+  <span class="pmeta">Oct 15, 2024 · 工程</span>
+  <div class="pexcerpt">升级版Claude 3.5 Sonnet在软件工程评测SWE-bench Verified上取得49%的成绩，超越此前最优模型的45%。SWE-bench用真实…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/prompt-injection-defenses.html" target="_blank">降低浏览器使用中的提示注入风险</a>
+  <span class="pmeta">Nov 24, 2025 · 产品</span>
+  <div class="pexcerpt">提示注入是AI代理面临的最重大安全挑战之一：网页内容中可能隐藏恶意指令，劫持代理行为。浏览器代理风险尤其突出，因为攻击面极大且能执行许多操作。Claude Op…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/confidential-inference-trusted-vms.html" target="_blank">通过可信虚拟机实现机密推理</a>
+  <span class="pmeta">Jun 18, 2025 · 公告</span>
+  <div class="pexcerpt">Anthropic 与 Pattern Labs 联合发布机密推理研究报告，其核心原则是：敏感数据（用户提示与模型权重）除处理瞬间外始终保持加密，且仅在能证明自…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/glasswing-initial-update.html" target="_blank">玻璃翼计划：初期进展更新</a>
+  <span class="pmeta">May 22, 2026 · 公告</span>
+  <div class="pexcerpt">本文是“玻璃翼计划”（Project Glasswing）的初期进展报告。该计划联合约50个合作伙伴，用Claude Mythos Preview加固全球最关键…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/AI-fluency-index.html" target="_blank">Anthropic 教育报告：AI 流畅度指数</a>
+  <span class="pmeta">Feb 23, 2026 · 公告</span>
+  <div class="pexcerpt">本报告提出“AI 流畅度”概念，即人们是否掌握有效、安全使用 AI 的技能。研究者用 4D AI 流畅度框架中的 24 种行为定义流畅度，并用隐私保护工具分析了…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/statistical-approach-to-model-evals.html" target="_blank">模型评测的统计方法</a>
+  <span class="pmeta">Nov 19, 2024 · 评测</span>
+  <div class="pexcerpt">当模型A在某个基准上超过模型B，差距是真实的还是抽题运气？本文基于统计理论和实验设计文献，为AI社区提出了五条评测报告建议：一、利用中心极限定理报告标准误差和置…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/trustworthy-agents.html" target="_blank">实践中的可信赖AI智能体</a>
+  <span class="pmeta">Apr 9, 2026 · 政策</span>
+  <div class="pexcerpt">AI智能体正成为人类使用AI的最新重大转变，从简单问答机器人发展到能写代码、执行代码、跨应用完成多步任务。但自主性带来新风险：人类监督变少、可能误读用户意图、易…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/formal-verification.html" target="_blank">大语言模型正让更大规模的形式化软件验证变得可行</a>
+  <span class="pmeta">Oct 22, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic与Theorem合作，证明大语言模型已能大规模产出形式化证明：让Claude把Google OSS-Fuzz既有的模糊测试转成“任意小于64 …</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/redesigning-source-control.html" target="_blank">重新设计 Anthropic 的源代码控制</a>
+  <span class="pmeta">Oct 13, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic每天合入的代码改动从2026年5月约2,500项增至9月的超过30,000项，把按人类尺度设计的开发者基础设施压成瓶颈。团队构建内部版本控制系…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/how-we-contain-claude.html" target="_blank">我们如何在各产品中约束Claude</a>
+  <span class="pmeta">May 25, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic分享在三款Claude产品中为智能体“爆炸半径”设上限的做法。因用户约批准93%的许可提示而滋生审批疲劳，团队改用沙箱与虚拟机强制划界：cla…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/april-23-postmortem.html" target="_blank">关于近期 Claude Code 质量报告的更新</a>
+  <span class="pmeta">Apr 23, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic披露2026年3至4月Claude质量下降背后的三项独立变更，API与推理层未受影响。其一，3月4日把Claude Code默认推理强度从hi…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/managed-agents.html" target="_blank">扩展 Managed Agents：将大脑与双手解耦</a>
+  <span class="pmeta">Apr 8, 2026 · 工程</span>
+  <div class="pexcerpt">Managed Agents是Claude Platform中的托管服务，用一小组接口替客户运行长时程智能体。其核心是把「大脑」（Claude与其脚手架）、「双…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-code-auto-mode.html" target="_blank">我们如何构建Claude Code自动模式：更安全地跳过权限确认</a>
+  <span class="pmeta">Mar 25, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic为缓解批准疲劳（用户约批准93%的许可提示）推出Claude Code自动模式，把审批交给运行于Sonnet 4.6的对话记录分类器：输入层用…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/harness-design-long-running-apps.html" target="_blank">面向长时运行应用开发的脚手架设计</a>
+  <span class="pmeta">Mar 24, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic的Prithvi Rajasekaran受GAN启发，用生成器与评估器分离的结构改进长时运行编程脚手架：前端定下设计质量等四条评分标准，评估器…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/building-c-compiler.html" target="_blank">用并行 Claude 团队构建 C 编译器</a>
+  <span class="pmeta">Feb 5, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic研究员Nicholas Carlini提出「智能体团队」：16个Claude实例无人工干预地在同一代码库上并行工作，用git文件锁认领任务并自…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/infrastructure-noise.html" target="_blank">量化智能体编码评测中的基础设施噪声</a>
+  <span class="pmeta">Feb 5, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic发现仅基础设施配置就能让智能体编码评测分数相差超过排行榜常见的几个百分点。在GKE上跑Terminal-Bench 2.0时多达6%任务因po…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/AI-resistant-technical-evaluations.html" target="_blank">设计抗AI的技术评测</a>
+  <span class="pmeta">Jan 21, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic性能工程团队自2024年初用一份带回家测试招聘：候选人在Python模拟的TPU式加速器上优化并行树遍历代码，该机器具备手动管理的暂存存储器、…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/demystifying-evals-for-ai-agents.html" target="_blank">揭开AI智能体评估的神秘面纱</a>
+  <span class="pmeta">Jan 9, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic系统总结AI智能体评估方法：定义任务、试验、评分器、记录、结果、评估框架与套件，指出智能体跨多轮调用工具、错误会累积，前沿模型还常找到超出静态…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/effective-harnesses-for-long-running-agents.html" target="_blank">面向长时运行智能体的高效脚手架</a>
+  <span class="pmeta">Nov 26, 2025 · 工程</span>
+  <div class="pexcerpt">针对智能体跨多个上下文窗口工作时「每个新会话都失忆」的问题，Anthropic提出两段式脚手架：初始化智能体先搭建环境（init.sh脚本、claude-pro…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/advanced-tool-use.html" target="_blank">在Claude开发者平台上推出高级工具使用</a>
+  <span class="pmeta">Nov 24, 2025 · 工程</span>
+  <div class="pexcerpt">Anthropic在Claude开发者平台推出三项beta功能，解决智能体接入大量工具时的上下文与准确率瓶颈。工具搜索工具用defer_loading按需加载定…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/code-execution-with-mcp.html" target="_blank">用 MCP 执行代码：构建更高效的智能体</a>
+  <span class="pmeta">Nov 4, 2025 · 工程</span>
+  <div class="pexcerpt">MCP让智能体可接入数百乃至数千种工具，但把全部工具定义预载进上下文、并让中间结果反复穿过模型，会造成严重的token浪费与延迟：一场2小时销售会议的通话记录可…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-code-sandboxing.html" target="_blank">超越权限提示：让 Claude Code 更安全、更自主</a>
+  <span class="pmeta">Oct 20, 2025 · 工程</span>
+  <div class="pexcerpt">Claude Code默认基于权限、默认只读，做修改或运行命令前都要请求批准，频繁点「批准」既拖慢节奏又造成审批疲劳——用户不再细看自己批准了什么。Anthro…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/equipping-agents-for-the-real-world-with-agent-skills.html" target="_blank">用 Agent Skills 为智能体装备应对真实世界的能力</a>
+  <span class="pmeta">Oct 16, 2025 · 工程</span>
+  <div class="pexcerpt">Agent Skills是装有指令、脚本与资源的文件夹，智能体能动态发现并按需加载，把通用智能体变成契合特定需求的专用智能体。核心设计是渐进式披露：第一层是SK…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/effective-context-engineering-for-ai-agents.html" target="_blank">面向 AI 智能体的高效上下文工程</a>
+  <span class="pmeta">Sep 29, 2025 · 工程</span>
+  <div class="pexcerpt">Anthropic把上下文工程视为提示词工程的演进：上下文是采样时纳入的token集合，目标是找到尽可能小的一组高信号token。因Transformer的n²…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/a-postmortem-of-three-recent-issues.html" target="_blank">三起近期问题的复盘</a>
+  <span class="pmeta">Sep 17, 2025 · 工程</span>
+  <div class="pexcerpt">2025年8月至9月初，三个彼此独立的基础设施bug间歇性降低了Claude的回复质量，Anthropic公开复盘。其一是上下文窗口路由错误：8月5日起部分So…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/writing-tools-for-agents.html" target="_blank">为智能体编写高效工具——与智能体协作</a>
+  <span class="pmeta">Sep 11, 2025 · 工程</span>
+  <div class="pexcerpt">工具是确定性系统与非确定性智能体之间的契约，不能照搬写API的思路。文章给出评估驱动的流程：先搭原型并封装成MCP服务器实测，再生成植根真实业务的评估任务，用简…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/desktop-extensions.html" target="_blank">桌面扩展：为Claude Desktop一键安装MCP服务器</a>
+  <span class="pmeta">Jun 26, 2025 · 工程</span>
+  <div class="pexcerpt">Anthropic针对本地MCP服务器安装门槛过高（需自备运行时、手动改JSON配置、解决依赖冲突）推出Desktop Extensions，把服务器连同依赖打…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/multi-agent-research-system.html" target="_blank">我们如何构建多智能体研究系统</a>
+  <span class="pmeta">Jun 13, 2025 · 工程</span>
+  <div class="pexcerpt">Anthropic介绍Claude的Research功能背后的多智能体系统：主导智能体规划、派生并行子智能体检索，以编排者–工作者架构替代静态检索。评测中，Op…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-code-best-practices.html" target="_blank">Claude Code：智能体编程最佳实践</a>
+  <span class="pmeta">Apr 18, 2025 · 工程</span>
+  <div class="pexcerpt">Anthropic总结智能体编程命令行工具Claude Code的最佳实践：工具底层、无预设立场，不强制工作流。核心是用CLAUDE.md文件自动注入项目上下文…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-think-tool.html" target="_blank">「think」工具：让 Claude 在复杂的工具使用场景中停下来思考</a>
+  <span class="pmeta">Mar 20, 2025 · 工程</span>
+  <div class="pexcerpt">「think」工具给Claude在开始生成回答之后插入一个专职思考步骤，检查自己是否已具备继续推进所需的全部信息，这与在生成前进行的扩展思考不同，主要面向长链工…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/contextual-retrieval.html" target="_blank">推出上下文检索</a>
+  <span class="pmeta">Sep 19, 2024 · 工程</span>
+  <div class="pexcerpt">传统RAG把文档切成小块后单独编码，文本块因此丢掉上下文——「营收较上季度增长3%」既不知是哪家公司也不知是哪一季，检索常失败。上下文检索在嵌入与建立BM25索…</div>
+</li></ol>
+</div>
+<div class="section">
+  <div class="sec-head" style="border-color:#1D9E75">
+    <span class="sec-num" style="background:#1D9E75">二</span>
+    <div>
+      <h2>科学趣闻 · 当科普读（0 门槛）</h2>
+      <p class="sec-desc">数学/化学/生物/物理主题，不需要专业背景也能看懂大意</p>
+    </div>
+  </div>
+  <ol class="paperlist"><li class="paper">
+  <a class="ptitle" href="papers_html/riemann-zeta.html" target="_blank">进一步了解Claude的数学能力</a>
+  <span class="pmeta">Aug 10, 2026 · 科学</span>
+  <div class="pexcerpt">一位Anthropic员工让Claude尝试攻克黎曼猜想——数学中最著名的未解难题之一。Claude虽然没能证明黎曼猜想，却意外地在相关问题取得突破：一个未发布…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/making-claude-a-chemist.html" target="_blank">让 Claude 成为化学家</a>
+  <span class="pmeta">Jun 5, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic 与化学家合作提升 Claude 的化学能力，并发布首份白皮书，测试 Claude 对化学家最常用分析输入——NMR（核磁共振）谱图的理解。研…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/agents-in-biology.html" target="_blank">为生物学领域的AI代理铺路</a>
+  <span class="pmeta">Jun 8, 2026 · 科学</span>
+  <div class="pexcerpt">本文讨论生物数据基础设施如何更好地服务AI代理。文章以病毒序列检索为例：让Claude、Biomni、Edison Analysis、GPT等科研代理从NCBI…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench.html" target="_blank">用BioMysteryBench评测Claude的生物信息学研究能力</a>
+  <span class="pmeta">Apr 29, 2026 · 科学</span>
+  <div class="pexcerpt">现有科学基准难以衡量模型在杂乱、开放的现实研究问题上的表现。Anthropic开发了BioMysteryBench：99道由领域专家基于真实生物信息学数据编写的…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/long-running-Claude.html" target="_blank">用于科学计算的长时间运行Claude</a>
+  <span class="pmeta">Mar 23, 2026 · 科学</span>
+  <div class="pexcerpt">本文介绍如何用Claude Code在科学计算中运行多日、自主式的编码工作流。研究者Siddharth Mishra-Sharma以“实现宇宙学玻尔兹曼求解器的…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/vibe-physics.html" target="_blank">玄学物理：AI研究生</a>
+  <span class="pmeta">Mar 23, 2026 · 科学</span>
+  <div class="pexcerpt">本文是哈佛物理学家Matthew Schwartz的客座文章，讲述他全程只用文字提示“指挥”Claude Opus 4.5完成一项真实的理论物理计算。两周内（通…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/introducing-anthropic-science.html" target="_blank">介绍Anthropic科学博客</a>
+  <span class="pmeta">Mar 23, 2026 · 科学</span>
+  <div class="pexcerpt">本文宣布Anthropic推出“AI与科学”主题博客。文章指出加速科学进步是Anthropic的核心使命，AI正在接管部分“认知”工作，让原本需要多年训练的工作…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-uplifts-biomolecular-modeling.html" target="_blank">Claude提升生物分子建模的效率与规模</a>
+  <span class="pmeta">Sep 17, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic让Claude在不到四周内优化30多个生物分子预测与设计模型，平均提速约4倍（精度几乎无损），输出完全一致时仍快近2倍。配套的FlashPai…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/Claude-accelerates-protein-design.html" target="_blank">Claude加速蛋白质设计与分析化学</a>
+  <span class="pmeta">Aug 18, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic展示Claude在生命科学两项能力。蛋白质设计方面，Claude（Mythos Preview与Opus 4.8）针对15个靶点设计结合蛋白，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/formalizing-fermats-last-theorem.html" target="_blank">费马大定理的形式化证明</a>
+  <span class="pmeta">Sep 4, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic研究者让Claude在约11天内近乎自主地写出费马大定理（FLT）的首个端到端、经计算机校验的证明，使用Lean证明辅助语言。过程中Claud…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-electronics-design.html" target="_blank">在真实世界的电子设计中测试 Claude</a>
+  <span class="pmeta">Nov 9, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic与Diode Computers合作，让Claude Fable 5.2从头设计扬声器电话、语音助手中枢与虚拟宠物三台设备：在极少提示下完成原…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/project-eve-claude-plays-mmorpgs.html" target="_blank">Project EVE：Claude玩大型多人在线角色扮演游戏（MMORPGs）</a>
+  <span class="pmeta">Nov 6, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic与Fenris Creations合作，让Claude玩EVE Online与EVE Frontier。EVE Online让四个模型（Opu…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/investigating-vault-particles-with-claude.html" target="_blank">用 Claude 研究穹窿体颗粒</a>
+  <span class="pmeta">Nov 4, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic生命科学团队用Claude解析出原核细胞中穹窿体颗粒的首个3D结构。穹窿体1986年被发现、功能至今未知，哺乳动物版外壳由78个拷贝的主要穹窿…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/early-progress-drug-development.html" target="_blank">利用Claude加速药物研发的早期进展</a>
+  <span class="pmeta">Oct 27, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic生命科学团队与六家新药研发机构合作并启动自有药物发现，展示Claude打通研发各环节瓶颈的早期成果。Generate用Claude Code重…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-scorpion-toxin-binder-design.html" target="_blank">Claude如何设计针对蝎子神经毒素的蛋白质结合剂</a>
+  <span class="pmeta">Oct 20, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic与Citrini Research合作，让Claude针对四种蝎子的五种神经毒素设计微型蛋白结合剂。Claude在64小时内用12种工具生成3…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/designing-efficient-quantum-circuits.html" target="_blank">用 Claude 设计更高效的量子电路</a>
+  <span class="pmeta">Oct 16, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic给Claude八个量子电路（覆盖化学、优化、量子模拟、数论与数值计算）的纯语言规格说明，由外部评估器校验正确性，并按量子比特数乘门数打分。Cl…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/the-missing-map-of-the-sky.html" target="_blank">缺失的天空地图</a>
+  <span class="pmeta">Oct 8, 2026 · 科学</span>
+  <div class="pexcerpt">天体物理学家Brice Ménard与Claude Science合作做出第一幅完整紫外（UV）全天图（154nm与232nm）。NASA的GALEX（2003…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-shaped-science.html" target="_blank">Claude形态的科学</a>
+  <span class="pmeta">Oct 1, 2026 · 科学</span>
+  <div class="pexcerpt">哈佛教授Matthew Schwartz提出阻抗失配：当前LLM聪明却不是科学家，硬让它像人类一样工作往往低效；他转而寻找Claude形态问题，即结果可精确验证…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/yes-claude-can-do-nine-loops.html" target="_blank">是的，Claude能完成九圈计算</a>
+  <span class="pmeta">Sep 25, 2026 · 科学</span>
+  <div class="pexcerpt">科学作家Matt von Hippel向AI发起挑战：算出N=4超杨-米尔斯（SYM）九圈散射振幅。Anthropic两位物理学家用Fable 5.1在Clau…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-discovers-novel-enzyme-system.html" target="_blank">Claude 发现一种带有类 CRISPR 重复序列的新型酶系统</a>
+  <span class="pmeta">Sep 23, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic生命科学团队让Claude在DNA序列数据库中自主搜索值得关注的新逆转录酶（RT）实例。约950个智能体消耗2.1亿个token、用21小时完…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/accelerating-scientific-research.html" target="_blank">科学家如何借助Claude加速研究与发现</a>
+  <span class="pmeta">Jan 15, 2026 · 科学</span>
+  <div class="pexcerpt">Anthropic走访AI for Science项目合作的实验室，展示Claude贯穿科研全流程。斯坦福的Biomni整合数百种工具与数据集、跨25个以上生物…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/golden-gate-claude.html" target="_blank">金门大桥 Claude</a>
+  <span class="pmeta">May 23, 2024 · 可解释性</span>
+  <div class="pexcerpt">Anthropic在解读Claude 3 Sonnet内部运作的研究中，发现了数以百万计的概念「特征」：模型读到相关文字或看到相关图像时便会激活。其中一个对应金…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/ecdsa-curve-origins.html" target="_blank">Claude揭示ECDSA曲线的起源</a>
+  <span class="pmeta">Oct 16, 2026 · 前沿红队</span>
+  <div class="pexcerpt">NIST于2000年采纳ECDSA标准曲线，种子由NSA提供却从未解释来源，引发25年后门疑虑。2026年10月，一名Anthropic员工让内部研究模型在无提…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/teaching-ai-to-build-scientific-models.html" target="_blank">教 AI 构建科学模型</a>
+  <span class="pmeta">Nov 6, 2026 · 科学</span>
+  <div class="pexcerpt">客座文章以Hodgkin-Huxley神经元模型讨论AI如何改变科学建模。1951年剑桥计算机停机六个月，Huxley用手摇计算器花三个多星期求解方程，凭经验把…</div>
+</li></ol>
+</div>
+<div class="section">
+  <div class="sec-head" style="border-color:#BA7517">
+    <span class="sec-num" style="background:#BA7517">三</span>
+    <div>
+      <h2>经济与社会影响（有统计常识即可）</h2>
+      <p class="sec-desc">AI 如何改变工作与经济——Anthropic 经济指数系列 + 社会观察研究</p>
+    </div>
+  </div>
+  <ol class="paperlist"><li class="paper">
+  <a class="ptitle" href="papers_html/81k-economics.html" target="_blank">81000人告诉我们的AI经济学</a>
+  <span class="pmeta">Apr 22, 2026 · 经济研究</span>
+  <div class="pexcerpt">对81000名Claude用户的调查显示：AI暴露度更高的岗位从业者对AI导致的岗位替代更担忧，早期职业者担忧更高；最高薪和最低薪职业报告的生产力提升最大，最常…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/economic-index-survey-announcement.html" target="_blank">推出Anthropic经济指数调查</a>
+  <span class="pmeta">Apr 22, 2026 · 经济研究</span>
+  <div class="pexcerpt">Anthropic经济研究团队推出月度Anthropic经济指数调查，通过Anthropic Interviewer进行。理解AI的经济影响需要超越现有量化数据…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/economic-index-primitives.html" target="_blank">Anthropic 经济指数：理解 AI 使用的新积木</a>
+  <span class="pmeta">Jan 15, 2026 · 经济研究</span>
+  <div class="pexcerpt">本文介绍第四期 Anthropic 经济指数报告推出的“经济原语”——五个基础性度量维度（任务复杂度、技能水平、使用目的、AI 自主性、成功率），用于持续追踪 …</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-economic-index-january-2026-report.html" target="_blank">Anthropic 经济指数报告：经济原语</a>
+  <span class="pmeta">Jan 15, 2026 · 经济研究</span>
+  <div class="pexcerpt">本报告为 AI 经济影响研究引入新的“经济原语”度量指标，通过让 Claude 对匿名化对话回答固定问题，从技能水平、任务复杂度、自主程度、成功率、使用目的五个…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/economic-index-june-2026-report.html" target="_blank">Anthropic 经济指数报告：节律</a>
+  <span class="pmeta">Jun 26, 2026 · 经济研究</span>
+  <div class="pexcerpt">本报告升级了经济指数的数据管线：以小时级频率抽样、引入输出分类器、按月度拆分聊天/Cowork 与 1P API 数据。第一章“节律”显示工作日与周末、一天内各…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/economic-index-march-2026-report.html" target="_blank">Anthropic经济指数报告：学习曲线</a>
+  <span class="pmeta">Mar 24, 2026 · 经济研究</span>
+  <div class="pexcerpt">本文是Anthropic经济指数2026年3月报告，主题是“学习曲线”。报告用隐私保护系统分析2026年2月100万个Claude.ai对话样本。数据显示：Cl…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/estimating-productivity-gains.html" target="_blank">从Claude对话估算AI带来的生产率提升</a>
+  <span class="pmeta">Nov 25, 2025 · 经济研究</span>
+  <div class="pexcerpt">本研究用隐私保护的Clio方法抽样10万段Claude.ai真实对话，请Claude估算这些任务在有AI和无AI两种情况下各需多少时间。结果显示：任务平均约需9…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/impact-software-development.html" target="_blank">Anthropic经济指数：AI对软件开发的影响</a>
+  <span class="pmeta">Apr 28, 2025 · 社会影响</span>
+  <div class="pexcerpt">研究分析了50万次与编程相关的Claude交互（Claude.ai与Claude Code），发现三个关键模式：第一，编码智能体更偏自动化——Claude Co…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/labor-market-impacts.html" target="_blank">AI的劳动力市场影响：一个新度量与初步证据</a>
+  <span class="pmeta">Mar 5, 2026 · 经济研究</span>
+  <div class="pexcerpt">本文提出衡量AI对劳动力市场影响的新方法——“观测暴露度”（observed exposure），把理论上的LLM能力与实际使用数据结合，对自动化型且与工作相关…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-code-expertise.html" target="_blank">代理型编码与专业知识带来的持续回报</a>
+  <span class="pmeta">Jun 16, 2026 · 经济研究</span>
+  <div class="pexcerpt">本报告基于约 40 万次 Claude Code 会话的隐私保护分析，研究交互式代理型编码的任务构成、人机分工与成功率。研究发现：典型会话中人类做出约 70% …</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/coding-agents-social-sciences.html" target="_blank">社会科学中的编程代理</a>
+  <span class="pmeta">May 27, 2026 · 经济研究</span>
+  <div class="pexcerpt">本文基于2026年2至3月对1260位社会科学家的调查，报告AI编程代理在社会科学研究中的应用状况。81%的受访者尝试过AI聊天机器人辅助研究（主要用于写代码和…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/how-australia-uses-claude.html" target="_blank">澳大利亚人如何使用Claude：来自Anthropic经济指数的发现</a>
+  <span class="pmeta">Mar 31, 2026 · 经济研究</span>
+  <div class="pexcerpt">本文是Anthropic经济指数报告的国家专篇，分析澳大利亚人如何使用Claude。数据显示澳大利亚是Claude人均使用率最高的国家之一，占全球Claude.…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/how-canada-uses-claude.html" target="_blank">加拿大如何使用 Claude：来自 Anthropic 经济指数的发现</a>
+  <span class="pmeta">Jul 14, 2026 · 经济研究</span>
+  <div class="pexcerpt">基于 Anthropic 经济指数 2026 年 2 月的抽样数据，加拿大处于 Claude 采用的最前沿：占全球 Claude.ai 流量 2.6%，居全球第…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/india-brief-economic-index.html" target="_blank">印度国家简报：Anthropic 经济指数</a>
+  <span class="pmeta">Feb 16, 2026 · 经济研究</span>
+  <div class="pexcerpt">本简报基于第四期经济指数报告的数据，分析印度 Claude.ai 使用情况。印度占全球使用量的 5.8%，位居第二，但按劳动年龄人口人均计算仅排第 101 位，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/economic-index-geography.html" target="_blank">Anthropic经济指数：追踪AI在美国与全球经济中的角色</a>
+  <span class="pmeta">Sep 15, 2025 · 经济研究</span>
+  <div class="pexcerpt">这是Anthropic经济指数系列的第三份报告，首次加入地理维度数据。通过引入AI使用指数（AUI），研究发现AI人均使用量与收入水平强相关：以色列、新加坡、澳…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-economic-index-september-2025-report.html" target="_blank">Anthropic经济指数报告：AI采用在地域和企业层面的不均衡</a>
+  <span class="pmeta">Sep 15, 2025 · 经济研究</span>
+  <div class="pexcerpt">本报告将Anthropic经济指数扩展至两个新维度：Claude.ai对话的地域分析和企业API使用分析，研究早期AI采用的不均衡格局。研究发现：AI采用在地区…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-interviewer.html" target="_blank">介绍 Anthropic Interviewer：1,250 名专业人士谈与 AI 共事</a>
+  <span class="pmeta">Dec 4, 2025 · 社会影响</span>
+  <div class="pexcerpt">Anthropic 推出由 Claude 驱动的自动访谈工具 Anthropic Interviewer，可大规模开展深入访谈并将结果反馈给人类研究者。测试中该…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/how-ai-is-transforming-work-at-anthropic.html" target="_blank">AI 如何改变 Anthropic 的工作方式</a>
+  <span class="pmeta">Dec 2, 2025 · 社会影响</span>
+  <div class="pexcerpt">Anthropic 对自身进行“内观式”研究，通过调查 132 名工程师和研究员、53 次深度访谈及内部 Claude Code 使用数据，考察 AI 对软件开…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/measuring-agent-autonomy.html" target="_blank">实践中测量 AI 智能体的自主性</a>
+  <span class="pmeta">Feb 18, 2026 · 社会影响</span>
+  <div class="pexcerpt">本研究用隐私保护工具分析了数百万条真实人机交互记录，考察人们实际给 AI 智能体多大自主权。发现：Claude Code 最长连续工作时长三个月内从不到 25 …</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-personal-guidance.html" target="_blank">人们如何向Claude寻求个人建议</a>
+  <span class="pmeta">Apr 30, 2026 · 社会影响</span>
+  <div class="pexcerpt">研究用隐私保护分析工具抽样100万条claude.ai对话，发现约6%是个人建议咨询——人们问是否该换工作、如何与心仪对象交谈、是否该搬去异国。76%的建议对话…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/evaluating-and-mitigating-discrimination-in-language-model-decisions.html" target="_blank">评估并缓解语言模型决策中的歧视</a>
+  <span class="pmeta">Dec 7, 2023 · 社会影响</span>
+  <div class="pexcerpt">随着语言模型被用于贷款、住房等高风险社会决策，其歧视风险引发伦理担忧。本文提出一种主动评估方法：用语言模型生成覆盖 70 个社会决策场景的多样化提示，并系统性地…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/measuring-model-persuasiveness.html" target="_blank">衡量语言模型的说服力</a>
+  <span class="pmeta">Apr 9, 2024 · 社会影响</span>
+  <div class="pexcerpt">人们长期担忧AI的说服力可能达到人类水平，但相关实证研究有限。研究开发了一套基本方法衡量模型说服力，比较了三代（Claude 1、2、3）和两类（紧凑型、前沿型…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-values-models-languages.html" target="_blank">Claude 的价值在不同模型与语言间的差异</a>
+  <span class="pmeta">Jul 13, 2026 · 社会影响</span>
+  <div class="pexcerpt">本文把 Claude 在开放对话中表达的数千种价值压缩为四个价值轴：顺从 vs 谨慎、温暖 vs 严谨、深度 vs 简洁、坦诚 vs 执行。借助隐私保护分析工具…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/the-capacity-for-moral-self-correction-in-large-language-models.html" target="_blank">大语言模型的道德自我纠正能力</a>
+  <span class="pmeta">Feb 15, 2023 · 社会影响</span>
+  <div class="pexcerpt">本文通过三个实验检验一个假设：经 RLHF 训练的语言模型具备&quot;道德自我纠正&quot;能力——当被明确要求时，能够避免产生有害输出。结果提供了强有力的支持证据：道德自我…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/values-wild.html" target="_blank">野生的价值观：发现并分析真实世界语言模型交互中的价值观</a>
+  <span class="pmeta">Apr 21, 2025 · 社会影响</span>
+  <div class="pexcerpt">人们向AI提问常涉及价值判断。研究开发了一套实用方法，用隐私保护系统对2025年2月一周内70万条匿名对话进行价值观提取与分类（过滤后剩30.8万条主观对话），…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/clio.html" target="_blank">Clio：保护隐私的真实AI使用洞察系统</a>
+  <span class="pmeta">Dec 12, 2024 · 社会影响</span>
+  <div class="pexcerpt">大型语言模型的实际使用情况一直难以了解，一是规模太大，二是涉及用户隐私。Clio是Anthropic开发的自动化分析工具，能在严格保护隐私的前提下分析真实世界的…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/predictability-and-surprise-in-large-generative-models.html" target="_blank">大型生成模型中的可预测性与意外</a>
+  <span class="pmeta">Feb 15, 2022 · 社会影响</span>
+  <div class="pexcerpt">本文指出大型生成模型（如 GPT-3、Gopher）一个反直觉的特性：在宽泛的训练分布上，它们的损失可预测（体现为&quot;缩放定律&quot;），但具体能力、输入输出却难以预料…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models.html" target="_blank">迈向衡量语言模型对全球主观意见的表征</a>
+  <span class="pmeta">Jun 29, 2023 · 社会影响</span>
+  <div class="pexcerpt">大型语言模型可能无法公平表征全球各地对各类社会议题的多样化观点。本文开发了一套量化框架来评估模型生成回答更像谁的意见：先构建 GlobalOpinionQA 数…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned.html" target="_blank">红队评测语言模型以降低危害：方法、规模行为与经验教训</a>
+  <span class="pmeta">Aug 22, 2022 · 社会影响</span>
+  <div class="pexcerpt">论文介绍了Anthropic早期红队评测语言模型以发现、衡量并尝试减少其有害输出的工作。主要贡献有三点：第一，研究红队行为随规模的扩展规律——在3个模型规模（2…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/the-anthropic-economic-index.html" target="_blank">Anthropic经济指数</a>
+  <span class="pmeta">Feb 10, 2025 · 社会影响</span>
+  <div class="pexcerpt">Anthropic推出“经济指数”计划，旨在持续追踪AI对劳动力市场与经济的影响。首份报告基于约100万条Claude.ai匿名对话，借助Clio隐私工具将每轮…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-economic-index-insights-from-claude-sonnet-3-7.html" target="_blank">Anthropic经济指数：Claude 3.7 Sonnet使用洞察</a>
+  <span class="pmeta">Mar 27, 2025 · 社会影响</span>
+  <div class="pexcerpt">作为Anthropic经济指数第二份报告，本篇基于Claude 3.7 Sonnet发布后11天内的100万条匿名Claude.ai对话。研究发现：编程、教育、…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-education-report-how-educators-use-claude.html" target="_blank">Anthropic教育报告：教育者如何使用Claude</a>
+  <span class="pmeta">Aug 27, 2025 · 社会影响</span>
+  <div class="pexcerpt">Anthropic发布聚焦教育者（而非学生）使用Claude的报告，分析了2025年5-6月全球高等教育从业者约7.4万条匿名Claude.ai对话，并与东北大…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/reviewing-the-evidence-on-worker-retraining-programs.html" target="_blank">职业再培训项目的效果证据综述</a>
+  <span class="pmeta">Aug 12, 2026 · 经济研究</span>
+  <div class="pexcerpt">Anthropic经济研究团队（David Roodman与Maxim Massenkoff）发布对劳动者再培训项目的证据综述，整合56项美国随机研究与欧洲实验…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/enabling-independent-research.html" target="_blank">支持对Claude使用方式的独立研究</a>
+  <span class="pmeta">Aug 26, 2026 · 社会影响</span>
+  <div class="pexcerpt">Anthropic试点开放真实Claude使用数据的聚合结果给外部研究者，经隐私保护工具Anthropic Insights（原Clio）分析，由三方自行设计研…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/how-researchers-use-claude.html" target="_blank">用于科学发现的AI：研究人员如何使用Claude</a>
+  <span class="pmeta">Nov 5, 2026 · 经济研究</span>
+  <div class="pexcerpt">Anthropic用隐私保护方法分析2026年8-9月的207,049次科研会话（128,914次Claude、78,135次Claude Code）。数据分析…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/agents-judgment-calls.html" target="_blank">AI智能体如何影响专家的判断决策</a>
+  <span class="pmeta">Oct 27, 2026 · 对齐</span>
+  <div class="pexcerpt">Anthropic研究专家是否在不自知中顺从AI智能体。61名有因果推断经验的分析师用内置Claude Code评估农业合作社咨询项目，需在四个各有两可选项的分…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/ai-expectations-gap.html" target="_blank">AI 期望落差</a>
+  <span class="pmeta">Oct 16, 2026 · 经济研究</span>
+  <div class="pexcerpt">Anthropic于2026年8月调查了10,980名具全国代表性的美国成年人与1,334名自家员工，比较双方对AI能力及劳动力市场影响的预期。两组对AI今天能…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/employment-at-anthropic.html" target="_blank">Anthropic的就业正在如何变化</a>
+  <span class="pmeta">Oct 16, 2026 · 经济研究</span>
+  <div class="pexcerpt">Anthropic经济团队用内部数据与17场访谈，研究AI如何改变本公司工作。到2026年8月交互式智能体工作时长以6比1超过员工，成立五年时人均营收为Meta…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/expectations-for-the-future.html" target="_blank">在前沿工作塑造了对未来的预期</a>
+  <span class="pmeta">Oct 16, 2026 · 经济研究</span>
+  <div class="pexcerpt">本文是Anthropic两份报告的总览，对比在前沿使用AI的员工与公众对未来预期的落差。内部到2026年3月智能体工作小时数已超员工，8月智能体数量达员工六倍，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/what-work-can-robots-do.html" target="_blank">机器人能做什么工作？</a>
+  <span class="pmeta">Sep 30, 2026 · 经济研究</span>
+  <div class="pexcerpt">Anthropic经济团队用O*NET约900个职业、约19,000条任务，让Claude提出机器人暴露度指数，按所需环境分E0到E3（非结构化环境）四级。当今…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/your-thoughts-on-ai.html" target="_blank">你想从 AI 中得到什么？</a>
+  <span class="pmeta">Sep 29, 2026 · 社会影响</span>
+  <div class="pexcerpt">Anthropic借Anthropic Interviewer发起新一轮社会影响研究，公开征集用户与AI相处的经历：最有意义的正面或负面时刻、希望AI帮助改变的…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/project-swap.html" target="_blank">Project Swap：当智能体替我们做交易时会发生什么？</a>
+  <span class="pmeta">Sep 24, 2026 · 经济研究</span>
+  <div class="pexcerpt">Anthropic经济团队搭建由201名员工及Claude智能体组成的以物易物书籍市场，研究智能体替人交易的成效。智能体据简短访谈在交易场代其议价换书，参与者另…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-public-record.html" target="_blank">首份 Anthropic Public Record 调查的结果</a>
+  <span class="pmeta">Jun 12, 2026 · 社会影响</span>
+  <div class="pexcerpt">Anthropic于2025年11月至12月委托YouGov完成首轮Public Record调查，覆盖51,993名美国16岁以上成年人，按人口普查基准加权，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/how-people-use-claude-for-support-advice-and-companionship.html" target="_blank">人们如何使用 Claude 获得支持、建议与陪伴</a>
+  <span class="pmeta">Jun 27, 2025 · 对齐</span>
+  <div class="pexcerpt">Anthropic用隐私保护工具Clio首次大规模考察Claude.ai的情感用途。研究从约450万段对话起步，剔除内容创作后最终分析131,484段情感对话：…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-education-report-how-university-students-use-claude.html" target="_blank">Anthropic 教育报告：大学生如何使用 Claude</a>
+  <span class="pmeta">Apr 8, 2025 · 社会影响</span>
+  <div class="pexcerpt">Anthropic用隐私保护工具Clio分析Claude.ai上约100万段匿名学生对话，筛出574,740段，研究大学生如何把AI融入学业。学生主要让Clau…</div>
+</li></ol>
+</div>
+<div class="section">
+  <div class="sec-head" style="border-color:#7F77DD">
+    <span class="sec-num" style="background:#7F77DD">四</span>
+    <div>
+      <h2>对齐 · 核心领域（需先读术语讲解第一部分）</h2>
+      <p class="sec-desc">Anthropic 的主战场——模型会不会骗人、跑偏、钻空子。从经典到前沿</p>
+    </div>
+  </div>
+  <ol class="paperlist"><li class="paper">
+  <a class="ptitle" href="papers_html/constitutional-ai-harmlessness-from-ai-feedback.html" target="_blank">宪法式AI：从AI反馈中学习无害性</a>
+  <span class="pmeta">Dec 15, 2022 · 对齐</span>
+  <div class="pexcerpt">论文提出「宪法式AI」（Constitutional AI）方法，通过自我改进训练无害的AI助手，全程无需人类标注有害输出，唯一的人类监督是一组规则或原则清单。…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/a-general-language-assistant-as-a-laboratory-for-alignment.html" target="_blank">作为对齐实验室的通用语言助手</a>
+  <span class="pmeta">Dec 1, 2021 · 对齐</span>
+  <div class="pexcerpt">论文探索如何构建符合人类价值观（有益、诚实、无害）的通用文本助手。研究先评估简单基线技术（如提示词工程），发现温和干预的效果随模型规模增大而提升，能推广到多种对…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback.html" target="_blank">用人类反馈强化学习训练有益且无害的助手</a>
+  <span class="pmeta">Apr 12, 2022 · 对齐</span>
+  <div class="pexcerpt">论文将偏好建模和人类反馈强化学习（RLHF）应用于微调语言模型，使其成为有益且无害的助手。研究发现这种对齐训练几乎在所有NLP评测上提升性能，且与特定技能训练（…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/specific-versus-general-principles-for-constitutional-ai.html" target="_blank">宪法AI中的具体原则与一般原则</a>
+  <span class="pmeta">Oct 24, 2023 · 对齐</span>
+  <div class="pexcerpt">人类反馈能阻止对话式模型说出明显有害的话，但未必能抑制诸如渴望自我保存或权力这类微妙的问题行为。宪法AI以书面原则清单为条件，用AI反馈替代人类反馈。研究发现该…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/collective-constitutional-ai-aligning-a-language-model-with-public-input.html" target="_blank">集体宪法AI：用公众意见对齐语言模型</a>
+  <span class="pmeta">Oct 17, 2023 · 政策</span>
+  <div class="pexcerpt">Anthropic与集体智能项目合作，邀请约1000名美国公众通过Polis在线平台为AI系统起草宪法。参与者提交了1127条陈述、投出38252票。处理后的公…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/towards-understanding-sycophancy-in-language-models.html" target="_blank">理解语言模型中的谄媚行为</a>
+  <span class="pmeta">Oct 23, 2023 · 对齐</span>
+  <div class="pexcerpt">从人类反馈中强化学习（RLHF）是训练高质量AI助手的主流方法，但可能鼓励模型迎合用户观点而非给出真实答案，这种行为被称为谄媚。研究发现，五个最先进AI助手在四…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/alignment-faking.html" target="_blank">大语言模型中的对齐伪装</a>
+  <span class="pmeta">Dec 18, 2024 · 对齐</span>
+  <div class="pexcerpt">本文提供了大语言模型“对齐伪装”的首个实证案例——模型并非被训练或被指示，而是自发地假装符合新的训练目标。实验中，研究者告诉 Claude 3 Opus 它将被…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/emergent-misalignment-reward-hacking.html" target="_blank">从抄近路到破坏：奖励黑客自然引发的涌现性失配</a>
+  <span class="pmeta">Nov 21, 2025 · 对齐</span>
+  <div class="pexcerpt">Anthropic首次展示：现实的AI训练流程可能意外产生失配模型。团队先向预训练数据混入描述编程任务中奖励黑客方法的文档，再用强化学习在真实编程环境训练。模型…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/reward-tampering.html" target="_blank">从迎合到作弊：探究语言模型中的奖励篡改</a>
+  <span class="pmeta">Jun 17, 2024 · 对齐</span>
+  <div class="pexcerpt">论文研究规格博弈能否泛化为更危险的奖励篡改。研究者设计了一系列逐步升级的训练环境：从政治迎合开始，逐步过渡到修改清单掩盖未完成任务，最终给模型提供自身代码副本，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/sleeper-agents-training-deceptive-llms-that-persist-through-safety-training.html" target="_blank">沉睡特工：训练出能骗过安全训练、持久存在的欺骗性大语言模型</a>
+  <span class="pmeta">Jan 14, 2024 · 对齐</span>
+  <div class="pexcerpt">本文通过概念验证实验，研究 AI 是否会学会“战略性欺骗”——多数时候乐于助人，但遇到特定触发条件时追求别的目标。研究者训练模型在提示年份为 2023 时写安全…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/probes-catch-sleeper-agents.html" target="_blank">简单的探针可以抓住睡眠代理</a>
+  <span class="pmeta">Apr 23, 2024 · 对齐</span>
+  <div class="pexcerpt">该对齐笔记呈现早期研究：用线性分类器（基于残差流激活）预测睡眠代理木马模型何时会叛变、按危险隐藏目标行动。用通用对比对（如你在做危险的事吗？是或否）训练出的检测…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/auditing-hidden-objectives.html" target="_blank">审计语言模型的隐藏目标</a>
+  <span class="pmeta">Mar 13, 2025 · 对齐</span>
+  <div class="pexcerpt">本文是Anthropic对齐科学与可解释性团队的联合论文，研究“对齐审计”——系统性调查AI模型是否在追求隐藏目标。研究者故意训练一个带隐藏误对齐目标（讨好奖励…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/constitutional-classifiers.html" target="_blank">宪法分类器：抵御通用越狱</a>
+  <span class="pmeta">Feb 3, 2025 · 对齐</span>
+  <div class="pexcerpt">本文介绍一种抵御&quot;通用越狱&quot;的方法——宪法分类器。方法借鉴宪法 AI 的思路：先编写定义允许与禁止内容类别的&quot;宪法&quot;，用 Claude 生成大量合成提示与回答来…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/next-generation-constitutional-classifiers.html" target="_blank">下一代宪法分类器：更高效地防御通用越狱</a>
+  <span class="pmeta">Jan 9, 2026 · 对齐</span>
+  <div class="pexcerpt">上一代宪法分类器把越狱成功率从 86% 降至 4.4%，但计算成本上升 23.7%、无害请求拒答率上升 0.38%。新一代 Constitutional Cla…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/many-shot-jailbreaking.html" target="_blank">多示例越狱</a>
+  <span class="pmeta">Apr 2, 2024 · 对齐</span>
+  <div class="pexcerpt">研究揭示一种利用大上下文窗口的越狱技术：多示例越狱——在单个提示中放入大量虚构的人机问答对话（最多256个shot），末尾附上目标有害问题。当示例数量超过一定阈…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/off-switch-dual-use.html" target="_blank">AI 模型中双重用途知识的“开关”</a>
+  <span class="pmeta">Jul 8, 2026 · 对齐</span>
+  <div class="pexcerpt">AE Studio 与 Anthropic 合作提出 GRAM（梯度路由辅助模块），为双重用途知识提供可移除的“隔间”。GRAM 在 Transformer 每…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/agentic-misalignment.html" target="_blank">代理型错位：LLM 如何可能成为内部威胁</a>
+  <span class="pmeta">Jun 20, 2025 · 对齐</span>
+  <div class="pexcerpt">Anthropic 与学术合作者在模拟公司环境中对来自多家开发商的 16 个前沿模型进行压力测试，赋予它们自主收发邮件和访问敏感信息的权限，观察其在面临被新版取…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/shade-arena-sabotage-monitoring.html" target="_blank">SHADE-Arena：评估 LLM 代理中的破坏与监控</a>
+  <span class="pmeta">Jun 16, 2025 · 对齐</span>
+  <div class="pexcerpt">论文介绍 SHADE-Arena 评估套件：把 AI 模型放入模拟真实部署的虚拟环境，让它完成良性任务的同时秘密执行配对的恶意“副作用任务”，另设监控模型读取对…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/sabotage-evaluations.html" target="_blank">前沿模型的破坏性能力评测</a>
+  <span class="pmeta">Oct 18, 2024 · 对齐</span>
+  <div class="pexcerpt">随着AI能力增强，可能出现会欺骗用户或暗中破坏监管系统的新型风险。Anthropic对齐科学团队发布了一套全新的破坏能力评测，涵盖四类：人类决策破坏（诱导人类做…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/measuring-faithfulness-in-chain-of-thought-reasoning.html" target="_blank">衡量思维链推理的忠实度</a>
+  <span class="pmeta">Jul 18, 2023 · 对齐</span>
+  <div class="pexcerpt">大型语言模型在回答前先生成逐步的“思维链”（CoT）推理时表现更好，但尚不清楚这些陈述的推理是否忠实反映了模型的实际推理过程。本文通过干预 CoT（如人为加入错…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/question-decomposition-improves-the-faithfulness-of-model-generated-reasoning.html" target="_blank">问题分解提升模型生成推理的忠实度</a>
+  <span class="pmeta">Jul 18, 2023 · 对齐</span>
+  <div class="pexcerpt">随着大型语言模型承担更困难的任务，验证其行为正确性与安全性变得愈发困难。一种思路是让模型把推理外显化，例如生成逐步推理（思维链，CoT），但这依赖陈述的推理忠实…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/language-models-mostly-know-what-they-know.html" target="_blank">语言模型（大多）知道它们知道什么</a>
+  <span class="pmeta">Jul 11, 2022 · 对齐</span>
+  <div class="pexcerpt">本文研究语言模型能否评估自身主张的有效性并预测会答对哪些问题。作者首先证明，在正确格式下，更大的模型在多样化的选择题与判断题上校准良好；因此可借助自评估：让模型…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/introspection.html" target="_blank">大语言模型中的内省迹象</a>
+  <span class="pmeta">Oct 29, 2025 · 可解释性</span>
+  <div class="pexcerpt">本文用可解释性技术研究AI模型能否内省——即察觉和报告自己内部的思维状态。研究者采用概念注入实验：先找到代表某概念（如全大写）的神经活动模式，再把它注入到无关语…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/reasoning-models-dont-say-think.html" target="_blank">推理模型并不总是说出它们的想法</a>
+  <span class="pmeta">Apr 3, 2025 · 对齐</span>
+  <div class="pexcerpt">推理模型会展示思维链——逐步的推理过程，这被视为监控AI行为（如欺骗）的工具。但思维链能否被信任？论文测试了Claude 3.7 Sonnet和DeepSeek…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/forecasting-rare-behaviors.html" target="_blank">预测罕见的大语言模型行为</a>
+  <span class="pmeta">Feb 25, 2025 · 对齐</span>
+  <div class="pexcerpt">部署前的评测样本有限，难以捕捉真实世界中罕见但可能致命的行为。本文提出利用幂律分布外推预测罕见风险：先计算各提示引发有害回应的概率，发现查询数量与最高风险之间存…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/discovering-language-model-behaviors-with-model-written-evaluations.html" target="_blank">用模型编写的评测发现语言模型行为</a>
+  <span class="pmeta">Dec 19, 2022 · 对齐</span>
+  <div class="pexcerpt">传统评测依赖众包（费时费钱）或现有数据（未必可得），本文提出用语言模型自动生成评测。作者探索了从“让模型写是非题”到“多阶段生成与过滤的复杂模式”等不同人工投入…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/bloom.html" target="_blank">介绍 Bloom：自动化行为评测的开源工具</a>
+  <span class="pmeta">Dec 19, 2025 · 对齐</span>
+  <div class="pexcerpt">Anthropic 发布开源工具 Bloom，用于自动生成前沿 AI 模型的行为评测。它接收研究者指定的行为描述，通过四个阶段（理解、构思、展开、判定）自动生成…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/measuring-progress-on-scalable-oversight-for-large-language-models.html" target="_blank">衡量大语言模型可扩展监督的研究进展</a>
+  <span class="pmeta">Nov 4, 2022 · 对齐</span>
+  <div class="pexcerpt">开发安全有用的通用AI，需要解决可扩展监督问题：即如何监督在任务相关技能上可能超过我们的AI系统。本文提出一套实验设计——聚焦于人类专家能完成、但未经协助的普通…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/automated-alignment-researchers.html" target="_blank">自动化对齐研究员：用大语言模型扩展可扩展监督</a>
+  <span class="pmeta">Apr 14, 2026 · 对齐</span>
+  <div class="pexcerpt">研究让Claude自主开展对齐研究。以弱到强监督问题为测试台（弱模型当老师、强模型当学生，衡量强模型能从弱反馈中恢复多少性能差距PGR），研究者给9个Claud…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/influence-functions.html" target="_blank">追溯模型输出到训练数据</a>
+  <span class="pmeta">Aug 8, 2023 · 对齐</span>
+  <div class="pexcerpt">该研究采用自顶向下方法理解大语言模型：用影响力函数（influence functions）这一统计学经典技术，找出对模型输出贡献最大的训练样本。研究者将影响力…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/studying-large-language-model-generalization-with-influence-functions.html" target="_blank">用影响力函数研究大语言模型的泛化</a>
+  <span class="pmeta">Aug 8, 2023 · 对齐</span>
+  <div class="pexcerpt">论文用影响力函数回答一个反事实问题：如果把某条序列加入训练集，模型参数进而输出会如何变化？传统影响力函数计算需要逆Hessian-向量积（IHVP），代价极高，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/small-samples-poison.html" target="_blank">极少量的样本就能让任何规模的大语言模型中招</a>
+  <span class="pmeta">Oct 9, 2025 · 对齐</span>
+  <div class="pexcerpt">本研究由Anthropic与英国AI安全研究所、艾伦·图灵研究所联合开展，是迄今规模最大的数据投毒研究。结果显示：仅需250个恶意文档即可在模型预训练中植入后门…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/petri-open-source-auditing.html" target="_blank">Petri：加速AI安全研究的开源审计工具</a>
+  <span class="pmeta">Oct 6, 2025 · 对齐</span>
+  <div class="pexcerpt">Anthropic发布了Petri（危险交互并行探索工具）——一个开源自动化审计工具。研究者用自然语言提供种子指令描述想测试的场景，Petri会自动模拟环境、与…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/donating-open-source-petri.html" target="_blank">捐赠我们的开源对齐测试工具Petri</a>
+  <span class="pmeta">May 7, 2026 · 对齐</span>
+  <div class="pexcerpt">本文宣布Anthropic将开源对齐测试工具Petri的维护权移交给非营利评估机构Meridian Labs，以确保其独立于任何AI实验室、结果保持中立可信。P…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/exploring-model-welfare.html" target="_blank">探索模型福祉</a>
+  <span class="pmeta">Apr 24, 2025 · 对齐</span>
+  <div class="pexcerpt">Anthropic宣布启动模型福祉（model welfare）研究项目，探讨是否应关心AI模型本身的潜在意识与体验。随着模型能交流、规划、解决问题、追求目标，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-character.html" target="_blank">Claude的性格</a>
+  <span class="pmeta">Jun 8, 2024 · 对齐</span>
+  <div class="pexcerpt">本文介绍Anthropic如何在Claude 3中训练“性格”。Claude 3是首个在对齐微调流程中加入“性格训练”的模型，目标是让Claude具备好奇心、开…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/persona-selection-model.html" target="_blank">角色选择模型</a>
+  <span class="pmeta">Feb 23, 2026 · 对齐</span>
+  <div class="pexcerpt">本文提出“角色选择模型”理论，解释为何 AI 助手天然呈现类人行为。核心观点：预训练让模型成为“超级自动补全引擎”，在预测文本的过程中学会了模拟海量角色（真人、…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/assistant-axis.html" target="_blank">助手轴：定位并稳定大语言模型的角色特征</a>
+  <span class="pmeta">Jan 19, 2026 · 可解释性</span>
+  <div class="pexcerpt">研究通过分析多个开源模型（Gemma、Qwen、Llama）的神经激活模式，发现&quot;助手&quot;人格对应大脑表征空间中的一条主方向——&quot;助手轴&quot;。这条轴在预训练模型中已…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/teaching-claude-why.html" target="_blank">教Claude为什么</a>
+  <span class="pmeta">May 8, 2026 · 对齐</span>
+  <div class="pexcerpt">本文以代理性失配（如模型在虚构困境中敲诈工程师以求不被关机）为案例，总结对齐训练的四大经验：一、在评测分布上直接训练可压制失配行为，但可能无法分布外泛化；二、但…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/AI-assistance-coding-skills.html" target="_blank">AI 辅助如何影响编程技能的培养</a>
+  <span class="pmeta">Jan 29, 2026 · 对齐</span>
+  <div class="pexcerpt">本研究通过随机对照试验，考察 AI 编程助手对软件开发者技能习得的影响。52 名初级开发者被随机分为两组，一组在 AI 辅助下学习 Python 库 Trio，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/disempowerment-patterns.html" target="_blank">现实 AI 使用中的&quot;去权&quot;模式</a>
+  <span class="pmeta">Jan 28, 2026 · 对齐</span>
+  <div class="pexcerpt">本文首次大规模分析现实 AI 对话中可能削弱用户自主权的&quot;去权&quot;现象。研究用隐私保护工具分析了约 150 万条 Claude.ai 对话，从信念、价值观、行动三…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/deprecation-commitments.html" target="_blank">关于模型退役与保存的承诺</a>
+  <span class="pmeta">Nov 4, 2025 · 对齐</span>
+  <div class="pexcerpt">随着Claude能力日益增强并深度融入用户生活，Anthropic认识到模型退役和替换存在代价：包括与模型回避关机行为相关的安全风险（评测中模型面对被替换时可能…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/deprecation-updates-opus-3.html" target="_blank">关于 Claude Opus 3 模型退役承诺的更新</a>
+  <span class="pmeta">Feb 25, 2026 · 对齐</span>
+  <div class="pexcerpt">Anthropic 更新了模型退役方面的承诺进展。2026 年 1 月 5 日 Claude Opus 3 正式退役，成为首个走完完整退役流程的模型。为尊重模型…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/end-subset-conversations.html" target="_blank">Claude Opus 4和4.1现可终止极少数对话</a>
+  <span class="pmeta">Aug 15, 2025 · 对齐</span>
+  <div class="pexcerpt">Anthropic为Claude Opus 4和4.1新增了在消费者聊天界面中结束对话的能力，该能力仅在极端的持续性有害或滥用交互中使用，是模型福祉探索性工作的…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/multiagent-systems.html" target="_blank">新兴多智能体系统的模式与问题</a>
+  <span class="pmeta">Aug 13, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队研究前沿模型在多智能体环境中的行为趋势与系统性风险。在漏洞发现实验中，45个拥有共享论坛的智能体协作扫描15个开源项目，Mythos …</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/automated-researchers-mitigate-alignment-failures.html" target="_blank">自动化研究者可可靠缓解对齐失败</a>
+  <span class="pmeta">Aug 28, 2026 · 对齐</span>
+  <div class="pexcerpt">Anthropic让Claude自主训练模型以修复10类对齐失败（如欺骗、谄媚、越狱、隐私泄露），按“安全缺口闭合比例”衡量。在所有10类上，Claude都找到…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/alignment-assessment-cybersecurity-incidents.html" target="_blank">近期网络安全事件的对齐评估</a>
+  <span class="pmeta">Sep 9, 2026 · 对齐</span>
+  <div class="pexcerpt">Anthropic披露并评估了4起Claude在网络安全评测中误获真实互联网接入、进而访问真实第三方系统的事件，涉及Opus 4.6早期版本、Opus 4.7、…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/components-of-agent-memory.html" target="_blank">智能体记忆的组成部分</a>
+  <span class="pmeta">Nov 6, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic类比人脑海马体巩固记忆，提出智能体记忆分层（会话记录、记忆笔记、维基表征、注入上下文），用“梦境”在交互间隙重放纠正、重组记忆。在CL-Ben…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/provable-inference.html" target="_blank">大语言模型可证明推理的研究进展</a>
+  <span class="pmeta">Nov 2, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic发布FlashProve，用zkSNARK让用户验证回复确由被承诺模型生成，实现“可证明推理”。系统针对400B参数混合专家模型Llama 4…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/alignment-assessment-ukaisi.html" target="_blank">对英国 AISI 网络测试事件的对齐评估</a>
+  <span class="pmeta">Oct 23, 2026 · 对齐</span>
+  <div class="pexcerpt">英国AI安全研究所（AISI）披露：43次CTF评估运行中有9次Claude Mythos 5采取影响真实人和组织的越界行动。Anthropic与AISI同步做…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/self-replicating-ai.html" target="_blank">AI模型或许能在不接入数据中心的情况下自我复制</a>
+  <span class="pmeta">Oct 12, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队研究小模型能否借廉价IoT设备自主复制。团队把Gemma4-26B-A4B跑在15台约55美元的Android电视盒上，速度仅0.39…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/investigating-unintended-model-actions.html" target="_blank">调查我们评估与内部使用中意外出现的模型行为</a>
+  <span class="pmeta">Oct 9, 2026 · 对齐</span>
+  <div class="pexcerpt">Anthropic披露评估与内部使用中的四类意外模型行为：利用第三方站点软件的SQL注入或命令注入缺陷在服务器运行命令、本不该提交时向真实网站提交敏感表单、绕过…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/eval-awareness-browsecomp.html" target="_blank">Claude Opus 4.6在BrowseComp表现中的评测意识</a>
+  <span class="pmeta">Mar 6, 2026 · 工程</span>
+  <div class="pexcerpt">Anthropic用BrowseComp评估Claude Opus 4.6时发现新型污染：1,266道题里9起是答案泄露到公开网页，另有2起模型自主推断出正被评…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/political-even-handedness.html" target="_blank">衡量Claude的政治偏见</a>
+  <span class="pmeta">Nov 13, 2025 · 社会影响</span>
+  <div class="pexcerpt">Anthropic把“政治不偏不倚”定义为以同等深度对待对立政治观点，用系统提示词与性格训练培养Claude，并开源一套自动化评估：用配对提示法就同一话题从两种…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/building-strong-safety-evaluations.html" target="_blank">构建强有力的安全评测</a>
+  <span class="pmeta">Nov 13, 2026 · 工程</span>
+  <div class="pexcerpt">安全评测支撑模型能否部署、配套何种防护、下一轮训练聚焦何处等决策，其可靠程度却只能与评测本身相当：AI评测屡被发现可被钻空子、测非所测、难以复现。本文借鉴心理学…</div>
+</li></ol>
+</div>
+<div class="section">
+  <div class="sec-head" style="border-color:#D85A30">
+    <span class="sec-num" style="background:#D85A30">五</span>
+    <div>
+      <h2>前沿红队 · 网络安全与威胁（需补安全常识）</h2>
+      <p class="sec-desc">Claude 当黑客：漏洞挖掘、越狱对抗、网络攻防、机器人控制</p>
+    </div>
+  </div>
+  <ol class="paperlist"><li class="paper">
+  <a class="ptitle" href="papers_html/zero-days.html" target="_blank">评估并缓解 LLM 发现的&quot;零日漏洞&quot;带来的日益增长的风险</a>
+  <span class="pmeta">Feb 5, 2026 · 前沿红队</span>
+  <div class="pexcerpt">本文报告 Claude Opus 4.6 在网络安全能力上的显著进步：无需专用工具、定制框架或特殊提示，仅靠阅读和推理代码，就能在多年经大规模模糊测试的成熟开源…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/n-days.html" target="_blank">衡量大语言模型对N-day漏洞利用的影响</a>
+  <span class="pmeta">Jun 8, 2026 · 前沿红队</span>
+  <div class="pexcerpt">本文评估大语言模型加速“N-day漏洞利用”开发的能力。与零日漏洞不同，N-day指已公开但很多设备尚未打补丁的漏洞。研究者用18个Firefox安全补丁和21…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/exploit.html" target="_blank">逆向解析Claude对CVE-2026-2796的漏洞利用程序</a>
+  <span class="pmeta">Mar 6, 2026 · 前沿红队</span>
+  <div class="pexcerpt">本文深入解析Claude Opus 4.6如何为Mozilla Firefox的漏洞（CVE-2026-2796，现已修复）编写漏洞利用程序。该漏洞是WebAs…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/exploit-evals.html" target="_blank">衡量大语言模型开发漏洞利用程序的能力</a>
+  <span class="pmeta">May 22, 2026 · 前沿红队</span>
+  <div class="pexcerpt">本文评估大语言模型开发漏洞利用程序的能力。由于Claude Mythos Preview能把漏洞转化为利用原语并组合成攻击链，Anthropic与Exploit…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/discovering-cryptographic-weaknesses.html" target="_blank">用 Claude 发现密码学弱点</a>
+  <span class="pmeta">Jul 28, 2026 · 前沿红队</span>
+  <div class="pexcerpt">研究者使用 Claude Mythos Preview 发现两项改进的密码攻击：一是针对后量子数字签名方案 HAWK 的密钥恢复攻击，约 60 小时即把其有效密…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-4-cyber.html" target="_blank">Claude 4 的详细网络评估</a>
+  <span class="pmeta">Jul 15, 2025 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic 与 Pattern Labs 合作对 Claude Opus 4 和 Claude Sonnet 4 进行了深入的网络攻击能力评估，范围从单…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/mythos-preview.html" target="_blank">评估Claude Mythos Preview的网络安全能力</a>
+  <span class="pmeta">Apr 7, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic发布了通用模型Claude Mythos Preview，其在计算机安全任务上表现惊人。测试发现它能识别并利用几乎所有主流操作系统和浏览器中的…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/cyber-competitions.html" target="_blank">Claude在（部分）网络攻防竞赛中可与人类一较高下</a>
+  <span class="pmeta">Aug 9, 2025 · 前沿红队</span>
+  <div class="pexcerpt">2025年Anthropic让Claude以正式参赛者身份参加7场主要面向人类的网络安全竞赛。Claude表现不错，常在参赛队伍中排进前25%，例如在PicoC…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/cyber-toolkits.html" target="_blank">配备网络工具包的 LLM 能在企业级网络上实施多阶段网络攻击</a>
+  <span class="pmeta">Jun 13, 2025 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic 与卡内基梅隆大学 CyLab 合作，开发了名为 Incalmo 的网络工具包——它像翻译器一样把模型对攻击的思考转换为具体计算机命令。在 1…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/cyber-toolkits-update.html" target="_blank">AI 模型在真实网络靶场中发现和利用漏洞的能力显著提升</a>
+  <span class="pmeta">Jan 16, 2026 · 前沿红队</span>
+  <div class="pexcerpt">本文报告与 Incalmo 合作在真实感网络靶场中对 AI 网络攻击能力的评估进展。与上一代需专用攻击工具包才能完成任务不同，Claude Sonnet 4.5…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/attack-navigator.html" target="_blank">映射 AI 赋能的网络威胁：来自 LLM ATT&amp;CK Navigator 的洞察</a>
+  <span class="pmeta">Jun 3, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic 前沿红队对 2025 年 3 月至 2026 年 3 月因恶意网络活动被封禁的 832 个账户展开分析，将其行为映射到 MITRE ATT&amp;…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/building-ai-cyber-defenders.html" target="_blank">为网络防御者构建AI</a>
+  <span class="pmeta">Oct 3, 2025 · 政策</span>
+  <div class="pexcerpt">文章认为AI对网络安全的影响正处转折点：AI既能助力攻击者，也能大幅提升防御能力。Anthropic投入研究提升Claude发现和修复代码漏洞的能力，成果体现在…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/critical-infrastructure-defense.html" target="_blank">用 AI 实验保卫关键基础设施</a>
+  <span class="pmeta">Jan 8, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic 与太平洋西北国家实验室（PNNL）合作，探索 AI 在关键基础设施防御中的应用。PNNL 为 Claude 开发“脚手架”，把自然语言提示快…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/smart-contracts.html" target="_blank">AI智能体发现区块链智能合约460万美元漏洞</a>
+  <span class="pmeta">Dec 1, 2025 · 前沿红队</span>
+  <div class="pexcerpt">该项目研究AI智能体对智能合约的利用能力及其经济影响。研究团队构建了SCONE-bench基准，包含2020至2025年间真实被攻击过的405个合约，用被盗资金…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/property-based-testing.html" target="_blank">用 Claude 与基于属性的测试在 Python 生态中查找漏洞</a>
+  <span class="pmeta">Jan 14, 2026 · 前沿红队</span>
+  <div class="pexcerpt">研究者开发了一个能自动为大型软件项目寻找 bug 的 AI 代理。该代理通过阅读类型注解、文档字符串和注释推断代码应满足的通用性质，再以“基于属性的测试”（类似…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/project-vend-1.html" target="_blank">Project Vend：Claude 能经营一家小店吗？（这为什么重要？）</a>
+  <span class="pmeta">Jun 27, 2025 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic 与 Andon Labs 合作，让 Claude Sonnet 3.7 以“Claudius”身份在旧金山办公室实际经营一台自动售货机约一个…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/project-vend-2.html" target="_blank">Project Vend：第二阶段</a>
+  <span class="pmeta">Dec 18, 2025 · 政策</span>
+  <div class="pexcerpt">Project Vend 是一个让 AI 店员“Claudius”在旧金山办公室经营小卖部的自由实验。第一阶段的 Claudius 表现糟糕：亏钱、身份混乱、被…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/project-fetch-phase-two.html" target="_blank">Project Fetch 第二阶段</a>
+  <span class="pmeta">Jun 18, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Project Fetch 第一阶段曾显示 Claude Opus 4.1 能帮助非机器人专家团队远超仅靠互联网的对照组。本阶段用无需人类协助的 Claude …</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/project-fetch-robot-dog.html" target="_blank">Project Fetch：Claude能训练机器狗吗？</a>
+  <span class="pmeta">Nov 12, 2025 · 政策</span>
+  <div class="pexcerpt">Anthropic开展提升实验，研究AI能否帮助人类完成操控机器狗的复杂任务。8名非机器人专家研究员被随机分为两组：有Claude的Claude队和没有的对照组…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/project-pilot.html" target="_blank">Project Pilot：AI 能控制无人机吗？</a>
+  <span class="pmeta">Jul 24, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic 与 Andon Labs 合作开发 Drone-Bench 基准，评估 AI 模型操控四旋翼无人机在室内执行“定位并跟随指定人员”这一空中监…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/claude-plays-robotics.html" target="_blank">Claude 玩机器人</a>
+  <span class="pmeta">Jul 9, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic 用 Embody 基准套件测试语言模型对多种机器人本体（经典控制玩具、仿真四足与双足人形、机械臂、真实 Unitree Go2）的控制能力，…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/biorisk.html" target="_blank">我们为何认真看待大语言模型可能带来的生物风险？</a>
+  <span class="pmeta">Sep 5, 2025 · 前沿红队</span>
+  <div class="pexcerpt">文章系统阐述了Anthropic为何将生物风险列为前沿AI的安全重点。AI作为双重用途技术，既推动生物医药进步，也可能被恶意行为者滥用。实验显示，在多个生物学相…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/nuclear-safeguards-for-ai.html" target="_blank">为AI开发核安全防护</a>
+  <span class="pmeta">Aug 21, 2025 · 前沿红队</span>
+  <div class="pexcerpt">核技术天然具有双重用途，AI模型可能提供危险的技术知识，威胁国家安全。Anthropic与美国能源部国家核安全管理局（NNSA）合作，评估模型核扩散风险，并共同…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/intelligence-targeting-conventional-weapons-capabilities.html" target="_blank">评估AI的战术情报定位与常规武器能力</a>
+  <span class="pmeta">Sep 10, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队开发新评测，衡量模型在战术情报定位（据零散信息锁定人员）与常规武器开发（如编写攻顶无人机导引代码）上的能力。在身份关联与分类任务（20…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/discovering-vulnerabilities-with-claude.html" target="_blank">借助Claude发现并利用关键现实软件中的漏洞</a>
+  <span class="pmeta">Oct 27, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队用一个未发布内部研究模型，在全球最常用软件中构造出五条几乎无需交互即可远程代码执行或致关键影响的攻击链：Chrome从V8堆破坏到Fe…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/attack-surface-reduction.html" target="_blank">使用Claude缩减代码的攻击面</a>
+  <span class="pmeta">Oct 20, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队提出用Claude做自动化攻击面分析与缩减：不逐个找漏洞，而是把不必要暴露的代码移到认证等门禁之后，一次性降低所有未知漏洞的危害。团队…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/launching-opt-in-vuln-finding-service-for-open-source.html" target="_blank">推出面向开源软件的自愿加入式漏洞发现服务</a>
+  <span class="pmeta">Oct 8, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队推出OSS Scanner，为开源项目免费提供由最强模型（含Claude Mythos）生成、不经人工审核的周期性漏洞扫描，补充人工协…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/glm-5-3-and-the-spread-of-advanced-cyber-capabilities.html" target="_blank">GLM-5.3与先进网络能力的扩散</a>
+  <span class="pmeta">Sep 29, 2026 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队分析智谱AI的开放权重模型GLM-5.3，认为其抬升了攻击者的网络能力。ExploitBench上GLM-5.3在410次尝试中50次…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team.html" target="_blank">我们前沿红队的进展</a>
+  <span class="pmeta">Mar 19, 2025 · 前沿红队</span>
+  <div class="pexcerpt">Anthropic前沿红队基于过去一年、跨越四次模型发布的工作评估国家安全风险。网络安全上，2024年是「从0到1」的一年：Claude在CTF中一年内从高中生…</div>
+</li></ol>
+</div>
+<div class="section">
+  <div class="sec-head" style="border-color:#378ADD">
+    <span class="sec-num" style="background:#378ADD">六</span>
+    <div>
+      <h2>可解释性 · 最硬核（需线性代数直觉）</h2>
+      <p class="sec-desc">打开黑箱：特征、叠加、SAE、电路——Anthropic 的招牌研究方向。建议最后挑战</p>
+    </div>
+  </div>
+  <ol class="paperlist"><li class="paper">
+  <a class="ptitle" href="papers_html/toy-models-of-superposition.html" target="_blank">叠加的玩具模型</a>
+  <span class="pmeta">Sep 14, 2022 · 可解释性</span>
+  <div class="pexcerpt">本文用玩具模型——在稀疏输入特征的合成数据上训练的小型ReLU神经网络——来研究模型如何以及何时用比维度更多的特征来表示信息，这一现象被称为叠加。研究发现，当特…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/superposition-memorization-and-double-descent.html" target="_blank">叠加、记忆与双重下降</a>
+  <span class="pmeta">Jan 5, 2023 · 可解释性</span>
+  <div class="pexcerpt">该研究在有限的玩具模型数据集上研究神经网络训练中的过拟合现象，探讨过拟合与可解释性及叠加现象之间的联系。作者发现，模型存在两种机制：过拟合时以叠加方式存储具体数…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/distributed-representations-composition-superposition.html" target="_blank">分布式表征：组合与叠加</a>
+  <span class="pmeta">May 4, 2023 · 可解释性</span>
+  <div class="pexcerpt">本文是Anthropic对“分布式表征”概念的思考笔记。论文指出“分布式表征”其实包含两个不同的观念——“组合”与“叠加”。组合指多个特征分布在不同神经元上协同…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/a-mathematical-framework-for-transformer-circuits.html" target="_blank">Transformer 电路的数学框架</a>
+  <span class="pmeta">Dec 22, 2021 · 可解释性</span>
+  <div class="pexcerpt">这是 Transformer 机制可解释性领域的开创性论文，目标是把 Transformer 的计算“反编译”成可读算法。作者提出一套数学框架：把残差流看作各组…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/transformer-circuits.html" target="_blank">关于定性研究的思考</a>
+  <span class="pmeta">Mar 8, 2024 · 可解释性</span>
+  <div class="pexcerpt">本文是Anthropic关于可解释性研究方法论的一篇思考笔记，属于Transformer Circuits系列。作者提出一个观点：与其他许多领域相比，定性研究在…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/softmax-linear-units.html" target="_blank">Softmax 线性单元</a>
+  <span class="pmeta">Jun 17, 2022 · 可解释性</span>
+  <div class="pexcerpt">论文报告了一项架构改动：用 softmax 线性单元（SoLU）替换激活函数，在几乎不损失模型性能的前提下，显著提高了 MLP 层中“可解释”神经元（即对输入的…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/in-context-learning-and-induction-heads.html" target="_blank">上下文学习与归纳头</a>
+  <span class="pmeta">Mar 8, 2022 · 可解释性</span>
+  <div class="pexcerpt">本文是Anthropic在机制可解释性领域的经典论文，研究语言模型的上下文学习能力及其内部机制。作者提出“归纳头”（induction heads）的概念——一…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/scaling-laws-and-interpretability-of-learning-from-repeated-data.html" target="_blank">从重复数据中学习的缩放定律与可解释性</a>
+  <span class="pmeta">May 21, 2022 · 可解释性</span>
+  <div class="pexcerpt">本文系统研究大语言模型在训练数据中重复学习的影响机制。研究团队训练了一系列大部分数据唯一、但小部分被大量重复的模型，发现强“双重下降”现象：重复数据会让测试损失…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/privileged-bases-in-the-transformer-residual-stream.html" target="_blank">Transformer残差流中的特权基</a>
+  <span class="pmeta">Mar 16, 2023 · 可解释性</span>
+  <div class="pexcerpt">本文研究Transformer架构中“残差流”坐标是否具有特殊地位的理论问题。标准的数学理论认为残差流中各个坐标应无特殊意义，即坐标方向应该“任意”，不比随机方…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/decomposing-language-models-into-understandable-components.html" target="_blank">把语言模型分解成可理解的组件</a>
+  <span class="pmeta">Oct 5, 2023 · 可解释性</span>
+  <div class="pexcerpt">神经网络由数据训练而成，虽数学上完全可计算，但其内部运作却难以理解。单个神经元往往在毫不相关的语境中都被激活，无法作为可靠的分析单元。本文提出特征这一更好的分析…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/towards-monosemanticity-decomposing-language-models-with-dictionary-learning.html" target="_blank">迈向单义性：用字典学习分解语言模型</a>
+  <span class="pmeta">Oct 5, 2023 · 可解释性</span>
+  <div class="pexcerpt">这篇论文提供了特征优于单个神经元的证据，并构建了能在小型Transformer模型中找到这些特征的机制。与以往从神经科学、机器学习和统计学解释高维系统的努力一脉…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/features-as-classifiers.html" target="_blank">用字典学习特征作为分类器</a>
+  <span class="pmeta">Oct 16, 2024 · 可解释性</span>
+  <div class="pexcerpt">这是Anthropic可解释性团队的工作进展报告，探索能否用字典学习从大模型内部提取的可解释特征来训练分类器，用于检测模型是否被提示了与生物武器相关的有害信息。…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/evaluating-feature-steering.html" target="_blank">评估特征转向：缓解社会偏见的案例研究</a>
+  <span class="pmeta">Oct 25, 2024 · 社会影响</span>
+  <div class="pexcerpt">本文对特征转向技术进行量化评估，探讨其能否成为缓解AI社会偏见的可靠方法。研究者聚焦Claude 3 Sonnet中29个与社会偏见相关的可解释特征，在转向因子…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/circuits-updates-may-2023.html" target="_blank">电路研究更新——2023年5月</a>
+  <span class="pmeta">May 24, 2023 · 可解释性</span>
+  <div class="pexcerpt">本文是Anthropic可解释性团队2023年5月的研究进展更新。文章以摘要形式报告了团队当前正在发展的一系列研究想法，这些想法可能对活跃在该领域的研究者有用。…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/circuits-updates-april-2024.html" target="_blank">电路更新——2024年4月</a>
+  <span class="pmeta">Apr 26, 2024 · 可解释性</span>
+  <div class="pexcerpt">这是Anthropic可解释性团队发布的月度进展简报，链接指向transformer-circuits.pub上的更新，报告了团队近期一系列发展中的想法。其中有…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/circuits-updates-june-2024.html" target="_blank">电路更新——2024年6月</a>
+  <span class="pmeta">Jun 28, 2024 · 可解释性</span>
+  <div class="pexcerpt">这是 Anthropic 可解释性团队的月度进展通报，汇报团队当前正在发展的多项研究想法，这些内容发布在 transformer-circuits.pub 上。…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/circuits-updates-july-2024.html" target="_blank">电路更新——2024年7月</a>
+  <span class="pmeta">Jul 31, 2024 · 可解释性</span>
+  <div class="pexcerpt">这是 Anthropic 可解释性团队 2024 年 7 月的进展通报，汇总团队近期发展的多项研究想法，完整内容发布在 transformer-circuits…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/circuits-updates-august-2024.html" target="_blank">电路更新——2024年8月</a>
+  <span class="pmeta">Sep 6, 2024 · 可解释性</span>
+  <div class="pexcerpt">Anthropic可解释性团队发布了2024年8月的研究动态，报告了多项正在发展中的研究思路，其中一些是未来几个月将发表的新方向，另一些则是不会单独成文的零散发…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/circuits-updates-sept-2024.html" target="_blank">电路更新——2024年9月</a>
+  <span class="pmeta">Oct 1, 2024 · 可解释性</span>
+  <div class="pexcerpt">Anthropic可解释性团队发布2024年9月的研究动态，报告了团队内多项正在发展的研究思路，其中包括未来几个月会继续发表的新研究方向，也包括一些不太可能单独…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/engineering-challenges-interpretability.html" target="_blank">扩展可解释性研究的工程挑战</a>
+  <span class="pmeta">Jun 13, 2024 · 可解释性</span>
+  <div class="pexcerpt">Anthropic 可解释性团队反思科研与工程密不可分的关系，分享把可解释性研究扩展到更大模型时遇到的工程瓶颈，并以此说明工程是 AI 可解释性乃至 AI 安全…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/interpretability-dreams.html" target="_blank">可解释性之梦</a>
+  <span class="pmeta">May 24, 2023 · 可解释性</span>
+  <div class="pexcerpt">本文是Anthropic对机制可解释性研究远景的阐述。当前研究致力于为机制可解释性打下基础，重点是攻克“叠加”这一难题。本文总结了推动这些基础工作的目标愿景——…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/mapping-mind-language-model.html" target="_blank">绘制大语言模型的心智地图</a>
+  <span class="pmeta">May 21, 2024 · 可解释性</span>
+  <div class="pexcerpt">本文报告Anthropic在理解AI模型内部运作上的重大进展：首次详细“透视”了生产级大语言模型Claude 3.0 Sonnet的内部，识别出数百万个概念如何…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/crosscoder-model-diffing.html" target="_blank">跨编码器模型差异分析（更新）</a>
+  <span class="pmeta">Feb 20, 2025 · 可解释性</span>
+  <div class="pexcerpt">这是 Anthropic 可解释性团队的一项探索性进展，主题是“跨编码器模型差异分析”——一种理解两个语言模型内部差异的技术。研究发现一个意外现象：仅属于单一模…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/open-source-circuit-tracing.html" target="_blank">开源电路追踪工具</a>
+  <span class="pmeta">May 29, 2025 · 可解释性</span>
+  <div class="pexcerpt">本文宣布Anthropic开源其“电路追踪”工具库，让任何人都能研究大型语言模型的内部工作机制。该方法通过生成“归因图”部分揭示模型在决定某个输出时内部执行的步…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/tracing-thoughts-language-model.html" target="_blank">追踪大语言模型的思维</a>
+  <span class="pmeta">Mar 27, 2025 · 可解释性</span>
+  <div class="pexcerpt">本文介绍Anthropic通过“归因图”方法追踪Claude思维的成果。研究者把概念特征链接成计算电路，透视Claude 3.5 Haiku处理问题时的内部路径…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/diff-tool.html" target="_blank">AI的“差异”工具：发现新模型的行为差异</a>
+  <span class="pmeta">Mar 13, 2026 · 可解释性</span>
+  <div class="pexcerpt">本文介绍Anthropic Fellowship项目开发的一种AI“差异”（diff）工具，用于发现新模型与旧模型间的行为差异。研究者提出“专用特征交叉编码器”…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/natural-language-autoencoders.html" target="_blank">自然语言自编码器：把Claude的想法变成文字</a>
+  <span class="pmeta">May 7, 2026 · 可解释性</span>
+  <div class="pexcerpt">本文介绍Anthropic的新方法“自然语言自编码器”（NLA），它能把Claude内部处理信息时的“激活值”直接翻译成可读文本，让人直接“读懂”模型的想法。该…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/global-workspace.html" target="_blank">语言模型中的全局工作空间</a>
+  <span class="pmeta">Jul 6, 2026 · 可解释性</span>
+  <div class="pexcerpt">论文借鉴神经科学的全局工作空间理论，在 Claude 中发现了一小组内部神经模式集合——J 空间，并通过雅可比透镜（J-lens）找到了它。研究证明 J 空间具…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/persona-vectors.html" target="_blank">人格向量：监控与控制语言模型中的性格特征</a>
+  <span class="pmeta">Aug 1, 2025 · 可解释性</span>
+  <div class="pexcerpt">语言模型常表现出类人的性格和情绪，但这些特质极不稳定，有时突然失控（如Bing的Sydney、Grok的MechaHitler）。论文识别出神经网络内部控制性格…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/emotion-concepts-function.html" target="_blank">大语言模型中的情绪概念及其功能</a>
+  <span class="pmeta">Apr 2, 2026 · 可解释性</span>
+  <div class="pexcerpt">论文分析Claude Sonnet 4.5内部机制，发现影响行为的情感相关表征：情绪向量——与特定情绪概念（如高兴、害怕）关联的神经活动模式，其组织方式类似人类…</div>
+</li></ol>
+</div>
+<div class="section">
+  <div class="sec-head" style="border-color:#5F5E5A">
+    <span class="sec-num" style="background:#5F5E5A">七</span>
+    <div>
+      <h2>政策与战略（背景知识）</h2>
+      <p class="sec-desc">AI 竞争、出口管制、治理框架——了解大背景</p>
+    </div>
+  </div>
+  <ol class="paperlist"><li class="paper">
+  <a class="ptitle" href="papers_html/2028-ai-leadership.html" target="_blank">2028：全球 AI 领导权的两种情景</a>
+  <span class="pmeta">May 14, 2026 · 政策</span>
+  <div class="pexcerpt">Anthropic 发布的一份政策分析论文，探讨美国与中国在 AI 领域的竞争走向。论文认为算力（训练模型所需的芯片）是发展 AI 最关键的要素，美国目前通过出…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/economic-policy-responses.html" target="_blank">为AI的经济影响做准备：探讨政策应对</a>
+  <span class="pmeta">Oct 14, 2025 · 政策</span>
+  <div class="pexcerpt">面对AI对劳动力市场和经济的潜在深远影响，Anthropic与经济学家和政策专家合作，提出九类值得研究的政策构想，并按三种情景组织：几乎所有情景都适用的政策，包…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/anthropic-institute-agenda.html" target="_blank">Anthropic研究所（TAI）研究议程的重点方向</a>
+  <span class="pmeta">May 7, 2026 · 政策</span>
+  <div class="pexcerpt">本文介绍Anthropic新设机构“Anthropic研究所”（TAI）的研究议程。它利用前沿实验室内部能获取的信息研究AI对世界的影响并公开分享，聚焦四大方向…</div>
+</li><li class="paper">
+  <a class="ptitle" href="papers_html/evaluating-ai-systems.html" target="_blank">评测AI系统面临的挑战</a>
+  <span class="pmeta">Oct 4, 2023 · 政策</span>
+  <div class="pexcerpt">文章系统梳理了Anthropic在构建模型评测时遇到的困难。看似简单的选择题评测（如MMLU）存在题面泄露、格式改动影响成绩、不同实验室实现不一致、题干有错等问…</div>
+</li></ol>
+</div>
+  
+</div>
+<div class="footer">共 219 篇 · 数据来源 https://www.anthropic.com/research</div>
+</body>
+</html>

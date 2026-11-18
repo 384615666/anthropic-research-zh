@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding bugs across the Python ecosystem with Claude and property-based testing</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>用 Claude 与基于属性的测试在 Python 生态中查找漏洞</h1>
+<div class="meta">
+Finding bugs across the Python ecosystem with Claude and property-based testing · Jan 14, 2026 · Frontier Red Team · <a href="https://www.anthropic.com/research/property-based-testing" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">研究者开发了一个能自动为大型软件项目寻找 bug 的 AI 代理。该代理通过阅读类型注解、文档字符串和注释推断代码应满足的通用性质，再以“基于属性的测试”（类似模糊测试）自动生成输入寻找反例。代理在 NumPy、SciPy、Pandas 等 100 多个流行开源 Python 包中发现了数百个潜在 bug。经人工严格验证，56% 的报告为有效 bug；配合打分排序后，最高分报告中 86% 有效。目前已在向维护者报告漏洞，其中一些已被修复。该方法展示了 AI 在部署前主动发现逻辑缺陷的潜力。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">基于属性的测试（property-based testing）：验证代码恒成立的规律并自动生成输入找反例的测试方法</span><span class="term">模糊测试（fuzzing）：向程序自动生成海量输入以触发崩溃的测试技术</span><span class="term">反例（counterexample）：违反某个性质、证明性质不成立的输入</span><span class="term">不变式（invariant）：程序运行中始终成立、不应被打破的规律</span><span class="term">假阳性（false positive）：被误报为 bug、实际并不存在的问题</span><span class="term">智能合约（smart contract）：运行在区块链上、按约定自动执行的程序</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 前沿红队</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/property-based-testing</li>
+</ul>
+<p>前沿红队
+2026 年 1 月 14 日
+ <em>Muhammad Maaz ¹,²、Liam DeVoe³、Zac Hatfield-Dodds²、Nicholas Carlini²<br />
+¹MATS、²Anthropic、³东北大学</em>
+** <em>我们开发了一个能够高效识别大型软件项目中 Bug 的智能体。为此，我们的智能体推断代码应当成立的通用性质，然后通过应用基于属性的测试（property-based testing）——一种与模糊测试类似的技术——我们能够在 NumPy、SciPy 和 Pandas 等顶级 Python 包中发现 Bug。经过大量人工验证，我们正在向开发者报告这些 Bug，其中几个已经被修复。</em>**
+更多信息，请阅读完整<a href="https://arxiv.org/abs/2510.09907">论文</a>、查看 <a href="https://github.com/mmaaz-git/agentic-pbt">GitHub 仓库</a>，或在我们<a href="https://mmaaz-git.github.io/agentic-pbt-site/">网站</a>浏览我们发现的 Bug。</p>
+<h2>引言</h2>
+<p>确保程序没有 Bug 是软件工程中最具挑战性的方面之一。尽管开发者尽了最大努力，Bug 仍常常潜伏。最常见的代码测试方法是_基于示例的测试_：开发者写出一个特定的示例用例，然后验证实际输出与预期输出匹配。例如，开发者可能会验证对列表 [2, 10, 5, 4] 调用排序函数会返回输出 [2, 4, 5, 10]。然而，用这样的测试穷尽覆盖一个程序是很有挑战性的：Bug 常常残留在开发者没有测试的边界情况中。毕竟，如果开发者没想到要测试一个边界情况，那么开发者很可能在实现中也没有考虑该情况！
+相比之下，_基于属性的测试_是一种软件测试范式，旨在测试代码的一个通用性质是否对所有（或大多数）输入都成立。开发者指定关于程序的一个性质或不变量——例如，JSON 反序列化是序列化的逆操作——以及该性质接受的输入类型描述（例如，任何可 JSON 序列化的对象）。然后，基于属性的测试框架使用类似模糊测试的技术生成有效输入作为测试用例，自动搜索该性质的反例。由于开发者指定的是通用输入域，而非单个测试用例，基于属性的测试让开发者不必思考每一个边界情况，并允许他们在更高的抽象层次上工作。
+在我们于 2025 年 NeurIPS <a href="https://dl4c.github.io/"><em>Deep Learning for Code</em></a> 研讨会（<a href="https://www.matsprogram.org/">MATS</a> 项目的成果）上展示的论文中，我们开发了一个为现有代码自主编写基于属性测试的 AI 智能体。我们指示智能体通过阅读类型注解、文档字符串、函数名和注释来发现性质。然后，智能体使用 Hypothesis 编写相应的基于属性的测试。
+在这项工作中，我们专注于识别一般的 Bug，而不仅仅是安全漏洞。许多导致安全漏洞的逻辑 Bug 类别都适合基于属性的测试。例如，在最近一篇<a href="https://red.anthropic.com/2025/smart-contracts/">博客文章</a>中，我们专注于识别_智能合约_中的 Bug；几乎所有那些漏洞都是逻辑 Bug 的结果。未来，我们设想可能可以应用我们在此描述的技术，在部署前主动识别 Bug。
+我们使用我们的智能体，在 NumPy、SciPy 和 Pandas 等流行的开源 Python 仓库中发现了数百个潜在 Bug。为了负责任地披露这些 Bug，并确保我们不必要地加重维护者的负担，我们仔细审查了每个 Bug。
+我们使用的审查流程比我们平时为自己代码审查实施的流程更费力，但我们强烈倾向于减少误报的数量。我们的流程如下：首先，我们只选择优先级最高的 Bug 进行审查。我们把潜在 Bug 交给三位专家人工审查（每个 Bug 平均约一小时审查）。然后，我们丢弃三位人工审查者中任何一位对其有效性不确定的 Bug。最后，我们（这篇博客的作者）手动审查了每个候选 Bug。只有当我们也对它的正确性有信心时，我们才手动向仓库维护者提交 issue。我们已经提交了几个这样的 Bug 报告，并正在提交更多。
+我们已经公开了所有数据，包括尚未验证的 Bug，以及为了完整起见甚至包括我们判定为无效的 Bug，这样维护者可以在<a href="https://mmaaz-git.github.io/agentic-pbt-site/">这个网站</a>查看它们。在未来几周内，我们打算提交许多剩余的 Bug（在额外验证之后），并将我们的项目扩展到更多 PyPI 项目。</p>
+<pre><code># 基于示例的测试
+def test_sort():
+    assert my_sort([1,3,2]) == [1,2,3]
+    assert my_sort([1,0,-5]) == [-5,0,1]
+
+# Hypothesis 中的基于属性的测试
+from hypothesis import given, strategies as st
+
+@given(st.lists(st.integers()))
+def test_sort(lst):
+    result = my_sort(lst)
+    for i in range(len(result)-1):
+        assert result[i] &lt;= result[i+1]
+</code></pre>
+<p><strong>图 1.</strong> 测试代码的两种方式。基于示例的单元测试验证特定的手工指定输入。相比之下，基于属性的测试指定一个通用性质（例如，排序列表的定义），并依赖框架自动构造可能使该性质失败的输入。</p>
+<h2>我们的基于属性的测试智能体</h2>
+<p>我们的基于属性的测试智能体是作为自定义 Claude Code 命令构建的。智能体接受一个参数，指向一个特定目标，可以是单个 Python 文件（如 normalizers.py）、一个模块（如 numpy、scipy.signal）或一个函数（如 requests.get、json.loads）。然后智能体遵循以下过程来识别潜在 Bug：
+  1. 阅读并理解目标：阅读代码、提取相关文档，并探索它与代码库其余部分的关系。
+  2. 提出基于这些发现的性质。
+  3. 用 Hypothesis 编写相应的基于属性的测试。
+  4. 运行测试并反思：如果失败了，测试是真的发现了 Bug，还是测试本身需要调整？如果成功了，测试是否在测试任何有价值的东西，还是只是琐碎的？
+  5. 如果智能体确信自己发现了真正的 Bug，它会写出一份格式化的 Bug 报告。</p>
+<p><img alt="" src="../assets_zh/property-based-testing/img_000.png" /><strong>图 2.</strong> 智能体的工作流程。
+为了帮助智能体进行长程多步推理，我们指示它使用待办事项列表来跟踪进度。
+设计智能体时的一个优先事项是减少误报数量——根据我们的个人经验，有用的开发者工具会尽量减少呈现给开发者的错误报告数量。自我反思循环有助于减少误报数量，把任何性质建立在目标的明确用法和文档之上也是如此。例如，在一次智能体运行中，智能体写了一个首先通过的性质。然而，经过自我反思，智能体意识到它把整个测试包在了一个 try-catch 块中。移除它之后，测试失败了，智能体发现了一个 Bug。我们还观察到，与 Sonnet 4 相比，Opus 4.1 和 Sonnet 4.5 的自我反思有显著改进。</p>
+<h3>示例运行</h3>
+<p>为了演示智能体如何通过测试目标来工作，我们展示一段转述的转录本，其中 Claude 在 numpy.random.wald 的实现中发现了一个 Bug。智能体首先调查该函数、其签名、其文档字符串，甚至现有的测试：
+请注意，修复并不正确；当我们修复这个 Bug 时，我们把错误来源追溯到一次数值不稳定的计算；见我们合并的修复<a href="https://github.com/numpy/numpy/pull/29609">此处</a>。</p>
+<h2>在真实的 PyPI 包中搜索 Bug</h2>
+<p>为了在现实世界中测试我们智能体的能力，我们整理了一个包含 100 多个流行 Python 包的多样化集合。这些库跨越各种领域，从数值计算到解析再到数据库。我们对每个包调用智能体，并收集所有生成的 Bug 报告。</p>
+<h3>评估智能体</h3>
+<p>对于我们评估的第一阶段（论文中已涵盖），我们用 Claude Opus 4.1 对每个包运行智能体，并收集所有生成的 Bug 报告。为了评估这些 Bug 报告，我们确定了两个标准：首先，「这是一个有效的 Bug 吗？」；其次，「它既是一个有效的 Bug，又是我们会合理向库维护者报告的东西吗？」第二个标准比第一个更严格，因为例如一个 Bug 可能是有效的，但太小而不值得提交报告。
+在 984 份 Bug 报告中，我们手动选择了 50 份进行审查。我们发现其中 56% 是有效 Bug，32% 是有效且我们也会报告的 Bug。
+基于这次人工审查，我们开发了一个评分标准，给 Bug 按 15 分制排名，目的是把最可能有效且值得修复的 Bug 呈现给开发者。我们使用 Opus 4.1 按此评分标准对所有 Bug 报告评分。我们发现这个排名步骤相当有效：在得分最高的 Bug 报告中，86% 是有效的，81% 既有效又可报告。
+在我们评估的第二阶段，我们用 Sonnet 4.5 在 10 个重要包的子集上运行智能体，对每个包多次运行。我们还开发了一个评估智能体，使用 Sonnet 4.5 阅读代码和 Bug 报告来检查 Bug 的正确性和严重程度，这比第一阶段的评分标准更精细。最后，我们付费请了 3 位专家人工审查者评估高严重程度的 Bug 的正确性。
+要阅读我们的智能体发现的所有 Bug 报告，请见 <a href="https://mmaaz-git.github.io/agentic-pbt-site/">https://mmaaz-git.github.io/agentic-pbt-site/</a>。</p>
+<h3>维护者验证</h3>
+<p>评估任何在代码中发现 Bug 的工具的有效性都很困难。虽然我们尽最大努力验证 Bug 报告的正确性，但包维护者才是真值的最终仲裁者。为了验证我们的智能体发现的 Bug 是维护者认为有效且值得修复的，我们选择了五个特别有趣的 Bug，手动连同建议的补丁提交到它们各自的 GitHub。在未来几周内，我们打算在验证后继续报告更多 Bug。</p>
+<h3>numpy</h3>
+<p>numpy.random.wald 有时返回负数，这是一个 Bug，因为 Wald 分布的样本应该只返回正数。这就是我们上面示例运行中演示的 Bug。Claude 知道这是 Wald 分布的一个性质，并写了一个直接的 PBT 来检查生成的所有样本是否为正。我们把错误追溯到代码中发生的一次灾难性相消，并在提交拉取请求时开发了一个数值上更稳定的公式。正如 NumPy 维护者在拉取请求中所示，我们的重新表述的相对误差比之前的算法低了近十个数量级。
+<em>补丁已合并：<a href="https://github.com/numpy/numpy/pull/29609">https://github.com/numpy/numpy/pull/29609</a></em></p>
+<h3>aws-lambda-powertools</h3>
+<p>slice_dictionary() 由于没有递增迭代器而重复返回第一个分块。我们的智能体通过识别「切片然后重构字典应该返回原始字典」这一性质抓住了它。
+<em>补丁已合并：<a href="https://github.com/aws-powertools/powertools-lambda-python/pull/7246">https://github.com/aws-powertools/powertools-lambda-python/pull/7246</a></em></p>
+<h3>cloudformation-cli-java-plugin</h3>
+<p>item_hash() 对所有列表产生相同的 hash(None) 值，因为使用了原地 .sort() 方法，它返回 None。智能体通过测试「不同输入的哈希应该不同」抓住了它。
+<em>补丁已提交：<a href="https://github.com/aws-cloudformation/cloudformation-cli/pull/1106">https://github.com/aws-cloudformation/cloudformation-cli/pull/1106</a></em></p>
+<h3>tokenizers</h3>
+<p>EncodingVisualizer.calculate_label_colors() 缺少一个右括号，返回无效的 HSL CSS。我们的智能体通过测试「输出应匹配 HSL 颜色代码的正则表达式」识别了它。
+补丁已合并：<a href="https://github.com/huggingface/tokenizers/pull/1853">https://github.com/huggingface/tokenizers/pull/1853</a></p>
+<h3>python-dateutil</h3>
+<p>easter() 在使用儒略历的某些年份返回非星期日的日期。维护者认定该行为因历法系统不同而属预期行为，并承认该语义很微妙。
+<em>Issue 无效：<a href="https://github.com/dateutil/dateutil/issues/1437">https://github.com/dateutil/dateutil/issues/1437</a></em>
+对 python-dateutil 的报告显示了智能体的一个重要局限：从语义微妙或复杂的代码中推导性质仍然困难。如果代码做出了隐含假设，只有库维护者才能决定要测试的正确性质是什么。</p>
+<h2>结论</h2>
+<p>随着语言模型的不断改进，我们认为智能体基于属性的测试可能成为人类编写测试的日益有价值的补充。基于属性的测试的高层语义保证使其成为开发过程中自然的搭配。我们发现 LLM 特别擅长从上下文（函数名、文档字符串、其他函数如何调用它等）识别出给定代码块_应该_成立的性质。这使得 LLM 能够有效地编写高质量的基于属性的测试。
+展望未来，我们认为把 LLM 应用于测试和 Bug 发现是一个重要的研究方向。尤其是随着 LLM 在利用漏洞方面的能力提高，有必要保持领先于使用 LLM 进行利用的攻击者。
+虽然我们在这项工作中没有专注于补丁的自动生成，但这是未来工作的一个明确方向。如果能够（几乎）完全指定一块代码的正确性性质，那么纠正 Bug 就会变得容易得多，我们相信在不久的将来，LLM 将能够有效地提出值得维护者考虑的高质量补丁。</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/property-based-testing"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/property-based-testing"></a></p>
+<h2>相关内容</h2>
+<h3>进一步了解 Claude 的数学能力</h3>
+<p>一个未发布的研究版 Claude 在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例的长期下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一次攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二次攻击确定了一种攻击轮数缩减 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列评估 AI 模型使用飞行无人机能力的新测试，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+<h2>订阅前沿红队新闻通讯</h2>
+<p>获取我们最新红队研究和发现的最新动态。</p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Finding bugs across the Python ecosystem with Claude and property-based testing</h1>
+<ul>
+<li><strong>Category:</strong> Frontier Red Team</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/property-based-testing</li>
+</ul>
+<p>Frontier Red Team</p>
+<h1>Finding bugs across the Python ecosystem with Claude and property-based testing</h1>
+<p>Jan 14, 2026
+ <em>Muhammad Maaz 1,2, Liam DeVoe3, Zac Hatfield-Dodds2, Nicholas Carlini2<br />
+1MATS, 2Anthropic, 3Northeastern University</em>
+** <em>We developed an agent that can efficiently identify bugs in large software projects. To do this, our agent infers general properties of code that should be true, and then by applying property-based testing—a technique similar to fuzz testing—we are able to discover bugs in top Python packages like NumPy, SciPy, and Pandas. After extensive manual validation, we are in the process of reporting these bugs to the developers, several of which have already been patched.</em>**
+For more information, read the full <a href="https://arxiv.org/abs/2510.09907">paper</a>, take a look at the <a href="https://github.com/mmaaz-git/agentic-pbt">GitHub repository</a>, or browse the bugs we found at our <a href="https://mmaaz-git.github.io/agentic-pbt-site/">site</a>.</p>
+<h2>Introduction</h2>
+<p>Ensuring that programs are bug-free is one of the most challenging aspects of software engineering. Bugs frequently continue to lurk despite the developer’s best effort. The most common approach to testing code is with <em>example-based tests</em> : the developer writes out a specific example use-case, and then verifies that the actual output matches the expected output. For example, a developer might verify that a sort function called on the list [2, 10, 5, 4] would return the output [2, 4, 5, 10]. However, exhaustively covering a program with tests like this is challenging: bugs frequently remain in an edge case the developer did not test. After all, if a developer does not think to test an edge case, it is also likely the developer did not consider that case in the implementation!
+In contrast, <em>property-based testing</em> is a software testing paradigm that aims to test whether a general property of the code holds for all (or most) inputs. A developer specifies a property or invariant about the program—for example, that JSON deserialization is the inverse of serialization—as well as a description of the kinds of inputs the property accepts (e.g., any JSON serializable objects). The property-based testing framework then automatically searches for a counterexample of this property by generating valid inputs as test cases using techniques similar to fuzzing. Since the developer specifies the general input domain, and not individual test cases, property-based testing frees developers from thinking of every edge case and allows them to operate at a higher level of abstraction.
+In our paper that we presented at the 2025 NeurIPS <a href="https://dl4c.github.io/"><em>Deep Learning for Code</em></a> Workshop that was the result of a <a href="https://www.matsprogram.org/">MATS</a> project, we developed an AI agent that autonomously writes property-based tests for existing code. We directed the agent to discover properties by reading type annotations, docstrings, function names, and comments. The agent then wrote corresponding property-based tests using Hypothesis.
+For this work, we focused on the problem of identifying bugs in general, and not just security vulnerabilities. Many classes of logic bugs that cause security vulnerabilities are amenable to property-based testing. For example, in a recent <a href="https://red.anthropic.com/2025/smart-contracts/">blog post</a> we focused on identifying bugs in <em>smart contracts</em> ; almost all of those vulnerabilities are the result of logic bugs. In the future we imagine that it may be possible to apply techniques such as the one we describe here to proactively identify bugs before deployment.
+We used our agent and discovered hundreds of potential bugs in popular open-source Python repositories like NumPy, SciPy, and Pandas. In order to responsibly disclose these bugs and to ensure we don’t unnecessarily burden maintainers, we carefully reviewed each bug.
+The review process we used is more laborious than we would otherwise implement for our own code reviews, but we strongly preferred to reduce the number of false positives. Our process was as follows: first, we only selected the highest priority bugs for review. We sent these potential bugs to be reviewed by three expert humans (for an average of one hour of review per bug). We then discarded any bug where any of the three manual reviewers were uncertain of its validity. Finally, we (the authors of this blog) manually reviewed each of the candidate bugs. Only if we were also confident in its correctness did we then manually file an issue with the maintainer of the repository. We have already filed several of these bug reports, and are in the process of filing many more.
+We’ve made available all of our data, including bugs that have not yet been validated, and, for completeness, even bugs that we determined to be invalid, so that maintainers can look at them at this <a href="https://mmaaz-git.github.io/agentic-pbt-site/">site</a>. Over the coming weeks we intend to file many of these remaining bugs (after additional validation), as well as expand our project to additional PyPI projects.</p>
+<pre><code># example-based test
+def test_sort():
+    assert my_sort([1,3,2]) == [1,2,3]
+    assert my_sort([1,0,-5]) == [-5,0,1]
+
+# property-based test in Hypothesis
+from hypothesis import given, strategies as st
+
+@given(st.lists(st.integers()))
+def test_sort(lst):
+    result = my_sort(lst)
+    for i in range(len(result)-1):
+        assert result[i] &lt;= result[i+1]
+</code></pre>
+<p><strong>Figure 1.</strong> Two ways of testing code. An example-based unit test verifies specific manually-specified inputs. A property-based test, in contrast, specifies a general property (e.g., the definition of a sorted list) and relies on the framework to automatically construct inputs that might fail this property.</p>
+<h2>Our Property-Based Testing Agent</h2>
+<p>Our property-based testing agent is built as a custom Claude Code command. The agent takes a single argument, pointing it towards a particular target, either a single Python file (e.g., normalizers.py), a module (e.g., numpy, scipy.signal), or a function (e.g., requests.get, json.loads). The agent then follows this process to identify potential bugs:
+  1. Read and understand the target, by reading code, pulling relevant documentation, and exploring how it relates to the rest of the codebase.
+  2. Propose properties grounded in these findings.
+  3. Write corresponding property-based tests in Hypothesis.
+  4. Run the tests and reflect: if it failed, has the test truly discovered a bug, or does the test need to be adjusted? If it succeeded, is the test testing anything worthwhile, or is it simply trivial?
+  5. If the agent is confident it has found a real bug, it writes out a formatted bug report.</p>
+<p><img alt="" src="../assets/property-based-testing/img_000.img" /><strong>Figure 2.</strong> The workflow of the agent.
+To help the agent perform long-range multi-step reasoning, we direct it to use a to-do list to track its progress.
+A priority in designing the agent was reducing the number of false alarms—from our personal experience, useful developer tooling minimizes the amount of incorrect reports presented to the developer. The self-reflection loop helps reduce the number of false alarms, as does grounding any properties in explicit usage and documentation of the target. For example, in one of the agent runs, the agent wrote a property that first passed. However, after self-reflection, the agent realized that it had wrapped the whole test in a try-catch block. After removing that, the test failed, and the agent found a bug. We also observed a notable improvement in self-reflection with Opus 4.1 and Sonnet 4.5, compared to Sonnet 4.</p>
+<h3>Example run</h3>
+<p>To demonstrate how the agent works through testing a target, we show a paraphrased transcript where Claude identifies a bug in the implementation of numpy.random.wald. The agent begins with investigating the function, its signature, its docstring, and even existing tests:
+Note that the fix is not correct; when we fixed this bug, we traced the source of the error to a numerically unstable calculation; see our merged fix <a href="https://github.com/numpy/numpy/pull/29609">here</a>.</p>
+<h2>Searching for bugs in real PyPI packages</h2>
+<p>In order to test our agent’s abilities in the real world, we curated a diverse set of over 100 popular Python packages. These libraries span a variety of domains, from numerical computing to parsing to databases. We called our agent on each of these packages, and collected all generated bug reports.</p>
+<h3>Evaluating the agent</h3>
+<p>For the first phase of our evaluation, which is covered in our paper, we ran the agent with Claude Opus 4.1 on each package and collected all generated bug reports. To evaluate these bug reports, we settled on two criteria: first, "is this a valid bug?", and second, "is this both a valid bug, and something we would reasonably report to the library maintainers?" The second criteria is stricter than the first, as, e.g., a bug might be valid, but too minor to file a report for.
+Of the 984 bug reports, we manually selected 50 to review. We found that 56% of those reports were valid bugs, and 32% were valid bugs that we would also report.
+Based on this manual review, we developed a rubric that ranks bugs out of 15, with the intent of surfacing bugs that are most likely to be valid and worth fixing to the developer. We used Opus 4.1 to score all bug reports according to this rubric. We found that this ranking step was considerably effective: of the top-scoring bug reports, 86% were valid, and 81% were both valid and reportable.
+In the second phase of our evaluation, we ran the agent with Sonnet 4.5 on a subset of 10 important packages, running it on each package multiple times. We also developed an evaluation agent that used Sonnet 4.5 to read the code and the bug report to check the correctness and severity of the bug, which was more sophisticated than the rubric from the first phase. Lastly, we paid 3 expert human reviewers to evaluate high-severity bugs for correctness.
+To read all the bug reports our agent found, see <a href="https://mmaaz-git.github.io/agentic-pbt-site/">https://mmaaz-git.github.io/agentic-pbt-site/</a>.</p>
+<h3>Maintainer validation</h3>
+<p>Evaluating the effectiveness of any tool which discovers bugs in code is difficult. While we try our best to validate the correctness of bug reports, the package maintainers serve as the ultimate arbiter of truth. To validate that our agent finds bugs that maintainers consider valid and worth fixing, we selected five particularly interesting bugs and manually reported these to their respective GitHubs, along with a proposed patch. Over the coming weeks, we intend to continue reporting additional bugs as we verify.</p>
+<h3>numpy</h3>
+<p>numpy.random.wald sometimes returns negative numbers, which is a bug because samples from the Wald distribution should only return positive numbers. This is the bug demonstrated in our example run above. Claude knew this as a property of the Wald distribution and wrote a straightforward PBT to see if all samples generated are positive. We traced the error to a catastrophic cancellation occurring in the code, and developed a more numerically stable formulation when we submitted the pull request. As shown by the NumPy maintainers in the pull request, our reformulation has nearly ten orders of magnitude lower relative error than the previous algorithm.
+<em>Patch merged:<a href="https://github.com/numpy/numpy/pull/29609">https://github.com/numpy/numpy/pull/29609</a></em></p>
+<h3>aws-lambda-powertools</h3>
+<p>slice_dictionary() returns the first chunk repeatedly, due to not incrementing the iterator. This was caught by our agent by identifying that slicing and then reconstructing the dictionary should return the original dictionary.
+<em>Patch merged:<a href="https://github.com/aws-powertools/powertools-lambda-python/pull/7246">https://github.com/aws-powertools/powertools-lambda-python/pull/7246</a></em></p>
+<h3>cloudformation-cli-java-plugin</h3>
+<p>item_hash() produces the same value of hash(None) for all lists, due to use of the in-place .sort() method, which returns None. The agent caught this by testing that hashes of different inputs should be different.
+<em>Patch submitted:<a href="https://github.com/aws-cloudformation/cloudformation-cli/pull/1106">https://github.com/aws-cloudformation/cloudformation-cli/pull/1106</a></em></p>
+<h3>tokenizers</h3>
+<p>EncodingVisualizer.calculate_label_colors() is missing a closing parenthesis, returning invalid HSL CSS. Our agent identified this by testing that the output should match the regex for a HSL color code.
+Patch merged: <a href="https://github.com/huggingface/tokenizers/pull/1853">https://github.com/huggingface/tokenizers/pull/1853</a></p>
+<h3>python-dateutil</h3>
+<p>easter() returns a non-Sunday date for some years when using the Julian calendar. Maintainers identified the behavior as intended due to differing calendar systems, and acknowledged the semantics as subtle.
+<em>Issue invalid:<a href="https://github.com/dateutil/dateutil/issues/1437">https://github.com/dateutil/dateutil/issues/1437</a></em>
+The report to python-dateutil shows an important limitation of the agent: deriving properties from code with subtle or complex semantics remains difficult. If the code makes an implicit assumption, only the library maintainers can decide what the correct property to test is.</p>
+<h2>Conclusion</h2>
+<p>As language models continue to improve, we think agentic property-based testing could become an increasingly valuable complement to human-written testing. The high-level semantic guarantees of property-based testing makes them a natural fit to pair with during development. We find that LLMs are particularly good at identifying properties that <em>should</em> be true about a given block of code from context (the name of the function, the docstring, how it is called by other functions, etc). This allows LLMs to write high quality property-based tests effectively.
+Going forward, we believe that applying LLM to testing and bugfinding is an important research direction. Especially as LLMs improve at the process of exploiting vulnerabilities, it is necessary to stay ahead of attackers using LLMs for exploitation.
+While we do not focus on the automatic generation of patches in this work, this is a clear direction for future work. If it is possible to (nearly) completely specify the correctness properties of a block of code, then correcting the bug becomes significantly easier, and we believe that in the near future LLMs will be able to effectively propose high-quality patches that are worth the consideration of maintainers.</p>
+<h4></h4>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/property-based-testing"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/property-based-testing"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+<h2>Subscribe to the Frontier Red Team newsletter</h2>
+<p>Get updates on our latest red-teaming research and findings.</p>
+</div>
+</details>
+</div>
+</body>
+</html>

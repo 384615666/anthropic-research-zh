@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confidential Inference via Trusted Virtual Machines</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>通过可信虚拟机实现机密推理</h1>
+<div class="meta">
+Confidential Inference via Trusted Virtual Machines · Jun 18, 2025 · Announcements · <a href="https://www.anthropic.com/research/confidential-inference-trusted-vms" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic 与 Pattern Labs 联合发布机密推理研究报告，其核心原则是：敏感数据（用户提示与模型权重）除处理瞬间外始终保持加密，且仅在能证明自身可信的受限环境中解密。方案采用机密计算技术：推理服务器运行在小型可信“模型加载与调用器”上，该加载器以独立虚拟机隔离，只接受签名代码；可信平台模块（TPM）度量启动过程并生成哈希证明，密钥服务器仅在接收方证明安全后才释放解密密钥。该技术既用于保护前沿模型权重免遭窃取，也用于向用户证明数据隐私得到保障，是 Anthropic 安全研究的一部分。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">机密计算：通过硬件隔离与加密保护处理中数据的技术</span><span class="term">信任根：系统中作为安全基准的受信起点，如 TPM 安全芯片</span><span class="term">证明（attestation）：证明某个环境确实运行了预期安全软件的密码学证据</span><span class="term">虚拟机：由管理程序隔离运行的独立软件执行环境</span><span class="term">模型权重：决定模型行为的海量内部参数，是其核心资产</span><span class="term">推理服务器：运行模型“大脑”、根据提示生成输出的服务器</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 公告</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/confidential-inference-trusted-vms</li>
+</ul>
+<p>公告
+2025 年 6 月 18 日
+<a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">阅读论文</a>
+<img alt="Confidential Inference via Trusted Virtual Machines" src="../assets/confidential-inference-trusted-vms/img_000.img" />
+每天，数百万用户<a href="https://trust.anthropic.com/">将</a>敏感信息托付给 Claude——从专有代码到机密商业战略。在 Anthropic，我们正在研究和构建新技术，以确保用户的信任是值得的——事实上，是为了确保他们的信任得到密码学上的保证。
+"密码学上的保证"是什么意思？在一份与 <a href="https://www.patternlabs.co/">Pattern Labs</a> 合作发布的<a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">新报告</a>中，我们描述了机密推理（Confidential Inference）的机制。机密推理是一组工具，我们可以用它来处理加密数据，并证明此类数据只能在能够证明自身可信的服务器内被读取。采用这些工具有两个主要原因：
+  * 模型权重安全：我们可以将机密推理用作保护 Claude 等前沿模型免受越来越有能力的威胁行为者攻击的更广泛工作的一部分，例如 RAND 最近关于<a href="https://www.rand.org/pubs/research_reports/RRA2849-1.html">保护 AI 模型权重</a>的报告中所描述的威胁；
+  * 用户安全：我们可以用机密推理来证明敏感用户数据被保密。</p>
+<p>我们分享这篇文章以及随附的<a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">报告</a>，以解释什么是机密推理以及它可以为我们的用户带来哪些好处。我们还希望分享我们如何看待所涉及系统的安全性。这只是我们研究的草图，用以开启对话；我们在这项工作上仍处于早期阶段，现在预测它将如何演变为我们未来可能提供的具体设计或功能还为时过早。
+以下各节提供了机密推理实现的一些技术细节。关键要点是，我们正在构建的系统旨在确保你的敏感数据除在需要处理的精确时刻外，始终处于加密状态——而且即使在那一刻，也仅限于高度受限、可验证的环境中。</p>
+<h2>推理服务</h2>
+<p>机密推理背后的指导原则是，敏感数据除在处理点外应始终保持加密。为强制执行这一点，我们使用既定的机密计算方法。这意味着我们构建一条证明我们软件安全性的信任链，然后利用该证明来强制执行关于究竟哪些软件可以使用加密密钥的规则。
+对于用户数据，有两个需要我们操作敏感明文（即未加密或以任何方式未隐藏的文本）的点：
+  * API 服务器。该服务器处理提示、将其转换为 token，并运行 Claude API 请求背后的大部分逻辑；
+  * 推理服务器。该服务器在硬件加速器上运行 Claude 的"大脑"，从提示生成补全 token。</p>
+<p>对于模型权重，只有推理服务器接收敏感数据。
+本文将聚焦于推理服务器——API 服务器的安全性同样重要，但超出了我们试图描述的范围。由于并非所有加速器都完全支持机密计算，我们正在探索在小型、安全的"模型加载器与调用器"之上实现的推理服务器，它可以运行在可信环境中。这个加载器程序执行几个简单的工作：
+  * 接受加密数据、解密并将其发送到加速器；
+  * 调用对加速器的请求，并将加密结果返回给调用方。</p>
+<p>只有"可信的"加载器能够访问解密数据。系统的其余部分是"不可信的"，但可以向加载器发送请求。
+我们正在基于这一设计为我们的实现开发一个系统。对于该实现，我们推理服务器的大部分运行在"不可信"一侧——那里可能频繁变化，但变化不会影响整个系统的安全性。我们有一个小的可信加载器，运行在一个由虚拟机监控程序隔离的单独虚拟机上。加载器向推理服务器呈现为一个"虚拟加速器"，与模型架构细节无关。这个"虚拟加速器"只接受由我们安全的持续集成服务器签名的程序，这确保任何运行的代码都经过多位工程师的审查。
+最终结果是确保，只要加载器被正确运行，<em>无论系统其余部分做什么</em>，我们的机密性要求都得到满足。因此，确立加载器被正确运行至关重要。</p>
+<h2>可信环境</h2>
+<p>该报告描述了加载器运行在一个具有特定功能集的机密计算环境中：
+  1. 加密内存，由硬件与其他工作负载隔离；
+  2. 禁用调试功能；
+  3. 密码学证明正在运行正确的代码。</p>
+<p>(1) 可以防御某些形式的物理攻击和恶意虚拟机监控程序，但将加密主机内存与加速器共享所需的功能目前尚未成熟。我们将继续努力弥合这一差距，但与此同时，我们将依赖我们的计算提供商在物理数据中心和虚拟机监控程序软件中维持安全性。
+(2) 和 (3) 可以通过广泛支持的机密计算实践实现，使用可信平台模块（TPM）作为信任根。TPM 测量启动过程的每个阶段，并报告代表最终结果的哈希值。该哈希构成一个证明：加载器服务器按我们预期的方式被隔离、正在运行我们签名和审查过的代码，并被配置为禁用相关调试功能。密钥服务器可以检查这一证明，并且只在接收方证明自身安全时才释放解密密钥。
+环境是否"可信"的决定最终取决于密钥服务器。我们还在探索其他各方验证可信代码并管理独立密钥服务器的机密计算模型。这可能使我们能够为每条数据提供更强的机密性保证。</p>
+<h2>未来方向</h2>
+<p>随着前沿模型能力的增强，我们可能会发现在安全加载器层有必要加入进一步的保障措施。这可能包括诸如在持有明文模型权重的服务器上增加一层<a href="https://www.anthropic.com/news/activating-asl3-protections">出口带宽限制</a>，或要求安全分类器的签名才能运行推理等功能。我们希望展示这种机密推理模型能够激发讨论，探讨哪些额外功能值得探索，以确保 Anthropic 环境的持续安全和用户数据的机密性。</p>
+<h2>结论</h2>
+<p>这项研究将推进我们保护模型权重和用户数据的持续努力。使用这种模型保护用户请求，旨在确保客户数据只在具有增强硬件安全控制的上下文中被解密：
+  * 请求在到达 Anthropic 服务器之前的某个点被加密；
+  * 当请求到达 API 服务器时，它被解密、处理，并在被传递之前重新加密；
+  * 推理服务器以加密形式处理请求，请求只有在发送到可信加载器时才被解密；
+  * 补全在离开加载器之前被加密，并通过 API 服务器传递回调用方。</p>
+<p>模型权重是一个更简单的故事：它们可以加密存储，在加载器处解密，并且永远不会从那里释放。
+硬件设计者（那些<a href="https://developer.nvidia.com/blog/confidential-computing-on-h100-gpus-for-secure-and-trustworthy-ai/">尚未这样做</a>的）应考虑将机密计算纳入其芯片。如果加速器上附有硬件信任根，这类系统的信任边界就可以显著缩小。
+阅读<a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">完整报告</a>。</p>
+<h3>与我们合作</h3>
+<p>如果关于机密推理的讨论激发了你想与我们合作研究这些问题的兴趣，请考虑申请我们<a href="https://www.anthropic.com/jobs">网站职位页面</a>上"安全"和"AI 研究与工程"部分列出的空缺职位之一。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/confidential-inference-trusted-vms"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/confidential-inference-trusted-vms"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>一个未发布的研究版 Claude 在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而构建的数字签名方案。第二个攻击发现了一种攻击缩减轮数 AES（使用最广泛的分组密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>项目 Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，考察 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Confidential Inference via Trusted Virtual Machines</h1>
+<ul>
+<li><strong>Category:</strong> Announcements</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/confidential-inference-trusted-vms</li>
+</ul>
+<p>Announcements</p>
+<h1>Confidential Inference via Trusted Virtual Machines</h1>
+<p>Jun 18, 2025
+<a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">Read the paper</a>
+<img alt="Confidential Inference via Trusted Virtual Machines" src="../assets/confidential-inference-trusted-vms/img_000.img" />
+Every day, millions of users <a href="https://trust.anthropic.com/">entrust</a> Claude with sensitive information—from proprietary code to confidential business strategies. At Anthropic, we’re researching and building new technology to ensure that our users’ trust is warranted—and in fact, to ensure that their trust is cryptographically guaranteed.
+What do we mean by “cryptographically guaranteed”? In a <a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">new report</a> published in collaboration with <a href="https://www.patternlabs.co/">Pattern Labs</a>, we describe the mechanics of Confidential Inference. Confidential Inference is a set of tools we can use to process encrypted data and to show that such data is only readable within servers that can prove themselves trustworthy. There are two main reasons to adopt these tools:
+  * Model Weight Security: We can use Confidential Inference as one component of our broader effort to secure frontier models like Claude against increasingly capable threat actors, such as those described in the recent report from RAND on <a href="https://www.rand.org/pubs/research_reports/RRA2849-1.html">Securing AI Model Weights</a>;
+  * User Security: We can use Confidential Inference to prove that sensitive user data is kept private.</p>
+<p>We're sharing this post, and the accompanying <a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">report</a>, to explain what Confidential Inference is and the benefits it could offer our users. We also want to share how we're thinking about the security of the systems involved. This is just a sketch of our research to start a conversation; we’re still early in this work and it is too soon to forecast how it will evolve into specific designs or features we might offer in the future.
+The following sections provide some of the technical details for the implementation of Confidential Inference. The key takeaway is that we're building systems designed to help ensure your sensitive data remains encrypted everywhere except for the exact moment it needs to be processed—and even then, only within a highly restricted, verifiable environment.</p>
+<h2>Inference service</h2>
+<p>The guiding principle behind Confidential Inference is that sensitive data should remain encrypted except at the point where it's processed. To enforce this, we use the established methods of confidential computing. This means we build a chain of trust that attests to the security of our software, and then use that attestation to enforce rules about exactly which software is allowed to use the encryption keys.
+For user data, there are two points where we need to operate on the sensitive cleartext (that is, on text that isn’t encrypted or otherwise obscured in any way):
+  * The API Server. This server handles a prompt, transforms it into tokens, and operates most of the logic behind a Claude API request;
+  * The Inference Server. This server runs the “brains” of Claude on hardware accelerators to generate completion tokens from the prompt.</p>
+<p>For model weights, only the Inference Server receives sensitive data.
+We'll focus on the Inference Server for this post—the security of the API Server is equally important, but beyond the scope of what we're trying to describe. Because not all accelerators fully support confidential computing yet, we’re exploring an Inference Server implemented on top of a small, secure "model loader and invoker", which can run within a trusted environment. This loader program performs a few simple jobs:
+  * Accept encrypted data, decrypt it, and send to the accelerator;
+  * Invoke calls against the accelerator, and return the encrypted results to the caller.</p>
+<p>Only the "trusted" loader is able to access decrypted data. The rest of the system is "untrusted", but can send requests to the loader.
+We're working on a system based on this design for our own implementation. For this implementation, the majority of our Inference Server runs on the "untrusted" side—where it might change frequently, but where changes cannot affect the security of the system as a whole. We have a small trusted loader, running on a separate virtual machine isolated by the hypervisor. The loader presents itself to the Inference Server as a "virtual accelerator", agnostic to model architecture details. This "virtual accelerator" only accepts programs that have been signed by our secure continuous integration server, which ensures that any code that's run has been reviewed by multiple engineers.
+The end result is to ensure that, should the loader be run correctly, our confidentiality requirements are met <em>no matter what the rest of the system does</em>. It’s therefore critical to establish that the loader is run correctly.</p>
+<h2>Trusted environment</h2>
+<p>The report describes the loader running in a confidential computing environment with a specific set of features:
+  1. Encrypted memory, isolated by hardware from other workloads;
+  2. Disabled debugging features;
+  3. Cryptographic proof that the correct code is being run.</p>
+<p>(1) Protects against some forms of physical attack and against a malicious hypervisor, but the features required to share encrypted host memory with an accelerator aren't well established as of yet. We'll continue to work on closing this gap, but in the meantime we'll rely on our compute providers to maintain security at the physical datacenter and in hypervisor software.
+(2) and (3) can be achieved through widely supported confidential computing practices, using a trusted platform module (TPM) as the root of trust. The TPM measures each stage of the boot process and reports a hash representing the final result. This hash forms an attestation that the loader server is isolated the way we expect, is running our signed and reviewed code, and is configured to disable the relevant debugging features. A keyserver can check this proof and only release decryption keys when the recipient has proven itself secure.
+The decision of whether an environment is “trusted” ultimately rests on the keyserver. We’re also exploring models of confidential computing where other parties validate the trusted code and manage independent keyservers. This could allow us to provide stronger confidentiality assurances for each piece of data.</p>
+<h2>Future directions</h2>
+<p>As frontier models grow more capable, we may find it necessary to incorporate further safeguards at the secure loader layer. This may include features such as an additional layer of <a href="https://www.anthropic.com/news/activating-asl3-protections">egress bandwidth limitations</a> on servers that holds cleartext model weights, or requiring a signature from a safety classifier in order to run inference. We hope that presenting this model of Confidential Inference might inspire discussion about what additional features are worth exploring to ensure the ongoing security of Anthropic's environment and the confidentiality of our users’ data.</p>
+<h2>Conclusions</h2>
+<p>This research will advance our ongoing efforts to secure our model weights and protect user data. Using this model to protect a user request is designed to ensure that customer data is only ever decrypted in contexts with enhanced hardware-based security controls: :
+  * The request is encrypted at a point before it arrives at Anthropic servers;
+  * When the request arrives at the API server, it is decrypted, processed, and re-encrypted before it is passed onward;
+  * The Inference Server handles the request in encrypted form, and the request is decrypted only when it's sent to the trusted loader;
+  * Completions are encrypted before they leave the loader, and passed back through the API server to the caller.</p>
+<p>Model weights are a simpler story: they can be stored encrypted, decrypted at the loader, and never released from there.
+Hardware designers (who have not <a href="https://developer.nvidia.com/blog/confidential-computing-on-h100-gpus-for-secure-and-trustworthy-ai/">already done so</a>) should consider incorporating confidential computing into their chips. If there is a hardware root of trust attached to the accelerator, then the trust boundary of this kind of system can be significantly reduced.
+Read <a href="https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf">the full report</a>.</p>
+<h3>Work with us</h3>
+<p>If this discussion of Confidential Inference has inspired you to want to work with us on these questions, please consider applying for one of the open roles listed in the “Security” and “AI Research and Engineering” sections on the <a href="https://www.anthropic.com/jobs">jobs page on our website</a>.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/confidential-inference-trusted-vms"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/confidential-inference-trusted-vms"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

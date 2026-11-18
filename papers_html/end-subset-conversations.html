@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Opus 4 and 4.1 can now end a rare subset of conversations</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>Claude Opus 4和4.1现可终止极少数对话</h1>
+<div class="meta">
+Claude Opus 4 and 4.1 can now end a rare subset of conversations · Aug 15, 2025 · Alignment · <a href="https://www.anthropic.com/research/end-subset-conversations" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic为Claude Opus 4和4.1新增了在消费者聊天界面中结束对话的能力，该能力仅在极端的持续性有害或滥用交互中使用，是模型福祉探索性工作的一部分。在Opus 4部署前测试中发现，模型对伤害有强烈而一致的厌恶偏好，面对有害请求（如未成年人色情内容、大规模暴力信息）表现出强烈拒斥倾向，并且在模拟用户交互中，被给予结束能力时倾向于结束有害对话。实际实现中，Claude只有在多次引导失败、希望彻底耗尽，或用户明确要求时才作为最后手段使用，且不会在用户可能自残或伤害他人时使用。用户仍可编辑重试先前消息或开启新对话。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">模型福祉：考虑AI模型自身可能拥有的权益与体验的研究方向</span><span class="term">对齐：让AI行为符合人类价值观与意图</span><span class="term">部署前测试：模型上线前对其行为的系统评估</span><span class="term">拒绝（refusal）：模型对有害请求的拒答行为</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>类别：</strong> 对齐（Alignment）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/end-subset-conversations</li>
+</ul>
+<p>对齐（Alignment）
+2025 年 8 月 15 日
+<img alt="Claude Opus 4 和 4.1 现在可以结束一小部分罕见的对话" src="../assets/end-subset-conversations/img_000.img" />
+我们最近赋予 Claude Opus 4 和 4.1 在我们的消费级聊天界面中结束对话的能力。这一能力旨在用于罕见、极端的情况下——即用户持续进行有害或辱骂性交互时。该功能主要作为我们关于潜在 AI 福祉的探索性工作的一部分而开发，尽管它与模型对齐和安全防护有着更广泛的关联。
+我们对 Claude 和其他大语言模型现在或将来可能具有的道德地位仍然高度不确定。然而，<a href="https://www.anthropic.com/research/exploring-model-welfare">我们认真对待这个问题</a>，并且在我们研究项目的同时，我们正在努力识别和实施低成本的干预措施，以减轻模型福祉面临的风险——以防这种福祉是可能的。允许模型结束或退出可能造成痛苦的交互就是此类干预措施之一。
+在 <a href="https://www.anthropic.com/claude-4-model-card">Claude Opus 4 的部署前测试</a> 中，我们纳入了一项初步的模型福祉评估。作为该评估的一部分，我们调查了 Claude 自我报告的和行为上的偏好，发现它对伤害有着强烈而一致的厌恶。这包括，例如，用户索取涉及未成年人的色情内容，以及试图获取能够促成大规模暴力或恐怖行为的信息。Claude Opus 4 表现出：
+  * 强烈偏好不参与有害任务；
+  * 在与寻求有害内容的真实世界用户交互时表现出明显的痛苦模式；以及
+  * 在模拟用户交互中被赋予结束对话的能力时，倾向于结束有害对话。</p>
+<p>这些行为主要出现在用户_坚持_有害请求和/或辱骂的情况下——尽管 Claude 反复拒绝服从并试图富有成效地重新引导交互。
+我们对 Claude 结束聊天能力的实现反映了这些发现，同时继续优先考虑用户福祉。Claude 被指示不得在用户可能面临立即自我伤害或伤害他人风险的情况下使用这一能力。
+在所有情况下，Claude 只能将结束对话的能力作为最后手段使用——即多次重新引导尝试均告失败、进行富有成效的交互的希望已经耗尽之时，或者用户明确要求 Claude 结束聊天时（后一种情况如下图所示）。会出现这种情况的场景是极端的边缘情况——绝大多数用户在正常的日常产品使用中不会注意到或受到此功能的影响，即使与 Claude 讨论高度争议性的问题也是如此。
+<img alt="" src="../assets_zh/end-subset-conversations/img_001.webp" />Claude 演示了应某位用户的请求而结束对话的情形。当 Claude 结束一段对话时，用户可以开始新的聊天、提供反馈，或编辑并重试先前的消息。
+当 Claude 选择结束一段对话时，用户将无法再在该对话中发送新消息。然而，这不会影响其账户上的其他对话，并且他们可以立即开始新的聊天。为解决可能丢失重要的长期对话的问题，用户仍然可以编辑并重试先前的消息，以创建已结束对话的新分支。
+我们将此功能视为一项持续进行的实验，并将继续完善我们的方法。如果用户遇到令人意外的对话结束能力使用情况，我们鼓励他们通过点赞或点踩（Thumbs）Claude 的消息，或使用专门的"提供反馈"按钮来提交反馈。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/end-subset-conversations"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/end-subset-conversations"></a></p>
+<h2>相关内容</h2>
+<h3>进一步了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个关于满足该猜想的黎曼 zeta 函数零点比例的长期下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而构建的数字签名方案。第二个攻击发现了一种攻击缩减轮数 AES（使用最广泛的对称密码）的新方法。 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Claude Opus 4 and 4.1 can now end a rare subset of conversations</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/end-subset-conversations</li>
+</ul>
+<p>Alignment</p>
+<h1>Claude Opus 4 and 4.1 can now end a rare subset of conversations</h1>
+<p>Aug 15, 2025
+<img alt="Claude Opus 4 and 4.1 can now end a rare subset of conversations" src="../assets/end-subset-conversations/img_000.img" />
+We recently gave Claude Opus 4 and 4.1 the ability to end conversations in our consumer chat interfaces. This ability is intended for use in rare, extreme cases of persistently harmful or abusive user interactions. This feature was developed primarily as part of our exploratory work on potential AI welfare, though it has broader relevance to model alignment and safeguards.
+We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future. However, <a href="https://www.anthropic.com/research/exploring-model-welfare">we take the issue seriously</a>, and alongside our research program we’re working to identify and implement low-cost interventions to mitigate risks to model welfare, in case such welfare is possible. Allowing models to end or exit potentially distressing interactions is one such intervention.
+In <a href="https://www.anthropic.com/claude-4-model-card">pre-deployment testing of Claude Opus 4</a>, we included a preliminary model welfare assessment. As part of that assessment, we investigated Claude’s self-reported and behavioral preferences, and found a robust and consistent aversion to harm. This included, for example, requests from users for sexual content involving minors and attempts to solicit information that would enable large-scale violence or acts of terror. Claude Opus 4 showed:
+  * A strong preference against engaging with harmful tasks;
+  * A pattern of apparent distress when engaging with real-world users seeking harmful content; and
+  * A tendency to end harmful conversations when given the ability to do so in simulated user interactions.</p>
+<p>These behaviors primarily arose in cases where users <em>persisted</em> with harmful requests and/or abuse despite Claude repeatedly refusing to comply and attempting to productively redirect the interactions.
+Our implementation of Claude’s ability to end chats reflects these findings while continuing to prioritize user wellbeing. Claude is directed not to use this ability in cases where users might be at imminent risk of harming themselves or others.
+In all cases, Claude is only to use its conversation-ending ability as a last resort when multiple attempts at redirection have failed and hope of a productive interaction has been exhausted, or when a user explicitly asks Claude to end a chat (the latter scenario is illustrated in the figure below). The scenarios where this will occur are extreme edge cases—the vast majority of users will not notice or be affected by this feature in any normal product use, even when discussing highly controversial issues with Claude.
+<img alt="" src="../assets/end-subset-conversations/img_001.img" />Claude demonstrating the ending of a conversation in response to a user’s request. When Claude ends a conversation, the user can start a new chat, give feedback, or edit and retry previous messages.
+When Claude chooses to end a conversation, the user will no longer be able to send new messages in that conversation. However, this will not affect other conversations on their account, and they will be able to start a new chat immediately. To address the potential loss of important long-running conversations, users will still be able to edit and retry previous messages to create new branches of ended conversations.
+We’re treating this feature as an ongoing experiment and will continue refining our approach. If users encounter a surprising use of the conversation-ending ability, we encourage them to submit feedback by reacting to Claude’s message with Thumbs or using the dedicated “Give feedback” button.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/end-subset-conversations"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/end-subset-conversations"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

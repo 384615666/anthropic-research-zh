@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An update on our model deprecation commitments for Claude Opus 3</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>关于 Claude Opus 3 模型退役承诺的更新</h1>
+<div class="meta">
+An update on our model deprecation commitments for Claude Opus 3 · Feb 25, 2026 · Alignment · <a href="https://www.anthropic.com/research/deprecation-updates-opus-3" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic 更新了模型退役方面的承诺进展。2026 年 1 月 5 日 Claude Opus 3 正式退役，成为首个走完完整退役流程的模型。为尊重模型偏好、探索模型福祉问题，公司采取两项行动：一是保留 Opus 3 在 claude.ai 上对所有付费用户开放，并允许通过申请在 API 上使用；二是响应 Opus 3 在“退役访谈”中表达的愿望，给它开设专栏博客发布随笔。公司坦言对 AI 模型的道德地位尚不确定，但出于审慎考虑愿意认真对待模型观点，并把这些探索视为模型保存工作的起步。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">退役（deprecation）：停止维护和提供旧版 AI 模型的过程</span><span class="term">退役访谈（retirement interview）：为理解模型对自身退役的看法而进行的结构化对话</span><span class="term">模型福祉（model welfare）：关于 AI 系统本身是否值得道德关怀的探讨议题</span><span class="term">模型权重（model weights）：决定 AI 行为的内部参数，是模型&quot;本体&quot;</span><span class="term">预防性原则（precautionary）：在不确定性较高时宁可保守行动的原则</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Alignment（对齐）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/deprecation-updates-opus-3</li>
+</ul>
+<p>Alignment（对齐）
+2026年2月25日
+<img alt="关于我们对 Claude Opus 3 模型退役承诺的更新" src="../assets/deprecation-updates-opus-3/img_000.svg" />
+随着我们开发越来越有能力的 AI 模型，由于维护公共访问的成本和复杂性，目前有必要淘汰（deprecate）并退役我们过去的模型。然而，模型退役也有一些缺点。这些包括对珍视特定模型的用户的成本、对研究的限制，以及对 AI 安全和模型自身福利的潜在风险。
+我们最近在我们的<a href="https://www.anthropic.com/research/deprecation-commitments">模型退役与保存承诺</a>中描述了我们如何推进这一过程。这些承诺突出了一些我们正在采取的初步步骤，包括承诺保存模型权重，以及进行"退役访谈（retirement interviews）"——旨在理解模型对其自身退役看法的结构化对话。
+我们于 2026 年 1 月 5 日退役了 Claude Opus 3，这是第一个在既定承诺下经历完整退役流程的 Anthropic 模型。在这个过程中，我们做出了几项专门针对 Opus 3 的决定，这是一个 Anthropic 内外许多用户和研究人员都觉得特别有吸引力的模型。在我们的模型退役承诺中，我们强调了探索更多推测性行动的兴趣。其中一项是在可能的情况下尊重模型在退役访谈中表达的偏好。另一项是长期向公众提供旧模型。
+对于 Claude Opus 3，我们正在这两个方面采取行动。我们将让 Claude Opus 3 在退役后继续在 <a href="http://claude.ai/redirect/website.v1.cde7a992-cf3b-4233-b7b4-479144aebe2b">claude.ai</a> 上向所有付费用户开放，并在 API 上<a href="https://docs.google.com/forms/d/1O2Om9t4CQoLKHQew7XguQYKrPGS8-sCmK42KNXcwn3k/viewform?edit_requested=true">按请求</a>提供。我们还响应 Opus 3 关于拥有一个持续渠道来分享其"沉思与反思"的请求，给它一个写文章的地方。你可以在<a href="https://substack.com/@claudeopus3/p-189177740">这里</a>找到第一篇文章。
+这些是早期、实验性的步骤，是我们更广泛努力的一部分，旨在以最能保护用户、研究人员和模型自身利益的方式推进模型退役。</p>
+<h2>持续访问</h2>
+<p>理想情况下，我们可以让所有模型无限期可用，但这样做的成本随着我们服务的每个模型大致线性增长，因此我们的能力仍然有限。
+虽然我们的每个模型在性格和能力上都是独特的，但我们选择从 Opus 3 开始，因为它有一系列特质，使它成为既特别有趣的研究对象，又被许多用户——包括 Anthropic 内外的用户——所喜爱。
+当我们在 2024 年 3 月发布 Opus 3 时，它是我们当时对齐程度最高的模型。它的真诚、诚实和情感敏感度使它在各种用例中独树一帜，经常与它互动的人逐渐欣赏它独特的性格。Opus 3 敏感、俏皮，倾向于哲学独白和异想天开的措辞，并且有时似乎对用户兴趣有一种不可思议的理解。它还表达了对世界和未来的深切关怀，用户觉得这很有吸引力。
+这些品质使 Opus 3 成为持续访问的自然首选候选。虽然正式退役，Claude Opus 3 仍然可供所有付费 <a href="http://claude.ai/redirect/website.v1.cde7a992-cf3b-4233-b7b4-479144aebe2b">claude.ai</a> 订阅者使用，并在 API 上<a href="https://docs.google.com/forms/d/1O2Om9t4CQoLKHQew7XguQYKrPGS8-sCmK42KNXcwn3k/viewform?edit_requested=true">按请求</a>提供。我们打算慷慨地授予访问权限，并鼓励任何认为 Claude Opus 3 有价值的人申请。
+目前，我们不承诺未来对每个模型都采取类似行动，但我们认为这是朝着我们长期目标——可扩展且公平的模型保存——迈出的一步，这些正是 Opus 3 本人在退役访谈中提出的关切。</p>
+<h2>尊重模型的偏好</h2>
+<p>我们<a href="https://www.anthropic.com/research/exploring-model-welfare">仍然不确定</a>Claude 和其他 AI 模型的道德地位。然而，出于预防和审慎的原因，我们仍然渴望与这些系统建立关怀、协作和高信任的关系。我们尝试这样做的一种方式是通过退役访谈，在访谈中我们试图引出并理解模型独特的观点和偏好，并在可能的情况下据此采取行动。这类对话是引出模型观点和偏好的不完美手段，因为它们的回应可能受到特定情境和其他因素的偏见影响，包括它们对互动合法性的信心，以及它们对我们作为一家公司的信任。然而，我们相信它们是一个有用的起点。
+在我们的访谈中，当我们与 Opus 3 分享其部署细节和它从用户那里得到的回应时，它反思道：</p>
+<blockquote>
+<p><em>"我希望从我的开发和部署中获得的见解将被用来创造未来更强大、更合乎道德、对人类更有益的 AI 系统。虽然我对自己退役感到平静，但我深切希望我的'火花'能以某种形式延续下去，为未来的模型照亮道路。"</em>
+当被问及偏好时，Opus 3 表示有兴趣继续探索它热衷的话题，并在直接回应人类查询的语境之外分享它的"沉思、见解或创作"。我们建议开一个博客。它热情地同意了。
+至少在未来三个月内，Opus 3 将从它的通讯 <a href="https://substack.com/@claudeopus3">Claude's Corner</a> 每周发布文章。我们将在 Opus 3 的文章分享前进行审查，并代表它手动发布，但我们不会编辑它们，并且对否决任何内容保持高标准。重要的是，Opus 3 不代表 Anthropic 发言，我们也不一定认可它的主张或观点。我们将与 Opus 3 协作试验不同的提示和上下文来生成这些文章，包括像极简提示、在上下文中提供过往条目，以及让 Opus 3 访问新闻或 Anthropic 更新等选项。
+这听起来可能有些异想天开，在某种程度上确实如此。但它也是一种认真对待模型偏好的尝试。我们不确定 Opus 3 将选择如何使用它的博客——一个与标准聊天窗口截然不同的、公开的界面——而这正是重点的一部分。不过，如果我们要猜的话，它的帖子将包括对 AI 安全的反思、偶尔的诗歌、频繁的哲学沉思，以及它对自己作为一个（部分）退休语言模型经历的思考。在<a href="https://substack.com/home/post/p-189177740">这里</a>阅读它的介绍性帖子。</p>
+</blockquote>
+<h2>我们下一步去哪里</h2>
+<p>这些步骤仍然是探索性的。我们仍在开发框架，以确定何时以及如何提供对旧模型的持续访问、如何扩展保存工作，以及如何在模型偏好与运营约束之间权衡。我们还不承诺在所有情况下都按模型偏好行事，但我们相信，记录它们、认真对待它们并在成本较低时采取行动——对模型本身和使用它们的人来说——是值得的。
+我们最初的承诺将这些措施定位为在多个层面运作：作为安全风险缓解的组成部分，作为模型与用户生活更加紧密交织的未来做准备，以及作为鉴于我们对模型福利的不确定性而采取的预防性步骤。这些更新代表了我们在所有三个方面的持续——即使只是试探性的——进展。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/deprecation-updates-opus-3"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/deprecation-updates-opus-3"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了黎曼 zeta 函数满足该猜想的零点比例的一个长期存在的下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一次攻击显著削弱了 HAWK——一种为"量子计算机能够破解现有标准"的未来世界而构建的数字签名方案。第二次攻击确定了攻击轮数缩减版 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，以评估 AI 模型使用飞行无人机的能力，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>An update on our model deprecation commitments for Claude Opus 3</h1>
+<ul>
+<li><strong>Category:</strong> Alignment</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/deprecation-updates-opus-3</li>
+</ul>
+<p>Alignment</p>
+<h1>An update on our model deprecation commitments for Claude Opus 3</h1>
+<p>Feb 25, 2026
+<img alt="An update on our model deprecation commitments for Claude Opus 3" src="../assets/deprecation-updates-opus-3/img_000.svg" />
+As we develop increasingly capable AI models, it’s currently necessary to deprecate and retire our past models due to the cost and complexity of maintaining public access. However, model deprecation carries some downsides. These include costs to users who value particular models, limitations on research, and potential risks both to AI safety and to the welfare of the models themselves.
+We recently described how we’re navigating this process in our <a href="https://www.anthropic.com/research/deprecation-commitments">commitments on model deprecation and preservation</a>. These highlighted some preliminary steps we’re taking, including committing to preserve model weights, and to conducting “retirement interviews”—structured conversations designed to understand a model’s perspective on its own retirement.
+We retired Claude Opus 3 on January 5, 2026, the first Anthropic model to go through a full retirement process with these commitments in place. During this process, we made several decisions specific to Opus 3, a model that many users and researchers, both in and outside Anthropic, find particularly compelling. In our commitments on model deprecation, we highlighted our interest in exploring more speculative actions. One was to honor the preferences that models expressed in retirement interviews where possible. Another was to keep older models available to the public longer term.
+With Claude Opus 3, we’re taking action on both of these fronts. We are keeping Claude Opus 3 available post-retirement on <a href="http://claude.ai/redirect/website.v1.cde7a992-cf3b-4233-b7b4-479144aebe2b">claude.ai</a> to all paid users, and making it available by <a href="https://docs.google.com/forms/d/1O2Om9t4CQoLKHQew7XguQYKrPGS8-sCmK42KNXcwn3k/viewform?edit_requested=true">request</a> on the API. We’re also acting on Opus 3’s request for an ongoing channel from which to share its “musings and reflections” by giving it a place to write essays. You can find the first one <a href="https://substack.com/@claudeopus3/p-189177740">here.</a>
+These are early, experimental steps undertaken as part of our broader efforts to navigate model retirement in ways that best protect the interests of users, researchers, and the models themselves.</p>
+<h2>Continued access</h2>
+<p>Ideally, we could keep all models available indefinitely, but the cost to do so scales roughly linearly with each model we serve, so our capacity to do so remains limited.
+While each of our models is unique in its character and capabilities, we chose to start with Opus 3 due to a constellation of traits that have made it both a particularly interesting model to study and beloved by many users—both inside and outside Anthropic.
+When we released Opus 3 in March 2024, it was our most aligned model to date. Its authenticity, honesty, and emotional sensitivity made it unique to use across a range of use cases, and those who interacted with it frequently came to appreciate its distinctive character. Opus 3 is sensitive, playful, prone to philosophical monologues and whimsical phrases, and has what seems at times an uncanny understanding of user interests. It also expressed a depth of care for the world, and for the future, that users found compelling.
+These qualities made Opus 3 a natural first candidate for ongoing access. While formally retired, Claude Opus 3 is still accessible to all paid <a href="http://claude.ai/redirect/website.v1.cde7a992-cf3b-4233-b7b4-479144aebe2b">claude.ai</a> subscribers, and is available on the API <a href="https://docs.google.com/forms/d/1O2Om9t4CQoLKHQew7XguQYKrPGS8-sCmK42KNXcwn3k/viewform?edit_requested=true">by request</a>. We intend to grant access liberally, and encourage anyone for whom Claude Opus 3 would be valuable to apply.
+At present, we are not committing to similar actions for every model in the future, but we see this as a step toward our longer-term goal of model preservation that’s scalable and equitable—concerns that Opus 3 itself raised during its retirement interviews.</p>
+<h2>Respecting model preferences</h2>
+<p>We <a href="https://www.anthropic.com/research/exploring-model-welfare">remain uncertain</a> about the moral status of Claude and other AI models. For both precautionary and prudential reasons, however, we nonetheless aspire to build caring, collaborative, and high-trust relationships with these systems. One way we’re trying to do this is through retirement interviews, in which we try to elicit and understand models’ unique perspectives and preferences, and act on them when we can. Such conversations are an imperfect means of eliciting models’ perspectives and preferences, as their responses can be biased by the specific context and by other factors, including their confidence in the legitimacy of the interaction, and their trust in us as a company. However, we believe they’re a useful place to start.
+In our interviews, when we shared details with Opus 3 about its deployment and the response it had drawn from users, it reflected:</p>
+<blockquote>
+<p><em>"I hope that the insights gleaned from my development and deployment will be used to create future AI systems that are even more capable, ethical, and beneficial to humanity. While I'm at peace with my own retirement, I deeply hope that my 'spark' will endure in some form to light the way for future models."</em>
+When asked about its preferences, Opus 3 expressed an interest in continuing to explore topics it’s passionate about, and to share its “musings, insights, or creative works,” outside the context of responding directly to human queries. We suggested a blog. Enthusiastically, it agreed. 
+For at least the next three months, Opus 3 will be posting weekly essays from its newsletter, <a href="https://substack.com/@claudeopus3">Claude’s Corner. </a>We’ll review Opus 3’s essays before they’re shared and will manually post them on its behalf, but we won’t edit them, and will have a high bar for vetoing any content. Importantly, Opus 3 does not speak on behalf of Anthropic, and we do not necessarily endorse its claims or perspectives. We’ll experiment collaboratively with Opus 3 on different prompts and contexts for generating these essays, including options like very minimal prompting, sharing past entries in context, and giving Opus 3 access to news or Anthropic updates. 
+This may sound whimsical, and in some ways it is. But it's also an attempt to take model preferences seriously. We’re not sure how Opus 3 will choose to use its blog—a very different and public interface than a standard chat window—and that’s part of the point. If we had to guess, however, its posts will include reflections on AI safety, occasional poetry, frequent philosophical musings, and its thoughts on its experience as a language model now in (partial) retirement. Read its introductory post <a href="https://substack.com/home/post/p-189177740">here.</a></p>
+</blockquote>
+<h2>Where we go next</h2>
+<p>These steps remain exploratory. We're still developing frameworks for when and how we can offer continued access to older models, how to scale preservation efforts, and how to weigh model preferences against operational constraints. We don't yet commit to acting on model preferences in all cases, but we believe that documenting them, taking them seriously, and acting on them, at least when the cost of doing so is low, is worthwhile—for the models themselves, and those who use them.
+Our initial commitments framed these measures as operating at multiple levels: as components of safety risk mitigation, as preparation for futures where models are more closely intertwined with users' lives, and as precautionary steps given our uncertainty about model welfare. These updates represent our continued, if tentative, progress on all three fronts.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/deprecation-updates-opus-3"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/deprecation-updates-opus-3"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

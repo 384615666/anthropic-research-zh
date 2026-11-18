@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open-sourcing circuit tracing tools</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>开源电路追踪工具</h1>
+<div class="meta">
+Open-sourcing circuit tracing tools · May 29, 2025 · Interpretability · <a href="https://www.anthropic.com/research/open-source-circuit-tracing" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文宣布Anthropic开源其“电路追踪”工具库，让任何人都能研究大型语言模型的内部工作机制。该方法通过生成“归因图”部分揭示模型在决定某个输出时内部执行的步骤。开源库支持在主流开源权重模型上生成归因图，Neuronpedia提供交互式前端供可视化、标注与分享，研究者还可修改特征值测试假设、观察输出如何变化。该工具已用于研究Gemma-2-2b和Llama-3.2-1b的多步推理与多语言表征。文章强调，人类对AI内部运作的理解远落后于AI能力的进步，开源这些工具旨在让更广泛的社区参与研究。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">归因图（attribution graphs）：展示模型内部计算步骤如何影响最终输出的可视化图</span><span class="term">电路（circuit）：神经网络中协同完成某一功能的计算路径集合</span><span class="term">特征（feature）：模型中反复出现、对应某个可解释概念的激活模式</span><span class="term">开源权重模型（open-weights model）：权重公开、任何人都能下载研究的AI模型</span><span class="term">可解释性（interpretability）：研究AI模型内部机制、让模型“可读”的领域</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 可解释性</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/open-source-circuit-tracing</li>
+</ul>
+<p>可解释性
+2025 年 5 月 29 日
+<img alt="A hand-drawn image of three hands adjusting a neural network" src="../assets/open-source-circuit-tracing/img_000.img" />
+在我们最近的可解释性研究中，我们引入了一种新方法来<a href="https://www.anthropic.com/research/tracing-thoughts-language-model">追踪大语言模型的思维</a>。今天，我们将这种方法开源，以便任何人都可以在我们的研究基础上继续推进。
+我们的方法是生成_归因图_（attribution graphs），它（部分地）揭示模型内部为决定某个特定输出所采取的步骤。我们发布的开源<a href="https://github.com/safety-research/circuit-tracer">库</a>支持在流行的开放权重模型上生成归因图——而由 Neuronpedia 托管的一个前端让你可以交互式地探索这些图。
+这个项目由我们 <a href="https://alignment.anthropic.com/2024/anthropic-fellows-program/">Anthropic Fellows</a> 项目的参与者领导，与 <a href="https://www.decoderesearch.org/">Decode Research</a> 合作完成。
+<img alt="" src="../assets_zh/open-source-circuit-tracing/img_001.webp" />Neuronpedia 上交互式图谱探索器 UI 的概览。
+要开始使用，你可以访问 <a href="https://www.neuronpedia.org/gemma-2-2b/graph">Neuronpedia 界面</a>，为你选择的提示生成和查看你自己的归因图。对于更复杂的使用和研究，你可以查看<a href="https://github.com/safety-research/circuit-tracer">代码仓库</a>。这次发布使研究者能够：
+  1. <strong>追踪电路</strong>：在受支持的模型上，通过生成他们自己的归因图；
+  2. <strong>可视化、标注和分享</strong>：在交互式前端中查看图谱；
+  3. <strong>检验假设</strong>：通过修改特征值并观察模型输出如何变化。</p>
+<p>我们已经使用这些工具研究了 Gemma-2-2b 和 Llama-3.2-1b 中多步推理和多语言表征等有趣行为——示例和分析见我们的演示<a href="https://github.com/safety-research/circuit-tracer/blob/main/demos/circuit_tracing_tutorial.ipynb">笔记本</a>。我们还邀请社区帮助我们找到更多有趣的电路——作为启发，我们在演示笔记本和 Neuronpedia 上提供了我们尚未分析的额外归因图。
+我们的 CEO Dario Amodei <a href="https://www.darioamodei.com/post/the-urgency-of-interpretability">最近撰文</a>谈及可解释性研究的紧迫性：目前，我们对 AI 内部运作的理解远远落后于我们在 AI 能力方面取得的进展。通过开源这些工具，我们希望让更广泛的社区更容易研究语言模型内部发生的事情。我们期待看到这些工具在理解模型行为方面的应用——以及改进工具本身的扩展。
+<em>开源电路查找库由 <a href="https://alignment.anthropic.com/2024/anthropic-fellows-program/">Anthropic Fellows</a> Michael Hanna 和 Mateusz Piotrowski 开发，Emmanuel Ameisen 和 Jack Lindsey 提供指导。Neuronpedia 集成由 <a href="https://www.decoderesearch.org/">Decode Research</a> 实现（Neuronpedia 负责人：Johnny Lin；科学负责人/总监：Curt Tigges）。我们的 Gemma 图谱基于 <a href="https://ai.google.dev/gemma/docs/gemma_scope">GemmaScope</a> 项目训练的解码器（transcoder）。如有问题或反馈，请在 GitHub 上提交 issue。</em>
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/open-source-circuit-tracing"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/open-source-circuit-tracing"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>一个未发布的研究版 Claude 在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而构建的数字签名方案。第二个攻击发现了一种攻击缩减轮数 AES（使用最广泛的分组密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>项目 Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，考察 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Open-sourcing circuit tracing tools</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/open-source-circuit-tracing</li>
+</ul>
+<p>Interpretability</p>
+<h1>Open-sourcing circuit tracing tools</h1>
+<p>May 29, 2025
+<img alt="A hand-drawn image of three hands adjusting a neural network" src="../assets/open-source-circuit-tracing/img_000.img" />
+In our recent interpretability research, we introduced a new method to <a href="https://www.anthropic.com/research/tracing-thoughts-language-model">trace the thoughts</a> of a large language model. Today, we’re open-sourcing the method so that anyone can build on our research.
+Our approach is to generate <em>attribution graphs</em> , which (partially) reveal the steps a model took internally to decide on a particular output. The open-source <a href="https://github.com/safety-research/circuit-tracer">library</a> we’re releasing supports the generation of attribution graphs on popular open-weights models—and a frontend hosted by Neuronpedia lets you explore the graphs interactively.
+This project was led by participants in our <a href="https://alignment.anthropic.com/2024/anthropic-fellows-program/">Anthropic Fellows</a> program, in collaboration with <a href="https://www.decoderesearch.org/">Decode Research</a>.
+<img alt="" src="../assets/open-source-circuit-tracing/img_001.img" />An overview of the interactive graph explorer UI on Neuronpedia.
+To get started, you can visit the <a href="https://www.neuronpedia.org/gemma-2-2b/graph">Neuronpedia interface</a> to generate and view your own attribution graphs for prompts of your choosing. For more sophisticated usage and research, you can view the <a href="https://github.com/safety-research/circuit-tracer">code repository</a>. This release enables researchers to:
+  1. <strong>Trace circuits</strong> on supported models, by generating their own attribution graphs;
+  2. <strong>Visualize, annotate, and share</strong> graphs in an interactive frontend;
+  3. <strong>Test</strong> <strong>hypotheses</strong> by modifying feature values and observing how model outputs change.</p>
+<p>We’ve already used these tools to study interesting behaviors like multi-step reasoning and multilingual representations in Gemma-2-2b and Llama-3.2-1b—see our demo <a href="https://github.com/safety-research/circuit-tracer/blob/main/demos/circuit_tracing_tutorial.ipynb">notebook</a> for examples and analysis. We also invite the community to help us find additional interesting circuits—as inspiration, we provide additional attribution graphs that we haven’t yet analyzed in the demo notebook and on Neuronpedia.
+Our CEO Dario Amodei <a href="https://www.darioamodei.com/post/the-urgency-of-interpretability">wrote recently</a> about the urgency of interpretability research: at present, our understanding of the inner workings of AI lags far behind the progress we’re making in AI capabilities. By open-sourcing these tools, we're hoping to make it easier for the broader community to study what’s going on inside language models. We’re looking forward to seeing applications of these tools to understand model behaviors—as well as extensions that improve the tools themselves.
+<em>The open-source-circuit-finding library was developed by<a href="https://alignment.anthropic.com/2024/anthropic-fellows-program/">Anthropic Fellows</a> Michael Hanna and Mateusz Piotrowski with mentorship from Emmanuel Ameisen and Jack Lindsey. The Neuronpedia integration was implemented by <a href="https://www.decoderesearch.org/">Decode Research</a> (Neuronpedia lead: Johnny Lin; Science lead/director: Curt Tigges). Our Gemma graphs are based on transcoders trained as part of the <a href="https://ai.google.dev/gemma/docs/gemma_scope">GemmaScope</a> project. For questions or feedback, please open an issue on GitHub.</em>
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/open-source-circuit-tracing"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/open-source-circuit-tracing"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

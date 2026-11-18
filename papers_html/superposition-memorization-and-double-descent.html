@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superposition, Memorization, and Double Descent</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>叠加、记忆与双重下降</h1>
+<div class="meta">
+Superposition, Memorization, and Double Descent · Jan 5, 2023 · Interpretability · <a href="https://www.anthropic.com/research/superposition-memorization-and-double-descent" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">该研究在有限的玩具模型数据集上研究神经网络训练中的过拟合现象，探讨过拟合与可解释性及叠加现象之间的联系。作者发现，模型存在两种机制：过拟合时以叠加方式存储具体数据点，泛化时以叠加方式存储特征；随着数据集大小变化，模型在这两种机制间转换，并观测到&quot;双重下降&quot;现象。研究还探讨了语言模型逐字记忆文本的可能机制，如用神经元构建查找表。这项工作为理解深度学习模型的过拟合机制及其与可解释性之间的关系提供了初步线索。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">叠加（superposition）：神经网络用比特征数量更少的神经元来表示多个特征，类似&quot;一物多用&quot;</span><span class="term">过拟合（overfitting）：模型把训练数据背下来而非学会规律，导致对新数据表现不佳</span><span class="term">双重下降（double descent）：随着数据量或规模增加，错误率先升后降的奇特现象</span><span class="term">记忆（memorization）：模型一字不差地记住训练样本，而非理解背后的规律</span><span class="term">泛化（generalization）：模型把学到的知识用到新数据上的能力</span><span class="term">玩具模型（toy model）：为研究特定现象而设计的极简化小模型</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 可解释性（Interpretability）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/superposition-memorization-and-double-descent</li>
+</ul>
+<p>可解释性研究
+2023年1月5日
+<a href="https://transformer-circuits.pub/2023/toy-double-descent/index.html">阅读论文</a></p>
+<h2>摘要</h2>
+<p>在<a href="https://transformer-circuits.pub/2022/toy_model/index.html">最近的一篇论文</a>中，我们发现，在玩具任务上训练的简单神经网络经常表现出一种叫做叠加（superposition）的现象，即它们表示的特征数量超过它们的神经元数量。我们的研究仅限于无限数据、欠拟合（underfitting）的范畴。但有理由相信，如果我们想在机制可解释性（mechanistic interpretability）方面取得成功，理解过拟合（overfitting）可能很重要，而叠加可能是这个故事的核心部分。</p>
+<p>为什么机制可解释性要关心过拟合？尽管过拟合是机器学习的核心问题，但我们对深度学习模型过拟合或记忆示例时到底发生了什么几乎没有机制上的理解。此外，之前的工作暗示，过拟合与学习可解释特征之间可能存在重要的联系。</p>
+<p>所以理解过拟合很重要，但它为什么与叠加相关呢？考虑一个逐字记忆文本的语言模型的情况。它怎么做到这一点？一个天真的想法是，它可能用神经元创建一个查找表，把序列映射到任意的续写。对于它想记忆的每一个 token 序列，它可以专门用一个神经元来检测该序列，然后在它触发时实现任意的行为。这种方法的问题在于它极其低效——但它似乎是叠加的完美候选，因为每个案例都是互斥的，不会相互干扰。</p>
+<p>在这篇笔记中，我们对在有限数据集上训练上一篇论文中相同的玩具模型进行了非常初步的探究。尽管极其简单，但事实证明，这个玩具模型是研究过拟合的一个惊人丰富的案例。特别是，我们发现了以下几点：
+  * 过拟合对应于在叠加中存储数据点，而不是特征。
+  * 根据数据集大小，我们的模型落入两个不同的范畴：过拟合范畴（以在叠加中存储数据点为特征）和泛化范畴（以在叠加中存储特征为特征）。
+  * 我们观察到模型在这两个范畴之间过渡时的双下降（double descent）现象。</p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/superposition-memorization-and-double-descent"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/superposition-memorization-and-double-descent"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>Claude 的一个未发布研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例的下界——将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而设计的数字签名方案。第二个攻击确定了一种攻击减轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列评估 AI 模型使用飞行无人机能力的新评估，最终形成一个新的基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Superposition, Memorization, and Double Descent</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/superposition-memorization-and-double-descent</li>
+</ul>
+<h1>Superposition, Memorization, and Double Descent</h1>
+<p>Jan 5, 2023
+<a href="https://transformer-circuits.pub/2023/toy-double-descent/index.html">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>In a <a href="https://transformer-circuits.pub/2022/toy_model/index.html">recent paper</a>, we found that simple neural networks trained on toy tasks often exhibit a phenomenon called superposition, where they represent more features than they have neurons. Our investigation was limited to the infinite-data, underfitting regime. But there's reason to believe that understanding overfitting might be important if we want to succeed at mechanistic interpretability, and that superposition might be a central part of the story.  </p>
+<p>Why should mechanistic interpretability care about overfitting? Despite overfitting being a central problem in machine learning, we have little mechanistic understanding of what exactly is going on when deep learning models overfit or memorize examples. Additionally, previous work has hinted that there may be an important link between overfitting and learning interpretable features.  </p>
+<p>So understanding overfitting is important, but why should it be relevant to superposition? Consider the case of a language model which verbatim memorizes text. How can it do this? One naive idea is that it might use neurons to create a lookup table mapping sequences to arbitrary continuations. For every sequence of tokens it wishes to memorize, it could dedicate one neuron to detecting that sequence, and then implement arbitrary behavior when it fires. The problem with this approach is that it's extremely inefficient – but it seems like a perfect candidate for superposition, since each case is mutually exclusive and can't interfere.  </p>
+<p>In this note, we offer a very preliminary investigation of training the same toy models in our previous paper on limited datasets. Despite being extremely simple, the toy model turns out to be a surprisingly rich case study for overfitting. In particular, we find the following:
+  * Overfitting corresponds to storing data points, rather than features, in superposition.
+  * Depending on dataset size, our models fall into two different regimes: an overfitting regime (characterized by storing data points in superposition), and a generalizing regime (characterized by storing features in superposition).  </p>
+<ul>
+<li>We observe double descent as the model transitions between these regimes.</li>
+</ul>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/superposition-memorization-and-double-descent"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/superposition-memorization-and-double-descent"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

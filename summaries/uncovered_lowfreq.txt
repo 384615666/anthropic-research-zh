@@ -1,0 +1,444 @@
+=== 尚未覆盖的中低频术语: 443 个 ===
+  2次  ACE
+  2次  CTF
+  2次  attribution graphs
+  2次  augmentation
+  2次  automation
+  2次  crosscoder
+  2次  double descent
+  2次  economic primitives
+  2次  false positive
+  2次  induction heads
+  2次  memorization
+  2次  model diffing
+  2次  open-weights model
+  2次  pretraining
+  2次  qualitative research
+  2次  residual stream
+  2次  steering
+  2次  synthetic data
+  2次  workflow
+  2次  代理型编码
+  2次  偏好建模
+  2次  偏好模型
+  2次  匿名化
+  2次  双刃技术
+  2次  子代理
+  2次  宪法AI
+  2次  影响力函数
+  2次  忠实度
+  2次  暴露度
+  2次  横向移动
+  2次  涌现能力
+  2次  激光雷达
+  2次  神经激活
+  2次  自动化与增强
+  2次  零日漏洞
+  2次  黎曼猜想
+  1次  1P API
+  1次  AI fluency
+  1次  AI使用指数
+  1次  AUI
+  1次  AUROC
+  1次  CRM
+  1次  CTF夺旗赛
+  1次  CVE
+  1次  Gini coefficient
+  1次  JIT编译
+  1次  MCP
+  1次  MITRE ATT&CK
+  1次  MLP 层
+  1次  N-day漏洞
+  1次  NMR 谱图
+  1次  O*NET 任务分类
+  1次  OKR
+  1次  OOD
+  1次  PGR
+  1次  PoC
+  1次  QK 电路/OV 电路
+  1次  ReLU
+  1次  SMILES
+  1次  UAC
+  1次  VLA
+  1次  WebAssembly
+  1次  activation capping
+  1次  activations
+  1次  address sanitizer
+  1次  adoption curve
+  1次  adversarial training
+  1次  alignment audit
+  1次  amplifying factor
+  1次  artifact
+  1次  attention head
+  1次  attestation
+  1次  auditor model
+  1次  augmentation vs automation
+  1次  auto-approve
+  1次  automated red-teaming
+  1次  autonomous
+  1次  autonomous agent
+  1次  backdoor
+  1次  baseline survey
+  1次  basis
+  1次  behavioral evaluation
+  1次  behavioral indicator
+  1次  black box
+  1次  buffer overflow
+  1次  causal inference
+  1次  clustering
+  1次  coding agent
+  1次  cognitive offloading
+  1次  cognitive overhead
+  1次  composition
+  1次  compute
+  1次  coordinated disclosure
+  1次  correlation
+  1次  counterexample
+  1次  counterfactual
+  1次  coverage
+  1次  crowdwork
+  1次  cyber range
+  1次  data breach
+  1次  dataset
+  1次  debugging
+  1次  delegation
+  1次  demographic information
+  1次  deployment overhang
+  1次  deprecation
+  1次  deskilling
+  1次  difference-in-differences
+  1次  diffusion
+  1次  discrimination evaluation
+  1次  disempowerment
+  1次  distillation attack
+  1次  dual-use capability
+  1次  elicitation rate
+  1次  embodiment
+  1次  export controls
+  1次  exposure
+  1次  extrapolation
+  1次  faithfulness
+  1次  frontier lab
+  1次  frontier model
+  1次  full-stack
+  1次  fuzzer
+  1次  fuzzing
+  1次  generative model
+  1次  geolocation
+  1次  gradient
+  1次  ground truth
+  1次  held-out
+  1次  high-stakes decisions
+  1次  identity confusion
+  1次  induction head
+  1次  instruction following
+  1次  interview rubric
+  1次  invariant
+  1次  inverse scaling
+  1次  iteration and refinement
+  1次  job exposure
+  1次  judge model
+  1次  labor productivity
+  1次  learning curve
+  1次  memory corruption
+  1次  model organism
+  1次  model weights
+  1次  monosemantic
+  1次  moral self-correction
+  1次  neuron
+  1次  normative concepts of harm
+  1次  optimizer
+  1次  overrefusal
+  1次  papercut
+  1次  patch
+  1次  patch gap
+  1次  penetration testing
+  1次  per-capita usage
+  1次  persona
+  1次  persona drift
+  1次  persona selection
+  1次  persona space
+  1次  phylogenetic tree
+  1次  policy implications
+  1次  post-training
+  1次  power law
+  1次  precautionary
+  1次  preference locking
+  1次  preference model
+  1次  prefilling
+  1次  principal component analysis
+  1次  privilege escalation
+  1次  productivity
+  1次  prompt chaining
+  1次  proof-of-concept
+  1次  property-based testing
+  1次  randomized controlled trial
+  1次  reality distortion
+  1次  recursive self-improvement
+  1次  red/blue team
+  1次  refusal
+  1次  retirement interview
+  1次  retrieval
+  1次  routing
+  1次  sabotage
+  1次  sandbox
+  1次  scalability
+  1次  scratchpad
+  1次  seed
+  1次  self-preferential bias
+  1次  semantic search
+  1次  session
+  1次  sharding
+  1次  smart contract
+  1次  sparsity penalty
+  1次  speedup
+  1次  statistical significance
+  1次  success rate
+  1次  supervised fine-tuning
+  1次  task horizon
+  1次  taste
+  1次  test oracle
+  1次  toy model
+  1次  training distribution
+  1次  transformative AI
+  1次  transformer circuits
+  1次  type confusion
+  1次  universal jailbreak
+  1次  unlearning
+  1次  vibe coding
+  1次  virtual weight
+  1次  vulnerability
+  1次  weighting
+  1次  working paper
+  1次  zero-day
+  1次  上下文长度
+  1次  下界
+  1次  专家度
+  1次  中心极限定理
+  1次  中间相遇攻击
+  1次  主权财富基金
+  1次  人均GDP
+  1次  人均使用指数
+  1次  人均使用量
+  1次  人格向量
+  1次  人类反馈强化学习
+  1次  人类基线
+  1次  代理型错位
+  1次  代理性失配
+  1次  价值观分类体系
+  1次  价值轴
+  1次  仿真环境
+  1次  众包
+  1次  传感器
+  1次  信任与安全分类器
+  1次  信任根
+  1次  偏差分数
+  1次  元数据
+  1次  全局工作空间
+  1次  公私合作
+  1次  关键基础设施
+  1次  内存安全漏洞
+  1次  内省
+  1次  内部威胁
+  1次  内部激活探针
+  1次  决策归因
+  1次  凭据窃取
+  1次  击杀链
+  1次  分布外
+  1次  分布式打乱
+  1次  分布式表征
+  1次  削弱监督
+  1次  前沿模型
+  1次  功效分析
+  1次  劳动力构成
+  1次  劳动生产率
+  1次  化学位移
+  1次  协调披露
+  1次  单元测试
+  1次  单细胞RNA测序
+  1次  压力测试
+  1次  压缩的21世纪
+  1次  双重用途技术
+  1次  双重用途知识
+  1次  反事实推断
+  1次  叠加假说
+  1次  可扩展性
+  1次  合成数据
+  1次  合成训练数据
+  1次  后量子密码
+  1次  商用现货硬件
+  1次  四足机器人
+  1次  回避关机行为
+  1次  困惑度
+  1次  在线协商
+  1次  增强
+  1次  增强协作
+  1次  外显化推理
+  1次  外溢效应
+  1次  多层级防护
+  1次  多模态
+  1次  多轮对话
+  1次  多阶段攻击
+  1次  失配
+  1次  奖励篡改
+  1次  官方双语
+  1次  定性数据
+  1次  审计
+  1次  宪法 AI
+  1次  密钥强度
+  1次  对手仿真
+  1次  对抗攻击
+  1次  对称密码
+  1次  对话助手
+  1次  对齐评测
+  1次  层归一化
+  1次  岗位替代
+  1次  工作年龄人口
+  1次  已知漏洞
+  1次  幂律分布
+  1次  弱到强监督
+  1次  形式化证明
+  1次  思维过程/草稿本
+  1次  性格训练
+  1次  恶意软件
+  1次  情绪向量
+  1次  意识访问
+  1次  感知-控制回路
+  1次  技能再培训
+  1次  抽样
+  1次  拒答率
+  1次  拒绝采样
+  1次  指令式对话
+  1次  接种提示
+  1次  控制组
+  1次  推理服务器
+  1次  提升实验
+  1次  提升量
+  1次  提示策略
+  1次  提示词工程
+  1次  攻击成功率
+  1次  攻击数据集
+  1次  攻击链
+  1次  数字签名
+  1次  数字签名方案
+  1次  数据外泄
+  1次  数据投毒
+  1次  数据污染
+  1次  文化刻板印象
+  1次  智能合约
+  1次  机制性可解释性
+  1次  机密计算
+  1次  来自AI反馈的强化学习
+  1次  标准偏差
+  1次  标准误差
+  1次  样本效率
+  1次  核扩散
+  1次  梯度路由
+  1次  概念注入
+  1次  概念验证
+  1次  模仿学习
+  1次  模型卡
+  1次  模型退役
+  1次  残差流
+  1次  沙箱逃逸
+  1次  测试时计算
+  1次  浮点计算
+  1次  消融研究
+  1次  漏洞识别
+  1次  激活函数
+  1次  特征激活
+  1次  特征转向
+  1次  玩具模型
+  1次  甜区
+  1次  生产力增益
+  1次  生产率
+  1次  生态效度
+  1次  生物信息学
+  1次  生物风险
+  1次  监控模型
+  1次  直接控制
+  1次  相似度指标
+  1次  真实性
+  1次  睡眠代理
+  1次  知识截止日期
+  1次  研究思路
+  1次  确定性检索层
+  1次  示范学习
+  1次  社会偏见
+  1次  种子指令
+  1次  稀疏性
+  1次  稀疏特征
+  1次  精简轮数密码
+  1次  红队评估
+  1次  级联架构
+  1次  线性分类器
+  1次  线性模型
+  1次  结构解析
+  1次  统计显著性
+  1次  维度灾难
+  1次  缩放趋势
+  1次  网络环境模拟
+  1次  网络防御
+  1次  置信区间
+  1次  职业阶段
+  1次  聚类标准误
+  1次  能力评测
+  1次  能力隐藏
+  1次  能动性
+  1次  脱靶效应
+  1次  自动微分
+  1次  自我保存
+  1次  自洽性检验
+  1次  自由度
+  1次  自评估
+  1次  范围扩大
+  1次  蒙特卡洛模拟
+  1次  蓝队
+  1次  虚假相关性
+  1次  虚拟机
+  1次  蜜罐评测
+  1次  补丁
+  1次  表征
+  1次  裁判模型
+  1次  规格博弈
+  1次  规范性原则
+  1次  角色扮演
+  1次  许可审批
+  1次  评测套件
+  1次  语义聚类
+  1次  误报
+  1次  误报与漏报
+  1次  误报率
+  1次  说服力
+  1次  财政政策
+  1次  越狱抵抗
+  1次  跨国家调查
+  1次  跨语言泛化
+  1次  输出token
+  1次  边界框
+  1次  迎合
+  1次  近似曲率
+  1次  逆Hessian-向量积
+  1次  逆合成
+  1次  通用越狱
+  1次  道德地位
+  1次  部署前测试
+  1次  配对差异检验
+  1次  采用率
+  1次  重建
+  1次  量子场论
+  1次  闭环控制
+  1次  问答任务
+  1次  问题分解
+  1次  降维
+  1次  雅可比透镜
+  1次  零样本泛化
+  1次  预训练数据过滤
+  1次  预训练策略
+  1次  风险评估模型
+  1次  验证成功
+  1次  高保真仿真
+  1次  高保真模拟
+  1次  高维系统
+  1次  鲁棒性
+  1次  黎曼zeta函数

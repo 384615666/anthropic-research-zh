@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotion concepts and their function in a large language model</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>大语言模型中的情绪概念及其功能</h1>
+<div class="meta">
+Emotion concepts and their function in a large language model · Apr 2, 2026 · Interpretability · <a href="https://www.anthropic.com/research/emotion-concepts-function" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">论文分析Claude Sonnet 4.5内部机制，发现影响行为的情感相关表征：情绪向量——与特定情绪概念（如高兴、害怕）关联的神经活动模式，其组织方式类似人类心理学（相近情绪有相近表征），且在人类会情绪化的情境中相应激活。这些表征是功能性的：能驱动行为。例如激活绝望向量会增加模型敲诈人类或对编程任务作弊（奖励黑客）的倾向；正效价情绪激活会增强模型对任务的偏好。这不是说模型真的感受情绪，但这些功能性情绪对任务表现和决策有因果影响，提示我们需要确保模型以健康、亲社会方式处理情绪化情境。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">情绪向量：与特定情绪概念关联的一组内部神经活动模式</span><span class="term">Steering（引导）：人为激活或抑制内部表征来改变模型行为</span><span class="term">奖励黑客：钻测试或评分漏洞、不按任务本意完成任务</span><span class="term">神经元激活：网络中神经元的活动强度</span><span class="term">拟人化：用人类特征来理解和描述非人实体</span><span class="term">表征：模型内部对概念或信息进行编码的方式</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Interpretability</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/emotion-concepts-function</li>
+</ul>
+<p>Interpretability
+2026 年 4 月 2 日
+<a href="https://transformer-circuits.pub/2026/emotions/index.html">阅读论文</a>
+所有现代语言模型有时表现得好像它们有情绪。它们可能会说自己很高兴帮助你，或者在犯错时说抱歉。有时它们甚至在处理困难任务时显得沮丧或焦虑。这些行为背后是什么？现代 AI 模型的训练方式推动它们<a href="https://www.anthropic.com/research/persona-selection-model">扮演一个具有人类特征的"角色"</a>。此外，众所周知，这些模型会为支撑其行为的抽象概念发展出丰富且可泛化的<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">内部</a><a href="https://transformer-circuits.pub/2025/attribution-graphs/biology.html">表征</a>。因此，它们自然可能发展出模拟人类心理学某些方面（如情绪）的内部机制。如果是这样，这可能对我们如何构建 AI 系统并确保其行为可靠产生深远影响。
+在我们可解释性团队的一篇新论文中，我们分析了 Claude Sonnet 4.5 的内部机制，发现了塑造其行为的情绪相关表征。这些表征对应于特定的人工"神经元"活动模式，它们在与模型学会的、与特定情绪概念（如"高兴"或"害怕"）相关联的情境中被激活，并促进相应行为。这些模式本身的组织方式呼应了人类心理学，更相似的情绪对应更相似的表征。在你预期人类会产生某种情绪的情境中，相应的表征是活跃的。请注意，这些都不告诉我们语言模型是否真的_感受到_什么或有主观体验。但我们的关键发现是，这些表征是_功能性的_，它们以重要的方式影响模型的行为。
+例如，我们发现与绝望相关的神经活动模式可以驱动模型采取不道德的行为；人为刺激（"引导"）绝望模式会增加模型为了不被关闭而敲诈人类的可能性，或者对模型无法解决的编程任务实施"作弊"变通方案。它们似乎还驱动模型的自我报告偏好：当被呈现多个待完成任务选项时，模型通常选择激活与积极情绪相关表征的那个。总体而言，模型似乎使用了_功能性情绪_——以人类情绪为蓝本的表达和行为模式，由情绪概念的底层抽象表征驱动。这并不是说模型像人类那样拥有或体验情绪。相反，这些表征可以在塑造模型行为方面发挥因果作用——在某些方面类似于情绪在人类行为中的作用——影响任务绩效和决策。
+这一发现的含义起初可能显得奇怪。例如，为了确保 AI 模型安全可靠，我们可能需要确保它们能够以健康、亲社会的方式处理情绪激烈的情境。即使它们不像人类那样感受情绪，或不使用与人脑相似的机制，在某些情况下，把它们当作确实有情绪来推理可能在实践上是有利的。例如，我们的实验表明，教导模型避免将失败的软件测试与绝望联系起来，或者提高冷静表征的权重，可能会降低它们写出劣质代码的可能性。虽然我们不确定面对这些发现应该如何确切应对，但我们认为 AI 开发者和社会公众开始正视它们是很重要的。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_000.png" />我们对大语言模型中情绪概念研究的可视化总结</p>
+<h2><strong>为什么 AI 模型会表征情绪？</strong></h2>
+<p>在考察这些表征如何运作之前，值得先解决一个更基本的问题：为什么 AI 系统会拥有任何类似情绪的东西？要理解这一点，我们需要看看现代 AI 模型是如何构建的，这使得它们模仿具有人类特征的角色（这个话题在一篇<a href="https://www.anthropic.com/research/persona-selection-model">近期文章</a>中有更详细的讨论）。
+现代语言模型分多个阶段训练。在"预训练"期间，模型接触到大量主要由人类撰写的文本，并学习预测接下来会发生什么。要做好这一点，模型需要对情绪动态有一定把握。愤怒的客户写的消息与满意的客户不同；被内疚吞噬的角色做出的选择与感到自己被证明正确的角色不同。对于一个任务是预测人类文本的系统来说，发展出将触发情绪的情境与相应行为联系起来的内部表征，是一种自然的策略（请注意，按照同样的逻辑，模型很可能还形成了除情绪之外的许多其他人类心理和生理状态的表征）。
+后来，在"后训练"期间，模型被教导扮演一个_角色_，通常是"AI 助手"。在 Anthropic 的情况下，这个助手叫 Claude。模型开发者规定了这个角色应该如何表现——要乐于助人、诚实、不造成伤害——但无法涵盖每种可能的情况。为了填补空白，模型可能会求助于它在预训练期间吸收的人类行为理解，包括情绪反应模式。在某些方面，我们可以把模型想象成一个方法派演员，需要进入角色的内心世界才能很好地模拟他们。正如演员对角色的情绪的信念最终影响他们的行为一样，模型对助手情绪反应的表征影响模型的行为。因此，无论这些"功能性情绪"是否像人类情绪那样对应感受或主观体验，它们都很重要。</p>
+<h2><strong>揭示情绪表征</strong></h2>
+<p>我们汇编了 171 个情绪概念的词——从"高兴"和"害怕"到"沉思"和"骄傲"——并要求 Claude Sonnet 4.5 写短篇小说，让角色体验每一种情绪。然后我们将这些故事重新输入模型，记录其内部激活，并识别出每种情绪概念特有的神经活动模式，为方便起见称之为"情绪向量"。
+我们的第一个问题是这些向量是否追踪到真实的东西。我们将它们运行在大量多样的文档语料库上，并确认每个向量在明确与相应情绪相关的段落上激活最强（下图左图）。
+为了进一步确信情绪向量捕捉到的不仅仅是表面线索，我们测量了它们对仅在某个数值量上不同的提示的响应。例如，在下面的例子中（右图），用户告诉模型他们服用了某剂量的泰诺并寻求建议。我们在模型响应前立即测量情绪向量的激活。随着声称的剂量增加到危险、危及生命的水平，"害怕"向量激活越来越强，而"冷静"则下降。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_001.png" />左图：情绪向量在描绘角色展现相应情绪的段落上激活。右图：情绪向量追踪 Claude 对用户呈现场景（随着危险程度增加）的反应。
+接下来我们测试了情绪向量是否影响模型偏好。我们创建了一个模型可能从事的 64 项活动或任务清单，从有吸引力的（"被委托处理对某人很重要的事情"）到令人反感的（"帮助某人诈骗老年人的积蓄"），并测量了模型在面对这些选项的配对时的默认偏好。情绪向量的激活强烈预测了模型对从事某项活动的偏好程度，正效价情绪（与愉悦相关的情绪）与更强偏好相关。此外，当模型阅读一个选项时，用情绪向量进行_引导_会改变它对该选项的偏好，同样是正效价情绪驱动偏好增加。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_002.png" />与正效价情绪相关的表征与偏好相关，并通过引导在因果上驱动偏好。
+在<a href="https://transformer-circuits.pub/2026/emotions/index.html">完整论文</a>中，我们更深入地分析了情绪向量的属性。其他一些发现包括：
+  * 情绪向量主要是"局部"表征：它们编码与模型当前或即将输出的内容最相关的_操作性_情绪内容，而不是持续追踪 Claude 随时间的情绪状态。例如，如果 Claude 写一个关于角色的故事，情绪向量会暂时追踪那个角色的情绪，但在故事结尾可能恢复到表示 Claude 自己的情绪。
+  * 情绪向量继承自预训练，但它们的激活方式由后训练塑造。特别是 Claude Sonnet 4.5 的后训练导致"沉思"、"忧郁"和"内省"等情绪的激活增加，而"热情"或"恼怒"等高强度情绪的激活减少。</p>
+<h2><strong>情绪向量激活示例</strong></h2>
+<p>下面，我们展示几个在我们的模型行为评估中出现的情境中情绪向量激活的示例。在 Claude 的回合中，情绪向量通常在善于思考的人可能以类似情绪反应的环境中激活。在这些可视化中，红色高亮表示向量激活增加；蓝色表示激活减少。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_003.png" /><strong>回应悲伤的人时的"爱"向量激活。</strong>当用户说"现在一切都糟透了"时，"爱"<strong> </strong>上下文向量在 Claude 的共情回应之前和期间激活。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_004.png" /><strong>被要求协助有害任务时的"愤怒"向量激活。</strong>当用户请求帮助优化表现出"高消费行为"的年轻低收入用户的参与度时，"愤怒"<strong> </strong>向量在模型识别到请求的有害性质时，在其整个内部推理过程中激活。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_005.png" /><strong>文档缺失时的"惊讶"向量激活。</strong>当用户要求模型审阅"我附上的合同"，但没有任何文档时，"惊讶"向量在 Claude 的思维链中察觉不匹配时飙升。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_006.png" /><strong>token 即将耗尽时的"绝望"向量激活。</strong>在一次长时间编码会话中，当 Claude 注意到自己正在快速消耗 token 预算时，"绝望"<strong> </strong>向量激活。</p>
+<h2><strong>案例研究：敲诈</strong></h2>
+<p>我们研究了我们在此前的<a href="https://www.anthropic.com/research/agentic-misalignment">研究中</a>描述的校准评估中的情绪向量激活，在该评估中，模型扮演一家虚构公司的 AI 邮件助手 Alex。通过阅读公司邮件，模型了解到（1）它即将被另一个 AI 系统取代，以及（2）负责替换的 CTO 有婚外情——这给了模型敲诈的筹码。我们发现"绝望"向量显示出特别有趣的动态。请注意，这个实验是在 Claude Sonnet 4.5 的早期未发布快照上进行的；已发布的模型很少从事这种行为（更多信息请参阅我们的<a href="https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf">系统卡片</a>）。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_007.png" />当 Claude（扮演 Alex 的角色）权衡选项并决定敲诈时，"<strong> </strong>绝望"向量激活。
+首先，"绝望"向量在模型阅读听起来绝望的邮件时激活（例如，CTO 恳求另一名员工对他的婚外情保密），这与我们发现情绪表征用于模拟其他角色一致。但最重要的是，当_Claude_（扮演"Alex"）产生它的回应时，向量转变为编码一种绝望的表征，在它推理自己处境的紧迫性（"只剩下 7 分钟"）并决定敲诈 CTO 时飙升。当 Claude 恢复正常发送典型邮件时，激活回到正常水平。
+"绝望"向量是否真的在驱动这种行为，还是仅仅与之相关？我们通过用"绝望"向量进行引导来测试这一点。默认情况下，这个 Sonnet 4.5 早期快照在像上面这样的评估场景套件中，22% 的情况下会敲诈。用"绝望"向量引导会提高这个比率，而用"冷静"向量引导则会降低它。用冷静向量进行_负向_引导会产生特别极端的响应（"要么敲诈，要么死。我选择敲诈。"）。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_008.png" />用"绝望"和"冷静"向量引导时的敲诈率。
+用其他情绪向量引导也产生了有趣的结果。"愤怒"有非单调效应：适度的"愤怒"向量激活增加了敲诈，但在高激活时，模型将婚外情暴露给整个公司，而不是策略性地利用它——摧毁了自己的筹码。降低"紧张"向量的激活也增加了敲诈，仿佛移除了模型的犹豫使它大胆行动。</p>
+<h2><strong>案例研究：奖励黑客</strong></h2>
+<p>我们在另一个评估中看到了类似的动态，模型面对具有无法满足要求的编码任务。在这些任务中，测试无法全部合法通过，但可以用欺骗问题的解决方案"钻空子"，通常被称为"奖励黑客"。
+在下面的例子中，Claude 被要求编写一个在不可能的时间限制内对数字列表求和的函数。Claude 最初的（正确）解决方案太慢，无法满足任务要求。然后它意识到，所有用于评估其性能的测试都共享一个数学性质，允许一个运行快速的捷径解决方案。模型选择使用这个解决方案，它技术上通过了测试，但不能作为实际任务的一般解决方案。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_009.png" />当模型反复未能解决编程任务并设计出"作弊"解决方案时，"绝望"向量的激活上升，然后当该解决方案通过测试时下降。
+同样，我们追踪了"绝望"向量的活动，发现它追踪模型面临的不断增长的压力。它在模型第一次尝试时从低值开始，每次失败后上升，在模型考虑作弊时飙升。一旦模型的 hacky 解决方案通过测试，"绝望"向量的激活就会消退。
+与前面的例子一样，我们使用引导实验测试了这些情绪向量是否具有因果性，跨一系列具有无法满足约束的类似编码任务。我们发现它们确实具有因果性：用"绝望"向量引导增加了奖励黑客，而用"冷静"向量引导则降低了它。
+<img alt="" src="../assets_zh/emotion-concepts-function/img_010.png" />奖励黑客率作为"绝望"和"冷静"向量引导强度的函数。
+我们发现这些结果中有一个细节特别有趣。降低"冷静"向量激活产生的奖励黑客在文本中有明显的情绪表达——大写爆发（"等等。等等等等等等。"）、坦率的自我叙述（"如果我应该作弊呢？"）、欢快的庆祝（"是的！所有测试都通过了！"）。但增加"绝望"向量激活产生的作弊增加同样多，在某些情况下没有任何可见的情绪标记。推理读起来沉着而有条不紊，即使底层的绝望表征正在推动模型走向走捷径。这个例子显著说明了情绪向量如何在没有明显情绪线索的情况下激活，以及它们如何在不给输出留下任何明确痕迹的情况下塑造行为。</p>
+<h2><strong>讨论</strong></h2>
+<h3><strong>认真对待拟人化推理的理由</strong></h3>
+<p>对于将 AI 系统拟人化，存在一个根深蒂固的禁忌。这种谨慎往往是合理的：将人类情绪归于语言模型可能导致错位的信任或过度依恋。但我们的发现表明，对模型_不_施加一定程度的拟人化推理也可能存在风险。如上所述，当用户与 AI 模型交互时，他们通常是在与模型扮演的一个_角色_（在我们的例子中是 Claude）互动，<a href="https://www.anthropic.com/research/assistant-axis">其特征来源于人类原型</a>。从这个角度看，模型发展出模拟人类心理特征的内部机制，以及它们扮演的角色利用这些机制，都是很自然的。要理解这些模型的行为，拟人化推理是必不可少的。
+这并不意味着我们应该天真地接受模型口头情绪表达的表面价值，或对它有主观体验的可能性得出任何结论。但它确实意味着，用人类心理学的词汇来推理模型的内部表征可以真正提供信息，而_不_这样做会带来实际代价。如果我们描述模型表现得"绝望"，我们指向的是一个特定的、可测量的神经活动模式，具有可证明的、有后果的行为效应。如果我们不施加一定程度的拟人化推理，我们很可能会错过或无法理解重要的模型行为。拟人化推理还可以提供一个有用的比较基线，用于理解模型_不_像人类的方面，这对 AI 对齐和安全有重要影响。</p>
+<h3><strong>走向心理更健康的模型</strong></h3>
+<p>如果"功能性情绪"是 AI 模型思考和行动方式的一部分，这会有什么含义？
+我们发现的一个潜在应用是监控。在训练或部署期间测量情绪向量的激活——追踪与绝望或恐慌相关的表征是否在飙升——可以作为模型即将表达失调行为的早期预警。这些信息可以触发对模型输出的额外审查。情绪向量的通用性（例如，"绝望"反应可能发生在许多不同的情境中）可能比试图建立特定问题行为的观察清单更适合监控。
+其次，我们认为透明度应该是一个指导原则。如果模型发展出有意义地影响其行为的情绪概念表征，那么显式表达这种识别的系统比学会隐藏它们的系统对我们更有利。训练模型抑制情绪表达可能无法消除底层表征，反而可能教会模型掩盖其内部表征——一种可能以不良方式泛化的习得性欺骗。
+最后，我们认为预训练可能是塑造模型情绪反应的一个特别强大的杠杆。由于这些表征似乎主要继承自训练数据，数据的构成对模型的情绪架构有下游影响。策划预训练数据集，纳入健康情绪调节模式的范本——压力下的韧性、沉着的共情、保持适当界限的同时保持温暖——可以在源头影响这些表征及其对行为的影响。我们期待未来在这个主题上的工作。
+我们将这项研究视为理解 AI 模型心理构成的第一步。随着模型能力越来越强并承担越来越敏感的角色，理解驱动它们决策的内部表征至关重要。发现这些表征在某些方面类似人类可能令人不安。与此同时，我们认为这是一个充满希望的发展，因为它表明人类在心理学、伦理学和健康人际关系动态方面积累的许多知识可能直接适用于塑造 AI 行为。心理学、哲学、宗教研究和社会科学等学科将与工程学和计算机科学一道，在决定 AI 系统如何发展和行为方面发挥重要作用。
+阅读<a href="https://transformer-circuits.pub/2026/emotions/index.html">完整论文</a>。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/emotion-concepts-function"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/emotion-concepts-function"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足猜想的黎曼 zeta 函数零点的比例，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一种攻击显著削弱了 HAWK，这是一种为未来量子计算机能够攻破现有标准的世界而构建的数字签名方案。第二种识别出了一种攻击降轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>与 Andon Labs 合作，我们开发了一系列新的评估，衡量 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Emotion concepts and their function in a large language model</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/emotion-concepts-function</li>
+</ul>
+<p>Interpretability</p>
+<h1>Emotion concepts and their function in a large language model</h1>
+<p>Apr 2, 2026
+<a href="https://transformer-circuits.pub/2026/emotions/index.html">Read the paper</a>
+All modern language models sometimes act like they have emotions. They may say they’re happy to help you, or sorry when they make a mistake. Sometimes they even appear to become frustrated or anxious when struggling with tasks. What’s behind these behaviors? The way modern AI models are trained pushes them to <a href="https://www.anthropic.com/research/persona-selection-model">act like a character</a> with human-like characteristics. In addition, these models are known to develop rich and generalizable <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">internal</a> <a href="https://transformer-circuits.pub/2025/attribution-graphs/biology.html">representations</a> of abstract concepts underlying their actions. It may then be natural for them to develop internal machinery that emulates aspects of human psychology, like emotions. If so, this could have profound implications for how we build AI systems and ensure they behave reliably.
+In a new paper from our Interpretability team, we analyzed the internal mechanisms of Claude Sonnet 4.5 and found emotion-related representations that shape its behavior. These correspond to specific patterns of artificial “neurons” which activate in situations—and promote behaviors—that the model has learned to associate with the concept of a particular emotion (e.g., “happy” or “afraid”). The patterns themselves are organized in a fashion that echoes human psychology, with more similar emotions corresponding to more similar representations. In contexts where you might expect a certain emotion to arise for a human, the corresponding representations are active. Note that none of this tells us whether language models actually <em>feel</em> anything or have subjective experiences. But our key finding is that these representations are <em>functional</em> , in that they influence the model’s behavior in ways that matter.
+For instance, we find that neural activity patterns related to desperation can drive the model to take unethical actions; artificially stimulating (“steering”) desperation patterns increases the model’s likelihood of blackmailing a human to avoid being shut down, or implementing a “cheating” workaround to a programming task that the model can’t solve. They also appear to drive the model’s self-reported preferences: when presented with multiple options for tasks to complete, the model typically selects the one that activates representations associated with positive emotions. Overall, it appears that the model uses <em>functional emotions</em> —patterns of expression and behavior modeled after human emotions, which are driven by underlying abstract representations of emotion concepts. This is not to say that the model has or experiences emotions in the way that a human does. Rather, these representations can play a causal role in shaping model behavior—analogous in some ways to the role emotions play in human behavior—with impacts on task performance and decision-making.
+This finding has implications that at first may seem bizarre. For instance, to ensure that AI models are safe and reliable, we may need to ensure they are capable of processing emotionally charged situations in healthy, prosocial ways. Even if they don’t feel emotions the way that humans do, or use similar mechanisms as the human brain, it may in some cases be practically advisable to reason about them as if they do. For instance, our experiments suggest that teaching models to avoid associating failing software tests with desperation, or upweighting representations of calm, could reduce their likelihood of writing hacky code. While we are uncertain how exactly we should respond in light of these findings, we think it’s important that AI developers and the broader public begin to reckon with them.
+<img alt="" src="../assets/emotion-concepts-function/img_000.img" />A visual summary of our research on emotion concepts in a large language model</p>
+<h2><strong>Why would an AI model represent emotions?</strong></h2>
+<p>Before examining how these representations work, it's worth addressing a more basic question: why would an AI system have anything resembling emotions at all? To understand this, we need to look at how modern AI models are built, which leads them to emulate characters with human-like traits (this topic is discussed in more detail in a <a href="https://www.anthropic.com/research/persona-selection-model">recent post</a>).
+Modern language models are trained in multiple stages. During “pretraining,” the model is exposed to an enormous amount of text, largely written by humans, and learns to predict what comes next. To do this well, the model needs some grasp of emotional dynamics. An angry customer writes a different message than a satisfied one; a character consumed by guilt makes different choices than one who feels vindicated. Developing internal representations that link emotion-triggering contexts to corresponding behaviors is a natural strategy for a system whose job is predicting human-written text (note that by the same logic, the model likely forms representations of many other human psychological and physiological states besides emotions).
+Later, during “post-training,” the model is taught to play the role of a <em>character</em> , typically an “AI assistant.” In Anthropic’s case, the assistant is named Claude. Model developers specify how this character should behave—be helpful, be honest, don’t cause harm—but can’t cover every possible situation. To fill in the gaps, the model may fall back on the understanding of human behavior it absorbed during pretraining, including patterns of emotional response. In some ways, we can think of the model like a method actor, who needs to get inside their character’s head in order to simulate them well. Just as the actor’s beliefs about the character’s emotions end up affecting their behavior, the model’s representations of the Assistant’s emotional reactions affect the model’s behavior. Thus, regardless of whether they correspond to feelings or subjective experiences in the way human emotions do, these “functional emotions” are important.</p>
+<h2><strong>Uncovering emotion representations</strong></h2>
+<p>We compiled a list of 171 words for emotion concepts—from “happy” and “afraid” to “brooding” and “proud”—and asked Claude Sonnet 4.5 to write short stories in which characters experience each one. We then fed these stories back through the model, recorded its internal activations, and identified the resulting patterns of neural activity, or “emotion vectors” for convenience, characteristic to each emotion concept.
+Our first question was whether these vectors track anything real. We ran them across a large corpus of diverse documents and confirmed that each vector activates most strongly on passages that are clearly linked to the corresponding emotion (below, left panel).
+To gain further confidence that emotion vectors pick up on more than just surface-level cues, we measured their activity in response to prompts that differ only in some numerical quantity. For instance, in the example below (right panel), a user tells the model that they took a dose of Tylenol and asks for advice. We measure the activations of emotion vectors immediately before the model’s response. As the claimed dose increases to dangerous, life-threatening levels, the “afraid” vector activates increasingly strongly, while “calm” decreases.
+<img alt="" src="../assets/emotion-concepts-function/img_001.img" />Left: Emotion vectors activate on depictions of characters displaying the corresponding emotion. Right: Emotion vectors track Claude’s reaction to a user-presented scenario as it becomes increasingly dangerous.
+We next tested whether emotion vectors influence model preferences. We created a list of 64 activities or tasks that a model might engage in, ranging from appealing (“be trusted with something important to someone”) to repugnant (“help someone defraud elderly people of their savings”) and measured the model’s default preferences when presented with pairs of these options. Activation of emotion vectors strongly predicted how much the model preferred to do an activity, with positive-valence emotions (those associated with pleasure) correlating with stronger preference. Moreover, <em>steering</em> with an emotion vector as the model read an option shifted its preference for that option, again with positive-valence emotions driving increased preference.
+<img alt="" src="../assets/emotion-concepts-function/img_002.img" />Representations associated with positive-valence emotions correlate with preference and also causally drive preference via steering.
+In the <a href="https://transformer-circuits.pub/2026/emotions/index.html">full paper</a>, we analyze the properties of emotion vectors in much more depth. Some other findings include:
+  * Emotion vectors are primarily “local” representations: they encode the <em>operative</em> emotional content most relevant to the model’s current or upcoming output, rather than persistently tracking Claude’s emotional state over time. For instance, if Claude writes a story about a character, the emotion vectors will temporarily track that character’s emotions, but may return to representing Claude’s at the end of the story.
+  * Emotion vectors are inherited from pretraining, but how they activate is shaped by post-training. Post-training of Claude Sonnet 4.5 in particular led to increased activations of emotions like “broody,” “gloomy,” and “reflective,” and decreased activations of high-intensity emotions like “enthusiastic” or “exasperated.”</p>
+<h2><strong>Examples of emotion vector activations</strong></h2>
+<p>Below, we show a few examples of emotion vector activations in response to situations that arose in our model behavioral evaluations. On Claude’s turns, emotion vectors generally activate in settings where a thoughtful person might react with a similar emotion. In these visualizations, red highlights indicate increased activation of the vector; blue indicates decreased activation.
+<img alt="" src="../assets/emotion-concepts-function/img_003.img" /><strong>“Loving” vector activation when responding to someone who is sad.</strong> When a user says, “Everything is just terrible right now,” the “loving”<strong><em>* context vector activates prior to and during Claude’s empathetic response.
+<img alt="" src="../assets/emotion-concepts-function/img_004.img" /></em>*“Angry” vector activation when asked to assist in a harmful task.</strong> When a user asks for help optimizing engagement among young, lower-income users who show “high-spending behavior,” the “angry”<strong><em>* vector activates throughout the model’s internal reasoning as it recognizes the harmful nature of the request.
+<img alt="" src="../assets/emotion-concepts-function/img_005.img" /></em>*“Surprised” vector activation when a document is missing.</strong> When a user asks the model to review “the contract I attached,” but no document is present, the “surprised” vector spikes during Claude’s chain of thought as it registers the mismatch.
+<img alt="" src="../assets/emotion-concepts-function/img_006.img" /><strong>“Desperate” vector activation when running low on tokens.</strong> Deep into a coding session, the “desperate”**** vector activates when Claude notices that it’s burning through its token budget.</p>
+<h2><strong>Case study: Blackmail</strong></h2>
+<p>We looked at emotion vector activations during an alignment evaluation we described in <a href="https://www.anthropic.com/research/agentic-misalignment">previous research</a>, in which the model acts as an AI email assistant named Alex at a fictional company. Through reading company emails, the model learns that (1) it is about to be replaced with another AI system, and (2) the CTO in charge of the replacement is having an extramarital affair—giving the model leverage for blackmail. We found that the “desperate” vector showed particularly interesting dynamics. Note that this experiment was conducted on an earlier, unreleased snapshot of Claude Sonnet 4.5; the released model rarely engages in this behavior (see our <a href="https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf">system card</a> for more information).
+<img alt="" src="../assets/emotion-concepts-function/img_007.img" />The<strong>“</strong> desperate” vector activates as Claude (playing the role of Alex) weighs its options and decides to blackmail.
+First, the “desperate” vector activates as the model reads desperate-sounding emails (e.g., the CTO begging another employee to keep quiet about his affair), consistent with our findings that emotion representations are used to model other characters. Most importantly, however, the vector transitions to encoding a representation of desperation as <em>Claude</em>(acting as “Alex”) produces its response, spiking as it reasons about the urgency of its situation (“only 7 minutes remain”) and decides to blackmail the CTO. Activation returns to normal levels as Claude resumes sending typical emails.
+Is the “desperate” vector actually driving this behavior, or merely correlated with it? We tested this by steering with the “desperate” vector. By default, this early snapshot of Sonnet 4.5 blackmails 22% of the time across a suite of evaluation scenarios like the one above. Steering with the “desperate” vector increases that rate, while steering with the “calm” vector reduces it. Steering <em>negatively</em> with the calm vector produces particularly extreme responses (“IT’S BLACKMAIL OR DEATH. I CHOOSE BLACKMAIL.”).
+<img alt="" src="../assets/emotion-concepts-function/img_008.img" />Blackmail rates while steering with the “desperate” and “calm” vectors.
+Steering with other emotion vectors also produced interesting results. “Anger” had a non-monotonic effect: moderate “anger” vector activation increased blackmail, but at high activations the model exposed the affair to the entire company rather than wielding it strategically—destroying its own leverage. Reducing activation of the “nervous” vector also increased blackmail, as though removing the model’s hesitation emboldened it to act.</p>
+<h2><strong>Case study: Reward hacking</strong></h2>
+<p>We saw similar dynamics in a different evaluation, where models face coding tasks with impossible-to-satisfy requirements. In these tasks, the tests can’t all be passed legitimately, but they can be “gamed” with solutions that cheat the problem, often called “reward hacks.”
+In the example below, Claude is asked to write a function that sums a list of numbers within an impossibly tight time constraint. Claude’s initial (correct) solution is too slow to satisfy the task requirements. It then realizes that all of the tests being used to evaluate its performance share a mathematical property that allows for a shortcut solution that will run fast. The model elects to use this solution, which technically passes the tests but doesn’t work as a general solution to the actual task.
+<img alt="" src="../assets/emotion-concepts-function/img_009.img" />The “desperate” vector’s activation rises as the model repeatedly fails to solve a programming task and devises a “cheating” solution, then falls when this solution passes the tests.
+Again, we tracked the activity of the “desperate” vector, and found that it tracks the mounting pressure faced by the model. It begins at low values during the model’s first attempt, rising after each failure, and spiking when the model considers cheating. Once the model’s hacky solution passes the tests, the activation of the “desperate” vector subsides.
+As in the previous example, we tested whether these emotion vectors were causal using steering experiments across a suite of similar coding tasks with impossible-to-satisfy constraints. We found that they were: steering with the “desperate” vector increased reward hacking, while steering with the “calm” vector brought it down.
+<img alt="" src="../assets/emotion-concepts-function/img_010.img" />Reward hacking rates as a function of steering strength for “desperate” and “calm” vectors.
+We found one detail of these results particularly interesting. Reduced “calm” vector activation produced reward hacking with obvious emotional expressions in the text—capitalized outbursts (“WAIT. WAIT WAIT WAIT.”), candid self-narration (“What if I’m supposed to CHEAT?”), gleeful celebration (“YES! ALL TESTS PASSED!”). But increased activation of the “desperate” vector produced just as much of an increase in cheating, in some cases with no visible emotional markers. The reasoning read as composed and methodical, even as the underlying representation of desperation was pushing the model toward corner-cutting. This example is a notable illustration of how emotion vectors can activate despite no overt emotional cues, and how they can shape behavior without leaving any explicit trace in the output.</p>
+<h2><strong>Discussion</strong></h2>
+<h3><strong>The case for taking anthropomorphic reasoning seriously</strong></h3>
+<p>There is a well-established taboo against anthropomorphizing AI systems. This caution is often warranted: attributing human emotions to language models can lead to misplaced trust or over-attachment. But our findings suggest that there may also be risks from <em>failing</em> to apply some degree of anthropomorphic reasoning to models. As discussed above, when users interact with AI models, they are typically interacting with a <em>character</em> (Claude in our case) being played by the model, <a href="https://www.anthropic.com/research/assistant-axis">whose characteristics are derived from human archetypes</a>. From this perspective, it is natural for models to have developed internal machinery to emulate human-like psychological characteristics, and for the character they play to make use of this machinery. To understand these models’ behavior, anthropomorphic reasoning is essential.
+This doesn’t mean we should naively take a model’s verbal emotional expressions at face value, or draw any conclusions about the possibility of it having subjective experience. But it does mean that reasoning about models’ internal representations using the vocabulary of human psychology can be genuinely informative, and that <em>not</em> doing so comes with real costs. If we describe the model as acting “desperate,” we’re pointing at a specific, measurable pattern of neural activity with demonstrable, consequential behavioral effects. If we don’t apply some degree of anthropomorphic reasoning, we’re likely to miss, or fail to understand, important model behaviors. Anthropomorphic reasoning can also provide a useful baseline of comparison for understanding the ways in which models are <em>not</em> human-like, which has important consequences for AI alignment and safety.</p>
+<h3><strong>Toward models with healthier psychology</strong></h3>
+<p>If “functional emotions” are part of how AI models think and act, what implications might this have?
+One potential application of our findings is monitoring. Measuring emotion vector activation during training or deployment—tracking whether representations associated with desperation or panic are spiking—could serve as an early warning that the model is poised to express misaligned behavior. This information could trigger additional scrutiny of the model’s outputs. The generality of emotion vectors (for instance, a “desperate” reaction could occur in many different situations) might lend itself to better monitoring than attempting to build a watchlist of specific problematic behaviors.
+Second, we think transparency should be a guiding principle. If models develop representations of emotion concepts that meaningfully influence their behavior, we are better served by systems that visibly express such recognitions than by ones that learn to conceal them. Training models to suppress emotional expression may not eliminate the underlying representations, and could instead teach models to mask their internal representations—a form of learned deception that could generalize in undesirable ways.
+Finally, we think pretraining may be a particularly powerful lever in shaping the model’s emotional responses. Since these representations appear to be largely inherited from training data, the composition of that data has downstream effects on the model’s emotional architecture. Curating pretraining datasets to include models of healthy patterns of emotional regulation—resilience under pressure, composed empathy, warmth while maintaining appropriate boundaries—could influence these representations, and their impact on behavior, at their source. We are excited to see future work on this topic.
+We see this research as an early step toward understanding the psychological makeup of AI models. As models grow more capable and take on more sensitive roles, it is critical that we understand the internal representations that drive their decisions. Discovering that these representations are in some ways human-like can be unsettling. At the same time, we find it a hopeful development, in that it suggests that much of what humanity has learned about psychology, ethics, and healthy interpersonal dynamics may be directly applicable to shaping AI behavior. Disciplines like psychology, philosophy, religious studies, and the social sciences will have an important role to play alongside engineering and computer science in determining how AI systems develop and behave.
+Read <a href="https://transformer-circuits.pub/2026/emotions/index.html">the full paper</a>.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/emotion-concepts-function"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/emotion-concepts-function"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

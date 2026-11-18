@@ -1,0 +1,5 @@
+# 本地中间产物与缓存（不发布）
+_imgwork/
+__pycache__/
+*.pyc
+*.pyo

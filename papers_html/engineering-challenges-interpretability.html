@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The engineering challenges of scaling interpretability</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>扩展可解释性研究的工程挑战</h1>
+<div class="meta">
+The engineering challenges of scaling interpretability · Jun 13, 2024 · Interpretability · <a href="https://www.anthropic.com/research/engineering-challenges-interpretability" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">Anthropic 可解释性团队反思科研与工程密不可分的关系，分享把可解释性研究扩展到更大模型时遇到的工程瓶颈，并以此说明工程是 AI 可解释性乃至 AI 安全研究的主要瓶颈之一。文章详述两个工程问题：一是分布式打乱——训练稀疏自编码器需要打乱海量激活数据，团队采用多趟分块置换方案把可处理规模从百 GB 级扩展到 PB 级；二是特征可视化流水线——为数百万特征高效找出激活最高的 token 示例，通过按数据集与特征分片、多趟聚合构建分布式系统。团队强调研究需要工程人才持续投入，二者不可分离。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">稀疏自编码器：用于把神经元激活分解为可解释特征的核心工具</span><span class="term">特征：模型内部与语义概念对应的激活模式</span><span class="term">分布式打乱：跨多台机器打乱超大数据集的方法</span><span class="term">分片（sharding）：把数据或任务切分成多块以便并行处理</span><span class="term">激活：神经层在处理输入时产生的中间数值</span><span class="term">可扩展性：方法在数据与算力规模增大时仍能有效工作的能力</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 可解释性</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/engineering-challenges-interpretability</li>
+</ul>
+<p>可解释性
+2024 年 6 月 13 日
+ <em>在本文以及上面的圆桌视频中，我们的研究人员反思了科学与工程进步之间的密切关系，并讨论了他们在将可解释性研究扩展到更大的 AI 模型时遇到的技术挑战。</em>
+去年 10 月，Anthropic 可解释性团队发表了<a href="https://transformer-circuits.pub/2023/monosemantic-features">《迈向单义性》</a>，一篇将字典学习技术应用于小型 Transformer 模型的论文。今年 5 月，我们发表了<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">《扩展单义性》</a>，将同样的技术应用于大几个数量级的模型。我们在 Claude 3 Sonnet 中发现了数千万个"特征"——与语义概念相关的神经元组合——代表着理解 AI 模型内部运作的重要一步。
+为了继续取得这样的进展，我们需要更多工程师。
+如果你只读过我们早期的论文（如<a href="https://transformer-circuits.pub/2021/framework/index.html">《框架》</a>和<a href="https://transformer-circuits.pub/2022/toy_model/index.html">《叠加的玩具模型》</a>），这可能会让你感到惊讶，因为那些论文需要的工程工作相对较少。但阅读较新的研究应该会清楚地看到我们所面临的工程挑战的规模。
+下面，我们分享我们最新研究涉及的两个技术工程问题的示例。这些示例说明了我们的工程师目前正在解决的问题类型，并有助于解释为什么我们认为工程将成为 AI 可解释性——以及最终是 AI 安全——研究进步的主要瓶颈之一。
+如果你是工程师，这篇文章就是为你准备的。如果你受到下面讨论的工程问题示例的启发，我们强烈鼓励你申请我们的<a href="https://boards.greenhouse.io/anthropic/jobs/4020305008">研究工程师职位</a>。</p>
+<h2>工程问题 1：分布式洗牌</h2>
+<p>我们的稀疏自编码器——我们用来研究"特征"的工具——在 Transformer 的激活上训练，而这些激活需要被洗牌，以防止它们学习虚假的、依赖顺序的模式。当我们最初开始训练稀疏自编码器时，我们可以将训练数据放入单个 GPU 并轻松洗牌。但最终，我们想要扩展到超出内存容量的规模（想象一下从洗一副牌的简单任务开始，然后扩展到洗满整个仓库的牌——这是一个困难得多的难题）。
+此时，我们本可以实施一个扩展到 PB 级的分布式洗牌。相反，我们决定采用一种可以快速实施、但扩展性较差的方法。我们将洗牌拆分为 <em>K</em> 个任务，每个任务负责 1/<em>K</em> 的洗牌后输出数据。我们生成一个排列，让每个任务对流式读取所有训练数据，然后写出其份额的输出。这让我们能够进一步扩展，但缺点很明显：每个任务都必须读取所有训练数据。这起初需要几个小时，后来需要几天。到我们进行<a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">《迈向单义性》</a>工作时，我们有 100TB 的训练数据（1000 亿个数据点，每个 1KB），洗牌已成为一个主要的头疼问题。
+执行可扩展的分布式洗牌不是一个新颖或尖端的问题。但它只是我们必须快速解决的众多工程问题之一，以便取得科学进展。
+在这种情况下，我们找到了一篇<a href="https://blog.janestreet.com/how-to-shuffle-a-big-dataset/">有用的博客文章</a>，并将该方法扩展到多遍。对于一遍，我们有 <em>N</em> 个任务。每个任务读取 1/<em>N</em> 的数据集，洗牌，并写出 K 个文件，每个文件包含 1/<em>NK</em> 的数据。每个任务写出的第一个文件的内容代表最终洗牌后数据的前 1/<em>K</em>，但它仍然需要洗牌。第二个文件也是如此，依此类推。在一遍中，我们将对整个数据的一次洗牌减少为 <em>N</em> 次洗牌，每次小 <em>K</em> 倍。现在，如果这些洗牌能在单台机器上放入内存，我们就可以洗牌并完成。如果放不下，我们可以再运行一遍。
+假设每个任务可以在内存中保留 100GB 的数据，我们写出一百个 1GB 的文件。每遍将所需洗牌的大小减少 100 倍。一遍可以洗 100GB 的数据，两遍可以洗 10TB，三遍 1PB，四遍 100PB，依此类推。
+自从我们实施这种方法以来，我们就不再考虑洗牌了。现在它是快速、无问题发生的事情。当然有比我们更好的方法和更快的实现。但这种方法解决了我们的瓶颈，使我们能够腾出手来解决下一个问题。</p>
+<h2>工程问题 2：特征可视化流水线</h2>
+<p>另一个工程挑战是为我们的特征可视化生成底层数据，这些可视化让用户看到作为各个特征一部分被最强烈激活的特定 token，以及其他信息（<a href="https://transformer-circuits.pub/2023/monosemantic-features/vis/a1.html">在此链接查看《迈向单义性》论文中的特征浏览器</a>）。
+对于每个特征，我们希望找到各种以不同水平激活它的数据集示例，探索其完整分布。对数百万个特征高效地做到这一点是一个有趣的分布式系统问题。最初，所有这些都在一个单一任务中运行——但我们很快扩展到了超越它的规模。下面是我们当前方法的草图。
+我们的可视化数据集是 1 亿 token，我们需要处理数百万个特征。首先，我们在数据集和特征上进行"分片"（shard），将它们拆分成许多不同的部分。每个任务迭代其数据集切片，并对其特征切片，跟踪每个特征激活最高的 <em>K</em> 个 token，以及 10*<em>K</em> 个随机激活该特征的 token（我们已经将 Transformer 激活缓存在 s3 中，因此无需重新计算）。
+接下来，我们在特征上分片并聚合上一遍的结果。这为我们提供了整个数据集中每个特征激活最高的 token，以及一组随机的激活该特征的 token。这些是我们将在特征可视化中展示的示例。
+对于这些示例中的每一个，我们需要计算特征在周围 token 上的激发情况。我们的第一个方法在特征上分片。每个任务加载其负责特征示例的 Transformer 激活。问题在于这些示例随机分布在数据集中：没有简单的方法只读取任务需要的数据。
+为了改进这一点，我们添加了一个在数据集上分片的遍。在这种设置中，每个任务处理一部分 Transformer 激活，并将每组特征所需的激活保存到单独的文件中。然后，我们可以在特征上运行一遍，并轻松访问我们只需要的数据。我们计算特征在周围 token 上的激发程度，然后以我们的前端网站可以读取和显示的格式写出所有相关数据。</p>
+<h2>我们在寻找什么</h2>
+<p>当我们开始研究稀疏自编码器时，我们不知道这种方法是否会奏效。我们运行的实验越多，对研究就越有信心。这让我们在基础设施上投入更多，以便运行更大的实验。这个过程一直持续到<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">《扩展单义性》</a>，我们最近的论文。
+这个过程指向了我们在可解释性团队所做的工程工作类型——以及我们认为研究与工程不可分割的事实。通常，我们的团队成员会在研究和工程之间来回切换，从当前系统中挤出更多规模以启动新实验，然后再回到研究。由于许多研究想法不会成功，我们在看到成功之前不会在其基础设施上过度投入。
+研究是一项团队工作，实现想法与思考想法同样重要。我们不只是假设；我们测试、构建、迭代和扩展。
+正因为如此，我们特别有兴趣招聘能够在不同领域灵活工作的通才型工程师——无论是构建流水线、运行 ML 实验，还是优化 GPU 使用。
+如果你是符合这一条件的工程师，并且对 AI 安全充满热情，我们很乐意看到你的申请。请查看我们<a href="https://boards.greenhouse.io/anthropic/jobs/4020305008">研究工程师职位</a>的职位描述，以及我们的<a href="https://www.anthropic.com/careers">职业页面</a>上可解释性团队的其他几个空缺职位。</p>
+<h2>常见问题</h2>
+<ol>
+<li><strong>你们要招聘多少个职位？</strong> 可解释性团队目前有 18 名成员，我们正在快速成长。目前我们计划在多个地点招聘至少五名高级工程师和两名团队经理。职位列表请见我们的<a href="https://www.anthropic.com/careers">职业页面</a>。</li>
+<li><strong>可解释性团队与其他团队合作吗？</strong> 合作。我们与其他研究团队（尤其是对齐团队）密切协作。Anthropic 是一个"团队科学"组织，团队之间的边界以最好的方式保持通透——这使我们能够快速完成很多事情。</li>
+<li><strong>你们如何选择要做的项目？</strong> 我们根据 Anthropic 的<a href="https://www.anthropic.com/news/anthropics-responsible-scaling-policy">负责任扩展政策</a>来思考我们的研究路线图，该政策承诺公司在开发或部署超过相应能力水平的模型之前达到各种安全里程碑。在思考研究方向时，我们会考虑可解释性的研究格局是什么样、我们有能力解决哪些问题，以及可解释性团队的工作如何影响这些安全里程碑。在日常层面，我们的研究往往非常探索性，但这种探索是以上述考虑为指导的。</li>
+<li><strong>可解释性团队的人有什么样的背景？</strong> 来到可解释性团队的人来自广泛的职业背景，包括神经科学、数学、生物学、物理学、数据可视化和软件工程。</li>
+<li><strong>你们对湾区以外的候选人开放吗？</strong> 团队目前在旧金山、波士顿、纽约、西雅图和伦敦都有成员。最大的集中地在旧金山，那里的成员每周有几天到办公室。我们接受远程工作，但要求每年约有 25% 的时间访问 Anthropic 办公室。关于我们所有空缺职位的更多信息，请参阅我们的<a href="https://www.anthropic.com/careers">职业页面</a>。</li>
+</ol>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/engineering-challenges-interpretability"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/engineering-challenges-interpretability"></a></p>
+<h2>相关内容</h2>
+<h3>了解更多关于 Claude 的数学能力</h3>
+<p>一个未发布的研究版 Claude 在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足该猜想的黎曼 zeta 函数零点比例，从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的时代而构建的数字签名方案。第二个攻击发现了一种攻击缩减轮数 AES（使用最广泛的分组密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>项目 Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作，开发了一系列新的评估，考察 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>The engineering challenges of scaling interpretability</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/engineering-challenges-interpretability</li>
+</ul>
+<p>Interpretability</p>
+<h1>The engineering challenges of scaling interpretability</h1>
+<p>Jun 13, 2024
+ <em>In this post, and in the above roundtable video, our researchers reflect on the close relationship between scientific and engineering progress, and discuss the technical challenges they encountered in scaling our interpretability research to much larger AI models.</em>
+Last October, the Anthropic Interpretability team published <a href="https://transformer-circuits.pub/2023/monosemantic-features">Towards Monosemanticity</a>, a paper applying the technique of dictionary learning to a small transformer model. In May this year, we published <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">Scaling Monosemanticity</a>, where we applied the same technique to a model several orders of magnitude larger. We found tens of millions of “features”—combinations of neurons that relate to semantic concepts—in Claude 3 Sonnet, representing an important step forward in understanding the inner workings of AI models.
+To continue making this progress, we need more engineers.
+This might seem surprising if you've only read our early papers (for example <a href="https://transformer-circuits.pub/2021/framework/index.html">Frameworks</a> and <a href="https://transformer-circuits.pub/2022/toy_model/index.html">Toy Models of Superposition</a>), which required relatively little engineering. But reading the newer research should make clear the scale of the engineering challenge we face.
+Below, we share two examples of the technical engineering questions that were involved in our latest research. These illustrate the kinds of problems our engineers are tackling right now, and help explain why we think engineering will be one of the major bottlenecks to progress in AI interpretability—and ultimately, AI safety—research.
+If you're an engineer, this post is aimed at you. If you’re inspired by the examples of engineering problems discussed below, we strongly encourage you to apply for our <a href="https://boards.greenhouse.io/anthropic/jobs/4020305008">Research Engineer role</a>.</p>
+<h2>Engineering Problem 1: Distributed Shuffle</h2>
+<p>Our Sparse Autoencoders—the tools we use to investigate “features”—are trained on the activations of transformers, and those activations need to be shuffled to stop them from learning spurious, order-dependent patterns. When we first started training sparse autoencoders, we could fit our training data on a single GPU and trivially shuffle it. But eventually, we wanted to scale beyond what could fit in memory (imagine starting with the easy task of shuffling a deck of cards, but then scaling it up to shuffling entire warehouses full of cards — it’s a much more difficult problem).
+At this point, we could have implemented a distributed shuffle that scaled to petabytes. Instead, we decided on an approach we could implement quickly, but which didn't scale as well. We split our shuffle into <em>K</em> jobs where each job was responsible for 1/<em>K</em> of the shuffled output data. We generated a permutation, had each job do a streaming read of all of the training data, and then had it write out its share of the output. This allowed us to scale further, but the downside was obvious: each job had to read all of the training data. This first took hours, and later took days. By the time we were working on <a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">Towards Monosemanticity</a>, we had 100TB of training data (100 billion data points, each being 1KB) and shuffling had become a major headache.
+Performing a distributed shuffle that scales isn’t a novel or cutting-edge problem. But it was just one of many engineering problems we had to solve quickly to make scientific progress.
+In this case, we found a <a href="https://blog.janestreet.com/how-to-shuffle-a-big-dataset/">helpful blog post</a> and extended the approach to many passes. For one pass, we have <em>N</em> jobs. Each job reads 1/<em>N</em> of the dataset, shuffles it, and writes out the data in K files each with 1/<em>NK</em> of the data. The contents of the first file written from each job represent the first 1/<em>K</em> of the final shuffled data, but it still needs to be shuffled. It’s the same for the second file, and so on. In one pass, we have reduced one shuffle of all the data to <em>N</em> shuffles, each <em>K</em> times smaller. Now, if the shuffles fit in memory on a single machine, we can shuffle it and we’re done. If they don’t fit, we can just run another pass.
+Let’s say each job can keep 100GB of data in memory, and we write one hundred 1GB files. Each pass reduces the size of the shuffles needed by 100 times. One pass can shuffle 100GB of data, two passes can shuffle 10TB, three passes 1PB, four passes 100PB, and so on.
+Since we implemented this approach, we’ve stopped thinking about shuffling. Now it’s something that happens quickly, without issues. There are certainly better approaches and faster implementations than ours. But this approach solves our bottleneck, and frees us up to tackle the next problem.</p>
+<h2>Engineering Problem 2: Feature Visualization Pipeline</h2>
+<p>Another engineering challenge has been generating the underlying data for our feature visualizations, which allow users to see specific tokens that are most strongly activated as part of individual features, along with other information (<a href="https://transformer-circuits.pub/2023/monosemantic-features/vis/a1.html">see the Feature Browser from the Towards Monosemanticity paper at this link</a>). 
+For each feature, we want to find a variety of dataset examples that activate it to different levels, exploring its full distribution. Doing this efficiently for millions of features is an interesting distributed systems problem. Originally, all of this ran in a single job – but we quickly scaled beyond that. Below is a sketch of our current approach.
+Our dataset for visualization is 100M tokens, and we need to handle millions of features. First we “shard” over the dataset and features, splitting them into many different parts. Each job iterates over its slice of the dataset and, for its slice of features, keeps track of the <em>K</em> highest activating tokens for each feature and 10*<em>K</em> random tokens that activate the feature (we have already cached the transformer activations in s3, so we don’t need to recompute them). 
+Next, we shard over the features and aggregate the results from the previous pass. This gives us the highest-activating tokens for each feature across the entire dataset, as well as a random set of tokens that activate the feature. These are the examples we’ll show in the feature visualization.
+For each of these examples, we need to calculate how the feature fires on surrounding tokens. Our first approach sharded over features. Each job loads the transformer activations for the examples of the features for which it’s responsible. The problem is that these examples are randomly distributed across the dataset: there’s no easy way to read <em>only</em> the data the job needs. 
+To improve this, we added a pass sharded over the dataset. In this setup, each job handles a slice of transformer activations, and saves the activations needed for each group of features to a separate file. Then, we can run a pass over features and have easy access to just the data we need. We compute how much the feature fires on surrounding tokens, then write out all the relevant data in a format our frontend website can read and display.</p>
+<h2>What we’re looking for</h2>
+<p>When we started working on Sparse Autoencoders, we didn’t know if the approach would work. The more experiments we ran, the more confident we became in our research. That led us to invest more in our infrastructure so we could run larger experiments. The process continued all the way to <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">Scaling Monosemanticity</a>, our most recent paper.
+That process points to the type of engineering work we do on the Interpretability team — and the fact that we consider research and engineering to be inseparable. Often, our team members will switch back and forth between research and engineering, squeezing more scale out of our current system to launch a new experiment before returning to the research. Since many research ideas don’t work out, we don’t invest more heavily in their infrastructure until we see success.
+Research is a team effort, and it's as much about implementing ideas as it is ruminating on them. We don’t just hypothesize; we test, build, iterate, and scale.
+Because of this, we’re particularly interested in hiring generalist engineers who are able to work flexibly across different domains — whether that’s building pipelines, running ML experiments, or optimizing GPU usage.
+If you’re an engineer who fits this bill, and who is passionate about AI safety, we’d love to see your application. Take a look at the job description for our <a href="https://boards.greenhouse.io/anthropic/jobs/4020305008">Research Engineer role</a>, and at our <a href="https://www.anthropic.com/careers">Careers page</a> for several other open roles on the Interpretability team.</p>
+<h2>FAQ</h2>
+<ol>
+<li><strong>How many roles are you hiring for?</strong> There are currently 18 members of the Interpretability team, and we're growing quickly. Currently we’re looking to hire at least five senior engineers and two team managers, across multiple locations. See our <a href="https://www.anthropic.com/careers">Careers page</a> for the listings.</li>
+<li><strong>Does the Interpretability team work with other teams?</strong> Yes. We collaborate strongly with our other research teams (especially the Alignment team). Anthropic is a “team-science” org, and the borders between teams are porous in the best ways — this allows us to get a lot done quickly.</li>
+<li><strong>How do you choose projects to work on?</strong> We think about our research roadmap in terms of Anthropic’s <a href="https://www.anthropic.com/news/anthropics-responsible-scaling-policy">Responsible Scaling Policy</a>, which commits the company to hitting various safety milestones before developing or deploying models above corresponding capability levels. In thinking about research directions, we consider what the research landscape of interpretability looks like, what problems we’re in a position to address, and how the Interpretability team’s work could impact those safety milestones. On a day-to-day level, our research tends to be very exploratory, but it’s an exploration that’s guided by the above considerations.</li>
+<li><strong>What kinds of backgrounds do people on the Interpretability team have?</strong> People have come to the Interpretability team from a wide range of professional backgrounds, including neuroscience, mathematics, biology, physics, data visualization, and software engineering.</li>
+<li><strong>Are you open to candidates outside of the Bay Area?</strong> The team currently has members in San Francisco, Boston, New York, Seattle, and London. The largest concentration is in San Francisco, and those members come into the office several days a week. We are open to remote working, with a requirement to visit an Anthropic office about 25% of the year. See our <a href="https://www.anthropic.com/careers">Careers page</a> for more information about all our open positions.</li>
+</ol>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/engineering-challenges-interpretability"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/engineering-challenges-interpretability"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

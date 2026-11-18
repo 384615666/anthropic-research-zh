@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Towards Measuring the Representation of Subjective Global Opinions in Language Models</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>迈向衡量语言模型对全球主观意见的表征</h1>
+<div class="meta">
+Towards Measuring the Representation of Subjective Global Opinions in Language Models · Jun 29, 2023 · Societal Impacts · <a href="https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">大型语言模型可能无法公平表征全球各地对各类社会议题的多样化观点。本文开发了一套量化框架来评估模型生成回答更像谁的意见：先构建 GlobalOpinionQA 数据集，收录跨国调查中关于全球议题的问题与回答；再定义按国家条件化的相似度指标。对以宪法 AI 训练的模型进行三项实验后发现：默认情况下模型回答更接近美国及部分欧洲、南美国家人群的意见，暴露潜在偏差；提示模型考虑某国视角后回答会靠拢该国意见，但可能反映有害的文化刻板印象；把问题翻译成目标语言后，模型回答并不必然与该语言使用者的意见最相似。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">宪法 AI：依据一套明文价值观规则训练模型行为的人工智能对齐方法</span><span class="term">相似度指标：量化模型回答与人类回答接近程度的度量</span><span class="term">跨国家调查：覆盖多国、用于比较不同国家民众意见的问卷</span><span class="term">文化刻板印象：对特定群体的过度简化、可能有害的固定印象</span><span class="term">提示：用户输入给模型的指令或问题文本</span><span class="term">校准：模型的自信程度与实际正确率的一致程度</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> 社会影响（Societal Impacts）</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models</li>
+</ul>
+<p>社会影响（Societal Impacts）
+2023 年 6 月 29 日
+<a href="https://arxiv.org/abs/2306.16388">阅读论文</a></p>
+<h2>摘要</h2>
+<p>大语言模型（Large Language Models，LLMs）可能无法公平地表征不同国家对社会议题的多样化全球观点。在本文中，我们开发了一个定量框架，用于评估模型生成的回答与哪些人群的观点更为相似。我们首先构建了一个数据集 GlobalOpinionQA，其中包含来自跨国调查的问题和答案，旨在捕捉不同国家在全球议题上的多样化观点。接下来，我们定义了一个指标，用以量化以国家为条件的 LLM 生成的调查回答与人类回答之间的相似度。借助这一框架，我们在一台通过宪法式 AI（Constitutional AI）训练为有用、诚实且无害的 LLM 上进行了三项实验。默认情况下，LLM 的回答往往与某些人群的观点更为相似，例如来自美国以及一些欧洲和南美国家的人群，这凸显了潜在的偏差。当我们提示模型考虑某一特定国家的视角时，回答会变得更接近被提示人群的观点，但可能反映出有害的文化刻板印象。当我们将 GlobalOpinionQA 的问题翻译成目标语言时，模型的回答并不一定会变得与使用这些语言的人群的观点最为相似。我们公开发布数据集，供他人使用和在此基础上继续研究。我们的数据位于<a href="https://huggingface.co/datasets/Anthropic/llm_global_opinions">此 URL</a>。我们还在此 URL 提供了交互式可视化：<a href="https://llmglobalvalues.anthropic.com/">此 URL</a>。
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models"></a></p>
+<h2>相关内容</h2>
+<h3>进一步了解 Claude 的数学能力</h3>
+<p>一个未公开发布的研究版 Claude 在与黎曼猜想（Riemann hypothesis）相关的问题上取得了进展。它改进了满足该猜想的黎曼 zeta 函数零点比例的长期下界，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">了解更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码算法。第一个攻击显著削弱了 HAWK——一种为未来量子计算机能够破解现有标准的世界而构建的数字签名方案。第二个攻击则发现了一种攻击轮数缩减版 AES（使用最广泛的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">了解更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>我们与 Andon Labs 合作开发了一系列评估，用于评估 AI 模型使用飞行无人机的能力，最终形成了一个新的基准测试：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">了解更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Towards Measuring the Representation of Subjective Global Opinions in Language Models</h1>
+<ul>
+<li><strong>Category:</strong> Societal Impacts</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models</li>
+</ul>
+<p>Societal Impacts</p>
+<h1>Towards Measuring the Representation of Subjective Global Opinions in Language Models</h1>
+<p>Jun 29, 2023
+<a href="https://arxiv.org/abs/2306.16388">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>Large language models (LLMs) may not equitably represent diverse global perspectives on societal issues. In this paper, we develop a quantitative framework to evaluate whose opinions model-generated responses are more similar to. We first build a dataset, GlobalOpinionQA, comprised of questions and answers from cross-national surveys designed to capture diverse opinions on global issues across different countries. Next, we define a metric that quantifies the similarity between LLM-generated survey responses and human responses, conditioned on country. With our framework, we run three experiments on an LLM trained to be helpful, honest, and harmless with Constitutional AI. By default, LLM responses tend to be more similar to the opinions of certain populations, such as those from the USA, and some European and South American countries, highlighting the potential for biases. When we prompt the model to consider a particular country's perspective, responses shift to be more similar to the opinions of the prompted populations, but can reflect harmful cultural stereotypes. When we translate GlobalOpinionQA questions to a target language, the model's responses do not necessarily become the most similar to the opinions of speakers of those languages. We release our dataset for others to use and build on. Our data is at <a href="https://huggingface.co/datasets/Anthropic/llm_global_opinions">this URL</a>. We also provide an interactive visualization at <a href="https://llmglobalvalues.anthropic.com/">this URL</a>.
+<a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>

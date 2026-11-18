@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scaling Laws and Interpretability of Learning from Repeated Data</title>
+<style>
+body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#faf9f6; color:#1f1f1f; line-height:1.85; margin:0; padding:0; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 36px 26px 90px; }
+h1 { font-size: 27px; line-height:1.35; border-bottom: 2px solid #e8e4dc; padding-bottom: 14px; margin-bottom: 6px; }
+.meta { color:#8a8575; font-size:13px; margin-bottom: 22px; }
+.meta a { color:#c15f3c; text-decoration:none; }
+.zh-block { background:#fff; border:1.5px solid #c15f3c; border-radius:14px; padding:20px 22px; margin:18px 0 24px; }
+.zh-block h2 { color:#b5522f; font-size:18px; margin:0 0 10px; border:none; padding:0; }
+.zh-summary { font-size:14.5px; color:#333; line-height:1.85; }
+.zh-terms { margin-top:14px; }
+.zh-terms h3 { font-size:14px; color:#7a4a30; margin:0 0 8px; }
+.term { display:inline-block; background:#f6efe9; color:#7a4a30; border-radius:8px; padding:4px 10px; margin:3px 4px 3px 0; font-size:12.5px; }
+.zh-full { background:#fff; border:1.5px solid #378ADD; border-radius:14px; padding:20px 24px; margin-bottom:28px; }
+.zh-full > h2:first-child { color:#185FA5; font-size:18px; margin:0 0 12px; border:none; padding:0; }
+.zh-full h1 { font-size:24px; border:none; }
+.zh-full h2 { font-size:19px; color:#185FA5; margin-top:30px; border-left:4px solid #378ADD; padding-left:10px; }
+.zh-full h3 { font-size:16px; color:#0C447C; margin-top:24px; }
+.zh-full blockquote { background:#f3f7fb; border-left:4px solid #378ADD; color:#3a4a5a; }
+.zh-en-toggle { margin:16px 0 4px; }
+.zh-en-toggle summary { cursor:pointer; color:#888; font-size:13.5px; user-select:none; }
+.zh-en-toggle summary:hover { color:#185FA5; }
+h2 { font-size: 20px; color:#b5522f; margin-top: 40px; border-left: 4px solid #c15f3c; padding-left: 12px; }
+h3 { font-size: 16px; margin-top: 26px; }
+blockquote { background:#f3efe7; border-left: 4px solid #c15f3c; margin:14px 0; padding:10px 16px; border-radius:0 8px 8px 0; color:#5a4a3a; }
+code { background:#f0ece4; padding:2px 6px; border-radius:4px; font-size:0.9em; }
+pre { background:#f6f3ec; padding:14px; border-radius:8px; overflow-x:auto; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; background:#fff; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #e8e4dc; padding:9px 13px; text-align:left; font-size:14px; }
+th { background:#f6f2ea; }
+img { max-width:100%; border-radius:8px; margin:10px 0; }
+hr { border:none; border-top:1px solid #e8e4dc; margin:28px 0; }
+.back { display:inline-block; margin-bottom:18px; color:#c15f3c; text-decoration:none; font-size:14px; }
+.back:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../阅读路线.html">&larr; 返回阅读目录</a>
+<h1>从重复数据中学习的缩放定律与可解释性</h1>
+<div class="meta">
+Scaling Laws and Interpretability of Learning from Repeated Data · May 21, 2022 · Interpretability · <a href="https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data" target="_blank">查看原文</a>
+</div>
+
+<div class="zh-block">
+  <h2>📖 中文摘要</h2>
+  <div class="zh-summary">本文系统研究大语言模型在训练数据中重复学习的影响机制。研究团队训练了一系列大部分数据唯一、但小部分被大量重复的模型，发现强“双重下降”现象：重复数据会让测试损失在训练中途上升，特定重复频率会造成严重性能退化。例如把0.1%的数据重复100次，就能让8亿参数的模型性能退化到4亿参数模型水平。研究者怀疑在中段重复率区间，模型把数据“背下来”会消耗大量容量。文章进一步把现象与机制可解释性联系起来：数据重复会不成比例地损害与泛化相关的复制和内部结构（如归纳头），提供了从泛化转向记忆的可能机制。</div>
+  <div class="zh-terms">
+    <h3>专业术语注解</h3>
+    <span class="term">双重下降（double descent）：模型训练损失先降后升再降的非单调现象</span><span class="term">泛化（generalization）：模型把学到的规律应用到没见过的新数据上的能力</span><span class="term">记忆（memorization）：模型把训练数据直接背下来而非学习规律</span><span class="term">归纳头（induction heads）：模型中负责复制重复模式、与上下文学习相关的结构</span><span class="term">缩放定律（scaling law）：预测模型性能随计算量、数据量增长而变化的规律</span>
+  </div>
+</div>
+<div class="zh-full">
+<h2>📄 中文全文</h2>
+<ul>
+<li><strong>分类：</strong> Interpretability</li>
+<li><strong>来源：</strong> https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data</li>
+</ul>
+<p>2022 年 5 月 21 日
+<a href="https://arxiv.org/abs/2205.10487">阅读论文</a></p>
+<h2>摘要</h2>
+<p>最近的大型语言模型在庞大的数据集上训练，但往往也在重复数据上训练，要么是为了提升更高质量数据权重的有意为之，要么是因为数据去重并不完美、模型在句子、段落或文档层面暴露于重复数据的无意之举。一些工作报告了这种重复数据对性能的显著负面影响。在本文中，我们试图系统地研究重复数据，并从机制上理解其影响。为此，我们训练了一个模型家族，其中大部分数据是唯一的，但一小部分数据被重复多次。我们发现一个强烈的双重下降现象，即重复数据可能导致测试损失在训练中途上升。一个可预测的重复频率范围会导致性能出现惊人地严重退化。例如，一个 800M 参数的模型，通过将 0.1% 的数据重复 100 次，尽管其余 90% 的训练 token 保持唯一，其性能可以退化到 2 倍小的模型（400M 参数）的水平。我们怀疑在中间存在一个数据可以被记忆的范围，而这样做消耗了模型容量的一大部分，这可能是退化峰值所在之处。最后，我们将这些观察与最近的机制可解释性工作联系起来——试图逆向工程模型执行的详细计算——表明数据重复不成比例地损害了复制和与泛化相关的内部结构，如归纳头（induction heads），为从泛化到记忆的转变提供了一种可能的机制。综合来看，这些结果提供了一个假说，解释为什么在大型语言模型中重复相对较小比例的数据可能导致对性能的不成比例的巨大损害。</p>
+<h2>作者</h2>
+<p>Amanda Askell, Yuntao Bai, Anna Chen, Dawn Drain, Deep Ganguli, Tom Henighan, Andy Jones, Nicholas Joseph, Ben Mann, Nova DasSarma, Nelson Elhage, Zac Hatfield-Dodds, Danny Hernandez, Jackson Kernion, Kamal Ndousse, Catherine Olsson, Dario Amodei, Tom Brown, Jack Clark, Sam McCandlish, Chris Olah, Jared Kaplan  </p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data"></a></p>
+<h2>相关内容</h2>
+<h3>深入了解 Claude 的数学能力</h3>
+<p>一个未发布的 Claude 研究版本在与黎曼猜想相关的问题上取得了进展。它改进了一个长期存在的下界——满足猜想的黎曼 zeta 函数零点的比例，将其从 41.6% 提高到 67.2%。
+<a href="https://www.anthropic.com/research/riemann-zeta">阅读更多</a></p>
+<h3>用 Claude 发现密码学弱点</h3>
+<p>密码学算法。第一种攻击显著削弱了 HAWK，这是一种为未来量子计算机能够攻破现有标准的世界而构建的数字签名方案。第二种识别出了一种攻击降轮 AES（最广泛使用的对称密码）的新方法。
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">阅读更多</a></p>
+<h3>Project Pilot：AI 能控制无人机吗？</h3>
+<p>与 Andon Labs 合作，我们开发了一系列新的评估，衡量 AI 模型使用飞行无人机的能力，最终形成了一个新基准：Drone-Bench。
+<a href="https://www.anthropic.com/research/project-pilot">阅读更多</a></p>
+</div>
+<details class="zh-en-toggle"><summary>▸ 英文原文（点击展开）</summary>
+<div style="margin-top:14px">
+<h1>Scaling Laws and Interpretability of Learning from Repeated Data</h1>
+<ul>
+<li><strong>Category:</strong> Interpretability</li>
+<li><strong>Source:</strong> https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data</li>
+</ul>
+<h1>Scaling Laws and Interpretability of Learning from Repeated Data</h1>
+<p>May 21, 2022
+<a href="https://arxiv.org/abs/2205.10487">Read Paper</a></p>
+<h2>Abstract</h2>
+<p>Recent large language models have been trained on vast datasets, but also often on repeated data, either intentionally for the purpose of upweighting higher quality data, or unintentionally because data deduplication is not perfect and the model is exposed to repeated data at the sentence, paragraph, or document level. Some works have reported substantial negative performance effects of this repeated data. In this paper we attempt to study repeated data systematically and to understand its effects mechanistically. To do this, we train a family of models where most of the data is unique but a small fraction of it is repeated many times. We find a strong double descent phenomenon, in which repeated data can lead test loss to increase midway through training. A predictable range of repetition frequency leads to surprisingly severe degradation in performance. For instance, performance of an 800M parameter model can be degraded to that of a 2x smaller model (400M params) by repeating 0.1% of the data 100 times, despite the other 90% of the training tokens remaining unique. We suspect there is a range in the middle where the data can be memorized and doing so consumes a large fraction of the model's capacity, and this may be where the peak of degradation occurs. Finally, we connect these observations to recent mechanistic interpretability work - attempting to reverse engineer the detailed computations performed by the model - by showing that data repetition disproportionately damages copying and internal structures associated with generalization, such as induction heads, providing a possible mechanism for the shift from generalization to memorization. Taken together, these results provide a hypothesis for why repeating a relatively small fraction of data in large language models could lead to disproportionately large harms to performance.</p>
+<h2>Authors</h2>
+<p>Amanda Askell, Yuntao Bai, Anna Chen, Dawn Drain, Deep Ganguli, Tom Henighan, Andy Jones, Nicholas Joseph, Ben Mann, Nova DasSarma, Nelson Elhage, Zac Hatfield-Dodds, Danny Hernandez, Jackson Kernion, Kamal Ndousse, Catherine Olsson, Dario Amodei, Tom Brown, Jack Clark, Sam McCandlish, Chris Olah, Jared Kaplan  </p>
+<p><a href="https://twitter.com/intent/tweet?text=https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data"></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.anthropic.com/research/scaling-laws-and-interpretability-of-learning-from-repeated-data"></a></p>
+<h2>Related content</h2>
+<h3>Learning more about Claude's mathematical capabilities</h3>
+<p>An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+<a href="https://www.anthropic.com/research/riemann-zeta">Read more</a></p>
+<h3>Discovering cryptographic weaknesses with Claude</h3>
+<p>cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher. 
+<a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">Read more</a></p>
+<h3>Project Pilot: Can AI control a drone?</h3>
+<p>Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+<a href="https://www.anthropic.com/research/project-pilot">Read more</a></p>
+</div>
+</details>
+</div>
+</body>
+</html>
