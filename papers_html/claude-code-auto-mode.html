@@ -67,21 +67,21 @@ How we built Claude Code auto mode:a safer way to skip permissions · Mar 25, 20
 已发布
     2026 年 3 月 25 日
 团队
-    <a href="/engineering">工程</a>
+    <a href="https://www.anthropic.com/engineering">工程</a>
 主题</p>
 <ul>
-<li><a href="/search?topic=claude-code">Claude Code</a></li>
-<li><a href="/search?topic=safeguards">安全保障</a></li>
-<li><a href="/search?topic=agents">智能体</a></li>
-<li><a href="/search?topic=jailbreaks">越狱</a></li>
-<li><a href="/search?topic=alignment">对齐</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-code">Claude Code</a></li>
+<li><a href="https://www.anthropic.com/search?topic=safeguards">安全保障</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">智能体</a></li>
+<li><a href="https://www.anthropic.com/search?topic=jailbreaks">越狱</a></li>
+<li><a href="https://www.anthropic.com/search?topic=alignment">对齐</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/agents-judgment-calls"></a><a href="https://www.anthropic.com/research/how-we-contain-claude"></a><a href="https://www.anthropic.com/news/disrupting-AI-espionage"></a><a href="https://www.anthropic.com/news/our-framework-for-developing-safe-and-trustworthy-agents"></a>
 相关文章
   * 对齐
 2026 年 10 月 27 日
 <a href="https://www.anthropic.com/research/agents-judgment-calls">AI智能体如何影响专家的判断决策</a></p>
-<p><a href="/search?topic=claude-code">阅读更多</a>
+<p><a href="https://www.anthropic.com/search?topic=claude-code">阅读更多</a>
 默认情况下，Claude Code会在运行命令或修改文件之前征求用户批准。这保障了用户安全，但也意味着要频繁点击「同意」。久而久之便会产生批准疲劳，人们不再仔细留意自己批准的内容。
 用户有两种办法规避这种疲劳：一是内置沙箱，把工具隔离起来以阻止危险操作；二是<code>--dangerously-skip-permissions</code>标志，它关闭所有权限提示、让Claude自由行动，在多数场景下并不安全。图1展示了这一权衡空间。沙箱安全但维护成本高：每增加一项新能力都需要配置，而任何需要网络或主机访问的操作都会破坏隔离。绕过权限无需维护，却毫无防护。手动提示介于两者之间，而实际上用户仍会接受其中93%的提示。
 <img alt="" src="../assets_zh/claude-code-auto-mode/img_000.png" />
@@ -195,21 +195,21 @@ n=52
 <p>Published
     Mar 25, 2026
 Team
-    <a href="/engineering">Engineering</a>
+    <a href="https://www.anthropic.com/engineering">Engineering</a>
 Topics</p>
 <ul>
-<li><a href="/search?topic=claude-code">Claude Code</a></li>
-<li><a href="/search?topic=safeguards">Safeguards</a></li>
-<li><a href="/search?topic=agents">Agents</a></li>
-<li><a href="/search?topic=jailbreaks">Jailbreaks</a></li>
-<li><a href="/search?topic=alignment">Alignment</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-code">Claude Code</a></li>
+<li><a href="https://www.anthropic.com/search?topic=safeguards">Safeguards</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">Agents</a></li>
+<li><a href="https://www.anthropic.com/search?topic=jailbreaks">Jailbreaks</a></li>
+<li><a href="https://www.anthropic.com/search?topic=alignment">Alignment</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/agents-judgment-calls"></a><a href="https://www.anthropic.com/research/how-we-contain-claude"></a><a href="https://www.anthropic.com/news/disrupting-AI-espionage"></a><a href="https://www.anthropic.com/news/our-framework-for-developing-safe-and-trustworthy-agents"></a>
 Related articles
   * Alignment
 Oct 27, 2026
 <a href="https://www.anthropic.com/research/agents-judgment-calls">How AI agents shape experts’ judgment calls</a></p>
-<p><a href="/search?topic=claude-code">View more</a>
+<p><a href="https://www.anthropic.com/search?topic=claude-code">View more</a>
 By default, Claude Code asks users for approval before running commands or modifying files. This keeps users safe, but it also means a lot of clicking "approve." Over time that leads to approval fatigue, where people stop paying close attention to what they're approving.
 Users have two solutions for avoiding this fatigue: a built-in sandbox where tools are isolated to prevent dangerous actions, or the <code>--dangerously-skip-permissions</code> flag that disables all permission prompts and lets Claude act freely, which is unsafe in most situations. Figure 1 lays out the tradeoff space. Sandboxing is safe but high-maintenance: each new capability needs configuring, and anything requiring network or host access breaks isolation. Bypassing permissions is zero-maintenance but offers no protection. Manual prompts sit in the middle, and in practice users accept 93% of them anyway.
 <img alt="" src="../assets/claude-code-auto-mode/img_000.webp" />

@@ -67,21 +67,21 @@ Scaling Managed Agents:Decoupling the brain from the hands · Apr 8, 2026 · Eng
 已发布
     2026 年 4 月 8 日
 团队
-    <a href="/engineering">工程</a>
+    <a href="https://www.anthropic.com/engineering">工程</a>
 主题</p>
 <ul>
-<li><a href="/search?topic=agents">智能体</a></li>
-<li><a href="/search?topic=claude-developer-platform">Claude 开发者平台</a></li>
-<li><a href="/search?topic=context-engineering">上下文工程</a></li>
-<li><a href="/search?topic=tool-use">工具使用</a></li>
-<li><a href="/search?topic=safeguards">安全防护</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">智能体</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-developer-platform">Claude 开发者平台</a></li>
+<li><a href="https://www.anthropic.com/search?topic=context-engineering">上下文工程</a></li>
+<li><a href="https://www.anthropic.com/search?topic=tool-use">工具使用</a></li>
+<li><a href="https://www.anthropic.com/search?topic=safeguards">安全防护</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/news/anthropic-acquires-stainless"></a><a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"></a><a href="https://www.anthropic.com/research/advanced-tool-use"></a><a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents"></a>
 相关文章
   * 公告
 2026 年 5 月 18 日
 <a href="https://www.anthropic.com/news/anthropic-acquires-stainless">Anthropic 收购 Stainless</a></p>
-<p><a href="/search?topic=agents">查看更多</a>
+<p><a href="https://www.anthropic.com/search?topic=agents">查看更多</a>
  <em>按照我们的<a href="https://platform.claude.com/docs/en/managed-agents/overview">文档</a>开始使用 Claude Managed Agents。</em>  </p>
 <p>工程博客里一个持续出现的话题，是如何<a href="https://www.anthropic.com/engineering/building-effective-agents">构建高效的智能体</a>并<a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">设计脚手架</a>来支撑<a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">长时运行的任务</a>。这些工作有一条共同主线：脚手架把关于 Claude 靠自己做不到什么的假设编码了进去。然而，这些假设需要经常受到质疑，因为随着模型进步，它们可能会<a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">过时</a>。
 仅举一例，在此前的工作中<a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">我们发现</a>，Claude Sonnet 4.5 在察觉上下文上限临近时会过早收尾任务——这种行为有时被称为「上下文焦虑」（context anxiety）。我们通过在脚手架中加入上下文重置来解决它。但当我们把同一套脚手架用到 Claude Opus 4.5 上时，发现这种行为消失了。那些重置成了累赘。
@@ -134,21 +134,21 @@ Managed Agents 遵循同样的模式。我们把智能体的各个组成部分�
 <p>Published
     Apr 8, 2026
 Team
-    <a href="/engineering">Engineering</a>
+    <a href="https://www.anthropic.com/engineering">Engineering</a>
 Topics</p>
 <ul>
-<li><a href="/search?topic=agents">Agents</a></li>
-<li><a href="/search?topic=claude-developer-platform">Claude Developer Platform</a></li>
-<li><a href="/search?topic=context-engineering">Context engineering</a></li>
-<li><a href="/search?topic=tool-use">Tool use</a></li>
-<li><a href="/search?topic=safeguards">Safeguards</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">Agents</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-developer-platform">Claude Developer Platform</a></li>
+<li><a href="https://www.anthropic.com/search?topic=context-engineering">Context engineering</a></li>
+<li><a href="https://www.anthropic.com/search?topic=tool-use">Tool use</a></li>
+<li><a href="https://www.anthropic.com/search?topic=safeguards">Safeguards</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/news/anthropic-acquires-stainless"></a><a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"></a><a href="https://www.anthropic.com/research/advanced-tool-use"></a><a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents"></a>
 Related articles
   * Announcements
 May 18, 2026
 <a href="https://www.anthropic.com/news/anthropic-acquires-stainless">Anthropic acquires Stainless</a></p>
-<p><a href="/search?topic=agents">View more</a>
+<p><a href="https://www.anthropic.com/search?topic=agents">View more</a>
  <em>Get started with Claude Managed Agents by following our<a href="https://platform.claude.com/docs/en/managed-agents/overview">docs</a>.</em>  </p>
 <p>A running topic on the Engineering Blog is how to <a href="https://www.anthropic.com/engineering/building-effective-agents">build effective agents</a> and <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">design harnesses</a> for <a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">long-running work</a>. A common thread across this work is that harnesses encode assumptions about what Claude can’t do on its own. However, those assumptions need to be frequently questioned because they can <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">go stale</a> as models improve.
 As just one example, in prior work <a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">we found</a> that Claude Sonnet 4.5 would wrap up tasks prematurely as it sensed its context limit approaching—a behavior sometimes called “context anxiety.” We addressed this by adding context resets to the harness. But when we used the same harness on Claude Opus 4.5, we found that the behavior was gone. The resets had become dead weight.

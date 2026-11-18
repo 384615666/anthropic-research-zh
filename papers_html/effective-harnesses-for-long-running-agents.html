@@ -67,20 +67,20 @@ Effective harnesses for long-running agents · Nov 26, 2025 · Engineering · <a
 已发布
     2025 年 11 月 26 日
 团队
-    <a href="/engineering">工程</a>
+    <a href="https://www.anthropic.com/engineering">工程</a>
 主题</p>
 <ul>
-<li><a href="/search?topic=agents">智能体</a></li>
-<li><a href="/search?topic=context-engineering">上下文工程</a></li>
-<li><a href="/search?topic=coding">编程</a></li>
-<li><a href="/search?topic=claude-developer-platform">Claude 开发者平台</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">智能体</a></li>
+<li><a href="https://www.anthropic.com/search?topic=context-engineering">上下文工程</a></li>
+<li><a href="https://www.anthropic.com/search?topic=coding">编程</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-developer-platform">Claude 开发者平台</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/harness-design-long-running-apps"></a><a href="https://www.anthropic.com/research/building-c-compiler"></a><a href="https://www.anthropic.com/research/claude-code-best-practices"></a><a href="https://www.anthropic.com/research/building-effective-agents"></a>
 相关文章
   * 工程
 2026 年 3 月 24 日
 <a href="https://www.anthropic.com/research/harness-design-long-running-apps">面向长时运行应用开发的脚手架设计</a></p>
-<p><a href="/search?topic=agents">查看更多</a>
+<p><a href="https://www.anthropic.com/search?topic=agents">查看更多</a>
 随着 AI 智能体能力不断增强，开发者越来越多地让它们承担需要数小时甚至数天工作的复杂任务。然而，让智能体在多个上下文窗口之间持续取得进展，仍是一个尚未解决的问题。
 长时运行智能体的核心挑战在于，它们必须在一个个彼此分离的会话中工作，而每个新会话开始时都对之前发生的一切毫无记忆。想象一个软件项目由轮班工作的工程师承担，每位新来的工程师都不记得上一班发生过什么。由于上下文窗口有限，而大多数复杂项目又无法在单个窗口内完成，智能体需要一种方式来弥合编码会话之间的断层。
 我们提出了一套双重解决方案，让 <a href="https://platform.claude.com/docs/en/agent-sdk/overview">Claude Agent SDK</a> 能够跨多个上下文窗口高效工作：一个在首次运行时搭建环境的<strong>初始化智能体</strong>，以及一个负责在每次会话中取得增量进展、并为下一次会话留下清晰产物的<strong>编码智能体</strong>。你可以在配套的<a href="https://github.com/anthropics/claude-quickstarts/tree/main/autonomous-coding">快速入门</a>中找到代码示例。</p>
@@ -185,20 +185,20 @@ Claude 得花时间琢磨如何运行应用。
 <p>Published
     Nov 26, 2025
 Team
-    <a href="/engineering">Engineering</a>
+    <a href="https://www.anthropic.com/engineering">Engineering</a>
 Topics</p>
 <ul>
-<li><a href="/search?topic=agents">Agents</a></li>
-<li><a href="/search?topic=context-engineering">Context engineering</a></li>
-<li><a href="/search?topic=coding">Coding</a></li>
-<li><a href="/search?topic=claude-developer-platform">Claude Developer Platform</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">Agents</a></li>
+<li><a href="https://www.anthropic.com/search?topic=context-engineering">Context engineering</a></li>
+<li><a href="https://www.anthropic.com/search?topic=coding">Coding</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-developer-platform">Claude Developer Platform</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/harness-design-long-running-apps"></a><a href="https://www.anthropic.com/research/building-c-compiler"></a><a href="https://www.anthropic.com/research/claude-code-best-practices"></a><a href="https://www.anthropic.com/research/building-effective-agents"></a>
 Related articles
   * Engineering
 Mar 24, 2026
 <a href="https://www.anthropic.com/research/harness-design-long-running-apps">Harness design for long-running application development</a></p>
-<p><a href="/search?topic=agents">View more</a>
+<p><a href="https://www.anthropic.com/search?topic=agents">View more</a>
 As AI agents become more capable, developers are increasingly asking them to take on complex tasks requiring work that spans hours, or even days. However, getting agents to make consistent progress across multiple context windows remains an open problem.
 The core challenge of long-running agents is that they must work in discrete sessions, and each new session begins with no memory of what came before. Imagine a software project staffed by engineers working in shifts, where each new engineer arrives with no memory of what happened on the previous shift. Because context windows are limited, and because most complex projects cannot be completed within a single window, agents need a way to bridge the gap between coding sessions.
 We developed a two-fold solution to enable the <a href="https://platform.claude.com/docs/en/agent-sdk/overview">Claude Agent SDK</a> to work effectively across many context windows: an <strong>initializer agent</strong> that sets up the environment on the first run, and a <strong>coding agent</strong> that is tasked with making incremental progress in every session, while leaving clear artifacts for the next session. You can find code examples in the accompanying <a href="https://github.com/anthropics/claude-quickstarts/tree/main/autonomous-coding">quickstart.</a></p>

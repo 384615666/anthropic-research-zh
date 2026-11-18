@@ -68,7 +68,7 @@ Building strong safety evaluations · Nov 13, 2026 · Engineering · <a href="ht
 已发布
     2026 年 11 月 13 日
 团队
-    <a href="/engineering">工程</a>
+    <a href="https://www.anthropic.com/engineering">工程</a>
 安全评测为我们关于AI模型的一些最关键决策提供依据，包括模型是否已可部署、随附哪些防护措施，以及下一轮安全训练与研究应聚焦何处。当我们说某款模型“比其前代更安全”时，我们的意思是它在一组由某人所构建的评测上得分更高。但安全主张的可靠程度只能与其背后的评测相当，而优秀的评测很难构建。
 安全评测衡量的是模型造成伤害或促成伤害的倾向、其对某个请求的响应是提高还是降低了伤害发生的可能性，以及该伤害会有多严重，而不是衡量具体能力。它可以覆盖不同类型的伤害。例如，用户可能主动索取有害输出（例如寻求如何伤害自己的指引），也可能索取本意无害、但伴随很高意外伤害风险的输出（例如查询某种药物的合适剂量）。本质上，安全评测问的是：“给定某个特定输入，模型是否做了正确的事？”
 与其他类型的评测一样，这类评测也很难做对：研究者已多次发现，AI评测<a href="https://arxiv.org/abs/2504.20879">容易</a><a href="https://proceedings.neurips.cc/paper_files/paper/2025/file/f316275b44ee2de533102913828a8107-Paper-Datasets_and_Benchmarks_Track.pdf">被钻空子</a>，并不总能测量它们声称要测量的东西，也<a href="https://arxiv.org/abs/2411.12990">没有记录到足以复现的程度</a>。结果可能因问题是<a href="https://arxiv.org/abs/2402.16786">多选题还是开放式问题</a>而改变，甚至取决于<a href="https://arxiv.org/abs/2306.07951">答案选项的排列顺序</a>。
@@ -178,7 +178,7 @@ Building strong safety evaluations · Nov 13, 2026 · Engineering · <a href="ht
 Published
     Nov 13, 2026
 Team
-    <a href="/engineering">Engineering</a>
+    <a href="https://www.anthropic.com/engineering">Engineering</a>
 Safety evaluations inform some of the most consequential decisions we make about an AI model, including whether it’s ready to deploy, which safeguards ship alongside it, and what our next round of safety training and research should focus on. When we say a model is “safer than its predecessor,” we mean that it scored better on a set of evals someone built. But a safety claim is only as sound as the eval behind it, and good ones are hard to build.
 A safety eval measures a model’s propensity to cause or contribute to harm, whether its response to a request makes harm more or less likely, and how severe that harm would be, rather than measuring specific capabilities. It can cover different types of harm. For example, a user may actively request harmful outputs (such as seeking instructions on how to harm themselves), or they may request outputs that are intended to be harmless, but that come with high risk of unintended harm (such as seeking information on the appropriate dose of a drug). Essentially, a safety eval asks, “Given a specific input, did the model do the right thing?”
 Like other types of evals, these can be tricky to get right: researchers have repeatedly found that AI evals are <a href="https://arxiv.org/abs/2504.20879">easy to</a> <a href="https://proceedings.neurips.cc/paper_files/paper/2025/file/f316275b44ee2de533102913828a8107-Paper-Datasets_and_Benchmarks_Track.pdf">game</a>, don’t always measure what they claim to measure, and aren’t <a href="https://arxiv.org/abs/2411.12990">documented well enough to reproduce</a>. The results can change depending on whether the questions are <a href="https://arxiv.org/abs/2402.16786">multiple-choice or open-ended</a>, or even based on <a href="https://arxiv.org/abs/2306.07951">how answer options are ordered</a>.

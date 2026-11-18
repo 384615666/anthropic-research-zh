@@ -68,19 +68,19 @@ Introducing Contextual Retrieval · 2024-09-19 · Engineering · <a href="https:
 已发布
     2024 年 9 月 19 日
 团队
-    <a href="/engineering">工程</a>
+    <a href="https://www.anthropic.com/engineering">工程</a>
 主题</p>
 <ul>
-<li><a href="/search?topic=context-engineering">上下文工程</a></li>
-<li><a href="/search?topic=claude-developer-platform">Claude 开发者平台</a></li>
-<li><a href="/search?topic=benchmarks">基准测试</a></li>
+<li><a href="https://www.anthropic.com/search?topic=context-engineering">上下文工程</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-developer-platform">Claude 开发者平台</a></li>
+<li><a href="https://www.anthropic.com/search?topic=benchmarks">基准测试</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"></a><a href="https://www.anthropic.com/news/skills"></a><a href="https://www.anthropic.com/news/prompting-long-context"></a><a href="https://www.anthropic.com/news/100k-context-windows"></a>
 相关文章
   * 工程
 2025 年 11 月 26 日
 <a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents">面向长时运行智能体的高效脚手架</a></p>
-<p><a href="/search?topic=context-engineering">阅读更多</a>
+<p><a href="https://www.anthropic.com/search?topic=context-engineering">阅读更多</a>
 要让 AI 模型在特定场景中有用，它往往需要访问背景知识。例如，客服聊天机器人需要了解它被用于的那项具体业务的知识，法律分析机器人则需要了解大量过往案例。
 开发者通常用检索增强生成（Retrieval-Augmented Generation，RAG）来增强 AI 模型的知识。RAG 是一种从知识库中检索相关信息并把它附加到用户提示词上的方法，能显著增强模型的回答。问题在于，传统 RAG 方案在编码信息时会把上下文剥离掉，这常常导致系统无法从知识库中检索到相关信息。
 在这篇文章里，我们概述一种能大幅改善 RAG 中检索步骤的方法。该方法名为「上下文检索（Contextual Retrieval）」，使用两种子技术：上下文嵌入（Contextual Embeddings）与上下文 BM25（Contextual BM25）。该方法能把检索失败的数量减少 49%，若再结合重排序（reranking），可减少 67%。这代表着检索准确性的显著提升，而检索准确性会直接转化为下游任务中更好的表现。
@@ -203,19 +203,19 @@ Retrievals @ 10 与 @ 5 的拆分结果，以及每个数据集的示例问答�
 Published
     Sep 19, 2024
 Team
-    <a href="/engineering">Engineering</a>
+    <a href="https://www.anthropic.com/engineering">Engineering</a>
 Topics</p>
 <ul>
-<li><a href="/search?topic=context-engineering">Context engineering</a></li>
-<li><a href="/search?topic=claude-developer-platform">Claude Developer Platform</a></li>
-<li><a href="/search?topic=benchmarks">Benchmarks</a></li>
+<li><a href="https://www.anthropic.com/search?topic=context-engineering">Context engineering</a></li>
+<li><a href="https://www.anthropic.com/search?topic=claude-developer-platform">Claude Developer Platform</a></li>
+<li><a href="https://www.anthropic.com/search?topic=benchmarks">Benchmarks</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"></a><a href="https://www.anthropic.com/news/skills"></a><a href="https://www.anthropic.com/news/prompting-long-context"></a><a href="https://www.anthropic.com/news/100k-context-windows"></a>
 Related articles
   * Engineering
 Nov 26, 2025
 <a href="https://www.anthropic.com/research/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a></p>
-<p><a href="/search?topic=context-engineering">View more</a>
+<p><a href="https://www.anthropic.com/search?topic=context-engineering">View more</a>
 For an AI model to be useful in specific contexts, it often needs access to background knowledge. For example, customer support chatbots need knowledge about the specific business they're being used for, and legal analyst bots need to know about a vast array of past cases.
 Developers typically enhance an AI model's knowledge using Retrieval-Augmented Generation (RAG). RAG is a method that retrieves relevant information from a knowledge base and appends it to the user's prompt, significantly enhancing the model's response. The problem is that traditional RAG solutions remove context when encoding information, which often results in the system failing to retrieve the relevant information from the knowledge base.
 In this post, we outline a method that dramatically improves the retrieval step in RAG. The method is called “Contextual Retrieval” and uses two sub-techniques: Contextual Embeddings and Contextual BM25. This method can reduce the number of failed retrievals by 49% and, when combined with reranking, by 67%. These represent significant improvements in retrieval accuracy, which directly translates to better performance in downstream tasks. 

@@ -68,20 +68,20 @@ Quantifying infrastructure noise in agentic coding evals · Feb 5, 2026 · Engin
 已发布
     2026 年 2 月 5 日
 团队
-    <a href="/engineering">工程</a>
+    <a href="https://www.anthropic.com/engineering">工程</a>
 主题</p>
 <ul>
-<li><a href="/search?topic=benchmarks">基准测试</a></li>
-<li><a href="/search?topic=measurement-and-mitigation">测量与缓解</a></li>
-<li><a href="/search?topic=coding">编程</a></li>
-<li><a href="/search?topic=agents">智能体</a></li>
+<li><a href="https://www.anthropic.com/search?topic=benchmarks">基准测试</a></li>
+<li><a href="https://www.anthropic.com/search?topic=measurement-and-mitigation">测量与缓解</a></li>
+<li><a href="https://www.anthropic.com/search?topic=coding">编程</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">智能体</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents"></a><a href="https://www.anthropic.com/news/claude-opus-4-1"></a><a href="https://www.anthropic.com/research/shade-arena-sabotage-monitoring"></a><a href="https://www.anthropic.com/research/swe-bench-sonnet"></a>
 相关文章
   * 工程
 2026 年 1 月 9 日
 <a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">揭开AI智能体评测的神秘面纱</a></p>
-<p><a href="/search?topic=benchmarks">阅读更多</a>
+<p><a href="https://www.anthropic.com/search?topic=benchmarks">阅读更多</a>
 像SWE-bench和Terminal-Bench这样的智能体编码基准，常被用来比较前沿模型的软件工程能力——排行榜上靠前的名次往往只相差几个百分点。这些分数常被当作对模型相对能力的精确度量，并越来越多地影响该部署哪个模型的决策。然而我们发现，仅基础设施配置一项就能造成超过这些差距的差异。在内部实验中，Terminal-Bench 2.0上资源配置最多与最少的方案之间相差6个百分点（p &lt; 0.01）。
 静态基准直接给模型的输出打分——运行环境不影响结果。智能体编码评测则不同：模型被给予一个完整环境，在其中写程序、跑测试、安装依赖，并跨多轮迭代。运行环境不再是被动的容器，而是解题过程中不可或缺的组成部分。资源预算和时间限制不同的两个智能体，并不是在参加同一场考试。
 评测开发者已开始考虑这一点。例如Terminal-Bench 2.0在其最新的2.0版本中，按任务逐一给出了推荐的CPU和RAM。然而，规定资源并不等于始终一致地强制执行。此外我们发现，强制执行的方式本身会改变基准最终实际测量的东西。</p>
@@ -131,20 +131,20 @@ Quantifying infrastructure noise in agentic coding evals · Feb 5, 2026 · Engin
 Published
     Feb 5, 2026
 Team
-    <a href="/engineering">Engineering</a>
+    <a href="https://www.anthropic.com/engineering">Engineering</a>
 Topics</p>
 <ul>
-<li><a href="/search?topic=benchmarks">Benchmarks</a></li>
-<li><a href="/search?topic=measurement-and-mitigation">Measurement and mitigation</a></li>
-<li><a href="/search?topic=coding">Coding</a></li>
-<li><a href="/search?topic=agents">Agents</a></li>
+<li><a href="https://www.anthropic.com/search?topic=benchmarks">Benchmarks</a></li>
+<li><a href="https://www.anthropic.com/search?topic=measurement-and-mitigation">Measurement and mitigation</a></li>
+<li><a href="https://www.anthropic.com/search?topic=coding">Coding</a></li>
+<li><a href="https://www.anthropic.com/search?topic=agents">Agents</a></li>
 </ul>
 <p><a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents"></a><a href="https://www.anthropic.com/news/claude-opus-4-1"></a><a href="https://www.anthropic.com/research/shade-arena-sabotage-monitoring"></a><a href="https://www.anthropic.com/research/swe-bench-sonnet"></a>
 Related articles
   * Engineering
 Jan 9, 2026
 <a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a></p>
-<p><a href="/search?topic=benchmarks">View more</a>
+<p><a href="https://www.anthropic.com/search?topic=benchmarks">View more</a>
 Agentic coding benchmarks like SWE-bench and Terminal-Bench are commonly used to compare the software engineering capabilities of frontier models—with top spots on leaderboards often separated by just a few percentage points. These scores are often treated as precise measurements of relative model capability and increasingly inform decisions about which models to deploy. However, we’ve found that infrastructure configuration alone can produce differences that exceed those margins. In internal experiments, the gap between the most- and least-resourced setups on Terminal-Bench 2.0 was 6 percentage points (p &lt; 0.01).
 Static benchmarks score a model's output directly—the runtime environment doesn’t factor into the result. Agentic coding evals are different: models are given a full environment where they write programs, run tests, install dependencies, and iterate over multiple turns. The runtime is no longer a passive container, but an integral component of the problem-solving process. Two agents with different resource budgets and time limits aren't taking the same test.
 Eval developers have begun accounting for this. Terminal-Bench 2.0, for instance, specifies recommended CPU and RAM on a per-task basis in their latest 2.0 release. However, specifying resources isn't the same as enforcing them consistently. Moreover, we discovered that enforcement methodology can change what the benchmark ends up actually measuring.</p>
